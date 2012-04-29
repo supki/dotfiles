@@ -1,0 +1,16 @@
+# Fix icon theme
+gtk-icon-theme-name="Faenza-Darkest"
+
+# Fix gVim borders
+style "vimfix" {
+  bg[NORMAL] = "#3f3f3f"
+}
+widget "vim-main-window.*GtkForm" style "vimfix"
+
+style "no-resize-handle"
+{
+    GtkWindow::resize-grip-height = 0
+    GtkWindow::resize-grip-width = 0
+}
+
+class "GtkWidget" style "no-resize-handle"

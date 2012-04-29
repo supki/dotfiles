@@ -1,0 +1,104 @@
+urxvt.background: #333333
+urxvt.foreground: #ffffff
+
+urxvt.font: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+urxvt.boldFont: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+
+urxvt.scrollBar: False
+urxvt.cursorBlink: True
+urxvt.cursorUnderline: True
+
+urxvt.saveLines: 12000
+
+urxvt.color0:  #000000
+urxvt.color1:  #ff6a6a
+urxvt.color2:  #bbbb66
+urxvt.color3:  #dd9977
+urxvt.color4:  #cccccc
+urxvt.color5:  #eeccaa
+urxvt.color6:  #00aaaa
+urxvt.color7:  #ffffff
+urxvt.color8:  #555555
+urxvt.color9:  #ff5555
+urxvt.color10: #ff6a6a
+urxvt.color11: #ff6a6a
+urxvt.color12: #ff6a6a
+urxvt.color13: #ff6a6a
+urxvt.color14: #55ffff
+urxvt.color15: #ffffff
+urxvt.underlineColor: #eeccaa
+
+urxvt.urlLauncher: iceweasel
+urxvt.perl-ext-common: default,matcher
+urxvt.matcher.pattern.0: http[s]*:\/\/[^ "]+
+urxvt.matcher.button: 1
+
+scratchpad.background: #333333
+scratchpad.foreground: #ffffff
+
+scratchpad.font: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+scratchpad.boldFont: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+
+scratchpad.scrollBar: False
+scratchpad.cursorBlink: True
+scratchpad.cursorUnderline: True
+
+scratchpad.saveLines: 12000
+
+scratchpad.color0:  #000000
+scratchpad.color1:  #ff6a6a
+scratchpad.color2:  #bbbb66
+scratchpad.color3:  #dd9977
+scratchpad.color4:  #cccccc
+scratchpad.color5:  #eeccaa
+scratchpad.color6:  #00aaaa
+scratchpad.color7:  #ffffff
+scratchpad.color8:  #555555
+scratchpad.color9:  #ff5555
+scratchpad.color10: #ff6a6a
+scratchpad.color11: #ff6a6a
+scratchpad.color12: #ff6a6a
+scratchpad.color13: #ff6a6a
+scratchpad.color14: #55ffff
+scratchpad.color15: #ffffff
+scratchpad.underlineColor: #eeccaa
+
+scratchpad.urlLauncher: iceweasel
+scratchpad.perl-ext-common: default,matcher
+scratchpad.matcher.pattern.0: http[s]*:\/\/[^ "]+
+scratchpad.matcher.button: 1
+
+ncmpcpp.background: #333333
+ncmpcpp.foreground: #ffffff
+
+ncmpcpp.font: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+ncmpcpp.boldFont: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+
+ncmpcpp.scrollBar: False
+ncmpcpp.cursorBlink: True
+ncmpcpp.cursorUnderline: True
+
+ncmpcpp.saveLines: 12000
+
+ncmpcpp.color0:  #000000
+ncmpcpp.color1:  #ff6a6a
+ncmpcpp.color2:  #bbbb66
+ncmpcpp.color3:  #dd9977
+ncmpcpp.color4:  #cccccc
+ncmpcpp.color5:  #eeccaa
+ncmpcpp.color6:  #00aaaa
+ncmpcpp.color7:  #ffffff
+ncmpcpp.color8:  #555555
+ncmpcpp.color9:  #ff5555
+ncmpcpp.color10: #ff6a6a
+ncmpcpp.color11: #ff6a6a
+ncmpcpp.color12: #ff6a6a
+ncmpcpp.color13: #ff6a6a
+ncmpcpp.color14: #55ffff
+ncmpcpp.color15: #ffffff
+ncmpcpp.underlineColor: #eeccaa
+
+ncmpcpp.urlLauncher: iceweasel
+ncmpcpp.perl-ext-common: default,matcher
+ncmpcpp.matcher.pattern.0: http[s]*:\/\/[^ "]+
+ncmpcpp.matcher.button: 1

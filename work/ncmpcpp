@@ -1,0 +1,30 @@
+# connection settings
+mpd_host = "10.0.0.113"
+mpd_port = "6600"
+mpd_music_dir = "/home/maksenov/Music"
+mpd_connection_timeout = "5"
+mpd_crossfade_time = "5"
+
+# formats
+song_columns_list_format = "(5)[white]{l} (25)[blue]{a} (30)[magenta]{b} (40)[yellow]{t}"
+
+# display mode
+user_interface = "classic"
+playlist_display_mode = "columns" (classic/columns)
+browser_display_mode = "columns" (classic/columns)
+search_engine_display_mode = "columns" (classic/columns)
+
+# misc
+color1 = "red"
+color2 = "red"
+ask_before_clearing_main_playlist = "yes"
+default_space_mode = "add"
+display_remaining_time = "yes"
+display_volume_level = "no"
+main_window_color = "white"
+main_window_highlight_color = "green"
+mouse_support = "yes"
+playlist_disable_highlight_delay = "3"
+playlist_separate_albums = "yes"
+playlist_show_remaining_time = "yes"
+titles_visibility = "no"

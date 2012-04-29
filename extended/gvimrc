@@ -1,0 +1,15 @@
+" Appearance {
+	" load a colorscheme
+	colorscheme zenburn
+
+	" set gui font same as cli
+	set guifont=Terminus\ 9
+	" remove all unneded toolbars, menus and scrollbars
+	set guioptions=
+	" add X selection handle
+	set guioptions+=a
+
+	" highlight problematic whitespace
+	highlight WhitespaceErrors ctermbg=Red guibg=Red
+	autocmd BufRead * match WhitespaceErrors /\s\+$\|[^\t]\@<=\t\+/
+" }

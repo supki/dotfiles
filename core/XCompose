@@ -1,0 +1,80 @@
+<Multi_key> <space> <space>  : " "   nobreakspace # NO-BREAK SPACE
+
+<Multi_key> <o> <c> : "©"   copyright # COPYRIGHT SIGN
+<Multi_key> <o> <C> : "©"   copyright # COPYRIGHT SIGN
+<Multi_key> <O> <c> : "©"   copyright # COPYRIGHT SIGN
+<Multi_key> <O> <C> : "©"   copyright # COPYRIGHT SIGN
+
+<Multi_key> <o> <r> : "®"   registered # REGISTERED SIGN
+<Multi_key> <o> <R> : "®"   registered # REGISTERED SIGN
+<Multi_key> <O> <r> : "®"   registered # REGISTERED SIGN
+<Multi_key> <O> <R> : "®"   registered # REGISTERED SIGN
+
+<Multi_key> <T> <M> : "™"   U2122 # TRADE MARK SIGN
+<Multi_key> <t> <M> : "™"   U2122 # TRADE MARK SIGN
+<Multi_key> <T> <m> : "™"   U2122 # TRADE MARK SIGN
+<Multi_key> <t> <m> : "™"   U2122 # TRADE MARK SIGN
+
+<Multi_key> <period> <period> <period> : "…"   ellipsis # HORIZONTAL ELLIPSIS
+<Multi_key> <plus> <minus>    : "±"   plusminus # PLUS-MINUS SIGN
+
+<Multi_key> <o> <o> : "°"   degree # DEGREE SIGN
+
+<Multi_key> <less> <less>       : "«"   guillemotleft # LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+<Multi_key> <greater> <greater> : "»"   guillemotright # RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+
+<Multi_key> <less> <3> : "♥"   U2665 # BLACK HEART SUIT
+
+<Multi_key> <colon> <parenright> : "☺"   U263A # WHITE SMILING FACE
+<Multi_key> <colon> <parenleft>  : "☹"   U2639 # WHITE FROWNING FACE
+
+<Multi_key> <comma> <minus> : "¬"   notsign # NOT SIGN
+<Multi_key> <minus> <comma> : "¬"   notsign # NOT SIGN
+<Multi_key> <colon> <minus> : "÷"   division # DIVISION SIGN
+<Multi_key> <minus> <colon> : "÷"   division # DIVISION SIGN
+<Multi_key> <colon> <plus>  : "×"
+<Multi_key> <plus> <colon>  : "×"
+
+<Multi_key> <less> <minus>    : "←" U2190 # LEFTWARDS ARROW
+<Multi_key> <minus> <greater> : "→" U2192 # RIGHTWARDS ARROW
+<Multi_key> <less> <equal>    : "⇐"
+<Multi_key> <equal> <greater> : "⇒"
+<Multi_key> <colon> <colon> : "∷"
+
+<Multi_key> <slash> <equal> : "≠"   U2260 # NOT EQUAL TO
+<Multi_key> <equal> <slash> : "≠"   U2260 # NOT EQUAL TO
+
+<Multi_key> <space> <f> : "α"
+<Multi_key> <space> <comma> : "β"
+<Multi_key> <space> <u> : "γ"
+<Multi_key> <space> <l> : "δ"
+<Multi_key> <space> <t> : "ε"
+<Multi_key> <space> <b> : "ι"
+<Multi_key> <space> <r> : "κ"
+<Multi_key> <space> <k> : "λ"
+<Multi_key> <space> <v> : "μ"
+<Multi_key> <space> <y> : "ν"
+<Multi_key> <space> <j> : "ο"
+<Multi_key> <space> <g> : "π"
+<Multi_key> <space> <h> : "ρ"
+<Multi_key> <space> <c> : "ς"
+<Multi_key> <space> <n> : "τ"
+<Multi_key> <space> <e> : "υ"
+<Multi_key> <space> <a> : "φ"
+<Multi_key> <space> <Cyrillic_a> : "α"
+<Multi_key> <space> <Cyrillic_be> : "β"
+<Multi_key> <space> <Cyrillic_ghe> : "γ"
+<Multi_key> <space> <Cyrillic_de> : "δ"
+<Multi_key> <space> <Cyrillic_ie> : "ε"
+<Multi_key> <space> <Cyrillic_i> : "ι"
+<Multi_key> <space> <Cyrillic_ka> : "κ"
+<Multi_key> <space> <Cyrillic_el> : "λ"
+<Multi_key> <space> <Cyrillic_em> : "μ"
+<Multi_key> <space> <Cyrillic_en> : "ν"
+<Multi_key> <space> <Cyrillic_o> : "ο"
+<Multi_key> <space> <Cyrillic_pe> : "π"
+<Multi_key> <space> <Cyrillic_er> : "ρ"
+<Multi_key> <space> <Cyrillic_es> : "ς"
+<Multi_key> <space> <Cyrillic_te> : "τ"
+<Multi_key> <space> <Cyrillic_u> : "υ"
+<Multi_key> <space> <Cyrillic_ef> : "φ"

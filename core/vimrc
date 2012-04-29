@@ -1,0 +1,196 @@
+" General {
+	" disable vi compatibility
+	set nocompatible
+	let g:neocomplcache_enable_at_startup = 1
+
+	" let vim now name of terminal emulator
+	set term=$TERM
+
+	" set history to 1000 lines
+	set history=1000
+
+	" automatically reload when a file is changed outside of Vim
+	set autoread
+
+	" we have fast connections
+	set ttyfast
+
+	" enable pathogen
+	call pathogen#infect()
+
+	" share clipboard among instances
+	set clipboard=unnamed
+" }
+
+" Appearance {
+	" assume that background is dark
+	set background=dark
+
+	" enable syntax highlighting
+	syntax on
+
+	" relative or absolute line numbers
+	if exists("+relativenumber")
+		set relativenumber
+	else
+		set number
+	end
+
+	" show current line underlined
+	set cursorline
+
+	" always show current cursor position
+	set ruler
+	set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
+
+	" show current command prompt
+	set showcmd
+
+	" always show status line
+	set laststatus=2
+
+	" show advanced information
+	set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
+
+	" enable autocomplete
+	set wildmenu
+	set wildmode=list:longest,full
+
+	" save as root with w!!
+	cmap w!! w !sudo tee % > /dev/null
+" }
+
+" Misc {
+	" automatic tab indent
+	set autoindent
+	" smart tab indent
+	set smartindent
+	" space width for tabs
+	set tabstop=4
+	" shift width for tabs
+	set shiftwidth=4
+
+	" use ghc functionality for haskell files
+	autocmd BufEnter *.hs compiler ghc
+	let g:haddock_browser = "iceweasel"
+
+	" set Haskell indent
+	autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
+	" set Racket indent
+	autocmd FileType racket  setlocal expandtab shiftwidth=2 softtabstop=2
+
+	" save on focus lost
+	autocmd FocusLost * :wa
+
+	" enable filetype detection, plus loading of filetype plugins
+	filetype plugin on
+
+	" highligh search results
+	set hlsearch
+	" ignore cases in search queries
+	set ignorecase
+	set smartcase
+
+	" set g default option to any s///
+	set gdefault
+
+	" enable wrap
+	set wrap
+	" wrap backspace, space, h, l, <-, ->, [ and ] keys
+	set whichwrap=b,s,h,l,<,>,[,]
+	" set word-wrap, not symbol-wrap
+	set linebreak
+
+	" lines to scroll when cursor leaves screen
+	set scrolljump=7
+	" lines before screen edge to scroll
+	set scrolloff=1000
+
+	" default encodings
+	set termencoding=utf-8
+	set encoding=utf-8
+	set fileencoding=utf-8
+
+	" manage backups
+	set backup
+	set backupdir=$HOME/.vim/backups
+	" manage .swp files
+	set directory=$HOME/.vim/temp
+	" preserve undo actions even after file has closed
+	if exists("+undofile")
+		set undolevels=1000
+		set undofile
+	end
+
+	" map leader to ,
+	let mapleader = ","
+
+	" highlight parentheses
+	au VimEnter *.rkt RainbowParenthesesToggle
+	au Syntax racket RainbowParenthesesLoadRound
+
+	" enable omni-completion
+	autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+" }
+
+" Keys mappings {
+	" fix broken regex syntax
+	nnoremap / /\v
+	vnoremap / /\v
+
+	" save one key press
+	nnoremap ; :
+
+	" map arrows and fix j and k
+	nnoremap <up> <nop>
+	nnoremap <down> <nop>
+	nnoremap <left> <nop>
+	nnoremap <right> <nop>
+	inoremap <up> <nop>
+	inoremap <down> <nop>
+	inoremap <left> <nop>
+	inoremap <right> <nop>
+	nnoremap j gj
+	nnoremap k gk
+
+	" map for easier buffer window change
+	noremap <C-H> <C-W>h
+	noremap <C-J> <C-W>j
+	noremap <C-K> <C-W>k
+	noremap <C-L> <C-W>l
+
+	" shift key fixes
+	cnoremap WQ wq
+	cnoremap wQ wq
+	cnoremap Wq wq
+	cnoremap Tabe tabe
+
+	" disable search results highlighting
+	noremap <leader>h :noh<bar>echo<CR>
+
+	" toggle scratch buffer
+	noremap <leader>t :VScratch<CR>
+
+	" paste file to pastebin
+	noremap <leader>z :w \| !upload-pastebin % \| xsel<CR>
+
+	inoremap <leader>p <C-X><C-O>
+
+	" easy move to next bracket
+	nnoremap <tab> %
+	vnoremap <tab> %
+
+	" fix rxvt shit
+	map  <Esc>[5^ :tabp<CR>
+	map  <Esc>[6^ :tabn<CR>
+" }
+
+" Functions {
+	" chmod +х to .sh-, .pl- and .py-scripts
+	function ModeChange()
+		if getline(1) =~ '^#!\(/usr\)\?/bin/\(sh\|bash\|perl\|python\|env\)'
+			silent !chmod a+x <afile>
+		endif
+	endfunction
+	autocmd BufWritePost * call ModeChange()
+" }

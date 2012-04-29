@@ -1,0 +1,3 @@
+--smart-case
+--pager=less -R
+--type-add=scheme=.rkt

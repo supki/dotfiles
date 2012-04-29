@@ -1,0 +1,34 @@
+autoload -U compinit promptinit colors
+
+fpath=(~/git/zsh-completions ~/git/zsh-cabal-completion $fpath)
+compinit
+setopt correctall
+zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
+
+promptinit
+colors
+PROMPT="%F{blue}%n%f@%M:%F{yellow}%~%f%# "
+RPROMPT="[%?]"
+
+function chpwd {
+	print -Pn "\e]2;%~\a"
+}
+chpwd
+
+HISTSIZE=1000
+HISTFILE=~/.zhistory
+SAVEHIST=1000
+
+setopt histignorealldups
+setopt histignorespace
+
+setopt autocd
+
+bindkey -v
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+bindkey -a "k" history-beginning-search-backward
+bindkey -a "j" history-beginning-search-forward
+
+alias ack=ack-grep #stupid debian
