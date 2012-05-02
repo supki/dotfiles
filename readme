@@ -1,0 +1,58 @@
+.
+├── core
+│   ├── ackrc
+│   ├── bashrc
+│   ├── conceal
+│   │   └── haskell.vim
+│   ├── ghci
+│   ├── gitconfig
+│   ├── haskeline
+│   ├── inputrc
+│   ├── mpdconf
+│   ├── profile
+│   ├── racketrc
+│   ├── vim
+│   │   ├── cscope_maps.vim
+│   │   ├── haskellmode.vim
+│   │   ├── pathogen.vim
+│   │   └── scratch
+│   │       └── plugin
+│   │           └── scratch.vim
+│   ├── vimrc
+│   ├── XCompose
+│   ├── xsession
+│   └── zshrc
+├── extended
+│   ├── gtkrc.mine
+│   ├── gvimrc
+│   ├── pentadactylrc
+│   ├── vimcolors
+│   │   ├── camo.vim
+│   │   └── zenburn.vim
+│   ├── xmonad
+│   │   ├── Controls.hs
+│   │   ├── Layouts.hs
+│   │   ├── Misc.hs
+│   │   ├── Startup.hs
+│   │   ├── Themes.hs
+│   │   └── Workspaces.hs
+│   └── xmonad.hs
+├── laptop
+│   ├── mcabberrc
+│   ├── ncmpcpp
+│   ├── Xdefaults
+│   ├── xmobarrc
+│   ├── xmodmap
+│   └── xmonad
+│       └── Profile.hs
+├── readme
+└── work
+    ├── mcabberrc
+    ├── ncmpcpp
+    ├── Xdefaults
+    ├── xmobarrc
+    ├── xmodmap
+    └── xmonad
+        └── Profile.hs
+
+12 directories, 43 files
