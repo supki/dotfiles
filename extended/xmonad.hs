@@ -1,6 +1,7 @@
 import Data.Functor ((<$>))
 import System.IO
 import XMonad
+import XMonad.Actions.UpdatePointer
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run
@@ -35,7 +36,9 @@ main = do
 		}
 
 -- Log hook
-myLogHook xmproc_handle = dynamicLogWithPP $ xmobarPP
+myLogHook xmproc_handle = do
+  updatePointer (Relative 0.5 0.5)
+  dynamicLogWithPP $ xmobarPP
 	{ ppOutput = hPutStrLn xmproc_handle
 	, ppLayout = const ""
 	, ppTitle = xmobarColor P.yellowColor ""
