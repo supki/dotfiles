@@ -6,6 +6,7 @@
 │   │   └── haskell.vim
 │   ├── ghci
 │   ├── gitconfig
+│   ├── gitignore
 │   ├── haskeline
 │   ├── inputrc
 │   ├── mpdconf
@@ -55,4 +56,4 @@
     └── xmonad
         └── Profile.hs
 
-12 directories, 43 files
+12 directories, 44 files
