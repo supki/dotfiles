@@ -39,4 +39,6 @@ set mapleader=","
 nnoremap <leader>s -js dactyl.toggleStatusLine();
 nnoremap <leader>z -js window.content.document.toggleImageSize();
 
+style -group=user -name=black_new_tab chrome://* xul|browser { background-color: black; }
+
 " vim: set ft=pentadactyl:
