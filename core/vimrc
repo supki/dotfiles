@@ -3,9 +3,6 @@
 	set nocompatible
 	let g:neocomplcache_enable_at_startup = 1
 
-	" let vim now name of terminal emulator
-	set term=$TERM
-
 	" set history to 1000 lines
 	set history=1000
 

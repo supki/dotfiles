@@ -72,8 +72,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- quit/restart xmonad
       , (0,         xK_q, restart "xmonad" True)
       , (shiftMask, xK_q, spawn "killall trayer; xmonad --recompile; xmonad --restart")
-      -- spawn empty gvim
-      , (0,         xK_g, spawn "urxvt -e gvim")
       ]
       ++
       -- switch to workspace
