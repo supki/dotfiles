@@ -21,7 +21,7 @@ chpwd
 HISTSIZE=1000
 HISTFILE=~/.zhistory
 SAVEHIST=1000
-setopt SHARE_HISTORY
+setopt sharehistory
 
 setopt histignorealldups
 setopt histignorespace
