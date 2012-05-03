@@ -2,7 +2,7 @@ autoload -U compinit promptinit colors
 
 fpath=(~/git/zsh-completions ~/git/zsh-cabal-completion $fpath)
 compinit
-setopt correctall
+setopt autocd correct
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
