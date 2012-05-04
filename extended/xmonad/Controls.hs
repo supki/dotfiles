@@ -91,9 +91,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   [ ((mod1Mask .|. mod, key), spawn script)
     | (mod, key, script) <-
       -- take a window/selected area/entire screen screenshot
-      [ (shiftMask,   xK_Print, "screenshot-take -w")
-      , (controlMask, xK_Print, "screenshot-take -s")
-      , (0,           xK_Print, "screenshot-take -a")
+      [ (shiftMask,   xK_Print, "upload-screenshot -w")
+      , (controlMask, xK_Print, "upload-screenshot -s")
+      , (0,           xK_Print, "upload-screenshot -a")
       -- toggle touchpad driver
       , (0,           xK_t, "vaio-touchpad --toggle")
       -- copy selection from work machine
