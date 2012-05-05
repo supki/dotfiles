@@ -2,6 +2,7 @@ module Workspaces where
 
 import Data.Functor ((<$>))
 import Data.List (isPrefixOf)
+import Data.Word (Word64)
 
 import XMonad
 import XMonad.Hooks.ManageDocks
@@ -13,7 +14,20 @@ import Themes
 
 -- Workspaces
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = [ "~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "\\", "<-" ]
+myWorkspaces = concat
+  [ ["~"]
+  , map show [1..7]
+  , map ((++ "'") . show) [1..8]
+  , ["8", "9", "0", "-", "=", "\\", "<-"]
+  ]
+
+myWorkspacesKeys :: [Word64]
+myWorkspacesKeys = concat
+  [ [xK_grave]
+  , [xK_1..xK_7]
+  , [xK_F1..xK_F8]
+  , [xK_8, xK_9, xK_0, xK_minus, xK_equal, xK_backslash, xK_BackSpace]
+  ]
 --
 
 -- Ids

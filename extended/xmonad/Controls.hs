@@ -77,13 +77,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- switch to workspace
       -- move client to workspace
       [ (m,         k, windows $ f i)
-        | (i, k) <- zip WS.myWorkspaces $ xK_grave : [xK_1..xK_9] ++ [xK_0, xK_minus, xK_equal, xK_backslash, xK_BackSpace]
+        | (i, k) <- zip WS.myWorkspaces WS.myWorkspacesKeys
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
       ]
       ++
       -- swap workspaces and return to old one
       [ (controlMask, k, withWindowSet (\s -> windows (swapWithCurrent i) >> windows (W.view $ W.currentTag s)))
-        | (i, k) <- zip WS.myWorkspaces $ xK_grave : [xK_1..xK_9] ++ [xK_0, xK_minus, xK_equal, xK_backslash, xK_BackSpace]
+        | (i, k) <- zip WS.myWorkspaces WS.myWorkspacesKeys
       ]
   ]
   ++
