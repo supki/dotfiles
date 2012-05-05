@@ -1,14 +1,16 @@
-:set prompt "gay> "
+:set prompt "μ> "
 
-:module +Control.Applicative
-:module +Control.Arrow
-:module +Control.Monad
-:module +Data.Char
-:module +Data.Function
-:module +Data.List
-:module +Data.Monoid
-:module +System.Directory
-:module +System.FilePath
+import Control.Applicative
+import Control.Arrow
+import Control.Monad
+import Data.Char
+import Data.Function
+import Data.List
+import Data.Monoid
+import System.Directory
+import System.FilePath
+import qualified Data.Map as M
+import qualified Data.Set as S
 
 :set -fwarn-alternative-layout-rule-transitional
 :set -fwarn-auto-orphans
@@ -38,3 +40,7 @@
 :set -fwarn-wrong-do-bind
 
 :set -XUnicodeSyntax
+:set -XBangPatterns
+:set -XViewPatterns
+:set -XGeneralizedNewtypeDeriving
+:set -XTupleSections
