@@ -7,6 +7,7 @@ import Data.Word (Word64)
 import XMonad
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import qualified XMonad.Layout.PerWorkspace as XLP
 import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
 
@@ -31,17 +32,19 @@ myWorkspacesKeys = concat
 --
 
 -- Ids
-toId :: Int -> WorkspaceId
-toId = (!!) myWorkspaces
+data Workspace = Talkative | WWW | Texts | Video | Status | Mail | Files | Torrents
 
-relax = 0
-chromie = 1
-docs = 8
-video = 9
-status = 10
-mail = 11
-files = 12
-torrent = 13
+toWsId :: Workspace -> WorkspaceId
+toWsId Talkative = "~"
+toWsId WWW = "1"
+toWsId Texts = "8"
+toWsId Video = "9"
+toWsId Status = "0"
+toWsId Mail = "-"
+toWsId Files = "="
+toWsId Torrents = "\\"
+
+onWorkspace ws = XLP.onWorkspace (toWsId ws)
 --
 
 -- Manage hook
@@ -50,14 +53,14 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
     -- automatically switching app to workspace
     [ isFullscreen --> doFullFloat
     , myFloat      --> doFloat
-    , myRelax      --> (doShift . toId) relax
-    , myChromie    --> (doShift . toId) chromie
-    , myDocs       --> (doShift . toId) docs
-    , myVideo      --> (doShift . toId) video
-    , myStatus     --> (doShift . toId) status
-    , myMail       --> (doShift . toId) mail
-    , myFiles      --> (doShift . toId) files
-    , myTorrent    --> (doShift . toId) torrent
+    , myRelax      --> doShift (toWsId Talkative)
+    , myChromie    --> doShift (toWsId WWW)
+    , myDocs       --> doShift (toWsId Texts)
+    , myVideo      --> doShift (toWsId Video)
+    , myStatus     --> doShift (toWsId Status)
+    , myMail       --> doShift (toWsId Mail)
+    , myFiles      --> doShift (toWsId Files)
+    , myTorrent    --> doShift (toWsId Torrents)
     ]
     <+> manageDocks <+> manageHook defaultConfig
   where

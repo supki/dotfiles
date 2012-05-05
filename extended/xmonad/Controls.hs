@@ -4,6 +4,7 @@ import Graphics.X11.ExtraTypes.XF86
 import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Actions.FindEmptyWorkspace
 import XMonad.Actions.SwapWorkspaces
 import XMonad.Hooks.ManageDocks
 import XMonad.Prompt.Shell
@@ -54,7 +55,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (shiftMask, xK_Tab, windows W.focusDown)
       , (0,         xK_j, windows W.focusDown)
       , (0,         xK_k, windows W.focusUp  )
-      , (0,         xK_m, windows W.focusMaster  )
       -- swap the focused window
       , (0,         xK_Return, windows W.swapMaster)
       , (shiftMask, xK_j, windows W.swapDown  )
@@ -72,6 +72,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- quit/restart xmonad
       , (0,         xK_q, restart "xmonad" True)
       , (shiftMask, xK_q, spawn "killall trayer; xmonad --recompile; xmonad --restart")
+      -- view empty workspace
+      , (0,         xK_m, viewEmptyWorkspace )
+      -- shift window to empty workspace
+      , (shiftMask, xK_m, tagToEmptyWorkspace )
       ]
       ++
       -- switch to workspace
