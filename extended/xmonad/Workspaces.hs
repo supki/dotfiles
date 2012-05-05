@@ -50,22 +50,22 @@ onWorkspace ws = XLP.onWorkspace (toWsId ws)
 -- Manage hook
 myManageHook :: ManageHook
 myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
-    -- automatically switching app to workspace
-    [ isFullscreen --> doFullFloat
-    , myFloat      --> doFloat
-    , myRelax      --> doShift (toWsId Talkative)
-    , myChromie    --> doShift (toWsId WWW)
-    , myDocs       --> doShift (toWsId Texts)
-    , myVideo      --> doShift (toWsId Video)
-    , myStatus     --> doShift (toWsId Status)
-    , myMail       --> doShift (toWsId Mail)
-    , myFiles      --> doShift (toWsId Files)
-    , myTorrent    --> doShift (toWsId Torrents)
-    ]
-    <+> manageDocks <+> manageHook defaultConfig
+  [ isFullscreen --> doFullFloat
+  , myFloat      --> doFloat
+  , myRelax      --> doShift (toWsId Talkative)
+  , myChromie    --> doShift (toWsId WWW)
+  , myDocs       --> doShift (toWsId Texts)
+  , myVideo      --> doShift (toWsId Video)
+  , myStatus     --> doShift (toWsId Status)
+  , myMail       --> doShift (toWsId Mail)
+  , myFiles      --> doShift (toWsId Files)
+  , myTorrent    --> doShift (toWsId Torrents)
+  ]
+  <+> manageDocks <+> manageHook defaultConfig
   where
   myFloat = foldr1 (<||>)
     [ ("Figure" `isPrefixOf`) <$> title
+    , title     =? "youtube-video"
     ]
   myStatus = foldr1 (<||>)
     [ title     =? "htop"
