@@ -29,9 +29,11 @@ setopt histignorespace
 setopt autocd
 
 bindkey -v
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
-bindkey -a "k" history-beginning-search-backward
-bindkey -a "j" history-beginning-search-forward
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+bindkey -a 'k' history-beginning-search-backward
+bindkey -a 'j' history-beginning-search-forward
+bindkey '^?' backward-delete-char
+bindkey '^[[3~' delete-char
 
-alias ack=ack-grep #stupid debian
+alias ack=ack-grep # stupid debian
