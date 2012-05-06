@@ -30,6 +30,7 @@
 │   ├── vimcolors
 │   │   ├── camo.vim
 │   │   └── zenburn.vim
+│   ├── xmobar.hs
 │   ├── xmonad
 │   │   ├── Controls.hs
 │   │   ├── Layouts.hs
@@ -56,4 +57,4 @@
     └── xmonad
         └── Profile.hs
 
-12 directories, 44 files
+12 directories, 45 files
