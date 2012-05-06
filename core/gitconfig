@@ -1,12 +1,13 @@
 [core]
 	excludesfile = ~/.gitignore
+	editor = vim
 [user]
 	name = Matvey Aksenov
 	email = matvey.aksenov@gmail.com
 [color]
-	ui = always
+	ui = true
 [merge]
-	tool = vimdiff
+	tool = gvimdiff
 [alias]
 	co = checkout
 	br = branch
