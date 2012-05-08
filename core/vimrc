@@ -23,6 +23,13 @@
 	" assume that background is dark
 	set background=dark
 
+	" load a colorscheme
+	colorscheme zenburn
+
+	" highlight problematic whitespace
+	highlight WhitespaceErrors ctermbg=Red guibg=Red
+	autocmd BufRead * match WhitespaceErrors /\s\+$\|[^\t]\@<=\t\+/
+
 	" enable syntax highlighting
 	syntax on
 
