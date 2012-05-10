@@ -8,6 +8,7 @@ import XMonad.Actions.FindEmptyWorkspace
 import XMonad.Actions.SwapWorkspaces
 import XMonad.Hooks.ManageDocks
 import XMonad.Prompt.Shell
+import XMonad.Prompt.Window
 import XMonad.Util.NamedScratchpad
 import qualified Data.Map        as M
 import qualified XMonad.StackSet as W
@@ -35,52 +36,55 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   [ ((modm .|. mod, key), command)
     | (mod, key, command) <-
       -- launch a terminal
-      [ (shiftMask, xK_Return, spawn $ XMonad.terminal conf)
+      [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
       -- launch shellPrompt
-      , (0,         xK_p, shellPrompt myXPConfig)
+      , (0,           xK_p, shellPrompt myXPConfig)
+      -- launch windowPrompts
+      , (shiftMask,   xK_p, windowPromptGoto myXPConfig)
+      , (controlMask, xK_p, windowPromptBring myXPConfig)
       -- close focused window
-      , (shiftMask, xK_c, kill)
+      , (shiftMask,   xK_c, kill)
       -- rotate through the available layout algorithms
-      , (0,         xK_space, sendMessage NextLayout)
+      , (0,           xK_space, sendMessage NextLayout)
       -- reset the layouts on the current workspace to default
-      , (shiftMask, xK_space, setLayout $ XMonad.layoutHook conf)
+      , (shiftMask,   xK_space, setLayout $ XMonad.layoutHook conf)
       -- resize viewed windows to the correct size
-      , (0,         xK_n, refresh)
+      , (0,           xK_n, refresh)
       -- toggle scratchpads
-      , (0,         xK_s, namedScratchpadAction WS.scratchpads "scratchpad")
-      , (0,         xK_o, namedScratchpadAction WS.scratchpads "ncmpcpp")
+      , (0,           xK_s, namedScratchpadAction WS.scratchpads "scratchpad")
+      , (0,           xK_o, namedScratchpadAction WS.scratchpads "ncmpcpp")
       -- switch to last workspace
-      , (0,         xK_Tab, toggleWS' ["NSP"])
+      , (0,           xK_Tab, toggleWS' ["NSP"])
       -- move focus
-      , (shiftMask, xK_Tab, windows W.focusDown)
-      , (0,         xK_j, windows W.focusDown)
-      , (0,         xK_k, windows W.focusUp  )
+      , (shiftMask,   xK_Tab, windows W.focusDown)
+      , (0,           xK_j, windows W.focusDown)
+      , (0,           xK_k, windows W.focusUp  )
       -- swap the focused window
-      , (0,         xK_Return, windows W.swapMaster)
-      , (shiftMask, xK_j, windows W.swapDown  )
-      , (shiftMask, xK_k, windows W.swapUp    )
+      , (0,           xK_Return, windows W.swapMaster)
+      , (shiftMask,   xK_j, windows W.swapDown  )
+      , (shiftMask,   xK_k, windows W.swapUp    )
       -- shrink/expand the master area
-      , (0,         xK_h, sendMessage Shrink)
-      , (0,         xK_l, sendMessage Expand)
+      , (0,           xK_h, sendMessage Shrink)
+      , (0,           xK_l, sendMessage Expand)
       -- push window back into tiling
-      , (0,         xK_t, withFocused $ windows . W.sink)
+      , (0,           xK_t, withFocused $ windows . W.sink)
       -- increment/decrement the number of windows in the master area
-      , (0,         xK_comma, sendMessage (IncMasterN 1))
-      , (0,         xK_period, sendMessage (IncMasterN (-1)))
+      , (0,           xK_comma, sendMessage (IncMasterN 1))
+      , (0,           xK_period, sendMessage (IncMasterN (-1)))
       -- toggle the status bar gap (used with avoidStruts from Hooks.ManageDocks)
-      , (0,         xK_b, sendMessage ToggleStruts)
+      , (0,           xK_b, sendMessage ToggleStruts)
       -- quit/restart xmonad
-      , (0,         xK_q, restart "xmonad" True)
-      , (shiftMask, xK_q, spawn "killall trayer; xmonad --recompile; xmonad --restart")
+      , (0,           xK_q, restart "xmonad" True)
+      , (shiftMask,   xK_q, spawn "killall trayer; xmonad --recompile; xmonad --restart")
       -- view empty workspace
-      , (0,         xK_m, viewEmptyWorkspace )
+      , (0,           xK_m, viewEmptyWorkspace )
       -- shift window to empty workspace
-      , (shiftMask, xK_m, tagToEmptyWorkspace )
+      , (shiftMask,   xK_m, tagToEmptyWorkspace )
       ]
       ++
       -- switch to workspace
       -- move client to workspace
-      [ (m,         k, windows $ f i)
+      [ (m,           k, windows $ f i)
         | (i, k) <- zip WS.myWorkspaces WS.myWorkspacesKeys
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
       ]
@@ -112,9 +116,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- upload file with copied url to vsegda.budueba.com
       , (0,           xK_u, "upload-budueba `xsel`")
       -- ncmpcpp: toggle music, select previous/next track
-      , (shiftMask, xK_Return, "ncmpcpp toggle")
-      , (shiftMask, xK_comma, "ncmpcpp prev")
-      , (shiftMask, xK_period, "ncmpcpp next")
+      , (shiftMask,   xK_Return, "ncmpcpp toggle")
+      , (shiftMask,   xK_comma, "ncmpcpp prev")
+      , (shiftMask,   xK_period, "ncmpcpp next")
       ]
   ]
   ++
