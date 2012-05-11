@@ -22,7 +22,7 @@ myNumlockMask = mod2Mask
 
 -- Borders
 myBorderWidth :: Dimension
-myBorderWidth = 2
+myBorderWidth = 1
 myNormalBorderColor :: String
 myNormalBorderColor = P.grayDarkColor
 myFocusedBorderColor :: String
