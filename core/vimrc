@@ -60,6 +60,18 @@
 	set wildmenu
 	set wildmode=list:longest,full
 
+	" don't pause big listings
+	set nomore
+
+	" make vim message not to annoy
+	set shortmess=aoOIT
+
+	" always report about changed lines
+	set report=0
+
+	" minimum line numbers column width
+	set numberwidth=2
+
 	" save as root with w!!
 	cmap w!! w !sudo tee % > /dev/null
 " }
@@ -190,9 +202,9 @@
 " }
 
 " Functions {
-	" chmod +х to .sh-, .pl- and .py-scripts
+	" chmod +х to scripts
 	function ModeChange()
-		if getline(1) =~ '^#!\(/usr\)\?/bin/\(sh\|bash\|perl\|python\|env\)'
+		if getline(1) =~ '^#!'
 			silent !chmod a+x <afile>
 		endif
 	endfunction
