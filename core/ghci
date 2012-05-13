@@ -1,5 +1,6 @@
 :set prompt "μ> "
 
+import Prelude.Unicode
 import Control.Applicative
 import Control.Arrow
 import Control.Monad
