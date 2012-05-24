@@ -35,5 +35,7 @@ bindkey -a 'k' history-beginning-search-backward
 bindkey -a 'j' history-beginning-search-forward
 bindkey '^?' backward-delete-char
 bindkey '^[[3~' delete-char
+bindkey "^[[7~" beginning-of-line
+bindkey "^[[8~" end-of-line
 
 alias ack=ack-grep # stupid debian
