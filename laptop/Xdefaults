@@ -64,7 +64,7 @@ scratchpad.color15: #ffffff
 scratchpad.underlineColor: #eeccaa
 
 scratchpad.urlLauncher: iceweasel
-scratchpad.perl-ext-common: default,matcher
+scratchpad.perl-ext-common: default,matcher,tabbed
 scratchpad.matcher.pattern.0: http[s]*:\/\/[^ "]+
 scratchpad.matcher.button: 1
 
