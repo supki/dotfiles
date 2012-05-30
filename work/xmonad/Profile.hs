@@ -31,10 +31,10 @@ yellowColor = "#eeccaa"
 apps :: [(String, String)]
 apps =
   [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 78 --heighttype pixel --height 17 --tint 0x" ++ tail blackColor ++ " --alpha 0")
-  , ("/usr/lib/firefox-11.0/firefox", "firefox")
+  , ("/usr/lib/firefox/firefox", "firefox")
   , ("thunderbird", "thunderbird")
   , ("gnome-commander", "gnome-commander")
-  , ("ssh .* mcabber", "urxvtc -title mcabber -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; screen -rD mcabber'")
+  , ("ssh .* im", "urxvtc -title IM -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t im'")
   , ("watch -n2 netstat", "urxvtc -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
   , ("htop", "urxvtc -title htop -e htop")
   , ("urxvtd", "urxvtd -q -f -o")
