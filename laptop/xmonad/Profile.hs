@@ -35,7 +35,7 @@ apps =  [ ("trayer", "trayer --edge bottom --align left --transparent true --wid
   , ("/usr/lib/iceweasel", "iceweasel")
   , ("gnome-commander", "gnome-commander")
   , ("transmission-gtk", "transmission-gtk")
-  , ("ssh .* IM", "urxvtc -title IM -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t im'")
+  , ("ssh .* im", "urxvtc -title IM -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t im'")
   , ("watch -n2 netstat", "urxvtc -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
   , ("htop", "urxvtc -title htop -e htop")
   , ("urxvtd", "urxvtd -q -f -o")
