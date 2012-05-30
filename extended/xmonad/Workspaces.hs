@@ -79,7 +79,8 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
     , className =? "Firefox"
     ]
   myRelax = foldr1 (<||>)
-    [ title     =? "mcabber"
+    [ title     =? "IM"
+    , title     =? "mcabber"
     , title     =? "irssi"
     , title     =? "youtube-video"
     ]
