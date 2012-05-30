@@ -22,7 +22,7 @@ myWorkspaces = concat
   , ["8", "9", "0", "-", "=", "\\", "<-"]
   ]
 
-myWorkspacesKeys :: [Word64]
+myWorkspacesKeys :: [KeySym]
 myWorkspacesKeys = concat
   [ [xK_grave]
   , [xK_1..xK_7]
