@@ -66,6 +66,7 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
   myFloat = foldr1 (<||>)
     [ ("Figure" `isPrefixOf`) <$> title
     , title     =? "youtube-video"
+    , title     =? "xmessage"
     ]
   myStatus = foldr1 (<||>)
     [ title     =? "htop"
