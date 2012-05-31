@@ -5,7 +5,7 @@ import XMonad
 import qualified Profile         as P
 
 -- Terminal emulator
-myTerminal = "urxvtc"
+myTerminal = "urxvtcd"
 --
 
 -- Whether focus follows the mouse pointer.
