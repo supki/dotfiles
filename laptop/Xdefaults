@@ -1,3 +1,12 @@
+URxvt.perl-lib: /home/maksenov/git/urxvt-tabbedex
+URxvt.tabbed.tabbar-fg: 3
+URxvt.tabbed.tabbar-bg: 8
+URxvt.tabbed.tab-fg: 8
+URxvt.tabbed.tab-bg: 3
+URxvt.tabbed.new-button: no
+URxvt.tabbed.autohide: yes
+URxvt.tabbed.title: no
+
 urxvt.background: #333333
 urxvt.foreground: #ffffff
 
@@ -18,7 +27,7 @@ urxvt.color4:  #cccccc
 urxvt.color5:  #eeccaa
 urxvt.color6:  #00aaaa
 urxvt.color7:  #ffffff
-urxvt.color8:  #555555
+urxvt.color8:  #333333
 urxvt.color9:  #ff5555
 urxvt.color10: #ff6a6a
 urxvt.color11: #ff6a6a
@@ -29,8 +38,9 @@ urxvt.color15: #ffffff
 urxvt.underlineColor: #eeccaa
 
 urxvt.urlLauncher: iceweasel
-urxvt.perl-ext-common: default,matcher
-urxvt.matcher.pattern.0: http[s]*:\/\/[^ "]+
+urxvt.perl-ext-common: default,matcher,tabbedex
+
+urxvt.matcher.pattern.0: http[s]*:\/\/[^ "]+"?
 urxvt.matcher.button: 1
 
 scratchpad.background: #333333
@@ -53,7 +63,7 @@ scratchpad.color4:  #cccccc
 scratchpad.color5:  #eeccaa
 scratchpad.color6:  #00aaaa
 scratchpad.color7:  #ffffff
-scratchpad.color8:  #555555
+scratchpad.color8:  #333333
 scratchpad.color9:  #ff5555
 scratchpad.color10: #ff6a6a
 scratchpad.color11: #ff6a6a
@@ -64,8 +74,8 @@ scratchpad.color15: #ffffff
 scratchpad.underlineColor: #eeccaa
 
 scratchpad.urlLauncher: iceweasel
-scratchpad.perl-ext-common: default,matcher,tabbed
-scratchpad.matcher.pattern.0: http[s]*:\/\/[^ "]+
+scratchpad.perl-ext-common: default,matcher,tabbedex
+scratchpad.matcher.pattern.0: http[s]*:\/\/[^ "]+"?
 scratchpad.matcher.button: 1
 
 ncmpcpp.background: #333333
@@ -88,7 +98,7 @@ ncmpcpp.color4:  #cccccc
 ncmpcpp.color5:  #eeccaa
 ncmpcpp.color6:  #00aaaa
 ncmpcpp.color7:  #ffffff
-ncmpcpp.color8:  #555555
+ncmpcpp.color8:  #333333
 ncmpcpp.color9:  #ff5555
 ncmpcpp.color10: #ff6a6a
 ncmpcpp.color11: #ff6a6a
@@ -100,5 +110,5 @@ ncmpcpp.underlineColor: #eeccaa
 
 ncmpcpp.urlLauncher: iceweasel
 ncmpcpp.perl-ext-common: default,matcher
-ncmpcpp.matcher.pattern.0: http[s]*:\/\/[^ "]+
+ncmpcpp.matcher.pattern.0: http[s]*:\/\/[^ "]+"?
 ncmpcpp.matcher.button: 1
