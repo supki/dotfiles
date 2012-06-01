@@ -89,8 +89,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
       ]
       ++
+      -- switch to another screen
+      [ (m,           k, screenWorkspace sc >>= flip whenJust (windows . f))
+        | (k, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+      ]
+      ++
       -- swap workspaces and return to old one
-      [ (controlMask, k, withWindowSet (\s -> windows (swapWithCurrent i) >> windows (W.view $ W.currentTag s)))
+      [ (controlMask, k, withWindowSet (\s -> windows (swapWithCurrent i) >> windows (W.greedyView $ W.currentTag s)))
         | (i, k) <- zip WS.myWorkspaces WS.myWorkspacesKeys
       ]
   ]
