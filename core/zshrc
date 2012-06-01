@@ -1,3 +1,7 @@
+function chpwd {
+	print -Pn "\e]2;%~\a"
+}
+
 autoload -U compinit promptinit colors
 
 fpath=(~/git/zsh-completions ~/git/zsh-cabal-completion $fpath)
@@ -11,11 +15,9 @@ zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 promptinit
 colors
 PROMPT="%F{blue}%n%f@%M:%F{yellow}%~%f%# "
-RPROMPT="[%?]"
+PROMPT2="%F{blue}%_%f> "
+RPROMPT="[%(?,%F{green}%?%f,%F{red}%?%f)]"
 
-function chpwd {
-	print -Pn "\e]2;%~\a"
-}
 chpwd
 
 HISTSIZE=1000
