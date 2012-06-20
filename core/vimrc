@@ -90,6 +90,8 @@
 	autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
 	" set Racket indent
 	autocmd FileType racket  setlocal expandtab shiftwidth=2 softtabstop=2
+	" set Python indent
+	autocmd FileType python  setlocal expandtab shiftwidth=4 softtabstop=4
 
 	" save on focus lost
 	autocmd FocusLost * :wa
@@ -145,7 +147,7 @@
 	autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 	" highlight problematic whitespace
-	highlight WhitespaceErrors ctermbg=Red guibg=Red
+	highlight WhitespaceErrors ctermbg=Red guibg=#ff6a6a
 	autocmd BufEnter * match WhitespaceErrors /\s\+$\|[^\t]\@<=\t\+/
 " }
 
