@@ -1,4 +1,5 @@
 :set prompt "μ> "
+:set editor vim
 
 import Prelude.Unicode
 import Control.Applicative
