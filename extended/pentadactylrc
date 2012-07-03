@@ -6,7 +6,7 @@ group user
 set complete=location,bookmark,suggestion
 
 set guioptions=C
-set defsearch=duckduckgo
+set defsearch=google
 set showtabline=multitab
 set newtab+=help
 set hlfind
