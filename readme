@@ -14,7 +14,6 @@
 │   ├── racketrc
 │   ├── vim
 │   │   ├── cscope_maps.vim
-│   │   ├── haskellmode.vim
 │   │   ├── indent
 │   │   │   └── haskell.vim
 │   │   ├── pathogen.vim
@@ -59,4 +58,4 @@
     └── xmonad
         └── Profile.hs
 
-13 directories, 46 files
+13 directories, 45 files
