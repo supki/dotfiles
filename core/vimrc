@@ -82,10 +82,6 @@
 	" shift width for tabs
 	set shiftwidth=4
 
-	" use ghc functionality for haskell files
-	autocmd BufEnter *.hs compiler ghc
-	let g:haddock_browser = "iceweasel"
-
 	" set Haskell indent
 	autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
 	" set Racket indent
@@ -187,12 +183,10 @@
 	noremap <leader>h :noh<bar>echo<CR>
 
 	" toggle scratch buffer
-	noremap <leader>t :VScratch<CR>
+	noremap <leader>s :VScratch<CR>
 
 	" paste file to pastebin
 	noremap <leader>z :w \| !upload-pastebin % \| xsel<CR>
-
-	inoremap <leader>p <C-X><C-O>
 
 	" easy move to next bracket
 	nnoremap <tab> %
@@ -201,6 +195,11 @@
 	" fix rxvt shit
 	map  <Esc>[5^ :tabp<CR>
 	map  <Esc>[6^ :tabn<CR>
+
+	" add some hotkeys for rather tedious ghc-mod commands
+	nmap <leader>c :GhcModCheck<CR>
+	nmap <leader>l :GhcModLint<CR>
+	nmap <leader>t :GhcModType<CR>
 " }
 
 " Functions {
