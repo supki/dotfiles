@@ -1,5 +1,7 @@
 import Data.Functor ((<$>))
 import System.IO
+
+import Graphics.UI.Gtk (initGUI)
 import XMonad
 import XMonad.Actions.UpdatePointer
 import XMonad.Hooks.DynamicLog
@@ -14,6 +16,7 @@ import Workspaces
 import qualified Profile         as P
 
 main = do
+  initGUI
   xmproc <- spawnPipe "xmobar"
   xmonad $ defaultConfig
     -- Terminal

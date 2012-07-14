@@ -12,6 +12,7 @@ import XMonad.Prompt.Window
 import XMonad.Util.NamedScratchpad
 import qualified Data.Map        as M
 import qualified XMonad.StackSet as W
+import qualified XMonad.Util.WorkspaceScreenshot as ScreenShot
 
 import Themes
 import qualified Profile         as P
@@ -58,11 +59,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- move focus
       , (shiftMask,   xK_Tab, windows W.focusDown)
       , (0,           xK_j, windows W.focusDown)
-      , (0,           xK_k, windows W.focusUp  )
+      , (0,           xK_k, windows W.focusUp)
       -- swap the focused window
       , (0,           xK_Return, windows W.swapMaster)
-      , (shiftMask,   xK_j, windows W.swapDown  )
-      , (shiftMask,   xK_k, windows W.swapUp    )
+      , (shiftMask,   xK_j, windows W.swapDown)
+      , (shiftMask,   xK_k, windows W.swapUp)
       -- shrink/expand the master area
       , (0,           xK_h, sendMessage Shrink)
       , (0,           xK_l, sendMessage Expand)
@@ -77,9 +78,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_q, restart "xmonad" True)
       , (shiftMask,   xK_q, spawn "killall trayer; xmonad --recompile; xmonad --restart")
       -- view empty workspace
-      , (0,           xK_m, viewEmptyWorkspace )
+      , (0,           xK_m, viewEmptyWorkspace)
       -- shift window to empty workspace
-      , (shiftMask,   xK_m, tagToEmptyWorkspace )
+      , (shiftMask,   xK_m, tagToEmptyWorkspace)
+      -- make workspaces screenshots and merge them
+      , (shiftMask,   xK_u, ScreenShot.allWorkspacesExcept ["4","5","-","\\"])
       ]
       ++
       -- switch to workspace

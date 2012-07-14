@@ -1,12 +1,12 @@
 module Themes where
 
-import XMonad
 import XMonad.Layout.Tabbed
 import XMonad.Prompt
 
 import qualified Profile         as P
 
 -- Theme
+myTheme :: Theme
 myTheme = defaultTheme {
   activeColor = P.blackColor,
   inactiveColor = P.grayDarkColor,
@@ -21,6 +21,7 @@ myTheme = defaultTheme {
 --
 
 -- XPConfig
+myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig {
   font = P.terminusFont,
   bgColor = P.blackColor,

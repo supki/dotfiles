@@ -2,7 +2,6 @@ module Workspaces where
 
 import Data.Functor ((<$>))
 import Data.List (isPrefixOf)
-import Data.Word (Word64)
 
 import XMonad
 import XMonad.Hooks.ManageDocks
@@ -10,8 +9,6 @@ import XMonad.Hooks.ManageHelpers
 import qualified XMonad.Layout.PerWorkspace as XLP
 import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
-
-import Themes
 
 -- Workspaces
 myWorkspaces :: [WorkspaceId]
@@ -111,6 +108,7 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
 --
 
 -- Scratchpads
+scratchpads :: [NamedScratchpad]
 scratchpads =
   [ NS "scratchpad" "urxvtc -name scratchpad" (resource =? "scratchpad") (customFloating $ W.RationalRect 0.25 0.20 0.5 0.6)
   , NS "ncmpcpp" "urxvtc -name ncmpcpp -e ncmpcpp" (resource =? "ncmpcpp") (customFloating $ W.RationalRect 0.25 0.20 0.5 0.6)
