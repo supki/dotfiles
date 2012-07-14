@@ -9,9 +9,6 @@ syntax match hsNiceOperator "\\" conceal cchar=λ
 syntax match hsNiceOperator "\\\\" conceal cchar=∖
 syntax match hsNiceOperator "<-" conceal cchar=←
 syntax match hsNiceOperator "->" conceal cchar=→
-syntax match hsNiceOperator "\<sum\>" conceal cchar=∑
-syntax match hsNiceOperator "\<product\>" conceal cchar=∏
-syntax match hsNiceOperator "\<sqrt\>" conceal cchar=√
 syntax match hsNiceOperator "\<pi\>" conceal cchar=π
 syntax match hsNiceOperator /\s%\s/ms=s+1,me=e-1 conceal cchar=÷
 syntax match hsNiceOperator "==" conceal cchar=≡
@@ -27,7 +24,6 @@ syntax match hsNiceOperator "\:\:" conceal cchar=∷
 syntax match hsNiceOperator "\<forall\>" conceal cchar=∀
 
 syntax match hsNiceOperator /\s\.\s/ms=s+1,me=e-1 conceal cchar=∘
-syntax match hsNiceOperator "\.\." conceal cchar=‥
 
 hi link hsNiceOperator Operator
 hi! link Conceal Operator
