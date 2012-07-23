@@ -10,9 +10,9 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
 import XMonad.Util.NamedScratchpad
+import XMonad.Util.WorkspaceScreenshot
 import qualified Data.Map        as M
 import qualified XMonad.StackSet as W
-import qualified XMonad.Util.WorkspaceScreenshot as ScreenShot
 
 import Themes
 import qualified Profile         as P
@@ -82,7 +82,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- shift window to empty workspace
       , (shiftMask,   xK_m, tagToEmptyWorkspace)
       -- make workspaces screenshots and merge them
-      , (shiftMask,   xK_u, ScreenShot.allWorkspacesExcept ["4","5","-","\\"])
+      , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook H)
       ]
       ++
       -- switch to workspace
