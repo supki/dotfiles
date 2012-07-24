@@ -82,7 +82,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- shift window to empty workspace
       , (shiftMask,   xK_m, tagToEmptyWorkspace)
       -- make workspaces screenshots and merge them
-      , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook H)
+      , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook horizontally)
       ]
       ++
       -- switch to workspace
