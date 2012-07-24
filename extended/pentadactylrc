@@ -14,12 +14,12 @@ set hlfind
 set hintkeys=asdfghjkl;
 :highlight -a Hint text-transform: uppercase;
 
-nnoremap : ;
-nnoremap ; :
-nnoremap j 5j
-nnoremap k 5k
-nnoremap h 5h
-nnoremap l 5l
+nmap -builtin : ;
+nmap -builtin ; :
+nmap -builtin j 5j
+nmap -builtin k 5k
+nmap -builtin h 5h
+nmap -builtin l 5l
 nmap <A-Tab> <C-6>
 nmap <Space> <C-D>
 nmap <S-Space> <C-U>
@@ -35,10 +35,10 @@ javascript <<EOF
 	};
 EOF
 
-set mapleader=","
-nnoremap <leader>s -js dactyl.toggleStatusLine();
-nnoremap <leader>z -js window.content.document.toggleImageSize();
-nnoremap <leader>d :dialog downloads<CR>
+map , <leader>
+nmap -builtin <leader>s -js dactyl.toggleStatusLine();
+nmap -builtin <leader>z -js window.content.document.toggleImageSize();
+nmap -builtin <leader>d :dialog downloads<CR>
 
 style -group=user -name=black_new_tab chrome://* xul|browser { background-color: black; }
 
