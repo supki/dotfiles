@@ -36,8 +36,9 @@
 		set number
 	end
 
-	" show current line underlined
+	" highlight current line and column
 	set cursorline
+	set cursorcolumn
 
 	" always show current cursor position
 	set ruler
