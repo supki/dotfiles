@@ -1,0 +1,37 @@
+" Pentadactyl Wanker theme
+" based on Pemees theme by dmalikov
+
+highlight -append URL color: #eeccaa
+
+highlight Normal background:  #080808; color: #afafaf; font-size: 8pt; font-family: Terminus;
+highlight CmdLine background: #080808; color: #8080a1; font-size: 8pt; font-family: Terminus; padding: 0px 3px;
+highlight StatusCmdLine background: transparent;
+
+highlight CompGroup background: #121212; color: #afafaf; font-weight: bold;
+highlight CompTitle background: #121212; color: #afafaf;
+highlight CompTitleSep height: 2px; background-color: #eeccaa;
+highlight CompItem background: #121212; color: #afafaf; padding: 0px 3px;
+highlight CompItem[selected] background: #121212; color: #dd9977; font-weight: bold;
+highlight CompDesc background: #121212; color: #eeccaa;
+highlight CompDesc[selected] background: #121212; color: #afafaf;
+highlight CompMsg background: #121212; color: #eeccaa;
+
+highlight Gradient background: #121212;
+highlight GradientLeft background: #121212;
+highlight GradientRight background: #121212;
+
+highlight ErrorMsg background: #ff6a6a; color: #ff6a6a !important;
+highlight WarningMsg background: #7f1b11; color: #ff6a6a !important;
+highlight Filter color: #ff9700; font-weight: bold;
+
+highlight StatusNormal font-family: Terminus; font-size: 8pt; color: #eeccaa; background: #080808;
+highlight StatusLineNormal font-family: Terminus; font-size: 8pt; color: #eeccaa; background: #180808;
+highlight StatusLineBroken font-family: Terminus; font-size: 8pt; color: #eeccaa; background: #181808;
+highlight StatusLineSecure font-family: Terminus; font-size: 8pt; color: #eeccaa; background: #081808;
+highlight StatusLineExtended font-family: Terminus; font-size: 8pt; color: #eeccaa; background: #082808;
+
+highlight Hint font-family: Terminus; font-size: 10pt; color: #eeccaa; background-color: #181818; padding: 1px; solid #121212;
+highlight -append HintElem background-color: #eeccaa;
+highlight Question font-family: Terminus; font-size: 8pt; color: #8080a1; background-color: #080808;
+
+highlight Title font-size: 10pt; color: #121212; background: #afafaf;

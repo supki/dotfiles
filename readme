@@ -27,6 +27,8 @@
 ├── extended
 │   ├── gtkrc.mine
 │   ├── gvimrc
+│   ├── pentadactyl
+│   │   └── wanker.penta
 │   ├── pentadactylrc
 │   ├── vimcolors
 │   │   ├── camo.vim
@@ -58,4 +60,4 @@
     └── xmonad
         └── Profile.hs
 
-13 directories, 45 files
+14 directories, 46 files

@@ -5,7 +5,7 @@ group user
 
 set complete=location,bookmark,suggestion
 
-set guioptions=C
+set guioptions=Cs
 set defsearch=google
 set showtabline=multitab
 set newtab+=help
