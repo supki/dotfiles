@@ -31,6 +31,7 @@ highlight StatusLineSecure font-family: Terminus; font-size: 8pt; color: #eeccaa
 highlight StatusLineExtended font-family: Terminus; font-size: 8pt; color: #eeccaa; background: #082808;
 
 highlight Hint font-family: Terminus; font-size: 10pt; color: #eeccaa; background-color: #181818; padding: 1px; solid #121212;
+highlight -a HintActive background-color: #ffddbb;
 highlight -append HintElem background-color: #eeccaa;
 highlight Question font-family: Terminus; font-size: 8pt; color: #8080a1; background-color: #080808;
 
