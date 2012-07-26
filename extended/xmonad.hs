@@ -7,6 +7,7 @@ import XMonad.Actions.UpdatePointer
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run
+import XMonad.Util.WorkspaceScreenshot (initCapturing)
 
 import Controls
 import Layouts
@@ -16,9 +17,9 @@ import Workspaces
 import qualified Profile         as P
 
 main = do
-  initGUI
+  initCapturing
   xmproc <- spawnPipe "xmobar"
-  xmonad $ defaultConfig
+  xmonad defaultConfig
     -- Terminal
     { terminal           = myTerminal
     -- Hooks

@@ -49,6 +49,7 @@ myManageHook :: ManageHook
 myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
   [ isFullscreen --> doFullFloat
   , myFloat      --> doFloat
+  , myIgnore     --> doIgnore
   , myRelax      --> doShift (toWsId Talkative)
   , myChromie    --> doShift (toWsId WWW)
   , myDocs       --> doShift (toWsId Texts)
@@ -64,6 +65,9 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
     [ ("Figure" `isPrefixOf`) <$> title
     , title     =? "youtube-video"
     , title     =? "xmessage"
+    ]
+  myIgnore = foldr1 (<||>)
+    [ title     =? "xfce4-notifyd"
     ]
   myStatus = foldr1 (<||>)
     [ title     =? "htop"
