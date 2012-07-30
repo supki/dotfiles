@@ -43,6 +43,7 @@ apps =  [ ("trayer", "trayer --edge bottom --align left --transparent true --wid
   , ("icedove", "icedove")
   , ("python /home/maksenov/bin/trayicon-mpd", "trayicon-mpd")
   , ("python /home/maksenov/bin/trayicon-mcabber", "trayicon-mcabber")
+  , ("suspender", "suspender")
   ]
 --
 
