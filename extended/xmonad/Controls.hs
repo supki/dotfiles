@@ -115,8 +115,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_t, "vaio-touchpad --toggle")
       -- copy selection from work machine
       , (0,           xK_c, "work-copypaste")
-      -- shutdown/logout menu, screenlock
-      , (0,           xK_F1, "shutdown-gui")
+      -- screenlock
       , (0,           xK_l, "slock")
       -- love current track in lastfm
       , (0,           xK_f, "lastfm-love-current-mpd-track")
