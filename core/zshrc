@@ -44,7 +44,7 @@ alias ack=ack-grep # stupid debian
 alias ls='ls --color'
 
 function man() {
-	/usr/bin/man $@ | vim -c 'set ft=man nomod' -
+	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -
 }
 
 function insert_sudo () {
