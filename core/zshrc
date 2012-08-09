@@ -43,7 +43,14 @@ bindkey "^[[8~" end-of-line
 alias ack=ack-grep # stupid debian
 alias ls='ls --color'
 
-function man
-{
+function man() {
 	/usr/bin/man $@ | vim -c 'set ft=man nomod' -
 }
+
+function insert_sudo () {
+	zle beginning-of-line
+	zle -U "sudo "
+}
+
+zle -N insert-sudo insert_sudo
+bindkey "^[z" insert-sudo
