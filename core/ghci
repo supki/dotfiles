@@ -9,9 +9,12 @@ import Data.Bits
 import Data.Char
 import Data.Function
 import Data.List
+import Data.Maybe
 import Data.Monoid
 import System.Directory
 import System.FilePath
+import System.IO
+import Text.Parsec hiding ((<|>), many)
 import Text.Printf
 import Unsafe.Coerce
 import qualified Data.Map as M
@@ -22,7 +25,7 @@ import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
 import qualified Data.ByteString.Lazy as BL
 import qualified Data.ByteString.Lazy.Char8 as BLC
-import qualified Text.Parsec as T
+import qualified Data.Text as T
 
 :set -fwarn-alternative-layout-rule-transitional
 :set -fwarn-auto-orphans
@@ -45,11 +48,12 @@ import qualified Text.Parsec as T
 :set -fwarn-tabs
 :set -fwarn-unrecognised-pragmas
 :set -fwarn-unused-binds
-:set -fno-warn-unused-do-bind
 :set -fwarn-unused-imports
 :set -fwarn-unused-matches
 :set -fwarn-warnings-deprecations
 :set -fwarn-wrong-do-bind
+
+:set -fno-warn-unused-do-bind
 
 :set -XUnicodeSyntax
 :set -XBangPatterns
@@ -57,3 +61,4 @@ import qualified Text.Parsec as T
 :set -XGeneralizedNewtypeDeriving
 :set -XTupleSections
 :set -XRankNTypes
+:set -XOverloadedStrings
