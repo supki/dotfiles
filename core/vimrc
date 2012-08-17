@@ -202,6 +202,9 @@
 	nmap <leader>l :GhcModLint<CR>
 	nmap <leader>t :GhcModType<CR>
 	nmap <leader>T :GhcModType<CR>
+
+	nnoremap <Space> <C-D>
+	nnoremap <S-Space> <C-U>
 " }
 
 " Functions {
