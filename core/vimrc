@@ -56,6 +56,7 @@
 	" enable autocomplete
 	set wildmenu
 	set wildmode=list:longest,full
+	set wildignore=*.o,*.hi,*.pyc,*~
 
 	" don't pause big listings
 	set nomore
