@@ -21,6 +21,7 @@
 │   │       └── plugin
 │   │           └── scratch.vim
 │   ├── vimrc
+│   ├── vimusrc
 │   ├── XCompose
 │   ├── xsession
 │   └── zshrc
@@ -60,4 +61,4 @@
     └── xmonad
         └── Profile.hs
 
-14 directories, 46 files
+14 directories, 47 files

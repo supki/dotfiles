@@ -201,6 +201,7 @@
 	nmap <leader>c :GhcModCheck<CR>
 	nmap <leader>l :GhcModLint<CR>
 	nmap <leader>t :GhcModType<CR>
+	nmap <leader>T :GhcModType<CR>
 " }
 
 " Functions {
