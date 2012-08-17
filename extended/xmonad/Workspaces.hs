@@ -115,5 +115,5 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
 scratchpads :: [NamedScratchpad]
 scratchpads =
   [ NS "scratchpad" "urxvtc -name scratchpad" (resource =? "scratchpad") (customFloating $ W.RationalRect 0.25 0.20 0.5 0.6)
-  , NS "ncmpcpp" "urxvtc -name ncmpcpp -e ncmpcpp" (resource =? "ncmpcpp") (customFloating $ W.RationalRect 0.25 0.20 0.5 0.6)
+  , NS "vimus" "urxvtc -name vimus -e vimus" (resource =? "vimus") (customFloating $ W.RationalRect 0.25 0.20 0.5 0.6)
   ]
