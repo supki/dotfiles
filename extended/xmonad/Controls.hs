@@ -53,7 +53,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_n, refresh)
       -- toggle scratchpads
       , (0,           xK_s, namedScratchpadAction WS.scratchpads "scratchpad")
-      , (0,           xK_o, namedScratchpadAction WS.scratchpads "ncmpcpp")
+      , (0,           xK_o, namedScratchpadAction WS.scratchpads "vimus")
       -- switch to last workspace
       , (0,           xK_Tab, toggleWS' ["NSP"])
       -- move focus

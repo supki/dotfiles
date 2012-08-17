@@ -78,37 +78,37 @@ scratchpad.perl-ext-common: default,matcher,tabbedex
 scratchpad.matcher.pattern.0: http[s]*:\/\/[^ "]+"?
 scratchpad.matcher.button: 1
 
-ncmpcpp.background: #333333
-ncmpcpp.foreground: #ffffff
+vimus.background: #333333
+vimus.foreground: #ffffff
 
-ncmpcpp.font: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
-ncmpcpp.boldFont: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+vimus.font: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+vimus.boldFont: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
 
-ncmpcpp.scrollBar: False
-ncmpcpp.cursorBlink: True
-ncmpcpp.cursorUnderline: True
+vimus.scrollBar: False
+vimus.cursorBlink: True
+vimus.cursorUnderline: True
 
-ncmpcpp.saveLines: 12000
+vimus.saveLines: 12000
 
-ncmpcpp.color0:  #000000
-ncmpcpp.color1:  #ff6a6a
-ncmpcpp.color2:  #bbbb66
-ncmpcpp.color3:  #dd9977
-ncmpcpp.color4:  #cccccc
-ncmpcpp.color5:  #eeccaa
-ncmpcpp.color6:  #00aaaa
-ncmpcpp.color7:  #ffffff
-ncmpcpp.color8:  #333333
-ncmpcpp.color9:  #ff5555
-ncmpcpp.color10: #ff6a6a
-ncmpcpp.color11: #ff6a6a
-ncmpcpp.color12: #ff6a6a
-ncmpcpp.color13: #ff6a6a
-ncmpcpp.color14: #55ffff
-ncmpcpp.color15: #ffffff
-ncmpcpp.underlineColor: #eeccaa
+vimus.color0:  #000000
+vimus.color1:  #ff6a6a
+vimus.color2:  #bbbb66
+vimus.color3:  #dd9977
+vimus.color4:  #cccccc
+vimus.color5:  #eeccaa
+vimus.color6:  #00aaaa
+vimus.color7:  #ffffff
+vimus.color8:  #333333
+vimus.color9:  #ff5555
+vimus.color10: #ff6a6a
+vimus.color11: #ff6a6a
+vimus.color12: #ff6a6a
+vimus.color13: #ff6a6a
+vimus.color14: #55ffff
+vimus.color15: #ffffff
+vimus.underlineColor: #eeccaa
 
-ncmpcpp.urlLauncher: iceweasel
-ncmpcpp.perl-ext-common: default,matcher
-ncmpcpp.matcher.pattern.0: http[s]*:\/\/[^ "]+"?
-ncmpcpp.matcher.button: 1
+vimus.urlLauncher: iceweasel
+vimus.perl-ext-common: default,matcher
+vimus.matcher.pattern.0: http[s]*:\/\/[^ "]+"?
+vimus.matcher.button: 1
