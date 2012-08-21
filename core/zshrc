@@ -54,3 +54,10 @@ function insert_sudo () {
 
 zle -N insert-sudo insert_sudo
 bindkey "^[z" insert-sudo
+
+function back_to_vim () {
+	fg
+}
+
+zle -N back-to-vim back_to_vim
+bindkey "^z" back-to-vim
