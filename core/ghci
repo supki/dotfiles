@@ -20,6 +20,7 @@ import Control.Monad.Reader
 import Control.Monad.Writer
 import Control.Monad.State
 import Control.Monad.Free
+import Control.Monad.Trans
 import Data.Monoid.Lens
 import Prelude.Unicode
 import System.Directory
