@@ -1,7 +1,6 @@
 :set prompt "μ> "
 :set editor vim
 
-import Prelude.Unicode
 import Control.Applicative
 import Control.Arrow
 import Control.Monad
@@ -11,12 +10,23 @@ import Data.Function
 import Data.List
 import Data.Maybe
 import Data.Monoid
-import System.Directory
-import System.FilePath
 import System.IO
-import Text.Parsec hiding ((<|>), many)
 import Text.Printf
 import Unsafe.Coerce
+
+import Control.Lens
+import Control.Monad.Error
+import Control.Monad.Reader
+import Control.Monad.Writer
+import Control.Monad.State
+import Control.Monad.Free
+import Data.Monoid.Lens
+import Prelude.Unicode
+import System.Directory
+import System.FilePath
+import System.FilePath.Lens
+import Text.Parsec hiding ((<|>), many)
+
 import qualified Data.Map as M
 import qualified Data.IntMap as IM
 import qualified Data.Set as S
