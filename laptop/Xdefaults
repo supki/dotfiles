@@ -78,7 +78,7 @@ scratchpad.perl-ext-common: default,matcher,tabbedex
 scratchpad.matcher.pattern.0: http[s]*:\/\/[^ "]+"?
 scratchpad.matcher.button: 1
 
-vimus.background: #333333
+vimus.background: #212121
 vimus.foreground: #ffffff
 
 vimus.font: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
@@ -89,24 +89,22 @@ vimus.cursorBlink: True
 vimus.cursorUnderline: True
 
 vimus.saveLines: 12000
-
-vimus.color0:  #000000
-vimus.color1:  #ff6a6a
-vimus.color2:  #bbbb66
-vimus.color3:  #dd9977
-vimus.color4:  #cccccc
-vimus.color5:  #eeccaa
-vimus.color6:  #00aaaa
-vimus.color7:  #ffffff
-vimus.color8:  #333333
-vimus.color9:  #ff5555
-vimus.color10: #ff6a6a
-vimus.color11: #ff6a6a
-vimus.color12: #ff6a6a
-vimus.color13: #ff6a6a
-vimus.color14: #55ffff
-vimus.color15: #ffffff
-vimus.underlineColor: #eeccaa
+vimus.color0:  #212121
+vimus.color1:  #AA0000
+vimus.color2:  #00AA00
+vimus.color3:  #BB6622
+vimus.color4:  #0000AA
+vimus.color5:  #AA00AA
+vimus.color6:  #00AAAA
+vimus.color7:  #AAAAAA
+vimus.color8:  #555555
+vimus.color9:  #FF5555
+vimus.color10: #55FF55
+vimus.color11: #FFFF55
+vimus.color12: #5555FF
+vimus.color13: #FF55FF
+vimus.color14: #55FFFF
+vimus.color15: #FFFFFF
 
 vimus.urlLauncher: iceweasel
 vimus.perl-ext-common: default,matcher

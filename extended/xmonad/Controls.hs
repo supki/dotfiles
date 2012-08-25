@@ -124,9 +124,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- upload file with copied url to vsegda.budueba.com
       , (0,           xK_u, "upload-budueba `xsel`")
       -- ncmpcpp: toggle music, select previous/next track
-      , (shiftMask,   xK_Return, "ncmpcpp toggle")
-      , (shiftMask,   xK_comma, "ncmpcpp prev")
-      , (shiftMask,   xK_period, "ncmpcpp next")
+      , (shiftMask,   xK_Return, "mpc toggle")
+      , (shiftMask,   xK_comma, "mpc prev")
+      , (shiftMask,   xK_period, "mpc next")
       ]
   ]
   ++

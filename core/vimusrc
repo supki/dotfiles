@@ -1,8 +1,13 @@
-color tab green black
-color main cyan black
-color ruler green black
-color songstatus blue black
-color playstatus blue black
+# Mappings
+map ; :
+map u :update<CR>
+
+# Colors
+color tab red black
+color main yellow black
+color ruler yellow black
+color songstatus white black
+color playstatus white black
 color error white red
 color input white black
-color suggestions green black
+color suggestions yellow black
