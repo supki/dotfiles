@@ -11,8 +11,6 @@ syntax match hsNiceOperator "<-" conceal cchar=←
 syntax match hsNiceOperator "->" conceal cchar=→
 syntax match hsNiceOperator "\<pi\>" conceal cchar=π
 syntax match hsNiceOperator /\s%\s/ms=s+1,me=e-1 conceal cchar=÷
-syntax match hsNiceOperator "==" conceal cchar=≡
-syntax match hsNiceOperator "\/=" conceal cchar=≠
 syntax match hsNiceOperator "\<not\>" conceal cchar=¬
 syntax match hsNiceOperator "`elem`" conceal cchar=∈
 syntax match hsNiceOperator /\s\*\s/ms=s+1,me=e-1 conceal cchar=×
