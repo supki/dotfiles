@@ -169,12 +169,6 @@
 	nnoremap j gj
 	nnoremap k gk
 
-	" map for easier buffer window change
-	noremap <C-H> <C-W>h
-	noremap <C-J> <C-W>j
-	noremap <C-K> <C-W>k
-	noremap <C-L> <C-W>l
-
 	" shift key fixes
 	cnoremap WQ wq
 	cnoremap wQ wq
