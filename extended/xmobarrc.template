@@ -1,9 +1,9 @@
 Config { font          = "xft:ubuntu-8"
-	, bgColor      = "#333333"
+	, bgColor      = $template.xmobar.backgroundColor$
 	, fgColor      = "#dd9977"
 	, border       = NoBorder
 	, borderColor  = "#ff0000"
-	, position     = Static { xpos = 102, ypos = 750, width = 1264, height = 20 }
+	, position     = $template.xmobar.position$
 	, lowerOnStart = False
 	, commands     = [ Run Cpu ["-t", "<total>", "-L", "25", "-H", "25", "-l", "#eeccaa", "--normal", "red", "--high", "red"] 10
 			, Run Memory ["-t", "<usedratio>", "-L", "50", "-H", "50", "-l", "#eeccaa", "--normal", "red", "--high", "red"] 10
@@ -17,6 +17,6 @@ Config { font          = "xft:ubuntu-8"
 			]
 	, sepChar      = "%"
 	, alignSep     = "}{"
-	, template     = " %StdinReader% }{ %cpu%%mysep% %memory%%mysep% %eth0%%mysep% %wlan0%%mysep% <fc=#eeccaa>%myweather%%mysep%</fc> %battery%%mysep% %mydate% "
+	, template     = " %StdinReader% }{ %cpu%%mysep% %memory%%mysep% %eth0%%mysep% %wlan0%%mysep% <fc=#eeccaa>%myweather%%mysep%</fc> $template.xmobar.battery$ %mydate% "
 }
 
