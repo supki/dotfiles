@@ -4,10 +4,6 @@ import XMonad
 
 import qualified Profile         as P
 
--- Terminal emulator
-myTerminal = "urxvtcd"
---
-
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False

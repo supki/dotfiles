@@ -1,5 +1,10 @@
 module Profile where
 
+-- Terminal emulator
+myTerminal :: String
+myTerminal = "urxvt"
+--
+
 -- Fonts
 ubuntuFont :: String
 ubuntuFont = "xft:ubuntu:size=9"
@@ -34,8 +39,8 @@ apps =
   , ("/usr/lib/firefox/firefox", "firefox")
   , ("thunderbird", "thunderbird")
   , ("gnome-commander", "gnome-commander")
-  , ("ssh .* im", "urxvtc -title IM -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t im'")
-  , ("watch -n2 netstat", "urxvtc -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
-  , ("htop", "urxvtc -title htop -e htop")
+  , ("ssh .* im", "urxvt -title IM -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t im'")
+  , ("watch -n2 netstat", "urxvt -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
+  , ("htop", "urxvt -title htop -e htop")
   ]
 --

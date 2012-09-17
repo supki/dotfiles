@@ -1,5 +1,10 @@
 module Profile where
 
+-- Terminal emulator
+myTerminal :: String
+myTerminal = "urxvtcd"
+--
+
 -- Fonts
 ubuntuFont :: String
 ubuntuFont = "xft:ubuntu:size=9"

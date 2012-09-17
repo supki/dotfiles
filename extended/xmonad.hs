@@ -1,7 +1,6 @@
 import Data.Functor ((<$>))
 import System.IO
 
-import Graphics.UI.Gtk (initGUI)
 import XMonad
 import XMonad.Actions.UpdatePointer
 import XMonad.Hooks.DynamicLog
@@ -21,7 +20,7 @@ main = do
   xmproc <- spawnPipe "xmobar"
   xmonad defaultConfig
     -- Terminal
-    { terminal           = myTerminal
+    { terminal           = P.myTerminal
     -- Hooks
     , manageHook         = myManageHook
     , layoutHook         = myLayoutHook
