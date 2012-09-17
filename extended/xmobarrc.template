@@ -1,5 +1,5 @@
 Config { font          = "xft:ubuntu-8"
-	, bgColor      = $template.xmobar.backgroundColor$
+	, bgColor      = $template.xmobar.background$
 	, fgColor      = "#dd9977"
 	, border       = NoBorder
 	, borderColor  = "#ff0000"

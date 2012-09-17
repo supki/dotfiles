@@ -13,14 +13,13 @@ import Layouts
 import Misc
 import Startup
 import Workspaces
-import qualified Profile         as P
 
 main = do
   initCapturing
   xmproc <- spawnPipe "xmobar"
   xmonad defaultConfig
     -- Terminal
-    { terminal           = P.myTerminal
+    { terminal           = myTerminal
     -- Hooks
     , manageHook         = myManageHook
     , layoutHook         = myLayoutHook
@@ -44,11 +43,11 @@ myLogHook xmproc_handle = do
   dynamicLogWithPP $ xmobarPP
     { ppOutput = hPutStrLn xmproc_handle
     , ppLayout = const ""
-    , ppTitle = xmobarColor P.yellowColor ""
-    , ppCurrent = xmobarColor P.yellowColor "" . const "λ"
-    , ppHidden = xmobarColor P.orangeColor ""
-    , ppHiddenNoWindows = xmobarColor P.grayLightColor ""
-    , ppSep = "<fc=" ++ P.whiteColor ++ "> | </fc>"
+    , ppTitle = xmobarColor yellowColor ""
+    , ppCurrent = xmobarColor yellowColor "" . const "λ"
+    , ppHidden = xmobarColor orangeColor ""
+    , ppHiddenNoWindows = xmobarColor grayLightColor ""
+    , ppSep = "<fc=" ++ whiteColor ++ "> | </fc>"
     , ppSort = (. namedScratchpadFilterOutWorkspace) <$> ppSort defaultPP
     }
 --

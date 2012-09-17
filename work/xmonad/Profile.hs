@@ -1,37 +1,5 @@
 module Profile where
 
--- Terminal emulator
-myTerminal :: String
-myTerminal = "urxvt"
---
-
--- Fonts
-ubuntuFont :: String
-ubuntuFont = "xft:ubuntu:size=9"
-terminusFont :: String
-terminusFont = "xft:terminus:size=9"
---
-
--- Colors
-whiteColor :: String
-whiteColor = "#ffffff"
-
-grayDarkColor :: String
-grayDarkColor = "#515151"
-
-grayLightColor :: String
-grayLightColor = "#cccccc"
-
-blackColor :: String
-blackColor = "#373737"
-
-orangeColor :: String
-orangeColor = "#dd9977"
-
-yellowColor :: String
-yellowColor = "#eeccaa"
---
-
 -- Startup apps
 apps :: [(String, String)]
 apps =

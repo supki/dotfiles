@@ -3,18 +3,18 @@ module Themes where
 import XMonad.Layout.Tabbed
 import XMonad.Prompt
 
-import qualified Profile         as P
+import Misc
 
 -- Theme
 myTheme :: Theme
 myTheme = defaultTheme {
-  activeColor = P.blackColor,
-  inactiveColor = P.grayDarkColor,
-  activeBorderColor = P.yellowColor,
-  inactiveBorderColor = P.orangeColor,
-  activeTextColor = P.yellowColor,
-  inactiveTextColor = P.orangeColor,
-  fontName = P.ubuntuFont,
+  activeColor = blackColor,
+  inactiveColor = grayDarkColor,
+  activeBorderColor = yellowColor,
+  inactiveBorderColor = orangeColor,
+  activeTextColor = yellowColor,
+  inactiveTextColor = orangeColor,
+  fontName = ubuntuFont,
   decoWidth = 1378,
   decoHeight = 20
 }
@@ -23,10 +23,10 @@ myTheme = defaultTheme {
 -- XPConfig
 myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig {
-  font = P.terminusFont,
-  bgColor = P.blackColor,
-  borderColor = P.yellowColor,
-  fgColor = P.yellowColor,
+  font = terminusFont,
+  bgColor = blackColor,
+  borderColor = yellowColor,
+  fgColor = yellowColor,
   position = Top,
   height = 20,
   autoComplete = Just 1
