@@ -1,0 +1,58 @@
+*.perl-lib: $template.urxvt.tabbedex$
+*.tabbed.tabbar-fg: 3
+*.tabbed.tabbar-bg: 8
+*.tabbed.tab-fg: 8
+*.tabbed.tab-bg: 3
+*.tabbed.new-button: no
+*.tabbed.autohide: yes
+*.tabbed.title: no
+
+*.background: $template.urxvt.background_$
+*.foreground: #ffffff
+
+*.font: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+*.boldFont: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+
+*.scrollBar: False
+*.cursorBlink: True
+*.cursorUnderline: True
+
+*.saveLines: 12000
+
+*.color0:  #000000
+*.color1:  #ff6a6a
+*.color2:  #bbbb66
+*.color3:  #dd9977
+*.color4:  #cccccc
+*.color5:  #eeccaa
+*.color6:  #00aaaa
+*.color7:  #ffffff
+*.color8:  $template.urxvt.background_$
+*.color9:  #ff5555
+*.color10: #55ff55
+*.color11: #ffff55
+*.color12: #5555ff
+*.color13: #ff55ff
+*.color14: #55ffff
+*.color15: #ffffff
+*.underlineColor: #eeccaa
+
+*.urlLauncher: $template.urxvt.browser$
+*.perl-ext-common: default,matcher,tabbedex
+*.matcher.pattern.0: http[s]*:\/\/[^ "]+"?
+*.matcher.button: 1
+
+vimus.background: #212121
+
+vimus.saveLines: 12000
+vimus.color0:  #212121
+vimus.color1:  #AA0000
+vimus.color2:  #00AA00
+vimus.color3:  #BB6622
+vimus.color4:  #0000AA
+vimus.color5:  #AA00AA
+vimus.color6:  #00AAAA
+vimus.color7:  #AAAAAA
+vimus.color8:  #555555
+
+vimus.perl-ext-common: default,matcher
