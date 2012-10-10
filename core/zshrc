@@ -60,4 +60,7 @@ function back_to_vim () {
 }
 
 zle -N back-to-vim back_to_vim
-bindkey "^z" back-to-vim
+bindkey -a "^z" back-to-vim
+bindkey -v "^z" back-to-vim
+
+export PATH=${HOME}/coursera/progfun/sbt/bin:${PATH}
