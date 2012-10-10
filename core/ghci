@@ -1,42 +1,45 @@
 :set prompt "μ> "
 :set editor vim
+:set +t
 
-import Control.Applicative
-import Control.Arrow
-import Control.Monad
-import Data.Bits
-import Data.Char
-import Data.Function
-import Data.List
-import Data.Maybe
-import Data.Monoid
-import System.IO
-import Text.Printf
-import Unsafe.Coerce
+import           Control.Applicative
+import           Control.Arrow
+import           Control.Category
+import qualified Control.Exception          as E
+import           Control.Monad
+import           Data.Bits
+import           Data.Char
+import           Data.Function
+import           Data.List
+import           Data.Maybe
+import           Data.Monoid
+import           System.IO
+import           Text.Printf
+import           Unsafe.Coerce
 
-import Control.Lens
-import Control.Monad.Error
-import Control.Monad.Reader
-import Control.Monad.Writer
-import Control.Monad.State
-import Control.Monad.Free
-import Control.Monad.Trans
-import Data.Monoid.Lens
-import Prelude.Unicode
-import System.Directory
-import System.FilePath
-import System.FilePath.Lens
-import Text.Parsec hiding ((<|>), many)
+import           Control.Lens
+import           Control.Monad.Error
+import           Control.Monad.Reader
+import           Control.Monad.Writer
+import           Control.Monad.State
+import           Control.Monad.Free
+import           Control.Monad.Trans
+import           Data.Monoid.Lens
+import           Prelude.Unicode
+import           System.Directory
+import           System.FilePath
+import           System.FilePath.Lens
+import           Text.Parsec hiding ((<|>), many)
 
-import qualified Data.Map as M
-import qualified Data.IntMap as IM
-import qualified Data.Set as S
-import qualified Data.Sequence as Q
-import qualified Data.ByteString as B
-import qualified Data.ByteString.Char8 as BC
-import qualified Data.ByteString.Lazy as BL
+import qualified Data.Map                   as M
+import qualified Data.IntMap                as IM
+import qualified Data.Set                   as S
+import qualified Data.Sequence              as Q
+import qualified Data.ByteString            as B
+import qualified Data.ByteString.Char8      as BC
+import qualified Data.ByteString.Lazy       as BL
 import qualified Data.ByteString.Lazy.Char8 as BLC
-import qualified Data.Text as T
+import qualified Data.Text                  as T
 
 :set -fwarn-alternative-layout-rule-transitional
 :set -fwarn-auto-orphans
@@ -66,10 +69,16 @@ import qualified Data.Text as T
 
 :set -fno-warn-unused-do-bind
 
-:set -XUnicodeSyntax
 :set -XBangPatterns
-:set -XViewPatterns
+:set -XDataKinds
 :set -XGeneralizedNewtypeDeriving
-:set -XTupleSections
-:set -XRankNTypes
+:set -XKindSignatures
+:set -XLambdaCase
+:set -XMultiWayIf
 :set -XOverloadedStrings
+:set -XRankNTypes
+:set -XTupleSections
+:set -XTypeFamilies
+:set -XUndecidableInstances
+:set -XUnicodeSyntax
+:set -XViewPatterns
