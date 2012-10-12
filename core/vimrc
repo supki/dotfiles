@@ -147,6 +147,9 @@
 	" highlight problematic whitespace
 	highlight WhitespaceErrors ctermbg=Red guibg=#ff6a6a
 	autocmd BufEnter * match WhitespaceErrors /\s\+$\|[^\t]\@<=\t\+/
+
+	" ghc-mod customs
+	g:ghcmod_ghc_options = ['-Wall', '-fno-warn-unused-do-bind']
 " }
 
 " Keys mappings {
