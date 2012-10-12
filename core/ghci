@@ -9,10 +9,11 @@ import qualified Control.Exception          as E
 import           Control.Monad
 import           Data.Bits
 import           Data.Char
-import           Data.Function
+import           Data.Function (fix, on)
 import           Data.List
 import           Data.Maybe
 import           Data.Monoid
+import           Prelude hiding (id, (.))
 import           System.IO
 import           Text.Printf
 import           Unsafe.Coerce
