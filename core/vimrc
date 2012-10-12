@@ -196,7 +196,7 @@
 	nmap <leader>c :GhcModCheck<CR>
 	nmap <leader>l :GhcModLint<CR>
 	nmap <leader>t :GhcModType<CR>
-	nmap <leader>T :GhcModType<CR>
+	nmap <leader>T :GhcModTypeClear<CR>
 
 	nnoremap <Space> <C-D>
 	nnoremap <S-Space> <C-U>
