@@ -7,7 +7,8 @@ apps =
   , ("/usr/lib/firefox/firefox", "firefox")
   , ("thunderbird", "thunderbird")
   , ("gnome-commander", "gnome-commander")
-  , ("ssh .* im", "urxvt -title IM -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t im'")
+  , ("ssh .* mcabber", "urxvtcd -title mcabber -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t mcabber'")
+  , ("ssh .* irssi", "urxvtcd -title irssi -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t irssi'")
   , ("watch -n2 netstat", "urxvt -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
   , ("htop", "urxvt -title htop -e htop")
   ]

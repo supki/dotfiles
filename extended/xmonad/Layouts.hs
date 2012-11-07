@@ -9,6 +9,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
+import XMonad.Layout.TwoPane
 
 import Workspaces
 import Themes
@@ -23,4 +24,5 @@ myLayoutHook =
   onWorkspace Mail Full $
   onWorkspace Files Full $
   onWorkspace Torrents Full $
+  onWorkspace Talkative (TwoPane (3/100) (1/2)) $
   GridRatio (3/2) ||| Full
