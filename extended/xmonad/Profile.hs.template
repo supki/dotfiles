@@ -1,0 +1,7 @@
+module Profile where
+
+import Misc
+
+-- Startup apps
+apps :: [(String, String)]
+apps = $template.xmonad.startup$
