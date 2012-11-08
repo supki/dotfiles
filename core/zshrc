@@ -42,6 +42,7 @@ bindkey "^[[8~" end-of-line
 
 alias ack=ack-grep # stupid debian
 alias ls='ls --color'
+alias less='less -R'
 
 function man() {
 	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
