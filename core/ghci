@@ -13,6 +13,7 @@ import           Data.Function (fix, on)
 import           Data.List
 import           Data.Maybe
 import           Data.Monoid
+import           Data.Ratio hiding ((%))
 import           Prelude hiding (id, (.))
 import           System.IO
 import           Text.Printf
@@ -25,6 +26,7 @@ import           Control.Monad.Writer
 import           Control.Monad.State
 import           Control.Monad.Free
 import           Control.Monad.Trans
+import           Data.List.Lens
 import           Data.Monoid.Lens
 import           Prelude.Unicode
 import           System.Directory
@@ -68,14 +70,19 @@ import qualified Data.Text                  as T
 :set -fwarn-warnings-deprecations
 :set -fwarn-wrong-do-bind
 
+:set -fno-warn-type-defaults
 :set -fno-warn-unused-do-bind
 
 :set -XBangPatterns
 :set -XDataKinds
+:set -XFlexibleContexts
+:set -XFlexibleInstances
+:set -XGADTs
 :set -XGeneralizedNewtypeDeriving
 :set -XKindSignatures
 :set -XLambdaCase
 :set -XMultiWayIf
+:set -XMultiParamTypeClasses
 :set -XOverloadedStrings
 :set -XRankNTypes
 :set -XTupleSections
