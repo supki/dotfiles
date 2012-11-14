@@ -27,7 +27,7 @@ vcs_info_wrapper() {
 
 promptinit
 colors
-PROMPT="%F{blue}%n%f@%M:%F{yellow}%~%f%# "
+PROMPT="%F{blue}%n%f@%M:%F{yellow}%~%(?,%F{green},%F{red})%#%f "
 PROMPT2="%F{blue}%_%f> "
 RPROMPT=$'$(vcs_info_wrapper)'
 
