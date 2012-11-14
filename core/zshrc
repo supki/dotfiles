@@ -3,6 +3,7 @@ function chpwd {
 }
 
 autoload -U compinit promptinit colors
+autoload -Uz vcs_info
 
 fpath=(~/git/zsh-completions ~/git/zsh-cabal-completion $fpath)
 compinit
@@ -12,11 +13,23 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
+setopt prompt_subst
+zstyle ':vcs_info:*' formats '%f%F{2}%b%f/%s '
+zstyle ':vcs_info:svn:*' branchformat '%b%F{1}:%F{3}%r'
+zstyle ':vcs_info:*' enable git svn
+
+vcs_info_wrapper() {
+  vcs_info
+  if [ -n "$vcs_info_msg_0_" ]; then
+    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+  fi
+}
+
 promptinit
 colors
 PROMPT="%F{blue}%n%f@%M:%F{yellow}%~%f%# "
 PROMPT2="%F{blue}%_%f> "
-RPROMPT="[%(?,%F{green}%?%f,%F{red}%?%f)]"
+RPROMPT=$'$(vcs_info_wrapper)'
 
 chpwd
 
