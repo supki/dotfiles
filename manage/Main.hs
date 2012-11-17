@@ -2,16 +2,12 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE UnicodeSyntax #-}
-{-# OPTIONS_GHC -fno-warn-orphans #-}
 module Main (main) where
 
-import Control.Monad (when)
 import Data.Monoid ((<>))
 
 import Control.Lens
-import Data.DeriveTH
-import Data.Derive.Default ()
-import Data.Default (Default(def))
+import Data.Default (def)
 import Options.Applicative
 import System.FilePath ((</>))
 
@@ -21,62 +17,38 @@ import Biegunka.Source.Git
 import Templates (laptopTemplates, workTemplates)
 
 
-data Settings = Settings
-  { _directory ∷ FilePath
-  , _tools ∷ Bool
-  , _experimental ∷ Bool
-  } deriving (Show, Read, Eq, Ord)
-
-
-
-instance Default Bool where
-  def = False
-
-
-$(derive makeDefault ''Settings)
-
-
 main ∷ IO ()
-main = execParser opts >>= \(s,t) → commands s %
+main = execParser opts >>= \(s,t) → s %
   pretend >-> executeWith (defaultExecution % templates .~ t) >-> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
   sample =
-     flag def (laptopSettings, laptopTemplates) (long "laptop" <> short 'l' <> help "Use laptop settings") <|>
-     flag def (workSettings, workTemplates) (long "work" <> short 'w' <> help "Use work settings")
+     flag (return (), def) (laptopSettings, laptopTemplates) (long "laptop" <> short 'l' <> help "Use laptop settings") <|>
+     flag (return (), def) (workSettings, workTemplates) (long "work" <> short 'w' <> help "Use work settings")
 
   (>->) = liftA2 (>>)
 
-
-laptopSettings, workSettings ∷ Settings
-laptopSettings = def
-  { _directory = "laptop"
-  , _tools = True
-  , _experimental = True
-  }
-workSettings = def
-  { _directory = "work"
-  }
+  laptopSettings = sequence_ [dotfiles, tools, vim, misc, experimental]
+  workSettings = sequence_ [dotfiles, vim, misc]
 
 
-commands ∷ Settings → Script Profile
-commands Settings {..} = do
-  profile "mine" $ do
-    dotfiles
-    when _tools tools
-    "git@github.com:supki/zsh-cabal-completion" --> "git/zsh-cabal-completion"
-  profile "vim" $ do
-    haskell_plugins
-    other_plugins
-  profile "misc" $ do
-    "https://github.com/zsh-users/zsh-completions.git" --> "git/zsh-completions"
-    "https://github.com/stepb/urxvt-tabbedex"          --> "git/urxvt-tabbedex"
-  when _experimental . profile "experimental" $ do
-    "https://github.com/sol/vimus"          --> "git/vimus"
-    "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
- where
-  dotfiles = git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
+misc ∷ Script Profile
+misc = profile "misc" $ do
+  "git@github.com:zsh-users/zsh-completions.git" --> "git/zsh-completions"
+  "git@github.com:stepb/urxvt-tabbedex"          --> "git/urxvt-tabbedex"
+  "git@github.com:supki/zsh-cabal-completion"    --> "git/zsh-cabal-completion"
+
+
+experimental ∷ Script Profile
+experimental = profile "experimental" $ do
+  "https://github.com/sol/vimus"          --> "git/vimus"
+  "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
+
+
+dotfiles ∷ Script Profile
+dotfiles = profile "dotfiles" $
+  git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     ex link $ traverse . _1 %~ ("core" </>) $
       [ ("xsession", ".xsession")
       , ("mpdconf", ".mpdconf")
@@ -121,7 +93,10 @@ commands Settings {..} = do
       , ("Xdefaults.template", ".Xdefaults")
       ]
 
-  tools = git "git@budueba.com:tools" "git/tools" $ do
+
+tools ∷ Script Profile
+tools = profile "tools" $
+  git "git@budueba.com:tools" "git/tools" $ do
     ex link
       [ ("youtube-in-mplayer.sh", "bin/youtube-in-mplayer")
       , ("cue2tracks.sh", "bin/cue2tracks")
@@ -146,16 +121,17 @@ commands Settings {..} = do
       , ("shutdown-gui.hs", "bin/shutdown-gui")
       ]
 
-  haskell_plugins = do
-    "git@github.com:Shougo/vimproc"               --> ".vim/bundle/vimproc"
-    "git@github.com:eagletmt/ghcmod-vim"          --> ".vim/bundle/ghcmod-vim"
-    "git@github.com:ujihisa/neco-ghc"             --> ".vim/bundle/neco-ghc"
-    "git@github.com:Shougo/neocomplcache"         --> ".vim/bundle/neocomplcache"
 
-  other_plugins = do
-    "git@github.com:spolu/dwm.vim"                --> ".vim/bundle/dwm"
-    "git@github.com:vim-scripts/bufexplorer.zip"  --> ".vim/bundle/be"
-    "git@github.com:rosstimson/scala-vim-support" --> ".vim/bundle/scala-vim-support"
+vim ∷ Script Profile
+vim = profile "vim" $ do
+  "git@github.com:Shougo/vimproc"               --> ".vim/bundle/vimproc"
+  "git@github.com:eagletmt/ghcmod-vim"          --> ".vim/bundle/ghcmod-vim"
+  "git@github.com:ujihisa/neco-ghc"             --> ".vim/bundle/neco-ghc"
+  "git@github.com:Shougo/neocomplcache"         --> ".vim/bundle/neocomplcache"
+
+  "git@github.com:spolu/dwm.vim"                --> ".vim/bundle/dwm"
+  "git@github.com:vim-scripts/bufexplorer.zip"  --> ".vim/bundle/be"
+  "git@github.com:rosstimson/scala-vim-support" --> ".vim/bundle/scala-vim-support"
 
 
 ex ∷ Monad m ⇒ (FilePath → FilePath → m a) → [(FilePath, FilePath)] → m ()
