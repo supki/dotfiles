@@ -115,7 +115,7 @@ tools = profile "tools" $
       , ("upload/budueba.sh", "bin/upload-budueba")
       , ("upload/pastebin.hs", "bin/upload-pastebin")
       ]
-    ignorant $ ex ghc
+    ex ghc
       [ ("mpd/scrobbler.hs", "bin/liblastfm-scrobbler")
       , ("audio.hs", "bin/vaio-audio")
       , ("shutdown-gui.hs", "bin/shutdown-gui")
