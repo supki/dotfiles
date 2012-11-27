@@ -115,10 +115,10 @@ tools = profile "tools" $
       , ("upload/budueba.sh", "bin/upload-budueba")
       , ("upload/pastebin.hs", "bin/upload-pastebin")
       ]
-    ex ghc
-      [ ("mpd/scrobbler.hs", "bin/liblastfm-scrobbler")
-      , ("audio.hs", "bin/vaio-audio")
-      , ("shutdown-gui.hs", "bin/shutdown-gui")
+    ex (\s d → shell "ghc" ["-O2", s, "-fforce-recomp", "-v0", "-o", d] >> link d ("bin" </> d))
+      [ ("mpd/scrobbler.hs", "liblastfm-scrobbler")
+      , ("audio.hs", "vaio-audio")
+      , ("shutdown-gui.hs", "shutdown-gui")
       ]
 
 
