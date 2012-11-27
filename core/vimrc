@@ -72,17 +72,26 @@
 
 	" save as root with w!!
 	cmap w!! w !sudo tee % > /dev/null
+
+	" show matching parens
+	set showmatch
+	set matchtime=2
 " }
 
 " Misc {
 	" automatic tab indent
 	set autoindent
+	" don't unindent on new line
+	set preserveindent
 	" smart tab indent
 	set smartindent
 	" space width for tabs
 	set tabstop=4
 	" shift width for tabs
 	set shiftwidth=4
+
+	" place new splits on the right
+	set splitright
 
 	" set Haskell indent
 	autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
