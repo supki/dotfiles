@@ -93,6 +93,9 @@
 	" place new splits on the right
 	set splitright
 
+	" dot affects yanks
+	set cpoptions+=y
+
 	" set Haskell indent
 	autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
 	" set Racket indent
@@ -209,9 +212,15 @@
 	nmap <leader>l :GhcModLint<CR>
 	nmap <leader>t :GhcModType<CR>
 	nmap <leader>T :GhcModTypeClear<CR>
+	nmap <leader>y :YRShow<CR>
 
 	nnoremap <Space> <C-D>
 	nnoremap <S-Space> <C-U>
+
+	" manage "N registers with YankRing
+	let g:yankring_manage_numbered_reg = 1
+	" hide history file
+	let g:yankring_history_file = '.yankring'
 " }
 
 " Functions {
