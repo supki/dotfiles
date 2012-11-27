@@ -8,7 +8,7 @@ import Data.Monoid ((<>))
 
 import Control.Lens
 import Data.Default (def)
-import Options.Applicative
+import Options.Applicative hiding ((&))
 import System.FilePath ((</>))
 
 import Biegunka
@@ -18,8 +18,8 @@ import Templates (laptopTemplates, workTemplates)
 
 
 main ∷ IO ()
-main = execParser opts >>= \(s,t) → s %
-  pretend >-> executeWith (defaultExecution % templates .~ t) >-> verify
+main = execParser opts >>= \(s,t) → s &
+  pretend >-> executeWith (defaultExecution & templates .~ t) >-> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
@@ -124,7 +124,8 @@ tools = profile "tools" $
 
 vim ∷ Script Profile
 vim = profile "vim" $ do
-  "git@github.com:Shougo/vimproc"               --> ".vim/bundle/vimproc"
+  "git@github.com:Shougo/vimproc"               -->/ ".vim/bundle/vimproc" $
+    shell "make" ["-f", "make_unix.mak"]
   "git@github.com:eagletmt/ghcmod-vim"          --> ".vim/bundle/ghcmod-vim"
   "git@github.com:ujihisa/neco-ghc"             --> ".vim/bundle/neco-ghc"
   "git@github.com:Shougo/neocomplcache"         --> ".vim/bundle/neocomplcache"
@@ -143,3 +144,7 @@ ex = mapM_ . uncurry
 
 (-->) ∷ String → FilePath → Script Source
 (-->) = git_
+
+
+(-->/) ∷ String → FilePath → Script Files → Script Source
+(-->/) = git
