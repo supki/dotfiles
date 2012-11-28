@@ -222,6 +222,10 @@
 	let g:yankring_manage_numbered_reg = 1
 	" hide history file
 	let g:yankring_history_file = '.yankring'
+
+	let g:syntastic_mode_map = { 'mode': 'active',
+		\ 'active_filetypes': [],
+		\ 'passive_filetypes': ['haskell'] }
 " }
 
 " Functions {
