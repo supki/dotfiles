@@ -33,20 +33,20 @@ main = execParser opts >>= \(s,t) → s &
   workSettings = sequence_ [dotfiles, vim, misc]
 
 
-misc ∷ Script Profile
+misc ∷ Script Profile ()
 misc = profile "misc" $ do
   "git@github.com:zsh-users/zsh-completions.git" --> "git/zsh-completions"
   "git@github.com:stepb/urxvt-tabbedex"          --> "git/urxvt-tabbedex"
   "git@github.com:supki/zsh-cabal-completion"    --> "git/zsh-cabal-completion"
 
 
-experimental ∷ Script Profile
+experimental ∷ Script Profile ()
 experimental = profile "experimental" $ do
   "https://github.com/sol/vimus"          --> "git/vimus"
   "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
 
 
-dotfiles ∷ Script Profile
+dotfiles ∷ Script Profile ()
 dotfiles = profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     ex link $ traverse . _1 %~ ("core" </>) $
@@ -94,7 +94,7 @@ dotfiles = profile "dotfiles" $
       ]
 
 
-tools ∷ Script Profile
+tools ∷ Script Profile ()
 tools = profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     ex link
@@ -115,17 +115,17 @@ tools = profile "tools" $
       , ("upload/budueba.sh", "bin/upload-budueba")
       , ("upload/pastebin.hs", "bin/upload-pastebin")
       ]
-    ex (\s d → shell "ghc" ["-O2", s, "-fforce-recomp", "-v0", "-o", d] >> link d ("bin" </> d))
+    ex (\s d → shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d))
       [ ("mpd/scrobbler.hs", "liblastfm-scrobbler")
       , ("audio.hs", "vaio-audio")
       , ("shutdown-gui.hs", "shutdown-gui")
       ]
 
 
-vim ∷ Script Profile
+vim ∷ Script Profile ()
 vim = profile "vim" $ do
   "git@github.com:Shougo/vimproc"               -->/ ".vim/bundle/vimproc" $
-    shell "make" ["-f", "make_unix.mak"]
+    shell "make -f make_unix.mak"
   "git@github.com:eagletmt/ghcmod-vim"          --> ".vim/bundle/ghcmod-vim"
   "git@github.com:ujihisa/neco-ghc"             --> ".vim/bundle/neco-ghc"
   "git@github.com:Shougo/neocomplcache"         --> ".vim/bundle/neocomplcache"
@@ -142,9 +142,9 @@ ex ∷ Monad m ⇒ (FilePath → FilePath → m a) → [(FilePath, FilePath)] �
 ex = mapM_ . uncurry
 
 
-(-->) ∷ String → FilePath → Script Source
+(-->) ∷ String → FilePath → Script Source ()
 (-->) = git_
 
 
-(-->/) ∷ String → FilePath → Script Files → Script Source
+(-->/) ∷ String → FilePath → Script Files () → Script Source ()
 (-->/) = git
