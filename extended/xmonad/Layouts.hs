@@ -25,4 +25,4 @@ myLayoutHook =
   onWorkspace Files Full $
   onWorkspace Torrents Full $
   onWorkspace Talkative (TwoPane (3/100) (1/2)) $
-  GridRatio (3/2) ||| Full
+  Tall 1 0.03 0.5 ||| Full

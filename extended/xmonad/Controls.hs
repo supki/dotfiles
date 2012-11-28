@@ -89,7 +89,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- move client to workspace
       [ (m,           k, windows $ f i)
         | (i, k) <- zip WS.myWorkspaces WS.myWorkspacesKeys
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
       ]
       ++
       -- switch to another screen
