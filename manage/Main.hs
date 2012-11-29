@@ -44,6 +44,7 @@ experimental ∷ Script Profile ()
 experimental = profile "experimental" $ do
   "https://github.com/sol/vimus"          --> "git/vimus"
   "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
+  "https://github.com/creswick/cabal-dev" --> "git/cabal-dev"
 
 
 dotfiles ∷ Script Profile ()
