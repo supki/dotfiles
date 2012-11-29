@@ -33,20 +33,6 @@ main = execParser opts >>= \(s,t) → s &
   workSettings = sequence_ [dotfiles, vim, misc]
 
 
-misc ∷ Script Profile ()
-misc = profile "misc" $ do
-  "git@github.com:zsh-users/zsh-completions.git" --> "git/zsh-completions"
-  "git@github.com:stepb/urxvt-tabbedex"          --> "git/urxvt-tabbedex"
-  "git@github.com:supki/zsh-cabal-completion"    --> "git/zsh-cabal-completion"
-
-
-experimental ∷ Script Profile ()
-experimental = profile "experimental" $ do
-  "https://github.com/sol/vimus"          --> "git/vimus"
-  "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
-  "https://github.com/creswick/cabal-dev" --> "git/cabal-dev"
-
-
 dotfiles ∷ Script Profile ()
 dotfiles = profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
@@ -137,6 +123,19 @@ vim = profile "vim" $ do
   "git@github.com:spolu/dwm.vim"                --> ".vim/bundle/dwm"
   "git@github.com:vim-scripts/bufexplorer.zip"  --> ".vim/bundle/be"
   "git@github.com:rosstimson/scala-vim-support" --> ".vim/bundle/scala-vim-support"
+
+
+misc ∷ Script Profile ()
+misc = profile "misc" $ do
+  "git@github.com:zsh-users/zsh-completions.git" --> "git/zsh-completions"
+  "git@github.com:stepb/urxvt-tabbedex"          --> "git/urxvt-tabbedex"
+
+
+experimental ∷ Script Profile ()
+experimental = profile "experimental" $ do
+  "https://github.com/sol/vimus"          --> "git/vimus"
+  "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
+  "https://github.com/creswick/cabal-dev" --> "git/cabal-dev"
 
 
 ex ∷ Monad m ⇒ (FilePath → FilePath → m a) → [(FilePath, FilePath)] → m ()
