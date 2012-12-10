@@ -121,6 +121,7 @@ vim = profile "vim" $ do
   "git@github.com:vim-scripts/coq-syntax"       --> ".vim/bundle/coq-syntax"
   "git@github.com:vim-scripts/Coq-indent"       --> ".vim/bundle/coq-indent"
 
+  "git@github.com:jpalardy/vim-slime.git"       --> ".vim/bundle/vim-slime"
   "git@github.com:vim-scripts/YankRing.vim"     --> ".vim/bundle/YankRing"
   "git@github.com:Shougo/unite.vim"             --> ".vim/bundle/unite"
   "git@github.com:spolu/dwm.vim"                --> ".vim/bundle/dwm"
