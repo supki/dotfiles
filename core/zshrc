@@ -61,6 +61,18 @@ function man() {
 	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
 }
 
+function haddock-dist() {
+	for index in dist/doc/html/*/index.html; do
+		xdg-open file://$(pwd)/${index}
+	done
+}
+function haddock-dev() {
+	package=$1
+	for index in cabal-dev/share/doc/${package}-*/html/index.html; do
+		xdg-open file://$(pwd)/${index}
+	done
+}
+
 function insert_sudo () {
 	zle beginning-of-line
 	zle -U "sudo "
