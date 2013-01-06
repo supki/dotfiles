@@ -1,6 +1,5 @@
 :set prompt "μ> "
 :set editor vim
-:set +t
 
 import           Control.Applicative
 import           Control.Arrow
@@ -89,3 +88,7 @@ import qualified Data.Text                  as T
 :set -XUndecidableInstances
 :set -XUnicodeSyntax
 :set -XViewPatterns
+
+let asAppliedTo :: (a -> b) -> a -> (a -> b); asAppliedTo = const
+
+:set +t
