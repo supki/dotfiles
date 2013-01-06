@@ -27,7 +27,6 @@ import           Control.Monad.State
 import           Control.Monad.Free
 import           Control.Monad.Trans
 import           Data.List.Lens
-import           Data.Monoid.Lens
 import           Prelude.Unicode
 import           System.Directory
 import           System.FilePath
