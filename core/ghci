@@ -3,7 +3,6 @@
 
 import           Control.Applicative
 import           Control.Arrow
-import           Control.Category
 import qualified Control.Exception          as E
 import           Control.Monad
 import           Data.Bits
@@ -13,7 +12,7 @@ import           Data.List
 import           Data.Maybe
 import           Data.Monoid
 import           Data.Ratio hiding ((%))
-import           Prelude hiding (id, (.))
+import           Prelude hiding ((.))
 import           System.IO
 import           Text.Printf
 import           Unsafe.Coerce
@@ -81,6 +80,7 @@ import qualified Data.Text                  as T
 :set -XLambdaCase
 :set -XMultiWayIf
 :set -XMultiParamTypeClasses
+:set -XNoMonomorphismRestriction
 :set -XOverloadedStrings
 :set -XRankNTypes
 :set -XTupleSections
@@ -89,6 +89,18 @@ import qualified Data.Text                  as T
 :set -XUnicodeSyntax
 :set -XViewPatterns
 
-let asAppliedTo :: (a -> b) -> a -> (a -> b); asAppliedTo = const
+:{
+let asAppliedTo :: (a -> b) -> a -> (a -> b)
+    asAppliedTo = const
+
+    (.) :: Functor f => (a -> b) -> f a -> f b
+    (.) = fmap
+
+    (.:) :: (Functor f, Functor g) => (a -> b) -> f (g a) -> f (g b)
+    (.:) = fmap . fmap
+
+    (.::) :: (Functor f, Functor g, Functor h) => (a -> b) -> f (g (h a)) -> f (g (h b))
+    (.::) = fmap . fmap . fmap
+:}
 
 :set +t
