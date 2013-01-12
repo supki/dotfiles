@@ -1,4 +1,4 @@
-:set prompt "μ> "
+:set prompt "\ESC[33;2mμ> \ESC[0m"
 :set editor vim
 
 import           Control.Applicative
