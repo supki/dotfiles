@@ -1,6 +1,9 @@
 module Controls where
 
+import Control.Monad
+import qualified Data.Map as M
 import Graphics.X11.ExtraTypes.XF86
+import qualified Network.MPD as MPD
 import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
@@ -11,7 +14,6 @@ import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.WorkspaceScreenshot
-import qualified Data.Map        as M
 import qualified XMonad.StackSet as W
 
 import Themes
@@ -105,6 +107,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   ]
   ++
   -- third party
+  [ ((mod1Mask .|. mod, key), script)
+    | (mod, key, script) <-
+      [ (shiftMask, xK_comma,  io . void $ MPD.withMPD MPD.previous)
+      , (shiftMask, xK_period, io . void $ MPD.withMPD MPD.next)
+      , (shiftMask, xK_Return, io . void . MPD.withMPD $
+          MPD.status >>= \s -> case MPD.stState s of
+            MPD.Playing -> MPD.pause True
+            _           -> MPD.play Nothing)
+      ]
+  ]
+  ++
   [ ((mod1Mask .|. mod, key), spawn script)
     | (mod, key, script) <-
       -- take a window/selected area/entire screen screenshot
@@ -123,10 +136,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_y, "youtube-in-mplayer `xsel`")
       -- upload file with copied url to vsegda.budueba.com
       , (0,           xK_u, "upload-budueba `xsel`")
-      -- ncmpcpp: toggle music, select previous/next track
-      , (shiftMask,   xK_Return, "mpc toggle")
-      , (shiftMask,   xK_comma, "mpc prev")
-      , (shiftMask,   xK_period, "mpc next")
       ]
   ]
   ++
