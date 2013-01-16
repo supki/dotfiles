@@ -8,4 +8,7 @@
 
 	" enable mouse in normal and visual modes
 	set mouse=nv
+
+	" load a colorscheme
+	colorscheme camo
 " }
