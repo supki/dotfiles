@@ -3,7 +3,7 @@
 loadplugins '\.(js|penta)$'
 group user
 
-set complete=location,bookmark,suggestion
+set complete=bookmark,location,search,file
 
 set guioptions=Cs
 set defsearch=google
