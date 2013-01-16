@@ -61,6 +61,18 @@ function man() {
 	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
 }
 
+function haddock-global() {
+	package=$1
+	for index in /usr/local/share/doc/ghc/html/libraries/${package}-*/index.html; do
+		xdg-open file://${index}
+	done
+}
+function haddock-local() {
+	package=$1
+	for index in ${HOME}/.cabal/share/doc/${package}-*/html/index.html; do
+		xdg-open file://${index}
+	done
+}
 function haddock-dist() {
 	for index in dist/doc/html/*/index.html; do
 		xdg-open file://$(pwd)/${index}
