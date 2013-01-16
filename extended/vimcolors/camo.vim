@@ -34,7 +34,10 @@ if exists("syntax_on")
 	    hi Visual       guifg=OliveDrab4        guibg=bisque1
 	    hi WarningMsg   guifg=bisque            guibg=red
 	    hi WildMenu     guifg=LightBlue         guibg=DarkViolet
-
+        hi Pmenu           guibg=#242424 guifg=#ccccbc
+        hi PMenuSel        guibg=#353a37 guifg=#ccdc90 gui=bold
+        hi PmenuSbar       guibg=#2e3330 guifg=#000000
+        hi PMenuThumb      guibg=#a0afa0 guifg=#040404
 
 	    "Syntax hilight groups
 
