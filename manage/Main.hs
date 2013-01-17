@@ -101,6 +101,7 @@ tools = profile "tools" $
       , ("upload/screenshot.sh", "bin/upload-screenshot")
       , ("upload/budueba.sh", "bin/upload-budueba")
       , ("upload/pastebin.hs", "bin/upload-pastebin")
+      , ("isup.sh", "bin/isup")
       ]
     ex (\s d → shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d))
       [ ("mpd/scrobbler.hs", "liblastfm-scrobbler")
