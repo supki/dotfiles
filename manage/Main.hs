@@ -19,7 +19,7 @@ import Templates (laptopTemplates, workTemplates)
 
 main ∷ IO ()
 main = execParser opts >>= \(s,t) → s &
-  pretend >-> executeWith (defaultExecution & templates .~ t) >-> verify
+  pretend >-> executeWith (defaultExecution & templates .~ t & onFail .~ Ignorant) >-> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
