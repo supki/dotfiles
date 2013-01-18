@@ -29,7 +29,7 @@ myXPConfig = defaultXPConfig {
   fgColor = yellowColor,
   position = Top,
   height = 20,
-  autoComplete = Just 1
+  autoComplete = Nothing
 }
 --
 
