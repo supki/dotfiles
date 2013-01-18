@@ -17,8 +17,9 @@ import XMonad.Util.WorkspaceScreenshot
 import qualified XMonad.StackSet as W
 
 import Themes
-import qualified Profile         as P
-import qualified Workspaces      as WS
+import qualified Profile as P
+import qualified Workspaces as WS
+import qualified Tmux as Tmux
 
 -- Mouse
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
@@ -115,6 +116,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
           MPD.status >>= \s -> case MPD.stState s of
             MPD.Playing -> MPD.pause True
             _           -> MPD.play Nothing)
+      , (shiftMask, xK_j, Tmux.prompt myXPConfig)
       ]
   ]
   ++
