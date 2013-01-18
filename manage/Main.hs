@@ -127,6 +127,7 @@ vim = profile "vim" $ do
   "git@github.com:vim-scripts/YankRing.vim"     --> ".vim/bundle/YankRing"
   "git@github.com:Shougo/unite.vim"             --> ".vim/bundle/unite"
   "git@github.com:spolu/dwm.vim"                --> ".vim/bundle/dwm"
+  "git@github.com:tpope/vim-commentary"         --> ".vim/bundle/commentary"
   "git@github.com:vim-scripts/bufexplorer.zip"  --> ".vim/bundle/be"
   "git@github.com:rosstimson/scala-vim-support" --> ".vim/bundle/scala-vim-support"
 
