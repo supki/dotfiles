@@ -118,7 +118,6 @@ vim = profile "vim" $ do
   "git@github.com:eagletmt/ghcmod-vim"          --> ".vim/bundle/ghcmod-vim"
   "git@github.com:ujihisa/neco-ghc"             --> ".vim/bundle/neco-ghc"
   "git@github.com:Shougo/neocomplcache"         --> ".vim/bundle/neocomplcache"
-  "git@github.com:Lokaltog/vim-easymotion"      --> ".vim/bundle/easymotion"
 
   "git@github.com:vim-scripts/coq-syntax"       --> ".vim/bundle/coq-syntax"
   "git@github.com:vim-scripts/Coq-indent"       --> ".vim/bundle/coq-indent"
@@ -130,7 +129,6 @@ vim = profile "vim" $ do
   "git@github.com:spolu/dwm.vim"                --> ".vim/bundle/dwm"
   "git@github.com:tpope/vim-commentary"         --> ".vim/bundle/commentary"
   "git@github.com:vim-scripts/bufexplorer.zip"  --> ".vim/bundle/be"
-  "git@github.com:rosstimson/scala-vim-support" --> ".vim/bundle/scala-vim-support"
 
 
 misc ∷ Script Profile ()
