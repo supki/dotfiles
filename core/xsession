@@ -19,3 +19,6 @@ kbdd
 
 # process .xmodmap
 xmodmap ~/.xmodmap
+
+# start ssh-agent
+ssh-agent

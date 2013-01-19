@@ -104,3 +104,5 @@ bindkey -v "^z" back-to-vim
 function xrandr-work() {
 	xrandr --auto --output VGA-1 --mode 1280x1024 --right-of DVI-I-1
 }
+
+ssh-add 2>/dev/null # add my identity to ssh-agent and don't tell me about this, thanks
