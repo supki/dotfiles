@@ -1,1 +1,2 @@
-export PATH="${HOME}/.cabal/bin:${HOME}/bin:${PATH}"
+typeset -U path
+path=(~/.cabal/bin ~/bin $path)
