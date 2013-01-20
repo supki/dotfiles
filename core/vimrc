@@ -199,9 +199,6 @@
 	" toggle scratch buffer
 	noremap <leader>s :VScratch<CR>
 
-	" paste file to pastebin
-	noremap <leader>z :w \| !upload-pastebin % \| xsel<CR>
-
 	" easy move to next bracket
 	nnoremap <tab> %
 	vnoremap <tab> %
