@@ -208,20 +208,15 @@
 	map  <Esc>[6^ :tabn<CR>
 
 	" add some hotkeys for rather tedious ghc-mod commands
-	nmap <leader>c :GhcModCheck<CR>
-	nmap <leader>l :GhcModLint<CR>
+	nmap <leader>c :GhcModLint<CR>
 	nmap <leader>t :GhcModType<CR>
 	nmap <leader>T :GhcModTypeClear<CR>
-	nmap <leader>y :YRShow<CR>
+
+	" unite command
 	nmap <leader>u :Unite 
 
 	nnoremap <Space> <C-D>
 	nnoremap <S-Space> <C-U>
-
-	" manage "N registers with YankRing
-	let g:yankring_manage_numbered_reg = 1
-	" hide history file
-	let g:yankring_history_file = '.yankring'
 
 	let g:syntastic_mode_map = { 'mode': 'active',
 		\ 'active_filetypes': [],
@@ -229,6 +224,7 @@
 	let g:syntastic_cpp_compiler_options = '-std=c++11'
 
 	let g:slime_target = "tmux"
+
 	" for vim-commentary
 	autocmd FileType haskell set commentstring=--\ %s
 " }
