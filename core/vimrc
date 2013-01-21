@@ -216,8 +216,8 @@
 	nmap <leader>u :Unite
 
 	" add some hotkeys for rather tedious perd commands
-	nmap <leader>l :PerdLoad<CR>
-	nmap <leader>L :PerdLoad<CR>:PerdSwitch<CR>
+	nmap <leader>l :PerdLoad<CR>:call system('tmux select-layout main-vertical')<CR>
+	nmap <leader>L :PerdLoad<CR>:call system('tmux select-layout main-vertical')<CR>:PerdSwitch<CR>
 	nmap <leader>z :PerdUnload<CR>
 
 	let g:perd_db = 'cabal-dev/packages-7.6.1.conf'
@@ -236,7 +236,7 @@
 	autocmd FileType haskell set commentstring=--\ %s
 
 	" for vim-perd
-	autocmd VimResized * exe "normal! \<C-w>="
+	autocmd VimResized * normal =
 	autocmd VimLeave * bufdo PerdUnload
 " }
 
