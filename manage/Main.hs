@@ -39,6 +39,7 @@ dotfiles = profile "dotfiles" $
     ex link $ traverse . _1 %~ ("core" </>) $
       [ ("xsession", ".xsession")
       , ("mpdconf", ".mpdconf")
+      , ("profile", ".profile")
       , ("bashrc", ".bashrc")
       , ("zshenv", ".zshenv")
       , ("zshrc", ".zshrc")
