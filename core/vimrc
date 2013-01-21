@@ -237,6 +237,7 @@
 
 	" for vim-perd
 	autocmd VimResized * exe "normal! \<C-w>="
+	autocmd VimLeave * bufdo PerdUnload
 " }
 
 " Functions {
