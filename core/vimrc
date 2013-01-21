@@ -237,7 +237,7 @@
 
 	" for vim-perd
 	autocmd VimResized * normal =
-	autocmd VimLeave * bufdo PerdUnload
+	autocmd VimLeave * bufdo :if exists(':PerdUnload') | execute 'PerdUnload' | endif
 " }
 
 " Functions {
