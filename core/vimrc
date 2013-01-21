@@ -234,6 +234,9 @@
 
 	" for vim-commentary
 	autocmd FileType haskell set commentstring=--\ %s
+
+	" for vim-perd
+	autocmd VimResized * exe "normal! \<C-w>="
 " }
 
 " Functions {
