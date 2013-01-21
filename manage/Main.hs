@@ -58,6 +58,7 @@ dotfiles = profile "dotfiles" $
       , ("conceal/haskell.vim", ".vim/after/syntax/haskell.vim")
       , ("XCompose", ".XCompose")
       , ("vimusrc", ".vimusrc")
+      , ("tmux.conf", ".tmux.conf")
       ]
     ex link $ traverse . _1 %~ ("extended" </>) $
       [ ("xmonad.hs", ".xmonad/xmonad.hs")
