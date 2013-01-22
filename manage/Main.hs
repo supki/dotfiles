@@ -19,7 +19,7 @@ import Templates (laptopTemplates, workTemplates)
 
 main ∷ IO ()
 main = execParser opts >>= \(s,t) → s &
-  pretend >-> executeWith (defaultExecution & templates .~ t & react .~ Ignorant) >-> verify
+  pretend >-> pause >-> executeWith (defaultExecution & templates .~ t & react .~ Ignorant) >-> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
@@ -36,7 +36,7 @@ main = execParser opts >>= \(s,t) → s &
 dotfiles ∷ Script Profile ()
 dotfiles = profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
-    ex link $ traverse . _1 %~ ("core" </>) $
+    mapM_ (uncurry link) $ mapped . _1 <\>~ "core" $
       [ ("xsession", ".xsession")
       , ("mpdconf", ".mpdconf")
       , ("profile", ".profile")
@@ -60,7 +60,7 @@ dotfiles = profile "dotfiles" $
       , ("vimusrc", ".vimusrc")
       , ("tmux.conf", ".tmux.conf")
       ]
-    ex link $ traverse . _1 %~ ("extended" </>) $
+    mapM_ (uncurry link) $ mapped . _1 <\>~ "extended" $
       [ ("xmonad.hs", ".xmonad/xmonad.hs")
       , ("xmonad/Controls.hs", ".xmonad/lib/Controls.hs")
       , ("xmonad/Layouts.hs", ".xmonad/lib/Layouts.hs")
@@ -75,7 +75,7 @@ dotfiles = profile "dotfiles" $
       , ("gtkrc.mine", ".gtkrc.mine")
       , ("xmobar.hs", ".xmobar/xmobar.hs")
       ]
-    ex substitute $ traverse . _1 %~ ("extended" </>) $
+    mapM_ (uncurry substitute) $ mapped . _1 <\>~ "extended" $
       [ ("xmobarrc.template", ".xmobarrc")
       , ("xmonad/Misc.hs.template", ".xmonad/lib/Misc.hs")
       , ("xmonad/Profile.hs.template", ".xmonad/lib/Profile.hs")
@@ -87,7 +87,7 @@ dotfiles = profile "dotfiles" $
 tools ∷ Script Profile ()
 tools = profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
-    ex link
+    mapM_ (uncurry link)
       [ ("youtube-in-mplayer.sh", "bin/youtube-in-mplayer")
       , ("cue2tracks.sh", "bin/cue2tracks")
       , ("weather.rb", "bin/ask-weather")
@@ -106,7 +106,7 @@ tools = profile "tools" $
       , ("upload/pastebin.hs", "bin/upload-pastebin")
       , ("isup.sh", "bin/isup")
       ]
-    ex (\s d → shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d))
+    mapM_ (uncurry (\s d → shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d)))
       [ ("mpd/scrobbler.hs", "liblastfm-scrobbler")
       , ("audio.hs", "vaio-audio")
       , ("shutdown-gui.hs", "shutdown-gui")
@@ -146,13 +146,14 @@ experimental = profile "experimental" $ do
   "https://github.com/creswick/cabal-dev" --> "git/cabal-dev"
 
 
-ex ∷ Monad m ⇒ (FilePath → FilePath → m a) → [(FilePath, FilePath)] → m ()
-ex = mapM_ . uncurry
-
-
 (-->) ∷ String → FilePath → Script Source ()
 (-->) = git_
 
 
 (-->/) ∷ String → FilePath → Script Files () → Script Source ()
 (-->/) = git
+
+
+infixr 4 <\>~
+(<\>~) :: Setting s t FilePath FilePath -> FilePath -> s -> t
+l <\>~ n = over l (n </>)
