@@ -238,7 +238,7 @@
 	" for vim-perd
 	autocmd VimResized * normal =
 	autocmd VimLeave * bufdo :if exists(':PerdUnload') | execute 'PerdUnload' | endif
-	autocmd BufDelete *.hs call F()
+	autocmd BufDelete *.hs :PerdUnload(1)
 " }
 
 " Functions {
@@ -249,19 +249,4 @@
 		endif
 	endfunction
 	autocmd BufWritePost * call ModeChange()
-
-	" awful
-	function F()
-		let l:a = bufnr(expand("%"))
-		let l:b = bufnr(expand("<afile>"))
-		execute "bufdo call G(" . l:b . ")"
-		execute "buffer " . a
-	endfunction
-
-	function G(d)
-		let l:a = bufnr(expand("%"))
-		if l:a == a:d
-			execute 'PerdUnload'
-		endif
-	endfunction
 " }
