@@ -238,7 +238,7 @@
 	" for vim-perd
 	autocmd VimResized * normal =
 	autocmd VimLeave * bufdo :if exists(':PerdUnload') | execute 'PerdUnload' | endif
-	autocmd BufDelete *.hs :PerdUnload(1)
+	autocmd BufDelete *.hs PerdUnload '<afile>'
 " }
 
 " Functions {
