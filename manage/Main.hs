@@ -155,5 +155,5 @@ experimental = profile "experimental" $ do
 
 
 infixr 4 <\>~
-(<\>~) :: Setting s t FilePath FilePath -> FilePath -> s -> t
+(<\>~) :: Setting (->) s t FilePath FilePath -> FilePath -> s -> t
 l <\>~ n = over l (n </>)
