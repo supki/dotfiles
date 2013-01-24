@@ -41,11 +41,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     | (mod, key, command) <-
       -- launch a terminal
       [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
+      -- launch tmuxPrompt
+      , (0,           xK_Return, Tmux.prompt myXPConfig)
       -- launch shellPrompt
       , (0,           xK_p, shellPrompt myXPConfig)
-      -- launch windowPrompts
-      , (shiftMask,   xK_p, windowPromptGoto myXPConfig)
-      , (controlMask, xK_p, windowPromptBring myXPConfig)
       -- close focused window
       , (shiftMask,   xK_c, kill)
       -- rotate through the available layout algorithms
@@ -64,7 +63,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_j, windows W.focusDown)
       , (0,           xK_k, windows W.focusUp)
       -- swap the focused window
-      , (0,           xK_Return, windows W.swapMaster)
+      , (controlMask, xK_Return, windows W.swapMaster)
       , (shiftMask,   xK_j, windows W.swapDown)
       , (shiftMask,   xK_k, windows W.swapUp)
       -- shrink/expand the master area
@@ -116,7 +115,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
           MPD.status >>= \s -> case MPD.stState s of
             MPD.Playing -> MPD.pause True
             _           -> MPD.play Nothing)
-      , (shiftMask, xK_j, Tmux.prompt myXPConfig)
       ]
   ]
   ++
