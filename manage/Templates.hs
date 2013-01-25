@@ -22,23 +22,13 @@ data Template = Template
 
 
 data Xmobar = Xmobar
-  { background ∷ String
-  , position ∷ String
+  { background, position ∷ String
   , battery ∷ Maybe String
   } deriving (Data, Typeable)
 
 
 data Xmonad = Xmonad
-  { terminal ∷ String
-  , ubuntu ∷ String
-  , terminus ∷ String
-  , white ∷ String
-  , grayDark ∷ String
-  , grayLight ∷ String
-  , black ∷ String
-  , orange ∷ String
-  , yellow ∷ String
-  , startup ∷ String
+  { terminal, ubuntu, terminus, white, grayDark, grayLight, black, orange, yellow, startup, follow ∷ String
   } deriving (Data, Typeable)
 
 
@@ -48,9 +38,7 @@ data Xmodmap = Xmodmap
 
 
 data Urxvt = Urxvt
-  { tabbedex ∷ String
-  , background_ ∷ String
-  , browser ∷ String
+  { tabbedex, background_, browser ∷ String
   } deriving (Data, Typeable)
 
 
@@ -98,6 +86,7 @@ laptopTemplates = def
         , ("suspender", "suspender")
         ]
       |]
+    , follow = "False"
     }
   , xmodmap = def
     { menu = "keysym Menu = Super_R"
@@ -135,6 +124,7 @@ workTemplates = def
         , ("htop", "urxvt -title htop -e htop")
         ]
       |]
+    , follow = "True"
     }
   , urxvt = def
     { tabbedex = "/home/pyoseek/git/urxvt-tabbedex"

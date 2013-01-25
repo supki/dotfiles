@@ -4,7 +4,7 @@ import XMonad
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
+myFocusFollowsMouse = $template.xmonad.follow$
 --
 
 -- Modificator masks
