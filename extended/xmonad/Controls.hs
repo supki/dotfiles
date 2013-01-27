@@ -106,18 +106,30 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ]
   ]
   ++
-  -- third party
+  -- mpd
   [ ((mod1Mask .|. mod, key), script)
     | (mod, key, script) <-
-      [ (shiftMask, xK_comma,  io . void $ MPD.withMPD MPD.previous)
-      , (shiftMask, xK_period, io . void $ MPD.withMPD MPD.next)
-      , (shiftMask, xK_Return, io . void . MPD.withMPD $
+      [ (shiftMask, xK_comma,  io_ $ MPD.withMPD MPD.previous)
+      , (shiftMask, xK_period, io_ $ MPD.withMPD MPD.next)
+      , (shiftMask, xK_Return, io_ . MPD.withMPD $
           MPD.status >>= \s -> case MPD.stState s of
             MPD.Playing -> MPD.pause True
             _           -> MPD.play Nothing)
+      , (shiftMask, xK_j, Tmux.prompt myXPConfig)
+      , (shiftMask, xK_minus, io_ . MPD.withMPD $ do
+          st <- MPD.status
+          let v = MPD.stVolume st
+              nv = max 0 (v - 5)
+          MPD.setVolume nv)
+      , (shiftMask, xK_equal, io_ . MPD.withMPD $ do
+          st <- MPD.status
+          let v = MPD.stVolume st
+              nv = min 100 (v + 5)
+          MPD.setVolume nv)
       ]
   ]
   ++
+  -- third party scripts
   [ ((mod1Mask .|. mod, key), spawn script)
     | (mod, key, script) <-
       -- take a window/selected area/entire screen screenshot
@@ -153,3 +165,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ]
   ]
 --
+
+
+io_ :: MonadIO m => IO a -> m ()
+io_ = io . void
