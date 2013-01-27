@@ -9,8 +9,8 @@ Config { font          = "xft:ubuntu-8"
 			, Run Memory ["-t", "<usedratio>", "-L", "50", "-H", "50", "-l", "#eeccaa", "--normal", "red", "--high", "red"] 10
 			, Run Network "eth0" ["-t", "<rx>:<tx>", "-L", "512", "-H", "512", "-l", "#eeccaa", "--normal", "red", "--high", "red"] 10
 			, Run Network "wlan0" ["-t", "<rx>:<tx>", "-L", "512", "-H", "512", "-l", "#eeccaa", "--normal", "red", "--high", "red"] 10
-			, Run Com "zsh" ["-c", "ask-weather", "--plain"] "myweather" 600
-			, Run Com "zsh" ["-c", "vaio-battery", "--xmobar"] "battery" 600
+			, Run Com "ask-weather" [] "myweather" 600
+			, Run Com "vaio-battery" ["--xmobar"] "battery" 600
 			, Run Com "date" ["+'%b <fc=#eeccaa>%d</fc>, (%a), <fc=#eeccaa>%I</fc>:<fc=#eeccaa>%M</fc> %P'"] "mydate" 600
 			, Run Com "echo" ["'<fc=#ffffff>|</fc>'"] "mysep" 6000
 			, Run StdinReader
