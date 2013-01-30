@@ -34,6 +34,16 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 --
 
 
+-- Tmux sessions advanced commands
+sessions :: Tmux.Sessions
+sessions = M.fromList
+  [ ("dotfiles", Tmux.ChangeDirectory "~/git/dotfiles")
+  , ("biegunka", Tmux.ChangeDirectory "~/git/biegunka-core")
+  , ("perds",    Tmux.ChangeDirectory "~/.vim/bundle/vim-perd")
+  ]
+--
+
+
 -- Keyboard hotkeys
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- default
@@ -42,7 +52,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- launch a terminal
       [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
       -- launch tmuxPrompt
-      , (0,           xK_Return, Tmux.prompt myXPConfig)
+      , (0,           xK_Return, Tmux.prompt sessions myXPConfig)
       -- launch shellPrompt
       , (0,           xK_p, shellPrompt myXPConfig)
       -- close focused window
@@ -115,7 +125,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
           MPD.status >>= \s -> case MPD.stState s of
             MPD.Playing -> MPD.pause True
             _           -> MPD.play Nothing)
-      , (shiftMask, xK_j, Tmux.prompt myXPConfig)
       , (shiftMask, xK_minus, io_ . MPD.withMPD $ do
           st <- MPD.status
           let v = MPD.stVolume st
