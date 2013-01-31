@@ -15,6 +15,7 @@ type Sessions = Map String Command
 
 data Command =
     ChangeDirectory FilePath
+  | Session String
     deriving (Show, Read, Eq, Ord)
 
 
@@ -32,12 +33,14 @@ prompt db c = do
 start :: Sessions -> [String] -> String -> X ()
 start db ss s = do
   term <- asks $ terminal . config
-  case undefined of
+  spawn $ case undefined of
     _ | s `elem` ss     -> attach  term s
       | s `M.member` db -> create' term s (db ! s)
       | otherwise       -> create  term s
  where
-  attach t s    = spawn $ t ++ " -e tmux attach -t " ++ s
-  create t s    = spawn $ t ++ " -e tmux new -s "    ++ s
+  attach t s    = t ++ " -e tmux attach -t " ++ s
+  create t s    = t ++ " -e tmux new -s "    ++ s
   create' t s (ChangeDirectory p) =
-    spawn $ t ++ " -e sh -c \"cd " ++ p ++ "; tmux new -s "    ++ s ++ "\""
+    t ++ " -e sh -c \"cd " ++ p ++ "; tmux new -s "    ++ s ++ "\""
+  create' t s (Session c) =
+    t ++ " -e tmux new -s "    ++ s ++ " '" ++ c ++ "'"
