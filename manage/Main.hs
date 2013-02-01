@@ -105,6 +105,7 @@ tools = profile "tools" $
       , ("upload/budueba.sh", "bin/upload-budueba")
       , ("upload/pastebin.hs", "bin/upload-pastebin")
       , ("isup.sh", "bin/isup")
+      , ("pretty-json.py", "bin/pretty-json")
       ]
     mapM_ (uncurry (\s d → shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d)))
       [ ("mpd/scrobbler.hs", "liblastfm-scrobbler")
