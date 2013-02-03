@@ -479,6 +479,10 @@ if exists("g:zenburn_alternate_Include") && g:zenburn_alternate_Include
 else
     " new, less contrasted one
     hi Include      guifg=#dfaf8f gui=bold
+    " also works without gui
+    if &t_Co > 255
+        hi Include      ctermfg=173 cterm=bold
+	endif
 endif
 
 if exists("g:zenburn_color_also_Ignore") && g:zenburn_color_also_Ignore
