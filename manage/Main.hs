@@ -9,6 +9,7 @@ import Data.Monoid ((<>))
 import Control.Lens
 import Data.Default (def)
 import Options.Applicative hiding ((&))
+import System.Directory (getHomeDirectory)
 import System.FilePath ((</>))
 
 import Biegunka
@@ -18,16 +19,16 @@ import Templates (laptopTemplates, workTemplates)
 
 
 main ∷ IO ()
-main = execParser opts >>= \(s,t) → s &
-  pretend >-> pause >-> executeWith (defaultExecution & templates .~ t & react .~ Ignorant) >-> verify
+main = execParser opts >>= \(s,t) → do
+  home <- getHomeDirectory
+  biegunka (def & root .~ home) s $
+    pretend <> pause <> executeWith (defaultExecution & templates .~ t & react .~ Ignorant) <> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
   sample =
      flag (return (), def) (laptopSettings, laptopTemplates) (long "laptop" <> short 'l' <> help "Use laptop settings") <|>
      flag (return (), def) (workSettings, workTemplates) (long "work" <> short 'w' <> help "Use work settings")
-
-  (>->) = liftA2 (>>)
 
   laptopSettings = sequence_ [dotfiles, tools, vim, misc, experimental]
   workSettings = sequence_ [dotfiles, vim, misc]
