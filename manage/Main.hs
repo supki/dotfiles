@@ -34,7 +34,7 @@ main = execParser opts >>= \(s,t) → do
   workSettings = sequence_ [dotfiles, vim, misc]
 
 
-dotfiles ∷ Script Profile ()
+dotfiles ∷ Script Profile
 dotfiles = profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     mapM_ (uncurry link) $ mapped . _1 <\>~ "core" $
@@ -85,7 +85,7 @@ dotfiles = profile "dotfiles" $
       ]
 
 
-tools ∷ Script Profile ()
+tools ∷ Script Profile
 tools = profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     mapM_ (uncurry link)
@@ -115,7 +115,7 @@ tools = profile "tools" $
       ]
 
 
-vim ∷ Script Profile ()
+vim ∷ Script Profile
 vim = profile "vim" $ do
   "git@github.com:Shougo/vimproc"               -->/ ".vim/bundle/vimproc" $
     shell "make -f make_unix.mak"
@@ -135,24 +135,24 @@ vim = profile "vim" $ do
   "git@github.com:vim-scripts/bufexplorer.zip"  --> ".vim/bundle/be"
 
 
-misc ∷ Script Profile ()
+misc ∷ Script Profile
 misc = profile "misc" $ do
   "git@github.com:zsh-users/zsh-completions.git" --> "git/zsh-completions"
   "git@github.com:stepb/urxvt-tabbedex"          --> "git/urxvt-tabbedex"
 
 
-experimental ∷ Script Profile ()
+experimental ∷ Script Profile
 experimental = profile "experimental" $ do
   "https://github.com/sol/vimus"          --> "git/vimus"
   "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
   "https://github.com/creswick/cabal-dev" --> "git/cabal-dev"
 
 
-(-->) ∷ String → FilePath → Script Source ()
+(-->) ∷ String → FilePath → Script Source
 (-->) = git_
 
 
-(-->/) ∷ String → FilePath → Script Files () → Script Source ()
+(-->/) ∷ String → FilePath → Script Files → Script Source
 (-->/) = git
 
 
