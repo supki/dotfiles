@@ -4,13 +4,12 @@
 {-# LANGUAGE UnicodeSyntax #-}
 module Main (main) where
 
-import Data.Monoid ((<>))
-
 import Control.Lens
 import Data.Default (def)
 import Options.Applicative hiding ((&))
 import System.Directory (getHomeDirectory)
 import System.FilePath ((</>))
+import System.FilePath.Lens
 
 import Biegunka
 import Biegunka.Source.Git
@@ -117,22 +116,25 @@ tools = profile "tools" $
 
 vim ∷ Script Profile
 vim = profile "vim" $ do
-  "git@github.com:Shougo/vimproc"               -->/ ".vim/bundle/vimproc" $
+  pathogen  "git@github.com:Shougo/vimproc" $
     shell "make -f make_unix.mak"
-  "git@github.com:eagletmt/ghcmod-vim"          --> ".vim/bundle/ghcmod-vim"
-  "git@github.com:ujihisa/neco-ghc"             --> ".vim/bundle/neco-ghc"
-  "git@github.com:Shougo/neocomplcache"         --> ".vim/bundle/neocomplcache"
+  pathogen_ "git@github.com:eagletmt/ghcmod-vim"
+  pathogen_ "git@github.com:ujihisa/neco-ghc"
+  pathogen_ "git@github.com:Shougo/neocomplcache"
 
-  "git@github.com:vim-scripts/coq-syntax"       --> ".vim/bundle/coq-syntax"
-  "git@github.com:vim-scripts/Coq-indent"       --> ".vim/bundle/coq-indent"
+  pathogen_ "git@github.com:vim-scripts/coq-syntax"
+  pathogen_ "git@github.com:vim-scripts/Coq-indent"
 
-  "git@github.com:scrooloose/syntastic.git"     --> ".vim/bundle/syntastic"
-  "git@github.com:jpalardy/vim-slime.git"       --> ".vim/bundle/vim-slime"
-  "git@github.com:vim-scripts/YankRing.vim"     --> ".vim/bundle/YankRing"
-  "git@github.com:Shougo/unite.vim"             --> ".vim/bundle/unite"
-  "git@github.com:spolu/dwm.vim"                --> ".vim/bundle/dwm"
-  "git@github.com:tpope/vim-commentary"         --> ".vim/bundle/commentary"
-  "git@github.com:vim-scripts/bufexplorer.zip"  --> ".vim/bundle/be"
+  pathogen_ "git@github.com:scrooloose/syntastic.git"
+  pathogen_ "git@github.com:jpalardy/vim-slime.git"
+  pathogen_ "git@github.com:vim-scripts/YankRing.vim"
+  pathogen_ "git@github.com:Shougo/unite.vim"
+  pathogen_ "git@github.com:spolu/dwm.vim"
+  pathogen_ "git@github.com:tpope/vim-commentary"
+  pathogen_ "git@github.com:vim-scripts/bufexplorer.zip"
+ where
+  pathogen  u = git  u (".vim/bundle" </> u ^. basename)
+  pathogen_ u = pathogen u (return ())
 
 
 misc ∷ Script Profile
@@ -148,12 +150,9 @@ experimental = profile "experimental" $ do
   "https://github.com/creswick/cabal-dev" --> "git/cabal-dev"
 
 
+infix 1 -->
 (-->) ∷ String → FilePath → Script Source
 (-->) = git_
-
-
-(-->/) ∷ String → FilePath → Script Files → Script Source
-(-->/) = git
 
 
 infixr 4 <\>~
