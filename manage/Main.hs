@@ -21,7 +21,7 @@ main ∷ IO ()
 main = execParser opts >>= \(s,t) → do
   home <- getHomeDirectory
   biegunka (def & root .~ home) s $
-    pretend <> pause <> executeWith (defaultExecution & templates .~ t & react .~ Ignorant) <> verify
+    pretend <> pause <> execute (def & templates .~ Templates t & react .~ Ignorant) <> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
