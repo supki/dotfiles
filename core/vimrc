@@ -208,7 +208,7 @@
 	map  <Esc>[6^ :tabn<CR>
 
 	" add some hotkeys for rather tedious ghc-mod commands
-	nmap <leader>c :GhcModLint<CR>
+	nmap <leader>c :GhcModCheck<CR>
 	nmap <leader>t :GhcModType<CR>
 	nmap <leader>T :GhcModTypeClear<CR>
 
@@ -220,7 +220,7 @@
 	nmap <leader>L :PerdLoad<CR>:call system('tmux select-layout main-vertical')<CR>:PerdSwitch<CR>
 	nmap <leader>z :PerdUnload<CR>
 
-	let g:perd_ghci_settings = '-package-db=cabal-dev/packages-7.6.1.conf'
+	let g:perd_ghci_settings = '-isrc -package-db=cabal-dev/packages-7.6.2.conf'
 	let g:perd_ghci_fallback = 1
 
 	nnoremap <Space> <C-D>

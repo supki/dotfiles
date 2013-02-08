@@ -17,7 +17,6 @@ myWorkspaces :: [WorkspaceId]
 myWorkspaces = concat
   [ ["~"]
   , map show [1..7]
-  , map ((++ "'") . show) [1..8]
   , ["8", "9", "0", "-", "=", "\\", "<-"]
   ]
 
@@ -116,5 +115,5 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
 scratchpads :: [NamedScratchpad]
 scratchpads =
   [ NS "scratchpad" (myTerminal ++ " -name scratchpad") (resource =? "scratchpad") (customFloating $ W.RationalRect 0.25 0.20 0.5 0.6)
-  , NS "vimus" (myTerminal ++ " -name vimus -e vimus") (resource =? "vimus") (customFloating $ W.RationalRect 0.25 0.20 0.5 0.6)
+  , NS "vimus" (myTerminal ++ " -name vimus -e zsh -c vimus") (resource =? "vimus") (customFloating $ W.RationalRect 0.25 0.20 0.5 0.6)
   ]

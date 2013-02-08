@@ -38,6 +38,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 sessions :: Tmux.Sessions
 sessions = M.fromList
   [ ("dotfiles", Tmux.ChangeDirectory "~/git/dotfiles")
+  , ("tools",    Tmux.ChangeDirectory "~/git/tools")
   , ("biegunka", Tmux.ChangeDirectory "~/git/biegunka-core")
   , ("perds",    Tmux.ChangeDirectory "~/.vim/bundle/vim-perd")
   ]

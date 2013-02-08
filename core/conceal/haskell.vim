@@ -12,7 +12,6 @@ syntax match hsNiceOperator "->" conceal cchar=→
 syntax match hsNiceOperator "\<pi\>" conceal cchar=π
 syntax match hsNiceOperator /\s%\s/ms=s+1,me=e-1 conceal cchar=÷
 syntax match hsNiceOperator "\<not\>" conceal cchar=¬
-syntax match hsNiceOperator "`elem`" conceal cchar=∈
 syntax match hsNiceOperator /\s\*\s/ms=s+1,me=e-1 conceal cchar=×
 
 sy match hs_DeclareFunction /^[a-z_(]\S*\(\s\|\n\)*::/me=e-2 contains=hs_FunctionName,hs_OpFunctionName
