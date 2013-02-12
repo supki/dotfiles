@@ -220,8 +220,11 @@
 	nmap <leader>L :PerdLoad<CR>:call system('tmux select-layout main-vertical')<CR>:PerdSwitch<CR>
 	nmap <leader>z :PerdUnload<CR>
 
-	let g:perd_ghci_settings = '-isrc -package-db=cabal-dev/packages-7.6.2.conf'
-	let g:perd_ghci_fallback = 1
+	let g:perd_profiles = {
+		\ 'raw': '',
+		\ 'root/src-7.6.2': '-isrc -package-db=cabal-dev/packages-7.6.2.conf'
+		\ }
+	let g:perd_profile = 'root/src-7.6.2'
 
 	nnoremap <Space> <C-D>
 	nnoremap <S-Space> <C-U>
