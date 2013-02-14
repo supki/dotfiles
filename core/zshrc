@@ -57,6 +57,7 @@ bindkey "^[[4~" end-of-line
 
 alias ack=ack-grep # stupid debian
 alias ls='ls --color'
+alias gut='git'
 alias less='less -R'
 
 function man() {
