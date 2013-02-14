@@ -222,9 +222,12 @@
 
 	let g:perd_profiles = {
 		\ 'raw': '',
-		\ 'root/src-7.6.2': '-isrc -package-db=cabal-dev/packages-7.6.2.conf'
+		\ '7.6.1': '-isrc -package-db=cabal-dev/packages-7.6.1.conf',
+		\ '7.6.1-dumb': '-package-db=cabal-dev/packages-7.6.1.conf',
+		\ '7.6.2': '-isrc -package-db=cabal-dev/packages-7.6.2.conf',
+		\ '7.6.2-dumb': '-package-db=cabal-dev/packages-7.6.2.conf'
 		\ }
-	let g:perd_profile = 'root/src-7.6.2'
+	let g:perd_profile = '7.6.2'
 
 	nnoremap <Space> <C-D>
 	nnoremap <S-Space> <C-U>
