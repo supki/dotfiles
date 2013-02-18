@@ -4,6 +4,7 @@ import Control.Monad
 import qualified Data.Map as M
 import Graphics.X11.ExtraTypes.XF86
 import qualified Network.MPD as MPD
+import System.FilePath ((</>))
 import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
@@ -36,12 +37,14 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 
 -- Tmux sessions advanced commands
 sessions :: Tmux.Sessions
-sessions = M.fromList
-  [ ("dotfiles", Tmux.ChangeDirectory "~/git/dotfiles")
-  , ("tools",    Tmux.ChangeDirectory "~/git/tools")
-  , ("biegunka", Tmux.ChangeDirectory "~/git/biegunka-core")
-  , ("perds",    Tmux.ChangeDirectory "~/.vim/bundle/vim-perd")
-  ]
+sessions = M.fromList $ gits ++ [("perds", Tmux.ChangeDirectory "~/.vim/bundle/vim-perd")]
+ where
+  gits = map (\x -> (x, Tmux.ChangeDirectory $ "~/git" </> x)) $
+    [ "biegunka"
+    , "dotfiles"
+    , "robot"
+    , "tools"
+    ]
 --
 
 
