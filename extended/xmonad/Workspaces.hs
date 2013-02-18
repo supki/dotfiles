@@ -24,7 +24,6 @@ myWorkspacesKeys :: [KeySym]
 myWorkspacesKeys = concat
   [ [xK_grave]
   , [xK_1..xK_7]
-  , [xK_F1..xK_F8]
   , [xK_8, xK_9, xK_0, xK_minus, xK_equal, xK_backslash, xK_BackSpace]
   ]
 --
