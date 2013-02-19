@@ -29,7 +29,7 @@ main = execParser opts >>= \(s,t) → do
      flag (return (), def) (laptopSettings, laptopTemplates) (long "laptop" <> short 'l' <> help "Use laptop settings") <|>
      flag (return (), def) (workSettings, workTemplates) (long "work" <> short 'w' <> help "Use work settings")
 
-  laptopSettings = sequence_ [dotfiles, tools, vim, misc, experimental]
+  laptopSettings = sequence_ [dotfiles, tools, vim, misc, experimental, edwardk]
   workSettings = sequence_ [dotfiles, vim, misc]
 
 
@@ -145,6 +145,16 @@ experimental ∷ Script Profiles
 experimental = profile "experimental" $ do
   "https://github.com/sol/vimus"          --> "git/vimus"
   "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
+
+
+edwardk :: Script Profiles
+edwardk = profile "edwardk" $ do
+  "git@github.com:ekmett/free"        --> "git/free"
+  "git@github.com:ekmett/reflection"  --> "git/reflection"
+  "git@github.com:ekmett/tagged"      --> "git/tagged"
+  "git@github.com:ekmett/machines"    --> "git/machines"
+  "git@github.com:ekmett/lens"        --> "git/lens"
+  "git@github.com:ekmett/profunctors" --> "git/profunctors"
 
 
 infix 1 -->
