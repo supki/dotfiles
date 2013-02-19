@@ -21,7 +21,7 @@ main ∷ IO ()
 main = execParser opts >>= \(s,t) → do
   home <- getHomeDirectory
   biegunka (def & root .~ home) s $
-    pretend <> pause <> execute (def & templates .~ Templates t) <> verify
+    pretend <> pause <> execute (def & templates .~ Templates t & parallel .~ True) <> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
@@ -115,23 +115,21 @@ tools = profile "tools" $
 
 
 vim ∷ Script Profiles
-vim = profile "vim" $ do
-  pathogen  "git@github.com:Shougo/vimproc" $
-    shell "make -f make_unix.mak"
-  pathogen_ "git@github.com:eagletmt/ghcmod-vim"
-  pathogen_ "git@github.com:ujihisa/neco-ghc"
-  pathogen_ "git@github.com:Shougo/neocomplcache"
-
-  pathogen_ "git@github.com:vim-scripts/coq-syntax"
-  pathogen_ "git@github.com:vim-scripts/Coq-indent"
-
-  pathogen_ "git@github.com:scrooloose/syntastic.git"
-  pathogen_ "git@github.com:jpalardy/vim-slime.git"
-  pathogen_ "git@github.com:vim-scripts/YankRing.vim"
-  pathogen_ "git@github.com:Shougo/unite.vim"
-  pathogen_ "git@github.com:spolu/dwm.vim"
-  pathogen_ "git@github.com:tpope/vim-commentary"
-  pathogen_ "git@github.com:vim-scripts/bufexplorer.zip"
+vim = do
+  profile "vim-haskell" $ do
+    pathogen  "git@github.com:Shougo/vimproc" $
+      shell "make -f make_unix.mak"
+    pathogen_ "git@github.com:eagletmt/ghcmod-vim"
+    pathogen_ "git@github.com:ujihisa/neco-ghc"
+    pathogen_ "git@github.com:Shougo/neocomplcache"
+  profile "vim-coq" $ do
+    pathogen_ "git@github.com:vim-scripts/coq-syntax"
+    pathogen_ "git@github.com:vim-scripts/Coq-indent"
+  profile "vim-misc" $ do
+    pathogen_ "git@github.com:scrooloose/syntastic.git"
+    pathogen_ "git@github.com:Shougo/unite.vim"
+    pathogen_ "git@github.com:spolu/dwm.vim"
+    pathogen_ "git@github.com:tpope/vim-commentary"
  where
   pathogen  u = git  u (".vim/bundle" </> u ^. basename)
   pathogen_ u = pathogen u (return ())
@@ -147,7 +145,6 @@ experimental ∷ Script Profiles
 experimental = profile "experimental" $ do
   "https://github.com/sol/vimus"          --> "git/vimus"
   "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
-  "https://github.com/creswick/cabal-dev" --> "git/cabal-dev"
 
 
 infix 1 -->
