@@ -1,2 +1,2 @@
 typeset -U path
-path=(~/.cabal/bin ~/bin $path)
+path=(~/.cabal/bin /opt/buildtools ~/bin $path)
