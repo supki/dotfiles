@@ -40,7 +40,7 @@ sessions :: Tmux.Sessions
 sessions = M.fromList $ gits ++ [("perds", Tmux.ChangeDirectory "~/.vim/bundle/vim-perd")]
  where
   gits = map (\x -> (x, Tmux.ChangeDirectory $ "~/git" </> x)) $
-    [ "biegunka"
+    [ "biegunka-core"
     , "dotfiles"
     , "robot"
     , "tools"
