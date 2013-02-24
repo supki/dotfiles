@@ -74,6 +74,7 @@ dotfiles = profile "dotfiles" $
       , ("pentadactyl/wanker.penta", ".pentadactyl/plugins/wanker.penta")
       , ("gtkrc.mine", ".gtkrc.mine")
       , ("xmobar.hs", ".xmobar/xmobar.hs")
+      , ("mplayer-config", ".mplayer/config")
       ]
     mapM_ (uncurry substitute) $ mapped . _1 <\>~ "extended" $
       [ ("xmobarrc.template", ".xmobarrc")
