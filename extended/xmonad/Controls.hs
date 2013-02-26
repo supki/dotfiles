@@ -37,14 +37,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 
 -- Tmux sessions advanced commands
 sessions :: Tmux.Sessions
-sessions = M.fromList $ gits ++ [("perds", Tmux.ChangeDirectory "~/.vim/bundle/vim-perd")]
- where
-  gits = map (\x -> (x, Tmux.ChangeDirectory $ "~/git" </> x)) $
-    [ "biegunka-core"
-    , "dotfiles"
-    , "robot"
-    , "tools"
-    ]
+sessions = M.fromList $ [("perds", Tmux.ChangeDirectory "~/.vim/bundle/vim-perd")]
 --
 
 

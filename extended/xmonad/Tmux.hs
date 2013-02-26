@@ -2,9 +2,14 @@ module Tmux where
 
 import Control.Applicative
 import Data.List (union)
+import Data.Monoid
+import System.IO.Error (catchIOError)
 
 import           Data.Map (Map, (!))
 import qualified Data.Map as M
+import           System.FilePath ((</>))
+import           System.Directory (getDirectoryContents, getHomeDirectory)
+
 import           XMonad
 import           XMonad.Prompt
 import           XMonad.Prompt.Input
@@ -25,17 +30,35 @@ run = lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{session_na
 
 prompt :: Sessions -> XPConfig -> X ()
 prompt db c = do
-  ss <- io run
-  let as = union ss (M.keys db)
-  inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start db ss
+  rs <- io run
+  gs <- io gits
+  ss <- io svns
+  let as = foldr union [] $ rs : map M.keys [gs, ss, db]
+  inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (mconcat [gs, ss, db]) rs
+
+
+gits, svns :: IO Sessions
+gits = vcs "git"
+svns = vcs "svn"
+
+
+vcs :: FilePath -> IO Sessions
+vcs p = catchIOError (repos p) (\_ -> return mempty)
+
+
+repos :: FilePath -> IO Sessions
+repos p = do
+  t <- (</> p) <$> getHomeDirectory
+  xs <- filter (`notElem` [".", ".."]) <$> getDirectoryContents t
+  return . M.fromList . zip xs $ map (ChangeDirectory . (t </>)) xs
 
 
 start :: Sessions -> [String] -> String -> X ()
-start db ss s = do
+start as ss s = do
   term <- asks $ terminal . config
   spawn $ case undefined of
     _ | s `elem` ss     -> attach  term s
-      | s `M.member` db -> create' term s (db ! s)
+      | s `M.member` as -> create' term s (as ! s)
       | otherwise       -> create  term s
  where
   attach t s = t ++ " -e tmux attach -t " ++ s
