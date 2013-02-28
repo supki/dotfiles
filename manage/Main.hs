@@ -7,7 +7,6 @@ module Main (main) where
 import Control.Lens
 import Data.Default (def)
 import Options.Applicative hiding ((&))
-import System.Directory (getHomeDirectory)
 import System.FilePath ((</>))
 import System.FilePath.Lens
 
@@ -19,8 +18,7 @@ import Templates (laptopTemplates, workTemplates)
 
 main ∷ IO ()
 main = execParser opts >>= \(s,t) → do
-  home <- getHomeDirectory
-  biegunka (def & root .~ home) s $
+  biegunka (def & root .~ "~") s $
     pretend <> pause <> execute (def & templates .~ Templates t & parallel .~ True) <> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
