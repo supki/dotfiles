@@ -41,6 +41,8 @@ import qualified Data.ByteString.Lazy       as BL
 import qualified Data.ByteString.Lazy.Char8 as BLC
 import qualified Data.Text                  as T
 
+import System.Wordexp
+
 :set -fwarn-alternative-layout-rule-transitional
 :set -fwarn-auto-orphans
 :set -fwarn-deprecated-flags
