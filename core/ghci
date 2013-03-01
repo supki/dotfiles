@@ -41,7 +41,7 @@ import qualified Data.ByteString.Lazy       as BL
 import qualified Data.ByteString.Lazy.Char8 as BLC
 import qualified Data.Text                  as T
 
-import System.Wordexp
+import System.Wordexp.Simple
 
 :set -fwarn-alternative-layout-rule-transitional
 :set -fwarn-auto-orphans
