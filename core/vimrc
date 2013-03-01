@@ -154,7 +154,8 @@
 
 	" highlight parentheses
 	au VimEnter *.rkt RainbowParenthesesToggle
-	au Syntax racket RainbowParenthesesLoadRound
+	au BufEnter *.rkt RainbowParenthesesLoadRound
+	au BufEnter *.rkt RainbowParenthesesLoadSquare
 
 	" enable omni-completion
 	autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
