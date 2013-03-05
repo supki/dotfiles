@@ -8,7 +8,6 @@ import System.FilePath ((</>))
 import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
-import XMonad.Actions.FindEmptyWorkspace
 import XMonad.Actions.SwapWorkspaces
 import XMonad.Hooks.ManageDocks
 import XMonad.Prompt.Shell
@@ -20,6 +19,7 @@ import qualified XMonad.StackSet as W
 import Themes
 import qualified Profile as P
 import qualified Workspaces as WS
+import qualified Man as Man
 import qualified Tmux as Tmux
 
 -- Mouse
@@ -48,8 +48,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     | (mod, key, command) <-
       -- launch a terminal
       [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
-      -- launch tmuxPrompt
+      -- launch tmux prompt
       , (0,           xK_Return, Tmux.prompt sessions myXPConfig)
+      -- launch man prompt
+      , (0,           xK_m, Man.prompt myXPConfig)
       -- launch shellPrompt
       , (0,           xK_p, shellPrompt myXPConfig)
       -- close focused window
@@ -86,10 +88,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- quit/restart xmonad
       , (0,           xK_q, restart "xmonad" True)
       , (shiftMask,   xK_q, spawn "killall trayer; xmonad --recompile; xmonad --restart")
-      -- view empty workspace
-      , (0,           xK_m, viewEmptyWorkspace)
-      -- shift window to empty workspace
-      , (shiftMask,   xK_m, tagToEmptyWorkspace)
       -- make workspaces screenshots and merge them
       , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook horizontally)
       ]

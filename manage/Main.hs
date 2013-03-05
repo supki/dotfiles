@@ -65,6 +65,7 @@ dotfiles = profile "dotfiles" $
       , ("xmonad/Startup.hs", ".xmonad/lib/Startup.hs")
       , ("xmonad/Themes.hs", ".xmonad/lib/Themes.hs")
       , ("xmonad/Tmux.hs", ".xmonad/lib/Tmux.hs")
+      , ("xmonad/Man.hs", ".xmonad/lib/Man.hs")
       , ("xmonad/Workspaces.hs", ".xmonad/lib/Workspaces.hs")
       , ("gvimrc", ".gvimrc")
       , ("vimcolors", ".vim/colors")

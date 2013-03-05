@@ -10,10 +10,10 @@ import qualified Data.Map as M
 import           System.FilePath ((</>))
 import           System.Directory (getDirectoryContents, getHomeDirectory)
 
-import           XMonad
-import           XMonad.Prompt
-import           XMonad.Prompt.Input
-import           XMonad.Util.Run
+import XMonad
+import XMonad.Prompt
+import XMonad.Prompt.Input
+import XMonad.Util.Run
 
 
 type Sessions = Map String Command
