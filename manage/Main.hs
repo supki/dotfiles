@@ -18,8 +18,8 @@ import Templates (laptopTemplates, workTemplates)
 
 main ∷ IO ()
 main = execParser opts >>= \(s,t) → do
-  biegunka (def & root .~ "~") s $
-    pretend <> pause <> execute (def & templates .~ Templates t & parallel .~ True) <> verify
+  biegunka (set root "~") s $
+    pretend <> pause <> execute (set templates (Templates t) . set order Parallel) <> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
@@ -32,7 +32,7 @@ main = execParser opts >>= \(s,t) → do
 
 
 dotfiles ∷ Script Profiles
-dotfiles = profile "dotfiles" $
+dotfiles = task $ profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     mapM_ (uncurry link) $ mapped . _1 <\>~ "core" $
       [ ("xsession", ".xsession")
@@ -85,7 +85,7 @@ dotfiles = profile "dotfiles" $
 
 
 tools ∷ Script Profiles
-tools = profile "tools" $
+tools = task $ profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     mapM_ (uncurry link)
       [ ("youtube-in-mplayer.sh", "bin/youtube-in-mplayer")
@@ -131,24 +131,24 @@ vim = do
     pathogen_ "git@github.com:spolu/dwm.vim"
     pathogen_ "git@github.com:tpope/vim-commentary"
  where
-  pathogen  u = git  u (".vim/bundle" </> u ^. basename)
+  pathogen  u = task . git u (".vim/bundle" </> u ^. basename)
   pathogen_ u = pathogen u (return ())
 
 
 misc ∷ Script Profiles
-misc = profile "misc" $ do
+misc = task $ profile "misc" $ do
   "git@github.com:zsh-users/zsh-completions.git" --> "git/zsh-completions"
   "git@github.com:stepb/urxvt-tabbedex"          --> "git/urxvt-tabbedex"
 
 
 experimental ∷ Script Profiles
-experimental = profile "experimental" $ do
+experimental = task $ profile "experimental" $ do
   "https://github.com/sol/vimus"          --> "git/vimus"
   "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
 
 
 edwardk :: Script Profiles
-edwardk = profile "edwardk" $ do
+edwardk = task $ profile "edwardk" $ do
   "git@github.com:ekmett/free"        --> "git/free"
   "git@github.com:ekmett/reflection"  --> "git/reflection"
   "git@github.com:ekmett/tagged"      --> "git/tagged"
