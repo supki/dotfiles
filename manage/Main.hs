@@ -143,18 +143,18 @@ misc = task $ profile "misc" $ do
 
 experimental ∷ Script Profiles
 experimental = task $ profile "experimental" $ do
-  "https://github.com/sol/vimus"          --> "git/vimus"
-  "https://github.com/sol/libmpd-haskell" --> "git/libmpd-haskell"
+  "git@github.com:sol/vimus"          --> "git/vimus"
+  "git@github.com:sol/libmpd-haskell" --> "git/libmpd-haskell"
 
 
 edwardk :: Script Profiles
-edwardk = task $ profile "edwardk" $ do
-  "git@github.com:ekmett/free"        --> "git/free"
-  "git@github.com:ekmett/reflection"  --> "git/reflection"
-  "git@github.com:ekmett/tagged"      --> "git/tagged"
-  "git@github.com:ekmett/machines"    --> "git/machines"
-  "git@github.com:ekmett/lens"        --> "git/lens"
-  "git@github.com:ekmett/profunctors" --> "git/profunctors"
+edwardk = profile "edwardk" $ do
+  task $ "git@github.com:ekmett/free"        --> "git/free"
+  task $ "git@github.com:ekmett/reflection"  --> "git/reflection"
+  task $ "git@github.com:ekmett/tagged"      --> "git/tagged"
+  task $ "git@github.com:ekmett/machines"    --> "git/machines"
+  task $ "git@github.com:ekmett/lens"        --> "git/lens"
+  task $ "git@github.com:ekmett/profunctors" --> "git/profunctors"
 
 
 infix 1 -->
