@@ -3,7 +3,6 @@
 
 import           Control.Applicative
 import           Control.Arrow
-import qualified Control.Exception          as E
 import           Control.Monad
 import           Data.Bits
 import           Data.Char
@@ -31,6 +30,7 @@ import           System.FilePath
 import           System.FilePath.Lens
 import           Text.Parsec hiding ((<|>), many)
 
+import qualified Control.Exception          as E
 import qualified Data.Map                   as M
 import qualified Data.IntMap                as IM
 import qualified Data.Foldable              as F
