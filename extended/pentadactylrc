@@ -35,8 +35,18 @@ javascript <<EOF
 	};
 EOF
 
+javascript <<EOF
+	dactyl.togglePinned = function () {
+		if (gBrowser.mCurrentTab.pinned)
+			dactyl.execute(":unpin");
+		else
+			dactyl.execute(":pin");
+	};
+EOF
+
 map , <leader>
 nmap -builtin <leader>s -js dactyl.toggleStatusLine();
+nmap -builtin <leader>p -js dactyl.togglePinned();
 nmap -builtin <leader>z -js window.content.document.toggleImageSize();
 nmap -builtin <leader>d :dialog downloads<CR>
 
