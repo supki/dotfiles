@@ -137,8 +137,9 @@ vim = do
 
 misc ∷ Script Profiles
 misc = task $ profile "misc" $ do
-  "git@github.com:zsh-users/zsh-completions.git" --> "git/zsh-completions"
-  "git@github.com:stepb/urxvt-tabbedex"          --> "git/urxvt-tabbedex"
+  "git@github.com:zsh-users/zsh-syntax-highlighting.git" --> "git/zsh-syntax-highlighting"
+  "git@github.com:zsh-users/zsh-completions.git"         --> "git/zsh-completions"
+  "git@github.com:stepb/urxvt-tabbedex"                  --> "git/urxvt-tabbedex"
 
 
 experimental ∷ Script Profiles
