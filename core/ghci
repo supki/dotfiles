@@ -9,7 +9,6 @@ import           Data.Char
 import           Data.Function (fix, on)
 import           Data.List
 import           Data.Maybe
-import           Data.Monoid
 import           Data.Ratio hiding ((%))
 import           Prelude hiding ((.))
 import           System.IO
@@ -19,11 +18,12 @@ import           Unsafe.Coerce
 import           Control.Lens
 import           Control.Monad.Error
 import           Control.Monad.Reader
-import           Control.Monad.Writer
+import           Control.Monad.Writer hiding ((<>))
 import           Control.Monad.State
 import           Control.Monad.Free
 import           Control.Monad.Trans
 import           Data.List.Lens
+import           Data.Semigroup
 import           Prelude.Unicode
 import           System.Directory
 import           System.FilePath
