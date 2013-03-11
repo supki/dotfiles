@@ -1,7 +1,4 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE UnicodeSyntax #-}
 module Main (main) where
 
 import Control.Lens
@@ -16,8 +13,8 @@ import Biegunka.Source.Git
 import Templates (laptopTemplates, workTemplates)
 
 
-main ∷ IO ()
-main = execParser opts >>= \(s,t) → do
+main :: IO ()
+main = execParser opts >>= \(s,t) -> do
   biegunka (set root "~") s $
     pretend <> pause <> execute (set templates (Templates t) . set order Parallel) <> verify
  where
@@ -31,7 +28,7 @@ main = execParser opts >>= \(s,t) → do
   workSettings = sequence_ [dotfiles, vim, misc]
 
 
-dotfiles ∷ Script Profiles
+dotfiles :: Script Profiles
 dotfiles = task $ profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     mapM_ (uncurry link) $ mapped . _1 <\>~ "core" $
@@ -84,7 +81,7 @@ dotfiles = task $ profile "dotfiles" $
       ]
 
 
-tools ∷ Script Profiles
+tools :: Script Profiles
 tools = task $ profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     mapM_ (uncurry link)
@@ -107,14 +104,14 @@ tools = task $ profile "tools" $
       , ("isup.sh", "bin/isup")
       , ("pretty-json.py", "bin/pretty-json")
       ]
-    mapM_ (uncurry (\s d → shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d)))
+    mapM_ (uncurry (\s d -> shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d)))
       [ ("mpd/scrobbler.hs", "liblastfm-scrobbler")
       , ("audio.hs", "vaio-audio")
       , ("shutdown-gui.hs", "shutdown-gui")
       ]
 
 
-vim ∷ Script Profiles
+vim :: Script Profiles
 vim = do
   profile "vim-haskell" $ do
     pathogen  "git@github.com:Shougo/vimproc" $
@@ -135,14 +132,14 @@ vim = do
   pathogen_ u = pathogen u (return ())
 
 
-misc ∷ Script Profiles
+misc :: Script Profiles
 misc = task $ profile "misc" $ do
   "git@github.com:zsh-users/zsh-syntax-highlighting.git" --> "git/zsh-syntax-highlighting"
   "git@github.com:zsh-users/zsh-completions.git"         --> "git/zsh-completions"
   "git@github.com:stepb/urxvt-tabbedex"                  --> "git/urxvt-tabbedex"
 
 
-experimental ∷ Script Profiles
+experimental :: Script Profiles
 experimental = task $ profile "experimental" $ do
   "git@github.com:sol/vimus"          --> "git/vimus"
   "git@github.com:sol/libmpd-haskell" --> "git/libmpd-haskell"
@@ -159,7 +156,7 @@ edwardk = profile "edwardk" $ do
 
 
 infix 1 -->
-(-->) ∷ String → FilePath → Script Sources
+(-->) :: String -> FilePath -> Script Sources
 (-->) = git_
 
 

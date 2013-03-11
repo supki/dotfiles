@@ -1,55 +1,88 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE QuasiQuotes #-}
-{-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE UnicodeSyntax #-}
 module Templates (laptopTemplates, workTemplates) where
 
 import Data.Data (Data)
 import Data.Typeable (Typeable)
 
 import Data.DeriveTH
-import Data.Default (Default(def))
+import Data.Default
 import Data.Derive.Default ()
 import Data.String.Quote
 
 
 data Template = Template
-  { xmobar ∷ Xmobar
-  , xmonad ∷ Xmonad
-  , xmodmap ∷ Xmodmap
-  , urxvt ∷ Urxvt
+  { xmobar :: Xmobar
+  , xmonad :: Xmonad
+  , xmodmap :: Xmodmap
+  , urxvt :: Urxvt
   } deriving (Data, Typeable)
+
+instance Default Template where
+  def = Template
+    { xmobar  = def
+    , xmonad  = def
+    , xmodmap = def
+    , urxvt   = def
+    }
 
 
 data Xmobar = Xmobar
-  { background, position ∷ String
-  , battery ∷ Maybe String
+  { background, position :: String
+  , battery :: Maybe String
   } deriving (Data, Typeable)
+
+instance Default Xmobar where
+  def = Xmobar
+    { background = def
+    , position   = def
+    , battery    = def
+    }
 
 
 data Xmonad = Xmonad
-  { terminal, ubuntu, terminus, white, grayDark, grayLight, black, orange, yellow, startup, follow ∷ String
+  { terminal, ubuntu, terminus, white, grayDark, grayLight, black, orange, yellow, startup, follow :: String
   } deriving (Data, Typeable)
+
+instance Default Xmonad where
+  def = Xmonad
+    { terminal  = def
+    , ubuntu    = def
+    , terminus  = def
+    , white     = def
+    , grayDark  = def
+    , grayLight = def
+    , black     = def
+    , orange    = def
+    , yellow    = def
+    , startup   = def
+    , follow    = def
+    }
 
 
 data Xmodmap = Xmodmap
-  { menu ∷ String
+  { menu :: String
   } deriving (Data, Typeable)
+
+instance Default Xmodmap where
+  def = Xmodmap
+    { menu = def
+    }
 
 
 data Urxvt = Urxvt
-  { tabbedex, background_, browser ∷ String
+  { tabbedex, background_, browser :: String
   } deriving (Data, Typeable)
 
+instance Default Urxvt where
+  def = Urxvt
+    { tabbedex    = def
+    , background_ = def
+    , browser     = def
+    }
 
-$(derive makeDefault ''Template)
-$(derive makeDefault ''Xmobar)
-$(derive makeDefault ''Xmonad)
-$(derive makeDefault ''Urxvt)
-$(derive makeDefault ''Xmodmap)
 
-
-laptopTemplates, workTemplates ∷ Template
+laptopTemplates, workTemplates :: Template
 laptopTemplates = def
   { xmobar = def
     { background = "\"#333333\""
