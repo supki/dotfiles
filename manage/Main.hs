@@ -16,7 +16,7 @@ import Templates (laptopTemplates, workTemplates)
 main :: IO ()
 main = execParser opts >>= \(s,t) -> do
   biegunka (set root "~") s $
-    pretend <> pause <> execute (set templates (Templates t) . set order Parallel) <> verify
+    pretend <> pause <> execute (set templates (Templates t) . set order Concurrent) <> verify
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
