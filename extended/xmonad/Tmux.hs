@@ -2,14 +2,14 @@
 module Tmux where
 
 import Control.Applicative
-import Control.Monad (mplus)
+import Control.Monad
 import Data.List (union)
 import Data.Monoid
 
 import           Data.Map (Map, (!))
 import qualified Data.Map as M
 import           System.FilePath ((</>))
-import           System.Directory (getDirectoryContents, getHomeDirectory)
+import           System.Directory (doesDirectoryExist, getDirectoryContents, getHomeDirectory)
 
 import XMonad
 import XMonad.Prompt
@@ -52,6 +52,7 @@ under p = io $ directories `mplus` return mempty
   directories = do
     t <- (</> p) <$> getHomeDirectory
     xs <- filter (`notElem` [".", ".."]) <$> getDirectoryContents t
+    xs <- filterM (\d -> doesDirectoryExist $ t </> d) xs
     return . M.fromList . zip xs $ map (ChangeDirectory . (t </>)) xs
 
 
