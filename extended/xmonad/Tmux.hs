@@ -8,7 +8,7 @@ import Data.Monoid
 
 import           Data.Map (Map, (!))
 import qualified Data.Map as M
-import           System.FilePath ((</>))
+import           System.FilePath (takeFileName)
 import           System.Directory (doesDirectoryExist, getDirectoryContents, getHomeDirectory)
 import           System.Wordexp.Simple (wordexp)
 
@@ -35,14 +35,14 @@ currents = io $ lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{
 
 -- | Ask what session user wants to create/attach to
 prompt :: Sessions   -- ^ Default user defined sessions
-       -> [String]   -- ^ Root patterns for ChangeDirectory sessions
+       -> [String]   -- ^ Patterns for ChangeDirectory sessions
        -> XPConfig   -- ^ Prompt theme
        -> X ()
 prompt db ps c = do
   cs <- currents
-  ss <- mapM under =<< concatMapM expand ps
-  let as = foldr union [] $ cs : map M.keys (ss ++ [db])
-  inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (mconcat (ss ++ [db])) cs
+  ss <- change =<< concatMapM expand ps
+  let as = foldr union [] $ cs : map M.keys (ss : [db])
+  inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (mconcat (ss : [db])) cs
 
 
 -- | That should exist in Control.Monad :-(
@@ -56,15 +56,11 @@ expand :: String -> X [FilePath]
 expand p = io $ wordexp p `mplus` return []
 
 
--- | List directories under root as ChangeDirectory sessions
-under :: FilePath   -- ^ Directory root
-      -> X Sessions -- ^ Sessions for each directory under the root
-under p = io $ directories `mplus` return mempty
- where
-  directories = do
-    xs <- filter (`notElem` [".", ".."]) <$> getDirectoryContents p
-    xs <- filterM (\d -> doesDirectoryExist $ p </> d) xs
-    return . M.fromList . zip xs $ map (ChangeDirectory . (p </>)) xs
+-- | List directories as ChangeDirectory sessions
+change :: [FilePath] -- ^ Directories
+       -> X Sessions -- ^ Sessions for each directory under the root
+change ds = io $
+  M.fromList . map (\x -> (takeFileName x, ChangeDirectory x)) <$> filterM doesDirectoryExist ds
 
 
 -- | Start tmux session terminal
