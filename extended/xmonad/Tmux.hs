@@ -10,6 +10,7 @@ import           Data.Map (Map, (!))
 import qualified Data.Map as M
 import           System.FilePath ((</>))
 import           System.Directory (doesDirectoryExist, getDirectoryContents, getHomeDirectory)
+import           System.Wordexp.Simple (wordexp)
 
 import XMonad
 import XMonad.Prompt
@@ -34,14 +35,25 @@ currents = io $ lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{
 
 -- | Ask what session user wants to create/attach to
 prompt :: Sessions   -- ^ Default user defined sessions
-       -> [FilePath] -- ^ Roots for ChangeDirectory sessions
+       -> [String]   -- ^ Root patterns for ChangeDirectory sessions
        -> XPConfig   -- ^ Prompt theme
        -> X ()
-prompt db roots c = do
+prompt db ps c = do
   cs <- currents
-  ss <- mapM under roots
+  ss <- mapM under =<< concatMapM expand ps
   let as = foldr union [] $ cs : map M.keys (ss ++ [db])
   inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (mconcat (ss ++ [db])) cs
+
+
+-- | That should exist in Control.Monad :-(
+concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
+concatMapM f = liftM concat . mapM f
+{-# INLINE concatMapM #-}
+
+
+-- | Safely expands wordexp pattern catching IO errors
+expand :: String -> X [FilePath]
+expand p = io $ wordexp p `mplus` return []
 
 
 -- | List directories under root as ChangeDirectory sessions
@@ -50,10 +62,9 @@ under :: FilePath   -- ^ Directory root
 under p = io $ directories `mplus` return mempty
  where
   directories = do
-    t <- (</> p) <$> getHomeDirectory
-    xs <- filter (`notElem` [".", ".."]) <$> getDirectoryContents t
-    xs <- filterM (\d -> doesDirectoryExist $ t </> d) xs
-    return . M.fromList . zip xs $ map (ChangeDirectory . (t </>)) xs
+    xs <- filter (`notElem` [".", ".."]) <$> getDirectoryContents p
+    xs <- filterM (\d -> doesDirectoryExist $ p </> d) xs
+    return . M.fromList . zip xs $ map (ChangeDirectory . (p </>)) xs
 
 
 -- | Start tmux session terminal
