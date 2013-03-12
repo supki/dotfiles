@@ -1,4 +1,6 @@
 -- | Semi-usable tmux sessions prompt for XMonad
+--
+-- Inspired by Simon Gomizelj (@vodik) - https://github.com/vodik/dotfiles/blob/master/xmonad/lib/XMonad/Util/Tmux.hs
 module Tmux where
 
 import Control.Applicative
