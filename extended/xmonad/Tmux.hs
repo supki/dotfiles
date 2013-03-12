@@ -1,9 +1,10 @@
+-- | Semi-usable tmux sessions prompt for XMonad
 module Tmux where
 
 import Control.Applicative
+import Control.Monad (mplus)
 import Data.List (union)
 import Data.Monoid
-import System.IO.Error (catchIOError)
 
 import           Data.Map (Map, (!))
 import qualified Data.Map as M
@@ -16,43 +17,46 @@ import XMonad.Prompt.Input
 import XMonad.Util.Run
 
 
+-- | Less typing type synonym
 type Sessions = Map String Command
 
+-- | Possible startup commands for tmux sessions
 data Command =
-    ChangeDirectory FilePath
-  | Session String
+    ChangeDirectory FilePath -- ^ Change directory before starting session
+  | Session String           -- ^ Start session for specific command
     deriving (Show, Read, Eq, Ord)
 
 
-run :: IO [String]
-run = lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{session_name}"] ""
+-- | Get current active tmux sessions names
+currents :: X [String]
+currents = io $ lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{session_name}"] ""
 
 
-prompt :: Sessions -> XPConfig -> X ()
-prompt db c = do
-  rs <- io run
-  gs <- io gits
-  ss <- io svns
-  let as = foldr union [] $ rs : map M.keys [gs, ss, db]
-  inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (mconcat [gs, ss, db]) rs
+-- | Ask what session user wants to create/attach to
+prompt :: Sessions   -- ^ Default user defined sessions
+       -> [FilePath] -- ^ Roots for ChangeDirectory sessions
+       -> XPConfig   -- ^ Prompt theme
+       -> X ()
+prompt db roots c = do
+  cs <- currents
+  ss <- mapM under roots
+  let as = foldr union [] $ cs : map M.keys (ss ++ [db])
+  inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (mconcat (ss ++ [db])) cs
 
 
-gits, svns :: IO Sessions
-gits = vcs "git"
-svns = vcs "svn"
+-- | List directories under root as ChangeDirectory sessions
+under :: FilePath   -- ^ Directory root
+      -> X Sessions -- ^ Sessions for each directory under the root
+under p = io $ directories `mplus` return mempty
+ where
+  directories = do
+    t <- (</> p) <$> getHomeDirectory
+    xs <- filter (`notElem` [".", ".."]) <$> getDirectoryContents t
+    return . M.fromList . zip xs $ map (ChangeDirectory . (t </>)) xs
 
 
-vcs :: FilePath -> IO Sessions
-vcs p = catchIOError (repos p) (\_ -> return mempty)
-
-
-repos :: FilePath -> IO Sessions
-repos p = do
-  t <- (</> p) <$> getHomeDirectory
-  xs <- filter (`notElem` [".", ".."]) <$> getDirectoryContents t
-  return . M.fromList . zip xs $ map (ChangeDirectory . (t </>)) xs
-
-
+-- | Start tmux session terminal
+-- May either start a new tmux session if it does not exist or connect to existing session
 start :: Sessions -> [String] -> String -> X ()
 start as ss s = do
   term <- asks $ terminal . config
