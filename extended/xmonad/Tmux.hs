@@ -3,13 +3,13 @@ module Tmux where
 
 import Control.Applicative
 import Control.Monad
-import Data.List (union)
 import Data.Monoid
 
 import           Data.Map (Map, (!))
 import qualified Data.Map as M
+import qualified Data.Set as S
 import           System.FilePath (takeFileName)
-import           System.Directory (doesDirectoryExist, getDirectoryContents, getHomeDirectory)
+import           System.Directory (doesDirectoryExist)
 import           System.Wordexp.Simple (wordexp)
 
 import XMonad
@@ -41,8 +41,8 @@ prompt :: Sessions   -- ^ Default user defined sessions
 prompt db ps c = do
   cs <- currents
   ss <- change =<< concatMapM expand ps
-  let as = foldr union [] $ cs : map M.keys (ss : [db])
-  inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (mconcat (ss : [db])) cs
+  let as = S.toList . S.fromList $ cs ++ M.keys (ss `mappend` db)
+  inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (ss `mappend` db) cs
 
 
 -- | That should exist in Control.Monad :-(
