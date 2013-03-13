@@ -33,9 +33,9 @@ RPROMPT=$'$(vcs_info_wrapper)'
 
 chpwd
 
-HISTSIZE=1000
+HISTSIZE=10000
 HISTFILE=~/.zhistory
-SAVEHIST=1000
+SAVEHIST=10000
 setopt sharehistory
 
 setopt histignorealldups
