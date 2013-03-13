@@ -25,13 +25,13 @@ main = execParser opts >>= \(s,t) -> do
      flag (return (), def) (workSettings, workTemplates) (long "work" <> short 'w' <> help "Use work settings")
 
   laptopSettings = sequence_ [dotfiles, tools, vim, misc, experimental, edwardk]
-  workSettings = sequence_ [dotfiles, vim, misc]
+  workSettings   = sequence_ [dotfiles,        vim, misc]
 
 
 dotfiles :: Script Profiles
 dotfiles = task $ profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
-    mapM_ (uncurry link) $ mapped . _1 <\>~ "core" $
+    unzipWithM_ link $
       [ ("xsession", ".xsession")
       , ("mpdconf", ".mpdconf")
       , ("profile", ".profile")
@@ -54,8 +54,8 @@ dotfiles = task $ profile "dotfiles" $
       , ("XCompose", ".XCompose")
       , ("vimusrc", ".vimusrc")
       , ("tmux.conf", ".tmux.conf")
-      ]
-    mapM_ (uncurry link) $ mapped . _1 <\>~ "extended" $
+      ] & mapped . _1 <\>~ "core"
+    unzipWithM_ link $
       [ ("xmonad.hs", ".xmonad/xmonad.hs")
       , ("xmonad/Controls.hs", ".xmonad/lib/Controls.hs")
       , ("xmonad/Layouts.hs", ".xmonad/lib/Layouts.hs")
@@ -71,20 +71,20 @@ dotfiles = task $ profile "dotfiles" $
       , ("gtkrc.mine", ".gtkrc.mine")
       , ("xmobar.hs", ".xmobar/xmobar.hs")
       , ("mplayer-config", ".mplayer/config")
-      ]
-    mapM_ (uncurry substitute) $ mapped . _1 <\>~ "extended" $
+      ] & mapped . _1 <\>~ "extended"
+    unzipWithM_ substitute $
       [ ("xmobarrc.template", ".xmobarrc")
       , ("xmonad/Misc.hs.template", ".xmonad/lib/Misc.hs")
       , ("xmonad/Profile.hs.template", ".xmonad/lib/Profile.hs")
       , ("xmodmap.template", ".xmodmap")
       , ("Xdefaults.template", ".Xdefaults")
-      ]
+      ] & mapped . _1 <\>~ "extended"
 
 
 tools :: Script Profiles
 tools = task $ profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
-    mapM_ (uncurry link)
+    unzipWithM_ link
       [ ("youtube-in-mplayer.sh", "bin/youtube-in-mplayer")
       , ("cue2tracks.sh", "bin/cue2tracks")
       , ("weather.rb", "bin/ask-weather")
@@ -104,7 +104,7 @@ tools = task $ profile "tools" $
       , ("isup.sh", "bin/isup")
       , ("pretty-json.py", "bin/pretty-json")
       ]
-    mapM_ (uncurry (\s d -> shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d)))
+    unzipWithM_ (\s d -> shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d))
       [ ("mpd/scrobbler.hs", "liblastfm-scrobbler")
       , ("audio.hs", "vaio-audio")
       , ("shutdown-gui.hs", "shutdown-gui")
@@ -163,3 +163,7 @@ infix 1 -->
 infixr 4 <\>~
 (<\>~) :: Setting (->) s t FilePath FilePath -> FilePath -> s -> t
 l <\>~ n = over l (n </>)
+
+
+unzipWithM_ :: Monad m => (a -> b -> m c) -> [(a, b)] -> m ()
+unzipWithM_ = mapM_ . uncurry

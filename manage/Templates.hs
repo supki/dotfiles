@@ -5,9 +5,7 @@ module Templates (laptopTemplates, workTemplates) where
 import Data.Data (Data)
 import Data.Typeable (Typeable)
 
-import Data.DeriveTH
 import Data.Default
-import Data.Derive.Default ()
 import Data.String.Quote
 
 
