@@ -48,10 +48,12 @@ prompt db ps c = do
   let as = sort . nubBy ((==) `on` un) $ map ('\'' :) cs ++ M.keys (ss `mappend` db)
   inputPromptWithCompl c "tmux" (compl' as) ?+ start (ss `mappend` db) cs
 
+-- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
 compl' xs [] = return xs
 compl' xs s  = return $ filter (\x -> take (length s) (un x) == s) xs
 
+-- | Unquote string if it's quoted
 un :: String -> String
 un ('\'' : s) = s
 un         s  = s
