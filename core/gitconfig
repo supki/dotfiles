@@ -8,6 +8,8 @@
 	ui = true
 [merge]
 	tool = gvimdiff
+[diff]
+	renames = true
 [alias]
 	co = checkout
 	br = branch
