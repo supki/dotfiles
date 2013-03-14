@@ -1,3 +1,5 @@
+{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE ViewPatterns #-}
 -- | Semi-usable tmux sessions prompt for XMonad
 --
 -- Inspired by Simon Gomizelj (@vodik) - https://github.com/vodik/dotfiles/blob/master/xmonad/lib/XMonad/Util/Tmux.hs
@@ -5,16 +7,16 @@ module Tmux where
 
 import Control.Applicative
 import Control.Monad
+import Data.List (nub, sort)
 import Data.Monoid
 
 import           Data.Map (Map, (!))
 import qualified Data.Map as M
-import qualified Data.Set as S
 import           System.FilePath (takeFileName)
 import           System.Directory (doesDirectoryExist)
 import           System.Wordexp.Simple (wordexp)
 
-import XMonad
+import XMonad hiding (S)
 import XMonad.Prompt
 import XMonad.Prompt.Input
 import XMonad.Util.Run
@@ -28,6 +30,21 @@ data Command =
     ChangeDirectory FilePath -- ^ Change directory before starting session
   | Session String           -- ^ Start session for specific command
     deriving (Show, Read, Eq, Ord)
+
+-- | Newtype 'String' that discards first '*' (if any) in 'Eq' instance
+newtype S = S { unS :: String }
+  deriving (Show, Read)
+
+instance Eq S where
+  S ('*' : a) == S ('*' : b) = a == b
+  S        a  == S ('*' : b) = a == b
+  S ('*' : a) == S        b  = a == b
+  S        a  == S        b  = a == b
+
+
+un :: String -> String
+un ('*' : s) = s
+un        s  = s
 
 
 -- | Get current active tmux sessions names
@@ -43,7 +60,7 @@ prompt :: Sessions   -- ^ Default user defined sessions
 prompt db ps c = do
   cs <- currents
   ss <- change =<< concatMapM expand ps
-  let as = S.toList . S.fromList $ cs ++ M.keys (ss `mappend` db)
+  let as = sort . map unS . nub . map S $ map ('*' :) cs ++ M.keys (ss `mappend` db)
   inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (ss `mappend` db) cs
 
 
@@ -68,7 +85,7 @@ change ds = io $
 -- | Start tmux session terminal
 -- May either start a new tmux session if it does not exist or connect to existing session
 start :: Sessions -> [String] -> String -> X ()
-start as ss s = do
+start as ss (un -> s) = do
   term <- asks $ terminal . config
   spawn $ case undefined of
     _ | s `elem` ss     -> attach  term s
