@@ -92,9 +92,9 @@ start as ss (un -> s) = do
       | s `M.member` as -> create' term s (as ! s)
       | otherwise       -> create  term s
  where
-  attach t s = t ++ " -e tmux attach -t " ++ s
-  create t s = t ++ " -e tmux new -s "    ++ s
-  create' t s (ChangeDirectory p) =
-    t ++ " -e sh -c \"cd " ++ p ++ "; tmux new -s "    ++ s ++ "\""
-  create' t s (Session c) =
-    t ++ " -e tmux new -s "    ++ s ++ " '" ++ c ++ "'"
+  attach t e = t ++ " -e tmux attach -t " ++ e
+  create t e = t ++ " -e tmux new -s "    ++ e
+  create' t e (ChangeDirectory p) =
+    t ++ " -e sh -c \"cd " ++ p ++ "; tmux new -s "    ++ e ++ "\""
+  create' t e (Session c) =
+    t ++ " -e tmux new -s "    ++ e ++ " '" ++ c ++ "'"
