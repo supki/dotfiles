@@ -36,14 +36,14 @@ newtype S = S { unS :: String }
   deriving (Show, Read)
 
 instance Eq S where
-  S ('*' : a) == S ('*' : b) = a == b
-  S        a  == S ('*' : b) = a == b
-  S ('*' : a) == S        b  = a == b
-  S        a  == S        b  = a == b
+  S ('\'' : a) == S ('\'' : b) = a == b
+  S        a   == S ('\'' : b) = a == b
+  S ('\'' : a) == S        b  = a == b
+  S        a   == S        b  = a == b
 
 
 un :: String -> String
-un ('*' : s) = s
+un ('\'' : s) = s
 un        s  = s
 
 
@@ -60,7 +60,7 @@ prompt :: Sessions   -- ^ Default user defined sessions
 prompt db ps c = do
   cs <- currents
   ss <- change =<< concatMapM expand ps
-  let as = sort . map unS . nub . map S $ map ('*' :) cs ++ M.keys (ss `mappend` db)
+  let as = sort . map unS . nub . map S $ map ('\'' :) cs ++ M.keys (ss `mappend` db)
   inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (ss `mappend` db) cs
 
 
