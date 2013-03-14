@@ -37,14 +37,14 @@ newtype S = S { unS :: String }
 
 instance Eq S where
   S ('\'' : a) == S ('\'' : b) = a == b
-  S        a   == S ('\'' : b) = a == b
-  S ('\'' : a) == S        b  = a == b
-  S        a   == S        b  = a == b
+  S         a  == S ('\'' : b) = a == b
+  S ('\'' : a) == S         b  = a == b
+  S         a  == S         b  = a == b
 
 
 un :: String -> String
 un ('\'' : s) = s
-un        s  = s
+un         s  = s
 
 
 -- | Get current active tmux sessions names
@@ -60,8 +60,16 @@ prompt :: Sessions   -- ^ Default user defined sessions
 prompt db ps c = do
   cs <- currents
   ss <- change =<< concatMapM expand ps
-  let as = sort . map unS . nub . map S $ map ('\'' :) cs ++ M.keys (ss `mappend` db)
-  inputPromptWithCompl c "tmux" (mkComplFunFromList' as) ?+ start (ss `mappend` db) cs
+  let as = map S . sort . map unS . nub . map S $ map ('\'' :) cs ++ M.keys (ss `mappend` db)
+  inputPromptWithCompl c "tmux" (mkComplFunFromSList' as) ?+ start (ss `mappend` db) cs
+
+
+mkComplFunFromSList' :: [S] -> ComplFunction
+mkComplFunFromSList' xs [] = return . map unS $ xs
+mkComplFunFromSList' xs s  = return . map unS $ filter predicate xs
+ where
+  predicate (S ('\'' : x)) = take (length s) x == s
+  predicate (S         x ) = take (length s) x == s
 
 
 -- | That should exist in Control.Monad :-(
