@@ -7,7 +7,8 @@ module Tmux where
 
 import Control.Applicative
 import Control.Monad
-import Data.List (nub, sort)
+import Data.Function (on)
+import Data.List (nubBy, sort)
 import Data.Monoid
 
 import           Data.Map (Map, (!))
@@ -16,7 +17,7 @@ import           System.FilePath (takeFileName)
 import           System.Directory (doesDirectoryExist)
 import           System.Wordexp.Simple (wordexp)
 
-import XMonad hiding (S)
+import XMonad
 import XMonad.Prompt
 import XMonad.Prompt.Input
 import XMonad.Util.Run
@@ -30,21 +31,6 @@ data Command =
     ChangeDirectory FilePath -- ^ Change directory before starting session
   | Session String           -- ^ Start session for specific command
     deriving (Show, Read, Eq, Ord)
-
--- | Newtype 'String' that discards first '*' (if any) in 'Eq' instance
-newtype S = S { unS :: String }
-  deriving (Show, Read)
-
-instance Eq S where
-  S ('\'' : a) == S ('\'' : b) = a == b
-  S         a  == S ('\'' : b) = a == b
-  S ('\'' : a) == S         b  = a == b
-  S         a  == S         b  = a == b
-
-
-un :: String -> String
-un ('\'' : s) = s
-un         s  = s
 
 
 -- | Get current active tmux sessions names
@@ -60,16 +46,16 @@ prompt :: Sessions   -- ^ Default user defined sessions
 prompt db ps c = do
   cs <- currents
   ss <- change =<< concatMapM expand ps
-  let as = map S . sort . map unS . nub . map S $ map ('\'' :) cs ++ M.keys (ss `mappend` db)
-  inputPromptWithCompl c "tmux" (mkComplFunFromSList' as) ?+ start (ss `mappend` db) cs
+  let as = sort . nubBy ((==) `on` un) $ map ('\'' :) cs ++ M.keys (ss `mappend` db)
+  inputPromptWithCompl c "tmux" (compl' as) ?+ start (ss `mappend` db) cs
 
+compl' :: [String] -> ComplFunction
+compl' xs [] = return xs
+compl' xs s  = return $ filter (\x -> take (length s) (un x) == s) xs
 
-mkComplFunFromSList' :: [S] -> ComplFunction
-mkComplFunFromSList' xs [] = return . map unS $ xs
-mkComplFunFromSList' xs s  = return . map unS $ filter predicate xs
- where
-  predicate (S ('\'' : x)) = take (length s) x == s
-  predicate (S         x ) = take (length s) x == s
+un :: String -> String
+un ('\'' : s) = s
+un         s  = s
 
 
 -- | That should exist in Control.Monad :-(
