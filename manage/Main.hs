@@ -40,6 +40,7 @@ dotfiles = task $ profile "dotfiles" $
       , ("zshrc", ".zshrc")
       , ("inputrc", ".inputrc")
       , ("vimrc", ".vimrc")
+      , ("vim.custom", ".vim/plugin/vimrc-local.vim")
       , ("ghci", ".ghci")
       , ("haskeline", ".haskeline")
       , ("racketrc", ".racketrc")
@@ -119,6 +120,7 @@ vim = do
     pathogen_ "git@github.com:eagletmt/ghcmod-vim"
     pathogen_ "git@github.com:ujihisa/neco-ghc"
     pathogen_ "git@github.com:Shougo/neocomplcache"
+    pathogen_ "git@github.com:bitc/hdevtools"
   profile "vim-coq" $ do
     pathogen_ "git@github.com:vim-scripts/coq-syntax"
     pathogen_ "git@github.com:vim-scripts/Coq-indent"

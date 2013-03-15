@@ -1,0 +1,3 @@
+if filereadable('.vim.custom')
+	source .vim.custom
+endif
