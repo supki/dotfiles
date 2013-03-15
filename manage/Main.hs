@@ -24,8 +24,8 @@ main = execParser opts >>= \(s,t) -> do
      flag (return (), def) (laptopSettings, laptopTemplates) (long "laptop" <> short 'l' <> help "Use laptop settings") <|>
      flag (return (), def) (workSettings, workTemplates) (long "work" <> short 'w' <> help "Use work settings")
 
-  laptopSettings = sequence_ [dotfiles, tools, vim, misc, experimental, edwardk]
-  workSettings   = sequence_ [dotfiles,        vim, misc]
+  laptopSettings = sequence_ [dotfiles, tools, vim, emacs, misc, experimental, edwardk]
+  workSettings   = sequence_ [dotfiles,        vim,        misc]
 
 
 dotfiles :: Script Profiles
@@ -55,6 +55,7 @@ dotfiles = task $ profile "dotfiles" $
       , ("XCompose", ".XCompose")
       , ("vimusrc", ".vimusrc")
       , ("tmux.conf", ".tmux.conf")
+      , ("emacs", ".emacs")
       ] & mapped . _1 <\>~ "core"
     unzipWithM_ link $
       [ ("xmonad.hs", ".xmonad/xmonad.hs")
@@ -132,6 +133,13 @@ vim = do
  where
   pathogen  u = task . git u (".vim/bundle" </> u ^. basename)
   pathogen_ u = pathogen u (return ())
+
+
+emacs :: Script Profiles
+emacs = do
+  profile "emacs-colorschemes" $ do
+    git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/zenburn-emacs" $ do
+      copy "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
 
 
 misc :: Script Profiles

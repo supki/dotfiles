@@ -1,0 +1,8 @@
+; actually it's interesting to know where you are
+(column-number-mode 1)
+(line-number-mode 1)
+
+; eyes should hurt!
+(set-default-font "Terminus-9")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
