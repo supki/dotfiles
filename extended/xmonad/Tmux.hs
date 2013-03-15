@@ -50,7 +50,6 @@ prompt db ps c = do
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
-compl' xs [] = return xs
 compl' xs s  = return $ filter (\x -> take (length s) (un x) == s) xs
 
 -- | Unquote string if it's quoted
