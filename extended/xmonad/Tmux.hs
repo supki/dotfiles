@@ -86,7 +86,7 @@ start as ss (un -> s) = do
       | s `M.member` as -> create' term s (as ! s)
       | otherwise       -> create  term s
  where
-  attach t e = t ++ " -e tmux attach -t " ++ e
+  attach t e = t ++ " -e tmux attach -d -t " ++ e
   create t e = t ++ " -e tmux new -s "    ++ e
   create' t e (ChangeDirectory p) =
     t ++ " -e sh -c \"cd " ++ p ++ "; tmux new -s "    ++ e ++ "\""
