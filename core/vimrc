@@ -97,13 +97,10 @@
 	" dot affects yanks
 	set cpoptions+=y
 
-	" set Haskell indent
+	" set indents
 	autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
-	" set Racket indent
 	autocmd FileType racket  setlocal expandtab shiftwidth=2 softtabstop=2
-	" set Python indent
-	autocmd FileType python  setlocal expandtab shiftwidth=4 softtabstop=4
-	" set Ruby indent
+	autocmd FileType ruby  setlocal expandtab shiftwidth=2 softtabstop=2
 	autocmd FileType python  setlocal expandtab shiftwidth=4 softtabstop=4
 
 	" save on focus lost
