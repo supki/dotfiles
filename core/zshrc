@@ -56,6 +56,7 @@ bindkey "^[[7~" beginning-of-line
 bindkey "^[[8~" end-of-line
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
+bindkey "^_" undo
 
 alias ack=ack-grep # stupid debian
 alias ls='ls --color'
