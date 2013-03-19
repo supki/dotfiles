@@ -6,6 +6,7 @@
 *.tabbed.new-button: no
 *.tabbed.autohide: yes
 *.tabbed.title: no
+*.iso14755: False
 
 *.background: $template.urxvt.background_$
 *.foreground: #ffffff
