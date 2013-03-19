@@ -143,6 +143,9 @@ emacs = do
   profile "emacs-usable" $ do
     git "git@github.com:emacsmirror/paredit" "git/emacs/paredit" $ do
       copy "paredit.el" ".emacs.d/plugins/paredit.el"
+    git "git@github.com:jlr/rainbow-delimiters" "git/emacs/rainbox" $ do
+      copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
+
 
 
 misc :: Script Profiles

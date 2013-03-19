@@ -8,9 +8,18 @@
 (load-theme 'zenburn t)
 
 (add-to-list 'load-path "~/.emacs.d/plugins/")
+
+; paredit
 (autoload 'paredit-mode "paredit"
 	"Minor mode for pseudo-structurally editing Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
 (add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
 (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
 (add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
+
+; rainbow-delimiters
+(require 'rainbow-delimiters)
+(add-hook 'emacs-lisp-mode-hook       'rainbow-delimiters-mode)
+(add-hook 'lisp-mode-hook             'rainbow-delimiters-mode)
+(add-hook 'lisp-interaction-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'scheme-mode-hook           'rainbow-delimiters-mode)
