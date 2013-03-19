@@ -140,6 +140,9 @@ emacs = do
   profile "emacs-colorschemes" $ do
     git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/zenburn-emacs" $ do
       copy "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
+  profile "emacs-usable" $ do
+    git "git@github.com:emacsmirror/paredit" "git/emacs/paredit" $ do
+      copy "paredit.el" ".emacs.d/plugins/paredit.el"
 
 
 misc :: Script Profiles
