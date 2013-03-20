@@ -40,7 +40,7 @@
 
 *.urlLauncher: $template.urxvt.browser$
 *.perl-ext-common: default,matcher,tabbedex
-*.matcher.pattern.0: http[s]*:\/\/[^ "]+"?
+*.matcher.pattern.0: http[s]*:\\/\\/[^ "]+"?
 *.matcher.button: 1
 
 vimus.background: #212121
