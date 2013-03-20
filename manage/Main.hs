@@ -81,6 +81,7 @@ dotfiles = task $ profile "dotfiles" $
       , ("xmodmap.template", ".xmodmap")
       , ("Xdefaults.template", ".Xdefaults")
       ] & mapped . _1 <\>~ "extended"
+    shell "xrdb -merge ~/.Xdefaults"
 
 
 tools :: Script Profiles
