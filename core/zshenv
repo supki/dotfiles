@@ -1,2 +1,6 @@
 typeset -U path
-path=(~/.cabal/bin /opt/buildtools ~/bin $path)
+path=(~/.cabal/bin ~/bin $path)
+
+if [ -f /opt/buildtools/setenv.sh ]; then
+	source /opt/buildtools/setenv.sh
+fi
