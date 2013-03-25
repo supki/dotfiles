@@ -1,6 +1,6 @@
 typeset -U path
 path=(~/.cabal/bin ~/bin $path)
 
-if [ -f /opt/buildtools/set-robot-env.sh ]; then
-	source /opt/buildtools/set-robot-env.sh
+if [ -f /opt/robot/set-robot-env.sh ]; then
+	source /opt/robot/set-robot-env.sh
 fi
