@@ -7,7 +7,7 @@ module Tmux where
 import Control.Applicative
 import Control.Monad
 import Data.Function (on)
-import Data.List (nubBy, sort)
+import Data.List (isInfixOf, nubBy, sort)
 import Data.Monoid
 
 import           Data.Map (Map, (!))
@@ -50,7 +50,7 @@ prompt db ps c = do
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
-compl' xs s  = return $ filter (\x -> take (length s) (un x) == s) xs
+compl' xs s  = return $ filter (\x -> s `isInfixOf` un x) xs
 
 -- | Unquote string if it's quoted
 un :: String -> String
