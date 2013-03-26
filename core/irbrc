@@ -1,0 +1,10 @@
+require 'irb/completion'
+require 'irb/ext/save-history'
+
+IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irbhistory"
+IRB.conf[:SAVE_HISTORY] = 1000
+IRB.conf[:PROMPT_MODE]  = :SIMPLE
+
+at_exit do
+  puts "Have a nice day." # Be polite
+end
