@@ -42,6 +42,7 @@ dotfiles = task $ profile "dotfiles" $
       , ("vimrc", ".vimrc")
       , ("vim.custom", ".vim/plugin/vimrc-local.vim")
       , ("ghci", ".ghci")
+      , ("irbrc", ".irbrc")
       , ("haskeline", ".haskeline")
       , ("racketrc", ".racketrc")
       , ("gitconfig", ".gitconfig")
