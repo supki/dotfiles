@@ -8,6 +8,7 @@
 	ui = true
 [merge]
 	tool = gvimdiff
+	conflictstyle = diff3
 [diff]
 	renames = true
 [alias]
