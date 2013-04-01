@@ -29,7 +29,7 @@ main = execParser opts >>= \(s,t) -> do
 
 
 dotfiles :: Script Profiles
-dotfiles = task $ profile "dotfiles" $
+dotfiles = profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     unzipWithM_ link $
       [ ("xsession", ".xsession")
@@ -86,7 +86,7 @@ dotfiles = task $ profile "dotfiles" $
 
 
 tools :: Script Profiles
-tools = task $ profile "tools" $
+tools = profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     unzipWithM_ link
       [ ("youtube-in-mplayer.sh", "bin/youtube-in-mplayer")
@@ -133,7 +133,7 @@ vim = do
     pathogen_ "git@github.com:spolu/dwm.vim"
     pathogen_ "git@github.com:tpope/vim-commentary"
  where
-  pathogen  u = task . git u (".vim/bundle" </> u ^. basename)
+  pathogen  u = git u (".vim/bundle" </> u ^. basename)
   pathogen_ u = pathogen u (return ())
 
 
@@ -151,26 +151,26 @@ emacs = do
 
 
 misc :: Script Profiles
-misc = task $ profile "misc" $ do
+misc = profile "misc" $ do
   "git@github.com:zsh-users/zsh-syntax-highlighting.git" --> "git/zsh-syntax-highlighting"
   "git@github.com:zsh-users/zsh-completions.git"         --> "git/zsh-completions"
   "git@github.com:stepb/urxvt-tabbedex"                  --> "git/urxvt-tabbedex"
 
 
 experimental :: Script Profiles
-experimental = task $ profile "experimental" $ do
+experimental = profile "experimental" $ do
   "git@github.com:sol/vimus"          --> "git/vimus"
   "git@github.com:sol/libmpd-haskell" --> "git/libmpd-haskell"
 
 
 edwardk :: Script Profiles
 edwardk = profile "edwardk" $ do
-  task $ "git@github.com:ekmett/free"        --> "git/free"
-  task $ "git@github.com:ekmett/reflection"  --> "git/reflection"
-  task $ "git@github.com:ekmett/tagged"      --> "git/tagged"
-  task $ "git@github.com:ekmett/machines"    --> "git/machines"
-  task $ "git@github.com:ekmett/lens"        --> "git/lens"
-  task $ "git@github.com:ekmett/profunctors" --> "git/profunctors"
+  "git@github.com:ekmett/free"        --> "git/free"
+  "git@github.com:ekmett/reflection"  --> "git/reflection"
+  "git@github.com:ekmett/tagged"      --> "git/tagged"
+  "git@github.com:ekmett/machines"    --> "git/machines"
+  "git@github.com:ekmett/lens"        --> "git/lens"
+  "git@github.com:ekmett/profunctors" --> "git/profunctors"
 
 
 infix 1 -->
