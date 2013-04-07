@@ -102,6 +102,7 @@ tools = profile "tools" $
       , ("trayicon/icons/mpd-pause.png", ".icons/mpd-pause.png")
       , ("trayicon/icons/mpd-playing.png", ".icons/mpd-playing.png")
       , ("battery.rb", "bin/vaio-battery")
+      , ("pemised.rb", "bin/pemised")
       , ("upload/screenshot.sh", "bin/upload-screenshot")
       , ("upload/budueba.sh", "bin/upload-budueba")
       , ("upload/pastebin.hs", "bin/upload-pastebin")
@@ -117,17 +118,17 @@ tools = profile "tools" $
 
 vim :: Script Profiles
 vim = do
-  profile "vim-haskell" $ do
+  profile "vim/haskell" $ do
     pathogen  "git@github.com:Shougo/vimproc" $
       shell "make -f make_unix.mak"
     pathogen_ "git@github.com:eagletmt/ghcmod-vim"
     pathogen_ "git@github.com:ujihisa/neco-ghc"
     pathogen_ "git@github.com:Shougo/neocomplcache"
     pathogen_ "git@github.com:bitc/hdevtools"
-  profile "vim-coq" $ do
+  profile "vim/coq" $ do
     pathogen_ "git@github.com:vim-scripts/coq-syntax"
     pathogen_ "git@github.com:vim-scripts/Coq-indent"
-  profile "vim-misc" $ do
+  profile "vim/misc" $ do
     pathogen_ "git@github.com:scrooloose/syntastic.git"
     pathogen_ "git@github.com:Shougo/unite.vim"
     pathogen_ "git@github.com:spolu/dwm.vim"
@@ -151,10 +152,12 @@ emacs = do
 
 
 misc :: Script Profiles
-misc = profile "misc" $ do
-  "git@github.com:zsh-users/zsh-syntax-highlighting.git" --> "git/zsh-syntax-highlighting"
-  "git@github.com:zsh-users/zsh-completions.git"         --> "git/zsh-completions"
-  "git@github.com:stepb/urxvt-tabbedex"                  --> "git/urxvt-tabbedex"
+misc = do
+  profile "misc/anus" $ do
+    "git@github.com:zsh-users/zsh-syntax-highlighting.git" --> "git/zsh-syntax-highlighting"
+    "git@github.com:zsh-users/zsh-completions.git"         --> "git/zsh-completions"
+  profile "misc/penis" $ do
+    "git@github.com:stepb/urxvt-tabbedex"                  --> "git/urxvt-tabbedex"
 
 
 experimental :: Script Profiles
