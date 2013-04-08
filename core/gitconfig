@@ -11,6 +11,7 @@
 	conflictstyle = diff3
 [diff]
 	renames = true
+	algorithm = patience
 [alias]
 	co = checkout
 	br = branch
