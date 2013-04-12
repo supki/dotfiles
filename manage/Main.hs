@@ -133,6 +133,9 @@ vim = do
     pathogen_ "git@github.com:Shougo/unite.vim"
     pathogen_ "git@github.com:spolu/dwm.vim"
     pathogen_ "git@github.com:tpope/vim-commentary"
+  profile "vim/idris" $ do
+    git "git@github.com:edwinb/Idris-dev" "git/idris-dev" $ do
+      link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
  where
   pathogen  u = git u (".vim/bundle" </> u ^. basename)
   pathogen_ u = pathogen u (return ())
