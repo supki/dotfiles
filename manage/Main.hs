@@ -57,6 +57,7 @@ dotfiles = profile "dotfiles" $
       , ("vimusrc", ".vimusrc")
       , ("tmux.conf", ".tmux.conf")
       , ("emacs", ".emacs")
+      , ("poneaux.yml", ".poneaux.yml")
       ] & mapped . _1 <\>~ "core"
     unzipWithM_ link $
       [ ("xmonad.hs", ".xmonad/xmonad.hs")
