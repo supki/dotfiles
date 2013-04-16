@@ -18,7 +18,7 @@ zstyle ':vcs_info:*' formats '%f%F{2}%b%f/%s '
 zstyle ':vcs_info:svn:*' branchformat '%b%F{1}:%F{3}%r'
 zstyle ':vcs_info:*' enable git svn
 
-vcs_info_wrapper() {
+function vcs_info_wrapper {
   vcs_info
   if [ -n "$vcs_info_msg_0_" ]; then
     echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
@@ -65,7 +65,7 @@ alias fap='fab'
 alias less='less -R'
 alias ghciu='ghci -ignore-dot-ghci'
 
-function man() {
+function man {
 	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
 }
 
@@ -73,31 +73,31 @@ function :t {
 	ghc -e ":t $@"
 }
 
-function haddock-global() {
+function haddock-global {
 	package=$1
 	for index in /usr/local/share/doc/ghc/html/libraries/${package}-*/index.html; do
 		xdg-open file://${index}
 	done
 }
-function haddock-local() {
+function haddock-local {
 	package=$1
 	for index in ${HOME}/.cabal/share/doc/${package}-*/html/index.html; do
 		xdg-open file://${index}
 	done
 }
-function haddock-dist() {
+function haddock-dist {
 	for index in dist/doc/html/*/index.html; do
 		xdg-open file://$(pwd)/${index}
 	done
 }
-function haddock-dev() {
+function haddock-dev {
 	package=$1
 	for index in cabal-dev/share/doc/${package}-*/html/index.html; do
 		xdg-open file://$(pwd)/${index}
 	done
 }
 
-function insert_sudo () {
+function insert_sudo {
 	zle beginning-of-line
 	zle -U "sudo "
 }
@@ -105,7 +105,7 @@ function insert_sudo () {
 zle -N insert-sudo insert_sudo
 bindkey "^[z" insert-sudo
 
-function back_to_vim () {
+function back_to_vim {
 	fg
 }
 
@@ -113,7 +113,7 @@ zle -N back-to-vim back_to_vim
 bindkey -a "^z" back-to-vim
 bindkey -v "^z" back-to-vim
 
-function xrandr-work() {
+function xrandr-work {
 	xrandr --auto --output VGA-1 --mode 1280x1024 --right-of DVI-I-1
 }
 
