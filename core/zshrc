@@ -69,6 +69,10 @@ function man() {
 	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
 }
 
+function :t {
+	ghc -e ":t $@"
+}
+
 function haddock-global() {
 	package=$1
 	for index in /usr/local/share/doc/ghc/html/libraries/${package}-*/index.html; do
