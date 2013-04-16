@@ -2,6 +2,7 @@ module Workspaces where
 
 import Data.Functor ((<$>))
 import Data.List (isPrefixOf)
+import Data.Monoid ((<>), mconcat)
 
 import XMonad
 import XMonad.Hooks.ManageDocks
@@ -46,7 +47,7 @@ onWorkspace ws = XLP.onWorkspace (toWsId ws)
 
 -- Manage hook
 myManageHook :: ManageHook
-myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
+myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   [ isFullscreen --> doFullFloat
   , myFloat      --> doFloat
   , myIgnore     --> doIgnore
@@ -59,7 +60,7 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
   , myFiles      --> doShift (toWsId Files)
   , myTorrent    --> doShift (toWsId Torrents)
   ]
-  <+> manageDocks <+> manageHook defaultConfig
+  <> manageDocks <> manageHook defaultConfig
   where
   myFloat = foldr1 (<||>)
     [ ("Figure" `isPrefixOf`) <$> title
@@ -105,8 +106,9 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
     , title     =? "mc"
     ]
   myTorrent = foldr1 (<||>)
-    [ title =? "rtorrent"
-    , title =? "Transmission"
+    [ title     =? "rtorrent"
+    , title     =? "Transmission"
+    , title     =? "Torrent Options"
     ]
 --
 
