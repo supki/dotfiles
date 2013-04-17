@@ -109,7 +109,7 @@ laptopTemplates = def
         , ("ssh .* irssi", "urxvtcd -title irssi -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t irssi'")
         , ("watch -n2 netstat", "urxvtcd -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
         , ("htop", "urxvtcd -title htop -e htop")
-        , ("liblastfm-scrobbler", "liblastfm-scrobbler")
+        , ("netwire-scrobbler", "netwire-scrobbler")
         , ("procfiled", "procfiled")
         , ("icedove", "icedove")
         , ("python /home/maksenov/bin/trayicon-mpd", "trayicon-mpd")
