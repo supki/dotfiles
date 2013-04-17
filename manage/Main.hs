@@ -111,8 +111,7 @@ tools = profile "tools" $
       , ("pretty-json.py", "bin/pretty-json")
       ]
     unzipWithM_ (\s d -> shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d))
-      [ ("mpd/scrobbler.hs", "liblastfm-scrobbler")
-      , ("audio.hs", "vaio-audio")
+      [ ("audio.hs", "vaio-audio")
       , ("shutdown-gui.hs", "shutdown-gui")
       ]
 
