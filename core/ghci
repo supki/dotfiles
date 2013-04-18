@@ -88,6 +88,7 @@ import System.Wordexp.Simple
 :set -XFlexibleInstances
 :set -XGADTs
 :set -XGeneralizedNewtypeDeriving
+:set -XImplicitParams
 :set -XKindSignatures
 :set -XLambdaCase
 :set -XMultiWayIf
