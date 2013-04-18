@@ -25,6 +25,7 @@ import           Control.Monad.Writer hiding ((<>))
 import           Control.Monad.State
 import           Control.Monad.Free
 import           Control.Monad.Trans
+import           Data.Functor.Foldable
 import           Data.List.Lens
 import           Data.Proxy
 import           Data.Reflection
