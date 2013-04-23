@@ -1,2 +1,3 @@
 download: ~/.torrents/files
-foreground: 173
+normalfg: 173
+errorbg: 9
