@@ -160,9 +160,6 @@
 	" highlight problematic whitespace
 	highlight WhitespaceErrors ctermbg=Red guibg=#ff6a6a
 	autocmd BufEnter * match WhitespaceErrors /\s\+$\|[^\t]\@<=\t\+/
-
-	" ghc-mod customs
-	let g:ghcmod_ghc_options = ['-Wall', '-fno-warn-unused-do-bind', '-fno-warn-type-defaults']
 " }
 
 " Keys mappings {
@@ -205,10 +202,10 @@
 	map  <Esc>[5^ :tabp<CR>
 	map  <Esc>[6^ :tabn<CR>
 
-	" add some hotkeys for rather tedious ghc-mod commands
-	nmap <leader>c :GhcModCheck<CR>
-	nmap <leader>t :GhcModType<CR>
-	nmap <leader>T :GhcModTypeClear<CR>
+	" add some hotkeys for vim-hdevtools commands
+	nmap <leader>i :HdevtoolsInfo<CR>
+	nmap <leader>t :HdevtoolsType<CR>
+	nmap <leader>c :HdevtoolsClear<CR>
 
 	" unite command
 	nmap <leader>u :Unite
