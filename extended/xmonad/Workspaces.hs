@@ -74,6 +74,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
     [ title     =? "htop"
     , title     =? "iotop"
     , title     =? "netstat"
+    , title     =? "poneaux"
     ]
   myChromie = foldr1 (<||>)
     [ className =? "Chromium-browser"
