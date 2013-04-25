@@ -28,7 +28,7 @@ main = execParser opts >>= \(s,t) -> do
   workSettings   = sequence_ [dotfiles,        vim,        misc]
 
 
-dotfiles :: Script Profiles
+dotfiles :: Script Profiles ()
 dotfiles = profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     unzipWithM_ link $
@@ -86,7 +86,7 @@ dotfiles = profile "dotfiles" $
     shell "xrdb -merge ~/.Xdefaults"
 
 
-tools :: Script Profiles
+tools :: Script Profiles ()
 tools = profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     unzipWithM_ link
@@ -116,7 +116,7 @@ tools = profile "tools" $
       ]
 
 
-vim :: Script Profiles
+vim :: Script Profiles ()
 vim = do
   profile "vim/haskell" $ do
     pathogen  "git@github.com:Shougo/vimproc" $
@@ -143,7 +143,7 @@ vim = do
   pathogen_ u = pathogen u (return ())
 
 
-emacs :: Script Profiles
+emacs :: Script Profiles ()
 emacs = do
   profile "emacs-colorschemes" $ do
     git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/zenburn-emacs" $ do
@@ -156,7 +156,7 @@ emacs = do
 
 
 
-misc :: Script Profiles
+misc :: Script Profiles ()
 misc = do
   profile "misc/anus" $ do
     "git@github.com:zsh-users/zsh-syntax-highlighting.git" --> "git/zsh-syntax-highlighting"
@@ -165,13 +165,13 @@ misc = do
     "git@github.com:stepb/urxvt-tabbedex"                  --> "git/urxvt-tabbedex"
 
 
-experimental :: Script Profiles
+experimental :: Script Profiles ()
 experimental = profile "experimental" $ do
   "git@github.com:sol/vimus"          --> "git/vimus"
   "git@github.com:sol/libmpd-haskell" --> "git/libmpd-haskell"
 
 
-edwardk :: Script Profiles
+edwardk :: Script Profiles ()
 edwardk = profile "edwardk" $ do
   "git@github.com:ekmett/free"        --> "git/free"
   "git@github.com:ekmett/reflection"  --> "git/reflection"
@@ -182,7 +182,7 @@ edwardk = profile "edwardk" $ do
 
 
 infix 1 -->
-(-->) :: String -> FilePath -> Script Sources
+(-->) :: String -> FilePath -> Script Sources ()
 (-->) = git_
 
 
