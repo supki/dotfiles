@@ -93,6 +93,7 @@ tools = profile "tools" $
       [ ("youtube-in-mplayer.sh", "bin/youtube-in-mplayer")
       , ("cue2tracks.sh", "bin/cue2tracks")
       , ("weather.rb", "bin/ask-weather")
+      , ("playcount.hs", "bin/playcount")
       , ("mpd/.lastfm.conf", ".lastfm.conf")
       , ("mpd/lastfm.png", ".icons/lastfm.png")
       , ("mpd/love.hs", "bin/lastfm-love-current-mpd-track")
