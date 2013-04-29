@@ -73,11 +73,10 @@ dotfiles = profile "dotfiles" $
       , ("pentadactylrc", ".pentadactylrc")
       , ("pentadactyl/wanker.penta", ".pentadactyl/plugins/wanker.penta")
       , ("gtkrc.mine", ".gtkrc.mine")
-      , ("xmobar.hs", ".xmobar/xmobar.hs")
       , ("mplayer-config", ".mplayer/config")
       ] & mapped . _1 <\>~ "extended"
     unzipWithM_ substitute $
-      [ ("xmobarrc.template", ".xmobarrc")
+      [ ("template.xmobar.hs", ".xmobar/xmobar.hs")
       , ("xmonad/Misc.hs.template", ".xmonad/lib/Misc.hs")
       , ("xmonad/Profile.hs.template", ".xmonad/lib/Profile.hs")
       , ("xmodmap.template", ".xmodmap")
