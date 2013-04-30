@@ -47,4 +47,4 @@ main = xmobar Config
   }
 
 
-sep = "<fc=#ffffff>|</fc>"
+sep = "<fc=#ffffff>|</fc> "
