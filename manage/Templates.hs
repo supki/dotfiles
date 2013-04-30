@@ -34,7 +34,7 @@ instance Default Xmobar where
   def = Xmobar
     { background = def
     , position   = def
-    , battery    = def
+    , battery    = Just "\"\""
     }
 
 
