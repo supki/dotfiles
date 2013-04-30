@@ -158,10 +158,9 @@ emacs = do
 
 misc :: Script Profiles ()
 misc = do
-  profile "misc/anus" $ do
+  profile "misc" $ do
     "git@github.com:zsh-users/zsh-syntax-highlighting.git" --> "git/zsh-syntax-highlighting"
     "git@github.com:zsh-users/zsh-completions.git"         --> "git/zsh-completions"
-  profile "misc/penis" $ do
     "git@github.com:stepb/urxvt-tabbedex"                  --> "git/urxvt-tabbedex"
     "git@github.com:dmalikov/xmobar-usable"                --> "git/xmobar-usable"
 
