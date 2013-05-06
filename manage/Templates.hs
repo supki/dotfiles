@@ -150,8 +150,8 @@ workTemplates = def
         , ("/usr/lib/firefox/firefox", "firefox")
         , ("thunderbird", "thunderbird")
         , ("gnome-commander", "gnome-commander")
-        , ("ssh .* mcabber", "urxvt -title mcabber -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t mcabber'")
-        , ("ssh .* irssi", "urxvt -title irssi -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -t irssi'")
+        , ("ssh .* mcabber", "urxvt -title mcabber -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; TERM=screen-256color tmux attach -t mcabber'")
+        , ("ssh .* irssi", "urxvt -title irssi -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; TERM=screen-256color tmux attach -t irssi'")
         , ("watch -n2 netstat", "urxvt -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
         , ("htop", "urxvt -title htop -e htop")
         ]
