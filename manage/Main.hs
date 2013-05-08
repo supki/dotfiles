@@ -136,8 +136,11 @@ vim = do
     pathogen_ "git@github.com:spolu/dwm.vim"
     pathogen_ "git@github.com:tpope/vim-commentary"
   profile "vim/idris" $ do
-    gitWith "git@github.com:edwinb/Idris-dev" "git/idris-dev" ["origin", "stream"] "master" $ do
-      link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
+    git' "git@github.com:edwinb/Idris-dev" "git/Idris-dev" def
+      { remotes = ["origin", "stream"]
+      , actions =
+          link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
+      }
  where
   pathogen  u = git u (".vim/bundle" </> u ^. basename)
   pathogen_ u = pathogen u (return ())
@@ -184,6 +187,10 @@ edwardk = profile "edwardk" $ do
 infix 1 -->
 (-->) :: String -> FilePath -> Script Sources ()
 (-->) = git_
+
+
+git_ :: URI -> FilePath -> Script Sources ()
+git_ u fp = git u fp (return ())
 
 
 infixr 4 <\>~
