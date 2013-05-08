@@ -136,11 +136,10 @@ vim = do
     pathogen_ "git@github.com:spolu/dwm.vim"
     pathogen_ "git@github.com:tpope/vim-commentary"
   profile "vim/idris" $ do
-    git' "git@github.com:edwinb/Idris-dev" "git/Idris-dev" def
-      { remotes = ["origin", "stream"]
-      , actions =
+    git' "git@github.com:edwinb/Idris-dev" "git/Idris-dev" $ def
+      & remotes .~ ["origin", "stream"]
+      & actions .~ do
           link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
-      }
  where
   pathogen  u = git u (".vim/bundle" </> u ^. basename)
   pathogen_ u = pathogen u (return ())
