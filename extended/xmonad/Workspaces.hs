@@ -1,7 +1,7 @@
 module Workspaces where
 
 import Data.Functor ((<$>))
-import Data.List (isPrefixOf)
+import Data.List (isInfixOf, isPrefixOf)
 import Data.Monoid ((<>), mconcat)
 
 import XMonad
@@ -71,7 +71,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
     [ title     =? "xfce4-notifyd"
     ]
   myStatus = foldr1 (<||>)
-    [ title     =? "htop"
+    [ ("htop" `isInfixOf`) <$> title
     , title     =? "iotop"
     , title     =? "netstat"
     , title     =? "poneaux"

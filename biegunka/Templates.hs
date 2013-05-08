@@ -153,7 +153,8 @@ workTemplates = def
         , ("ssh .* mcabber", "urxvt -title mcabber -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; TERM=screen-256color tmux attach -t mcabber'")
         , ("ssh .* irssi", "urxvt -title irssi -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; TERM=screen-256color tmux attach -t irssi'")
         , ("watch -n2 netstat", "urxvt -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
-        , ("htop", "urxvt -title htop -e htop")
+        , ("htop", "urxvt -title work-htop -e htop")
+        , ("htop", "urxvt -title dev-htop -e ssh dev -t htop")
         ]
       |]
     , follow = "True"
