@@ -58,6 +58,7 @@ dotfiles = profile "dotfiles" $
       , ("tmux.conf", ".tmux.conf")
       , ("emacs", ".emacs")
       , ("poneaux.rb", ".poneaux.rb")
+      , ("sqliterc", ".sqliterc")
       ] & mapped . _1 <\>~ "core"
     unzipWithM_ link $
       [ ("xmonad.hs", ".xmonad/xmonad.hs")
@@ -186,10 +187,6 @@ edwardk = profile "edwardk" $ do
 infix 1 -->
 (-->) :: String -> FilePath -> Script Sources ()
 (-->) = git_
-
-
-git_ :: URI -> FilePath -> Script Sources ()
-git_ u fp = git u fp (return ())
 
 
 infixr 4 <\>~
