@@ -11,8 +11,8 @@ import           Data.Int
 import           Data.List
 import           Data.Maybe
 import           Data.Ratio hiding ((%))
+import           Data.String
 import           Data.Word
-import           Prelude
 import           System.IO
 import           System.IO.Unsafe
 import           Text.Printf
@@ -25,12 +25,14 @@ import           Control.Monad.Writer hiding ((<>))
 import           Control.Monad.State
 import           Control.Monad.Free
 import           Control.Monad.Trans
+import           Data.Bits.Lens
 import           Data.Functor.Foldable
 import           Data.List.Lens
 import           Data.Proxy
 import           Data.Reflection
 import           Data.Semigroup
 import           Data.Tagged
+import           Numeric.Lens
 import           Prelude.Unicode
 import           System.Directory
 import           System.FilePath
@@ -84,6 +86,8 @@ import System.Wordexp.Simple
 
 :set -XBangPatterns
 :set -XDataKinds
+:set -XEmptyDataDecls
+:set -XExistentialQuantification
 :set -XFlexibleContexts
 :set -XFlexibleInstances
 :set -XGADTs
