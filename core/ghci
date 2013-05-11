@@ -98,7 +98,6 @@ import System.Wordexp.Simple
 :set -XMultiWayIf
 :set -XMultiParamTypeClasses
 :set -XNoMonomorphismRestriction
-:set -XOverloadedStrings
 :set -XRankNTypes
 :set -XTupleSections
 :set -XTypeFamilies
