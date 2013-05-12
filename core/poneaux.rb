@@ -1,4 +1,4 @@
-PONEAUX[:download] = "#{ENV['HOME']}/.torrents/files"
+PONEAUX[:download] = "~/.torrents/files"
 PONEAUX[:normal_fg] = 173
 PONEAUX[:error_bg] = 9
 PONEAUX[:keybindings] = {
