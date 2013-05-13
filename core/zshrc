@@ -122,3 +122,7 @@ ssh-add 2>/dev/null # add my identity to ssh-agent and don't tell me about this,
 compdef _cabal cabal-dev
 
 source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+export NO_SCRIPTS_NOTIFICATIONS=yes

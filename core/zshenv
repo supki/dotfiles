@@ -1,5 +1,5 @@
 typeset -U path
-path=(~/.cabal/bin ~/bin $path)
+path=(~/.cabal/bin ~/.rvm/bin ~/bin $path)
 
 if [ -f /opt/robot/set-robot-env.sh ]; then
 	source /opt/robot/set-robot-env.sh
