@@ -132,6 +132,7 @@ vim = do
     pathogen_ "git@github.com:vim-scripts/coq-syntax"
     pathogen_ "git@github.com:vim-scripts/Coq-indent"
   profile "vim/misc" $ do
+    pathogen_ "git@github.com:wikitopian/hardmode"
     pathogen_ "git@github.com:scrooloose/syntastic.git"
     pathogen_ "git@github.com:Shougo/unite.vim"
     pathogen_ "git@github.com:spolu/dwm.vim"
