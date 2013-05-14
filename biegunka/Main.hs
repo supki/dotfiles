@@ -131,12 +131,14 @@ vim = do
   profile "vim/coq" $ do
     pathogen_ "git@github.com:vim-scripts/coq-syntax"
     pathogen_ "git@github.com:vim-scripts/Coq-indent"
+    pathogen_ "git@github.com:trefis/coquille"
   profile "vim/misc" $ do
     pathogen_ "git@github.com:wikitopian/hardmode"
     pathogen_ "git@github.com:scrooloose/syntastic.git"
     pathogen_ "git@github.com:Shougo/unite.vim"
     pathogen_ "git@github.com:spolu/dwm.vim"
     pathogen_ "git@github.com:tpope/vim-commentary"
+    pathogen_ "git@github.com:def-lkb/vimbufsync"
   profile "vim/idris" $ do
     "git@github.com:edwinb/Idris-dev" ==> "git/Idris-dev" $ def
       & remotes .~ ["origin", "stream"]
