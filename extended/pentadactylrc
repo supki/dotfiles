@@ -25,6 +25,7 @@ nmap <Space> <C-D>
 nmap <S-Space> <C-U>
 nmap <C-S-p> ;tabmove -1<CR>
 nmap <C-S-n> ;tabmove +1<CR>
+nmap ge <C-S-e> " panorama view
 
 javascript <<EOF
 	dactyl.toggleStatusLine = function () {
