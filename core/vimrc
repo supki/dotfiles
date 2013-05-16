@@ -218,6 +218,9 @@
 	nmap <leader>L :PerdLoad<CR>:call system('tmux select-layout main-vertical')<CR>:PerdSwitch<CR>
 	nmap <leader>z :PerdUnload<CR>
 
+	" fuck it
+	nmap <leader>d :redraw!<CR>
+
 	let g:perd_profiles = {
 		\ 'raw': '',
 		\ '7.6.1': '-isrc -package-db=cabal-dev/packages-7.6.1.conf',
