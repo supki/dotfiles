@@ -154,6 +154,8 @@
 	au BufEnter *.rkt RainbowParenthesesLoadRound
 	au BufEnter *.rkt RainbowParenthesesLoadSquare
 
+	au BufEnter *.sh set syntax=zsh
+
 	" enable omni-completion
 	autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
