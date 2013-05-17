@@ -14,8 +14,11 @@ zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
 setopt prompt_subst
-zstyle ':vcs_info:*' formats '%f%F{2}%b%f/%s '
-zstyle ':vcs_info:svn:*' branchformat '%b%F{1}:%F{3}%r'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '×'
+zstyle ':vcs_info:*' unstagedstr '×'
+zstyle ':vcs_info:svn:*' formats "%F{3}%b%f"
+zstyle ':vcs_info:git:*' formats "%F{1}%u%f%F{2}%c%f %F{3}%b%f"
 zstyle ':vcs_info:*' enable git svn
 
 function vcs_info_wrapper {
