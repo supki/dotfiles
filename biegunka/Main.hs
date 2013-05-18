@@ -15,8 +15,7 @@ import Templates (laptopTemplates, workTemplates)
 
 main :: IO ()
 main = execParser opts >>= \(s,t) -> do
-  biegunka (set root "~") s $
-    pretend <> pause <> execute (set templates (Templates t)) <> verify
+  biegunka (set root "~") (pretend <> pause <> execute (set templates (Templates t)) <> verify) s
  where
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
