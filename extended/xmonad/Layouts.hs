@@ -1,28 +1,27 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
-
 module Layouts
   ( myLayoutHook
   ) where
 
 import XMonad
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.DwmStyle
 import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 import XMonad.Layout.TwoPane
 
-import Workspaces
 import Themes
+import Workspaces
 
--- Layout hook
-myLayoutHook =
-  smartBorders $
-  avoidStruts $
-  onWorkspace WWW Full $
+
+myLayoutHook = smartBorders $ avoidStruts $
+  onWorkspace WWW tall $
   onWorkspace Texts (tabbed shrinkText myTheme) $
-  onWorkspace Video Full $
-  onWorkspace Mail Full $
-  onWorkspace Files Full $
-  onWorkspace Torrents Full $
+  onWorkspaces [Video, Mail, Files, Torrents] Full $
+  onWorkspace Status (dwmStyle shrinkText myTheme tall) $
   onWorkspace Talkative (TwoPane (3/100) (1/2)) $
-  Tall 1 0.03 0.5 ||| Full
+  tall ||| Full
+
+
+tall = Tall 1 0.03 0.5

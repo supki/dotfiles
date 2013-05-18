@@ -7,7 +7,7 @@ import Data.Monoid ((<>), mconcat)
 import XMonad
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import qualified XMonad.Layout.PerWorkspace as XLP
+import qualified XMonad.Layout.PerWorkspace as XLPW
 import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
 
@@ -42,7 +42,8 @@ toWsId Mail = "-"
 toWsId Files = "="
 toWsId Torrents = "\\"
 
-onWorkspace ws = XLP.onWorkspace (toWsId ws)
+onWorkspace w = XLPW.onWorkspace (toWsId w)
+onWorkspaces ws = XLPW.onWorkspaces (map toWsId ws)
 --
 
 -- Manage hook
