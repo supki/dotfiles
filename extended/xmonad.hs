@@ -30,6 +30,7 @@ main = do
     , mouseBindings      = myMouseBindings
     -- Other stuff
     , focusFollowsMouse  = myFocusFollowsMouse
+    , clickJustFocuses   = myClickJustFocuses
     , modMask            = myModMask
     , workspaces         = myWorkspaces
     , borderWidth        = myBorderWidth

@@ -7,6 +7,11 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = $template.xmonad.follow$
 --
 
+-- Whether not pass focusing click to window
+myClickJustFocuses :: Bool
+myClickJustFocuses = False
+--
+
 -- Modificator masks
 myModMask :: KeyMask
 myModMask = mod4Mask
