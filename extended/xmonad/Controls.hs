@@ -10,6 +10,7 @@ import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.SwapWorkspaces
 import XMonad.Hooks.ManageDocks
+import XMonad.Prompt
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
 import XMonad.Util.NamedScratchpad
@@ -53,7 +54,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- launch man prompt
       , (0,           xK_m, Man.prompt myXPConfig)
       -- launch shellPrompt
-      , (0,           xK_p, shellPrompt myXPConfig)
+      , (0,           xK_p, shellPrompt myXPConfig { autoComplete = Just 1 })
       -- close focused window
       , (shiftMask,   xK_c, kill)
       -- rotate through the available layout algorithms
