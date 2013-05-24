@@ -18,12 +18,16 @@ import           System.IO.Unsafe
 import           Text.Printf
 import           Unsafe.Coerce
 
+import           Control.Concurrent.STM.TVar
+import           Control.Concurrent.STM.TChan
+import           Control.Concurrent.STM.TQueue
 import           Control.Lens
 import           Control.Monad.Error
 import           Control.Monad.Reader
 import           Control.Monad.Writer hiding ((<>))
 import           Control.Monad.State
 import           Control.Monad.Free
+import           Control.Monad.STM
 import           Control.Monad.Trans
 import           Data.Bits.Lens
 import           Data.Functor.Foldable
