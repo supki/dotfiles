@@ -12,6 +12,7 @@ import           Data.List
 import           Data.Maybe
 import           Data.Ratio hiding ((%))
 import           Data.String
+import           Data.Tuple
 import           Data.Word
 import           System.IO
 import           System.IO.Unsafe
