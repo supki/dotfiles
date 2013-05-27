@@ -102,7 +102,7 @@ laptopTemplates = def
         [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 102 --heighttype pixel --height 18 --tint 0x" ++ tail blackColor ++ " --alpha 0")
         , ("/home/maksenov/.dropbox-dist/dropbox", "${HOME}/.dropbox-dist/dropboxd")
         , ("mpd", "mpd")
-        , ("/usr/lib/iceweasel", "iceweasel")
+        , ("iceweasel", "iceweasel")
         , ("gnome-commander", "gnome-commander")
         , ("transmission-gtk", "transmission-gtk")
         , ("ssh .* mcabber", "urxvtcd -title mcabber -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -d -t mcabber'")
