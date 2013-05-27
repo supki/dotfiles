@@ -107,7 +107,7 @@ laptopTemplates = def
         , ("transmission-gtk", "transmission-gtk")
         , ("ssh .* mcabber", "urxvtcd -title mcabber -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -d -t mcabber'")
         , ("ssh .* irssi", "urxvtcd -title irssi -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -d -t irssi'")
-        , ("ruby /usr/bin/local/poneaux", "urxvtcd -title poneaux -e poneaux")
+        , ("/usr/bin/ruby1.9.1 /usr/local/bin/poneaux", "urxvtcd -title poneaux -e poneaux")
         , ("watch -n2 netstat", "urxvtcd -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
         , ("htop", "urxvtcd -title htop -e htop")
         , ("netwire-scrobbler", "netwire-scrobbler")
