@@ -16,7 +16,6 @@ import Workspaces
 
 
 myLayoutHook = smartBorders $ avoidStruts $
-  onWorkspace WWW tall $
   onWorkspace Texts (tabbed shrinkText myTheme) $
   onWorkspaces [Video, Mail, Files, Torrents] Full $
   onWorkspace Status (dwmStyle shrinkText myTheme tall) $
