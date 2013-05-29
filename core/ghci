@@ -14,6 +14,7 @@ import           Data.Ratio hiding ((%))
 import           Data.String
 import           Data.Tuple
 import           Data.Word
+import           Numeric
 import           System.IO
 import           System.IO.Unsafe
 import           Text.Printf
