@@ -6,6 +6,7 @@ import           Control.Arrow
 import           Control.Monad
 import           Data.Bits
 import           Data.Char
+import           Data.Data
 import           Data.Function (fix, on)
 import           Data.Int
 import           Data.List
@@ -13,6 +14,7 @@ import           Data.Maybe
 import           Data.Ratio hiding ((%))
 import           Data.String
 import           Data.Tuple
+import           Data.Typeable
 import           Data.Word
 import           Numeric
 import           System.IO
@@ -32,6 +34,7 @@ import           Control.Monad.Free
 import           Control.Monad.STM
 import           Control.Monad.Trans
 import           Data.Bits.Lens
+import           Data.Data.Lens
 import           Data.Functor.Foldable
 import           Data.List.Lens
 import           Data.Proxy
@@ -92,6 +95,9 @@ import System.Wordexp.Simple
 
 :set -XBangPatterns
 :set -XDataKinds
+:set -XDeriveFoldable
+:set -XDeriveFunctor
+:set -XDeriveDataTypeable
 :set -XEmptyDataDecls
 :set -XExistentialQuantification
 :set -XFlexibleContexts
