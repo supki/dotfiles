@@ -67,6 +67,7 @@ alias gut='git'
 alias fap='fab'
 alias less='less -R'
 alias ghciu='ghci -ignore-dot-ghci'
+alias ka='killall'
 
 function man {
 	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
