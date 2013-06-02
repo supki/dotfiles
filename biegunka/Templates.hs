@@ -110,7 +110,7 @@ laptopTemplates = def
         , ("/usr/bin/ruby1.9.1 /usr/local/bin/poneaux", "urxvtcd -title poneaux -e poneaux")
         , ("watch -n2 netstat", "urxvtcd -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
         , ("htop", "urxvtcd -title htop -e htop")
-        , ("netwire-scrobbler", "netwire-scrobbler")
+        , ("scrobbler-client", "scrobbler-client")
         , ("procfiled", "procfiled")
         , ("icedove", "icedove")
         , ("python /home/maksenov/bin/trayicon-mpd", "trayicon-mpd")
