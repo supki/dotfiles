@@ -137,6 +137,7 @@ vim = do
     pathogen_ "git@github.com:Shougo/unite.vim"
     pathogen_ "git@github.com:spolu/dwm.vim"
     pathogen_ "git@github.com:tpope/vim-commentary"
+    pathogen_ "git@github.com:tpope/vim-unimpaired"
     pathogen_ "git@github.com:def-lkb/vimbufsync"
   profile "vim/idris" $ do
     "git@github.com:edwinb/Idris-dev" ==> "git/Idris-dev" $ def
