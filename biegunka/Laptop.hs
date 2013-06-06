@@ -1,0 +1,58 @@
+{-# LANGUAGE QuasiQuotes #-}
+module Laptop where
+
+import Data.Default (def)
+import Data.String.Quote
+
+import Defaults
+
+
+templates :: Template
+templates = def
+  { xmobar = def
+    { background = "\"#333333\""
+    , position = "Static { xpos = 102, ypos = 750, width = 1264, height = 20 }"
+    , battery = Just "\"%battery%\""
+    }
+  , xmonad = def
+    { terminal = "urxvtcd"
+    , ubuntu = "xft:ubuntu:size=9"
+    , terminus = "xft:terminus:size=9"
+    , white = "#ffffff"
+    , grayDark = "#474747"
+    , grayLight = "#cccccc"
+    , black = "#333333"
+    , orange = "#dd9977"
+    , yellow = "#eeccaa"
+    , startup =
+      [s|
+        [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 102 --heighttype pixel --height 18 --tint 0x" ++ tail blackColor ++ " --alpha 0")
+        , ("/home/maksenov/.dropbox-dist/dropbox", "${HOME}/.dropbox-dist/dropboxd")
+        , ("mpd", "mpd")
+        , ("iceweasel", "iceweasel")
+        , ("gnome-commander", "gnome-commander")
+        , ("transmission-gtk", "transmission-gtk")
+        , ("ssh .* mcabber", "urxvtcd -title mcabber -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -d -t mcabber'")
+        , ("ssh .* irssi", "urxvtcd -title irssi -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -d -t irssi'")
+        , ("/usr/bin/ruby1.9.1 /usr/local/bin/poneaux", "urxvtcd -title poneaux -e poneaux")
+        , ("watch -n2 netstat", "urxvtcd -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
+        , ("htop", "urxvtcd -title htop -e htop")
+        , ("scrobbler-client", "scrobbler-client")
+        , ("procfiled", "procfiled")
+        , ("icedove", "icedove")
+        , ("python /home/maksenov/bin/trayicon-mpd", "trayicon-mpd")
+        , ("python /home/maksenov/bin/trayicon-mcabber", "trayicon-mcabber")
+        , ("suspender", "suspender")
+        ]
+      |]
+    , follow = "False"
+    }
+  , xmodmap = def
+    { menu = "keysym Menu = Super_R"
+    }
+  , urxvt = def
+    { tabbedex = "/home/maksenov/git/urxvt-tabbedex"
+    , background_ = "#333333"
+    , browser = "iceweasel"
+    }
+  }

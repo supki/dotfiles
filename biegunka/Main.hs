@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE LambdaCase #-}
 module Main (main) where
 
 import Control.Lens
@@ -10,20 +11,28 @@ import System.FilePath.Lens
 import Biegunka
 import Biegunka.Source.Git
 
-import Templates (laptopTemplates, workTemplates)
+import qualified Laptop as Laptop
+import qualified Work as Work
+
+
+data Environments = Laptop | Work
+    deriving (Show, Read, Eq, Ord, Enum, Bounded)
 
 
 main :: IO ()
-main = execParser opts >>= \(s,t) -> do
-  biegunka (set root "~") (pretend <> pause <> execute (set templates (Templates t)) <> verify) s
+main = execParser opts >>= \case
+  Laptop -> f laptop Laptop.templates
+  Work   -> f work Work.templates
  where
+  f s t = biegunka (set root "~") (pretend <> pause <> execute (set templates (Templates t)) <> verify) s
+
   opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
 
   sample =
-     flag (return (), def) (laptopSettings, laptopTemplates) (long "laptop" <> short 'l' <> help "Use laptop settings") <|>
-     flag (return (), def) (workSettings, workTemplates) (long "work" <> short 'w' <> help "Use work settings")
+     flag' Laptop (long "laptop" <> short 'l' <> help "Use laptop settings") <|>
+     flag' Work   (long "work"   <> short 'w' <> help "Use work settings")
 
-  laptopSettings = sequence_
+  laptop = sequence_
     [ dotfiles
     , tools
     , vim
@@ -32,7 +41,11 @@ main = execParser opts >>= \(s,t) -> do
     , experimental
     , edwardk
     ]
-  workSettings   = sequence_ [dotfiles,        vim,        misc]
+  work = sequence_
+    [ dotfiles
+    , vim
+    , misc
+    ]
 
 
 dotfiles :: Script Profiles ()
