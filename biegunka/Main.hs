@@ -23,7 +23,15 @@ main = execParser opts >>= \(s,t) -> do
      flag (return (), def) (laptopSettings, laptopTemplates) (long "laptop" <> short 'l' <> help "Use laptop settings") <|>
      flag (return (), def) (workSettings, workTemplates) (long "work" <> short 'w' <> help "Use work settings")
 
-  laptopSettings = sequence_ [dotfiles, tools, vim, emacs, misc, experimental, edwardk]
+  laptopSettings = sequence_
+    [ dotfiles
+    , tools
+    , vim
+    , emacs
+    , misc
+    , experimental
+    , edwardk
+    ]
   workSettings   = sequence_ [dotfiles,        vim,        misc]
 
 
