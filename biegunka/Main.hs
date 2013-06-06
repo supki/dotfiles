@@ -117,6 +117,7 @@ tools = profile "tools" $
       , ("upload/pastebin.hs", "bin/upload-pastebin")
       , ("isup.sh", "bin/isup")
       , ("pretty-json.py", "bin/pretty-json")
+      , ("publish-haddocks.sh", "bin/publish-haddocks")
       ]
     unzipWithM_ (\s d -> shell ("ghc -O2 " ++ s ++ " -fforce-recomp -v0 -o " ++ d) >> link d ("bin" </> d))
       [ ("audio.hs", "vaio-audio")
