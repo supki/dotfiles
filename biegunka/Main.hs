@@ -6,7 +6,6 @@ import Control.Lens
 import Data.Default (def)
 import Options.Applicative hiding ((&))
 import System.FilePath ((</>))
-import System.FilePath.Lens
 
 import Biegunka
 import Biegunka.Source.Git
@@ -155,58 +154,60 @@ vim = do
     pathogen_ "git@github.com:trefis/coquille"
   profile "vim/misc" $ do
     pathogen_ "git@github.com:wikitopian/hardmode"
-    pathogen_ "git@github.com:scrooloose/syntastic.git"
+    pathogen_ "git@github.com:scrooloose/syntastic"
     pathogen_ "git@github.com:Shougo/unite.vim"
     pathogen_ "git@github.com:spolu/dwm.vim"
     pathogen_ "git@github.com:tpope/vim-commentary"
     pathogen_ "git@github.com:tpope/vim-unimpaired"
     pathogen_ "git@github.com:def-lkb/vimbufsync"
   profile "vim/idris" $ do
-    "git@github.com:edwinb/Idris-dev" ==> "git/Idris-dev" $ def
+    "git@github.com:edwinb/Idris-dev" ==> "git/" $ def
       & remotes .~ ["origin", "stream"]
       & actions .~ do
           link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
  where
-  pathogen  u = git u (".vim/bundle" </> u ^. basename)
+  pathogen  u = git u ".vim/bundle/"
   pathogen_ u = pathogen u (return ())
 
 
 emacs :: Script Profiles ()
 emacs = do
   profile "emacs-colorschemes" $ do
-    git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/zenburn-emacs" $ do
+    git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/" $
       copy "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
   profile "emacs-usable" $ do
-    git "git@github.com:emacsmirror/paredit" "git/emacs/paredit" $ do
+    git "git@github.com:emacsmirror/paredit" "git/emacs/" $
       copy "paredit.el" ".emacs.d/plugins/paredit.el"
-    git "git@github.com:jlr/rainbow-delimiters" "git/emacs/rainbox" $ do
+    git "git@github.com:jlr/rainbow-delimiters" "git/emacs/" $
       copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
 
 misc :: Script Profiles ()
-misc = do
-  profile "misc" $ do
-    "git@github.com:zsh-users/zsh-syntax-highlighting.git" --> "git/zsh-syntax-highlighting"
-    "git@github.com:zsh-users/zsh-completions.git"         --> "git/zsh-completions"
-    "git@github.com:stepb/urxvt-tabbedex"                  --> "git/urxvt-tabbedex"
-    "git@github.com:dmalikov/xmobar-usable"                --> "git/xmobar-usable"
+misc = profile "misc" $ mapM_ (--> "git/")
+  [ "git@github.com:zsh-users/zsh-syntax-highlighting"
+  , "git@github.com:zsh-users/zsh-completions"
+  , "git@github.com:stepb/urxvt-tabbedex"
+  , "git@github.com:dmalikov/xmobar-usable"
+  ]
 
 
 experimental :: Script Profiles ()
-experimental = profile "experimental" $ do
-  "git@github.com:sol/vimus"          --> "git/vimus"
-  "git@github.com:sol/libmpd-haskell" --> "git/libmpd-haskell"
+experimental = profile "experimental" $ mapM_ (--> "git/")
+  [ "git@github.com:sol/vimus"
+  , "git@github.com:sol/libmpd-haskell"
+  ]
 
 
 edwardk :: Script Profiles ()
-edwardk = profile "edwardk" $ do
-  "git@github.com:ekmett/free"        --> "git/free"
-  "git@github.com:ekmett/reflection"  --> "git/reflection"
-  "git@github.com:ekmett/tagged"      --> "git/tagged"
-  "git@github.com:ekmett/machines"    --> "git/machines"
-  "git@github.com:ekmett/lens"        --> "git/lens"
-  "git@github.com:ekmett/profunctors" --> "git/profunctors"
+edwardk = profile "edwardk" $ mapM_ (--> "git/")
+  [ "git@github.com:ekmett/free"
+  , "git@github.com:ekmett/reflection"
+  , "git@github.com:ekmett/tagged"
+  , "git@github.com:ekmett/machines"
+  , "git@github.com:ekmett/lens"
+  , "git@github.com:ekmett/profunctors"
+  ]
 
 
 infix 1 -->
