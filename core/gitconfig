@@ -20,5 +20,6 @@
 	unstage = reset HEAD --
 	last = log -1 HEAD
 	lo = log --stat
+	lg = log --patch-with-stat
 [push]
 	default = current
