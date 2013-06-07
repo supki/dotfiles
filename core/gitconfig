@@ -19,5 +19,6 @@
 	st = status
 	unstage = reset HEAD --
 	last = log -1 HEAD
+	lo = log --stat
 [push]
 	default = current
