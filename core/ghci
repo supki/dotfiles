@@ -27,6 +27,7 @@ import           Control.Concurrent.STM.TVar
 import           Control.Concurrent.STM.TChan
 import           Control.Concurrent.STM.TQueue
 import           Control.Lens
+import           Control.Comonad
 import           Control.Monad.Error
 import           Control.Monad.Reader
 import           Control.Monad.Writer hiding ((<>))
