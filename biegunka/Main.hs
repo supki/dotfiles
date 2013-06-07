@@ -1,5 +1,6 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
+{-# OPTIONS_GHC -Wall #-}
 module Main (main) where
 
 import Control.Lens
