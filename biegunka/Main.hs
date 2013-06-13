@@ -141,6 +141,7 @@ vim = do
     pathogen_ "git@github.com:ujihisa/neco-ghc"
     pathogen_ "git@github.com:Shougo/neocomplcache"
     pathogen_ "git@github.com:bitc/vim-hdevtools"
+    pathogen_ "git@github.com:merijn/haskellFoldIndent"
   profile "vimish/haskell" $ do
     pathogen_ "git@github.com:bitc/hdevtools"
   profile "vim/coq" $ do
