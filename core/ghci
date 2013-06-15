@@ -35,6 +35,7 @@ import           Control.Monad.State
 import           Control.Monad.Free
 import           Control.Monad.STM
 import           Control.Monad.Trans
+import           Data.Bifunctor
 import           Data.Bits.Lens
 import           Data.Data.Lens
 import           Data.Functor.Foldable
