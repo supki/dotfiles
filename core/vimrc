@@ -3,6 +3,8 @@
 	set nocompatible
 	let g:neocomplcache_enable_at_startup = 1
 
+	runtime macros/matchit.vim
+
 	" set history to 1000 lines
 	set history=1000
 
