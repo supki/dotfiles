@@ -209,7 +209,7 @@ edwardk = profile "edwardk" $ mapM_ (--> "git/")
   ]
 
 
-infix 1 -->
+infix 8 -->
 (-->) :: String -> FilePath -> Script Sources ()
 (-->) = git_
 
