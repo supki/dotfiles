@@ -1,12 +1,14 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wall #-}
 module Main (main) where
 
+import Data.Monoid ((<>))
+
 import Control.Lens
 import Data.Default (def)
-import Options.Applicative hiding ((&))
 import System.FilePath ((</>))
 
 import Biegunka
@@ -17,18 +19,17 @@ import qualified Work as Work
 
 
 data Environments = Laptop | Work
-    deriving (Show, Read, Eq, Ord, Enum, Bounded)
-
 
 makeOptionsParser ''Environments
 
 
 main :: IO ()
 main = optionsParser >>= \case
-  Laptop -> f laptop Laptop.templates
-  Work   -> f work Work.templates
+  Laptop -> f (set root "~") (set templates (Templates Laptop.templates)) laptop
+  Work   -> f (set root "~") (set templates (Templates Work.templates)) work
  where
-  f s t = biegunka (set root "~") (pretend <> confirm <> execute (set templates (Templates t)) <> verify) s
+  f :: (Controls -> Controls) -> (forall a. EE a -> EE a) -> Script Profiles () -> IO ()
+  f cs es s = biegunka cs (pretend <> confirm <> execute es <> verify) s
 
   laptop = sequence_
     [ dotfiles
@@ -45,8 +46,9 @@ main = optionsParser >>= \case
     , misc
     ]
 
+dotfiles, tools, vim, emacs, misc, experimental, edwardk :: Script Profiles ()
 
-dotfiles :: Script Profiles ()
+
 dotfiles = profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     unzipWithM_ link $
@@ -104,7 +106,6 @@ dotfiles = profile "dotfiles" $
     shell "xrdb -merge ~/.Xdefaults"
 
 
-tools :: Script Profiles ()
 tools = profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     unzipWithM_ link
@@ -130,7 +131,6 @@ tools = profile "tools" $
       ]
 
 
-vim :: Script Profiles ()
 vim = do
   profile "vim/haskell" $ do
     pathogen  "git@github.com:Shougo/vimproc" $
@@ -167,7 +167,6 @@ vim = do
   pathogen_ u = pathogen u (return ())
 
 
-emacs :: Script Profiles ()
 emacs = do
   profile "emacs-colorschemes" $ do
     git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/" $
@@ -180,8 +179,7 @@ emacs = do
 
 
 
-misc :: Script Profiles ()
-misc = profile "misc" $ mapM_ (--> "git/")
+misc = profile "misc" $ mapM_ (git_ "git/")
   [ "git@github.com:zsh-users/zsh-syntax-highlighting"
   , "git@github.com:zsh-users/zsh-completions"
   , "git@github.com:stepb/urxvt-tabbedex"
@@ -189,16 +187,14 @@ misc = profile "misc" $ mapM_ (--> "git/")
   ]
 
 
-experimental :: Script Profiles ()
-experimental = profile "experimental" $ mapM_ (--> "git/")
+experimental = profile "experimental" $ mapM_ (git_ "git/")
   [ "git@github.com:sol/vimus"
   , "git@github.com:sol/libmpd-haskell"
   , "git@github.com:mitchellh/vagrant"
   ]
 
 
-edwardk :: Script Profiles ()
-edwardk = profile "edwardk" $ mapM_ (--> "git/")
+edwardk = profile "edwardk" $ mapM_ (git_ "git/")
   [ "git@github.com:ekmett/free"
   , "git@github.com:ekmett/reflection"
   , "git@github.com:ekmett/tagged"
@@ -206,11 +202,6 @@ edwardk = profile "edwardk" $ mapM_ (--> "git/")
   , "git@github.com:ekmett/lens"
   , "git@github.com:ekmett/profunctors"
   ]
-
-
-infix 8 -->
-(-->) :: String -> FilePath -> Script Sources ()
-(-->) = git_
 
 
 infixr 4 <\>~
