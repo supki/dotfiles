@@ -195,6 +195,7 @@ experimental :: Script Profiles ()
 experimental = profile "experimental" $ mapM_ (--> "git/")
   [ "git@github.com:sol/vimus"
   , "git@github.com:sol/libmpd-haskell"
+  , "git@github.com:mitchellh/vagrant"
   ]
 
 
