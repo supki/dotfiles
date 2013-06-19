@@ -1,5 +1,6 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wall #-}
 module Main (main) where
 
@@ -19,18 +20,15 @@ data Environments = Laptop | Work
     deriving (Show, Read, Eq, Ord, Enum, Bounded)
 
 
+makeOptionsParser ''Environments
+
+
 main :: IO ()
-main = execParser opts >>= \case
+main = optionsParser >>= \case
   Laptop -> f laptop Laptop.templates
   Work   -> f work Work.templates
  where
-  f s t = biegunka (set root "~") (pretend <> pause <> execute (set templates (Templates t)) <> verify) s
-
-  opts = info (helper <*> sample) (fullDesc <> header "Biegunka script")
-
-  sample =
-     flag' Laptop (long "laptop" <> short 'l' <> help "Use laptop settings") <|>
-     flag' Work   (long "work"   <> short 'w' <> help "Use work settings")
+  f s t = biegunka (set root "~") (pretend <> confirm <> execute (set templates (Templates t)) <> verify) s
 
   laptop = sequence_
     [ dotfiles
