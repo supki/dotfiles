@@ -22,10 +22,10 @@ makeOptionsParser ''Environments
 
 main :: IO ()
 main = do
-  environment <- optionsParser
+  (environment, run) <- optionsParser
   case environment of
-    (Laptop, run) -> run (set root "~") (set templates (Templates Laptop.templates)) laptop
-    (Work,   run) -> run (set root "~") (set templates (Templates Work.templates)) work
+    Laptop -> run (set root "~") (set templates (Templates Laptop.templates)) laptop
+    Work   -> run (set root "~") (set templates (Templates Work.templates)) work
  where
   laptop = sequence_
     [ dotfiles
