@@ -40,6 +40,7 @@ main = do
     [ dotfiles
     , vim
     , misc
+    , experimental
     ]
 
 dotfiles, tools, vim, emacs, misc, experimental, edwardk :: Script Profiles ()
@@ -187,6 +188,7 @@ experimental = profile "experimental" $ mapM_ (--> "git/")
   [ "git@github.com:sol/vimus"
   , "git@github.com:sol/libmpd-haskell"
   , "git@github.com:mitchellh/vagrant"
+  , "git@github.com:haskell/cabal"
   ]
 
 
