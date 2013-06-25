@@ -5,7 +5,7 @@ function chpwd {
 autoload -U compinit promptinit colors
 autoload -Uz vcs_info
 
-fpath=(~/git/zsh-completions/src $fpath)
+fpath=(/opt/devtools-1.0/completions/zsh ~/git/zsh-completions/src $fpath)
 compinit
 setopt autocd autopushd correct
 zstyle ':completion:*' use-cache on
