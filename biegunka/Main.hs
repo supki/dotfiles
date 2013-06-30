@@ -181,6 +181,7 @@ misc = profile "misc" $ mapM_ (--> "git/")
   , "git@github.com:zsh-users/zsh-completions"
   , "git@github.com:stepb/urxvt-tabbedex"
   , "git@github.com:dmalikov/xmobar-usable"
+  , "git@github.com:muennich/urxvt-perls"
   ]
 
 

@@ -67,12 +67,12 @@ instance Default Xmodmap where
 
 
 data Urxvt = Urxvt
-  { tabbedex, background_, browser :: String
+  { perllib, background_, browser :: String
   } deriving (Data, Typeable)
 
 instance Default Urxvt where
   def = Urxvt
-    { tabbedex    = def
+    { perllib     = def
     , background_ = def
     , browser     = def
     }

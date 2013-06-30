@@ -1,4 +1,4 @@
-*.perl-lib: $template.urxvt.tabbedex$
+*.perl-lib: $template.urxvt.perllib$
 *.tabbed.tabbar-fg: 3
 *.tabbed.tabbar-bg: 8
 *.tabbed.tab-fg: 8
@@ -39,9 +39,13 @@
 *.underlineColor: #eeccaa
 
 *.urlLauncher: $template.urxvt.browser$
-*.perl-ext-common: default,matcher,tabbedex
+*.perl-ext-common: default,matcher,tabbedex,keyboard-select,url-select
+
 *.matcher.pattern.0: http[s]*:\\/\\/[^ "]+"?
 *.matcher.button: 1
+
+*.keysym.C-s: perl:keyboard-select:activate
+*.keysym.C-u: perl:url-select:select_next
 
 vimus.background: #212121
 

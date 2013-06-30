@@ -49,7 +49,7 @@ templates = def
     { menu = "keysym Menu = Super_R"
     }
   , urxvt = def
-    { tabbedex = "/home/maksenov/git/urxvt-tabbedex"
+    { perllib = "/home/maksenov/git/urxvt-tabbedex:/home/maksenov/git/urxvt-perls"
     , background_ = "#333333"
     , browser = "iceweasel"
     }
