@@ -18,6 +18,7 @@
 	ci = commit
 	st = status
 	unstage = reset HEAD --
+	wipe = reset --hard HEAD --
 	last = log -1 HEAD
 	lo = log --stat
 	lg = log --patch-with-stat
