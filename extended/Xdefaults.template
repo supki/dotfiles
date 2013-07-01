@@ -45,7 +45,7 @@
 *.matcher.button: 1
 
 *.keysym.C-s: perl:keyboard-select:activate
-*.keysym.C-u: perl:url-select:select_next
+*.keysym.M-u: perl:url-select:select_next
 
 vimus.background: #212121
 
