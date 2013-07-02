@@ -50,12 +50,22 @@ prompt db ps c = do
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
-compl' xs s  = return $ filter (\x -> s `isInfixOf` un x) xs
+compl' xs s  = return $ filter (\x -> s `isSubsequenceOf` un x) xs
 
 -- | Unquote string if it's quoted
 un :: String -> String
 un ('\'' : s) = s
 un         s  = s
+
+-- | A bit smarter tmux sessions search than 'isSuffixOf'
+-- Checks that the first string is a subsequence of the second, that is
+-- all its characters are present in the second string in the same order
+isSubsequenceOf :: String -> String -> Bool
+isSubsequenceOf []     _  = True
+isSubsequenceOf (x:xs) ys =
+  case snd (break (== x) ys) of
+    _ : zs -> xs `isSubsequenceOf` zs
+    []     -> False
 
 
 -- | That should exist in Control.Monad :-(
