@@ -122,7 +122,7 @@ tools = profile "tools" $
       , ("pretty-json.py", "bin/pretty-json")
       , ("publish-haddocks.sh", "bin/publish-haddocks")
       ]
-    unzipWithM_ (\s d -> command "ghc" ["-O2 ", s, "-fforce-recomp", "-v0", "-o", d] >> link d ("bin" </> d))
+    unzipWithM_ (\s d -> raw "ghc" ["-O2 ", s, "-fforce-recomp", "-v0", "-o", d] >> link d ("bin" </> d))
       [ ("audio.hs", "vaio-audio")
       , ("shutdown-gui.hs", "shutdown-gui")
       ]
