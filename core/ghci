@@ -114,6 +114,7 @@ import System.Wordexp.Simple
 :set -XMultiWayIf
 :set -XMultiParamTypeClasses
 :set -XNoMonomorphismRestriction
+:set -XPackageImports
 :set -XRankNTypes
 :set -XTupleSections
 :set -XTypeFamilies
