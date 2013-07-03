@@ -1,4 +1,4 @@
-:set prompt "μ> "
+:set prompt ">>> "
 :set editor vim
 
 import           Control.Applicative
