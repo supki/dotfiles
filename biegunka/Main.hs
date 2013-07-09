@@ -43,7 +43,7 @@ main = do
     , experimental
     ]
 
-dotfiles, tools, vim, emacs, misc, experimental, edwardk :: Script Profiles ()
+dotfiles, tools, vim, emacs, misc, experimental, edwardk :: Script Sources ()
 
 
 dotfiles = profile "dotfiles" $
@@ -129,51 +129,53 @@ tools = profile "tools" $
 
 
 vim = do
-  profile "vim/haskell" $ do
-    pathogen  "git@github.com:Shougo/vimproc" $
-      shell "make -f make_unix.mak"
-    pathogen_ "git@github.com:eagletmt/ghcmod-vim"
-    pathogen_ "git@github.com:ujihisa/neco-ghc"
-    pathogen_ "git@github.com:Shougo/neocomplcache"
-    pathogen_ "git@github.com:bitc/vim-hdevtools"
-    pathogen_ "git@github.com:merijn/haskellFoldIndent"
-  profile "vim/ruby" $ do
-    pathogen_ "git@github.com:kana/vim-textobj-user"
-    pathogen_ "git@github.com:nelstrom/vim-textobj-rubyblock"
-  profile "vimish/haskell" $ do
-    pathogen_ "git@github.com:bitc/hdevtools"
-  profile "vim/coq" $ do
-    pathogen_ "git@github.com:vim-scripts/coq-syntax"
-    pathogen_ "git@github.com:vim-scripts/Coq-indent"
-    pathogen_ "git@github.com:trefis/coquille"
-  profile "vim/misc" $ do
-    pathogen_ "git@github.com:wikitopian/hardmode"
-    pathogen_ "git@github.com:scrooloose/syntastic"
-    pathogen_ "git@github.com:Shougo/unite.vim"
-    pathogen_ "git@github.com:spolu/dwm.vim"
-    pathogen_ "git@github.com:tpope/vim-commentary"
-    pathogen_ "git@github.com:tpope/vim-unimpaired"
-    pathogen_ "git@github.com:def-lkb/vimbufsync"
-  profile "vim/idris" $ do
-    "git@github.com:edwinb/Idris-dev" ==> "git/" $ def
-      & remotes .~ ["origin", "stream"]
-      & actions .~ do
-          link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
+  profile "vim" $ do
+    group "haskell" $ do
+      pathogen  "git@github.com:Shougo/vimproc" $
+        shell "make -f make_unix.mak"
+      pathogen_ "git@github.com:eagletmt/ghcmod-vim"
+      pathogen_ "git@github.com:ujihisa/neco-ghc"
+      pathogen_ "git@github.com:Shougo/neocomplcache"
+      pathogen_ "git@github.com:bitc/vim-hdevtools"
+      pathogen_ "git@github.com:merijn/haskellFoldIndent"
+    group "ruby" $ do
+      pathogen_ "git@github.com:kana/vim-textobj-user"
+      pathogen_ "git@github.com:nelstrom/vim-textobj-rubyblock"
+    group "coq" $ do
+      pathogen_ "git@github.com:vim-scripts/coq-syntax"
+      pathogen_ "git@github.com:vim-scripts/Coq-indent"
+      pathogen_ "git@github.com:trefis/coquille"
+    group "misc" $ do
+      pathogen_ "git@github.com:wikitopian/hardmode"
+      pathogen_ "git@github.com:scrooloose/syntastic"
+      pathogen_ "git@github.com:Shougo/unite.vim"
+      pathogen_ "git@github.com:spolu/dwm.vim"
+      pathogen_ "git@github.com:tpope/vim-commentary"
+      pathogen_ "git@github.com:tpope/vim-unimpaired"
+      pathogen_ "git@github.com:def-lkb/vimbufsync"
+    group "idris" $ do
+      "git@github.com:edwinb/Idris-dev" ==> "git/" $ def
+        & remotes .~ ["origin", "stream"]
+        & actions .~ do
+            link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
+  profile "vimish" $
+    group "haskell" $
+      pathogen_ "git@github.com:bitc/hdevtools"
  where
   pathogen  u = git u ".vim/bundle/"
   pathogen_ u = pathogen u (return ())
 
 
-emacs = do
-  profile "emacs-colorschemes" $ do
-    git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/" $
-      copy "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
-  profile "emacs-usable" $ do
-    git "git@github.com:emacsmirror/paredit" "git/emacs/" $
-      copy "paredit.el" ".emacs.d/plugins/paredit.el"
-    git "git@github.com:jlr/rainbow-delimiters" "git/emacs/" $
-      copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
-
+emacs =
+  profile "emacs" $ do
+    group "colorschemes" $ do
+      git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/" $
+        copy "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
+    group "usable" $ do
+      git "git@github.com:emacsmirror/paredit" "git/emacs/" $
+        copy "paredit.el" ".emacs.d/plugins/paredit.el"
+      git "git@github.com:jlr/rainbow-delimiters" "git/emacs/" $
+        copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
 misc = profile "misc" $ mapM_ (--> "git/")
