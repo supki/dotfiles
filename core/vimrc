@@ -101,8 +101,9 @@
 
 	" set indents
 	autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
+	autocmd FileType cabal   setlocal expandtab shiftwidth=2 softtabstop=2
 	autocmd FileType racket  setlocal expandtab shiftwidth=2 softtabstop=2
-	autocmd FileType ruby  setlocal expandtab shiftwidth=2 softtabstop=2
+	autocmd FileType ruby    setlocal expandtab shiftwidth=2 softtabstop=2
 	autocmd FileType python  setlocal expandtab shiftwidth=4 softtabstop=4
 
 	" save on focus lost
