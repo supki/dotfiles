@@ -52,6 +52,9 @@
 
 	call SetRelative()
 
+	" ???
+	set timeoutlen=0
+
 	" highlight current line and column
 	set cursorline
 	set cursorcolumn
@@ -222,10 +225,6 @@
 	" easy move to next bracket
 	nnoremap <tab> %
 	vnoremap <tab> %
-
-	" fix rxvt shit
-	map  <Esc>[5^ :tabp<CR>
-	map  <Esc>[6^ :tabn<CR>
 
 	" add some hotkeys for vim-hdevtools commands
 	nmap <leader>i :HdevtoolsInfo<CR>
