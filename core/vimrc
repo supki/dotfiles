@@ -53,7 +53,7 @@
 	call SetRelative()
 
 	" ???
-	set timeoutlen=0
+	set timeoutlen=500
 
 	" highlight current line and column
 	set cursorline
