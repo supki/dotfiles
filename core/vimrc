@@ -52,8 +52,8 @@
 
 	call SetRelative()
 
-	" ???
-	set timeoutlen=500
+	" fix annoying ESC key delays
+	set noesckeys
 
 	" highlight current line and column
 	set cursorline
