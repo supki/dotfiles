@@ -31,12 +31,26 @@
 	" enable syntax highlighting
 	syntax on
 
-	" relative or absolute line numbers
-	if exists("+relativenumber")
-		set relativenumber
-	else
-		set number
-	end
+	" relative or no line numbers
+	function SetRelative()
+		if exists("+relativenumber")
+			set relativenumber
+		end
+	endfunction
+
+	function UnsetRelative()
+		if exists("+relativenumber")
+			set norelativenumber
+		end
+	endfunction
+
+	augroup numbers
+		autocmd!
+		autocmd InsertEnter * :call UnsetRelative()
+		autocmd InsertLeave * :call SetRelative()
+	augroup end
+
+	call SetRelative()
 
 	" highlight current line and column
 	set cursorline
@@ -100,11 +114,14 @@
 	set cpoptions+=y
 
 	" set indents
-	autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
-	autocmd FileType cabal   setlocal expandtab shiftwidth=2 softtabstop=2
-	autocmd FileType racket  setlocal expandtab shiftwidth=2 softtabstop=2
-	autocmd FileType ruby    setlocal expandtab shiftwidth=2 softtabstop=2
-	autocmd FileType python  setlocal expandtab shiftwidth=4 softtabstop=4
+	augroup indents
+		autocmd!
+		autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType cabal   setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType racket  setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType ruby    setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType python  setlocal expandtab shiftwidth=4 softtabstop=4
+	augroup end
 
 	" save on focus lost
 	autocmd FocusLost * :wa
