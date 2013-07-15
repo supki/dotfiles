@@ -11,11 +11,11 @@ setxkbmap -option compose:ralt
 # fix xcompose in gtk applications
 export GTK_IM_MODULE=xim
 
-# set wallpaper
-nitrogen --restore
-
 # start kbdd
 kbdd
+
+# enable wallpaper
+xsetroot -solid black
 
 # process .xmodmap
 xmodmap ~/.xmodmap
