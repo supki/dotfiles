@@ -10,7 +10,7 @@ import Defaults
 templates :: Template
 templates = def
   { xmobar = def
-    { background = "\"#333333\""
+    { background = "\"#222222\""
     , position = "Static { xpos = 102, ypos = 750, width = 1264, height = 20 }"
     , battery = Just "\"%battery%\""
     }
@@ -21,7 +21,7 @@ templates = def
     , white = "#ffffff"
     , grayDark = "#474747"
     , grayLight = "#cccccc"
-    , black = "#333333"
+    , black = "#222222"
     , orange = "#dd9977"
     , yellow = "#eeccaa"
     , startup =
@@ -50,7 +50,7 @@ templates = def
     }
   , urxvt = def
     { perllib = "/home/maksenov/git/urxvt-tabbedex:/home/maksenov/git/urxvt-perls"
-    , background_ = "#333333"
+    , background_ = "#222222"
     , browser = "iceweasel"
     }
   }
