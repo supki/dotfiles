@@ -170,12 +170,12 @@ emacs =
   profile "emacs" $ do
     group "colorschemes" $ do
       git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/" $
-        copy "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
+        copyFile "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
     group "usable" $ do
       git "git@github.com:emacsmirror/paredit" "git/emacs/" $
-        copy "paredit.el" ".emacs.d/plugins/paredit.el"
+        copyFile "paredit.el" ".emacs.d/plugins/paredit.el"
       git "git@github.com:jlr/rainbow-delimiters" "git/emacs/" $
-        copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
+        copyFile "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
 misc = profile "misc" $ mapM_ (--> "git/")
