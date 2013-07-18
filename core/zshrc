@@ -65,13 +65,11 @@ bindkey -a "q" push-line
 
 alias ack=ack-grep # stupid debian
 alias ls='ls --color'
-alias gut='git'
 alias fap='fab'
 alias less='less -R'
 alias lens='ghci'
 alias ghciu='ghci -ignore-dot-ghci'
 alias ka='killall'
-alias runbiegunka='runhaskell -ibiegunka -package-db=$(echo cabal-dev/packages-*.conf) biegunka/Main.hs --all'
 alias g='git'
 
 function man {
