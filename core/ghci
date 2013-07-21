@@ -9,6 +9,8 @@ import           Data.Char
 import           Data.Data
 import           Data.Fixed
 import           Data.Function (fix, on)
+import           Data.Foldable (Foldable)
+import           Data.Traversable (Traversable)
 import           Data.Int
 import           Data.List
 import           Data.Maybe
@@ -39,7 +41,6 @@ import           Control.Monad.Trans.Maybe
 import           Data.Bifunctor
 import           Data.Bits.Lens
 import           Data.Data.Lens
-import           Data.Functor.Foldable
 import           Data.List.Lens
 import           Data.Proxy
 import           Data.Reflection
@@ -99,23 +100,26 @@ import System.Wordexp.Simple
 
 :set -XBangPatterns
 :set -XDataKinds
+:set -XDeriveDataTypeable
 :set -XDeriveFoldable
 :set -XDeriveFunctor
-:set -XDeriveDataTypeable
+:set -XDeriveTraversable
 :set -XEmptyDataDecls
 :set -XExistentialQuantification
 :set -XFlexibleContexts
 :set -XFlexibleInstances
+:set -XFunctionalDependencies
 :set -XGADTs
 :set -XGeneralizedNewtypeDeriving
 :set -XImplicitParams
 :set -XKindSignatures
 :set -XLambdaCase
-:set -XMultiWayIf
 :set -XMultiParamTypeClasses
+:set -XMultiWayIf
 :set -XNoMonomorphismRestriction
 :set -XPackageImports
 :set -XRankNTypes
+:set -XScopedTypeVariables
 :set -XTupleSections
 :set -XTypeFamilies
 :set -XTypeOperators
