@@ -71,6 +71,7 @@ alias lens='ghci'
 alias ghciu='ghci -ignore-dot-ghci'
 alias ka='killall'
 alias g='git'
+alias s='svn'
 
 function man {
 	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
