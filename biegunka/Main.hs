@@ -8,8 +8,8 @@ import Control.Lens
 import Data.Default (def)
 import System.FilePath ((</>))
 
-import Biegunka
-import Biegunka.Source.Git
+import Control.Biegunka
+import Control.Biegunka.Source.Git
 
 import qualified Laptop as Laptop
 import qualified Work as Work
@@ -48,84 +48,92 @@ dotfiles, tools, vim, emacs, misc, experimental, edwardk :: Script Sources ()
 
 dotfiles = profile "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
-    unzipWithM_ link $
-      [ "xsession" ~> ".xsession"
-      , "mpdconf" ~> ".mpdconf"
-      , "profile" ~> ".profile"
-      , "bashrc" ~> ".bashrc"
-      , "zshenv" ~> ".zshenv"
-      , "zshrc" ~> ".zshrc"
-      , "inputrc" ~> ".inputrc"
-      , "vimrc" ~> ".vimrc"
-      , "vim.custom" ~> ".vim/plugin/vimrc-local.vim"
-      , "ghci" ~> ".ghci"
-      , "irbrc" ~> ".irbrc"
-      , "haskeline" ~> ".haskeline"
-      , "racketrc" ~> ".racketrc"
-      , "gitconfig" ~> ".gitconfig"
-      , "gitignore" ~> ".gitignore"
-      , "ackrc" ~> ".ackrc"
-      , "vim/pathogen.vim" ~> ".vim/autoload/pathogen.vim"
-      , "vim/cscope_maps.vim" ~> ".vim/bundle/cscope_maps.vim"
-      , "vim/scratch" ~> ".vim/bundle/scratch"
-      , "vim/indent/haskell.vim" ~> ".vim/indent/haskell.vim"
-      , "conceal/haskell.vim" ~> ".vim/after/syntax/haskell.vim"
-      , "XCompose" ~> ".XCompose"
-      , "vimusrc" ~> ".vimusrc"
-      , "tmux.conf" ~> ".tmux.conf"
-      , "emacs" ~> ".emacs"
-      , "poneaux.rb" ~> ".poneaux.rb"
-      , "sqliterc" ~> ".sqliterc"
-      ] & mapped . _1 <\>~ "core"
-    unzipWithM_ link $
-      [ "xmonad.hs" ~> ".xmonad/xmonad.hs"
-      , "xmonad/Controls.hs" ~> ".xmonad/lib/Controls.hs"
-      , "xmonad/Layouts.hs" ~> ".xmonad/lib/Layouts.hs"
-      , "xmonad/Startup.hs" ~> ".xmonad/lib/Startup.hs"
-      , "xmonad/Themes.hs" ~> ".xmonad/lib/Themes.hs"
-      , "xmonad/Tmux.hs" ~> ".xmonad/lib/Tmux.hs"
-      , "xmonad/Man.hs" ~> ".xmonad/lib/Man.hs"
-      , "xmonad/Workspaces.hs" ~> ".xmonad/lib/Workspaces.hs"
-      , "gvimrc" ~> ".gvimrc"
-      , "vimcolors" ~> ".vim/colors"
-      , "pentadactylrc" ~> ".pentadactylrc"
-      , "pentadactyl/wanker.penta" ~> ".pentadactyl/plugins/wanker.penta"
-      , "gtkrc.mine" ~> ".gtkrc.mine"
-      , "mplayer-config" ~> ".mplayer/config"
-      ] & mapped . _1 <\>~ "extended"
-    unzipWithM_ substitute $
-      [ "template.xmobar.hs" ~> ".xmobar/xmobar.hs"
-      , "xmonad/Misc.hs.template" ~> ".xmonad/lib/Misc.hs"
-      , "xmonad/Profile.hs.template" ~> ".xmonad/lib/Profile.hs"
-      , "xmodmap.template" ~> ".xmodmap"
-      , "Xdefaults.template" ~> ".Xdefaults"
-      ] & mapped . _1 <\>~ "extended"
+    cores     & mapped._1 <\>~ "core"     & unzipWithM_ link
+    extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
+    recipes   & mapped._1 <\>~ "extended" & unzipWithM_ substitute
     shell "xrdb -merge ~/.Xdefaults"
-
+ where
+  cores =
+    [ "xsession" ~> ".xsession"
+    , "mpdconf" ~> ".mpdconf"
+    , "profile" ~> ".profile"
+    , "bashrc" ~> ".bashrc"
+    , "zshenv" ~> ".zshenv"
+    , "zshrc" ~> ".zshrc"
+    , "inputrc" ~> ".inputrc"
+    , "vimrc" ~> ".vimrc"
+    , "vim.custom" ~> ".vim/plugin/vimrc-local.vim"
+    , "ghci" ~> ".ghci"
+    , "irbrc" ~> ".irbrc"
+    , "haskeline" ~> ".haskeline"
+    , "racketrc" ~> ".racketrc"
+    , "gitconfig" ~> ".gitconfig"
+    , "gitignore" ~> ".gitignore"
+    , "ackrc" ~> ".ackrc"
+    , "vim/pathogen.vim" ~> ".vim/autoload/pathogen.vim"
+    , "vim/cscope_maps.vim" ~> ".vim/bundle/cscope_maps.vim"
+    , "vim/scratch" ~> ".vim/bundle/scratch"
+    , "vim/indent/haskell.vim" ~> ".vim/indent/haskell.vim"
+    , "conceal/haskell.vim" ~> ".vim/after/syntax/haskell.vim"
+    , "XCompose" ~> ".XCompose"
+    , "vimusrc" ~> ".vimusrc"
+    , "tmux.conf" ~> ".tmux.conf"
+    , "emacs" ~> ".emacs"
+    , "poneaux.rb" ~> ".poneaux.rb"
+    , "sqliterc" ~> ".sqliterc"
+    ]
+  extendeds =
+    [ "xmonad.hs" ~> ".xmonad/xmonad.hs"
+    , "xmonad/Controls.hs" ~> ".xmonad/lib/Controls.hs"
+    , "xmonad/Layouts.hs" ~> ".xmonad/lib/Layouts.hs"
+    , "xmonad/Startup.hs" ~> ".xmonad/lib/Startup.hs"
+    , "xmonad/Themes.hs" ~> ".xmonad/lib/Themes.hs"
+    , "xmonad/Tmux.hs" ~> ".xmonad/lib/Tmux.hs"
+    , "xmonad/Man.hs" ~> ".xmonad/lib/Man.hs"
+    , "xmonad/Workspaces.hs" ~> ".xmonad/lib/Workspaces.hs"
+    , "gvimrc" ~> ".gvimrc"
+    , "vimcolors" ~> ".vim/colors"
+    , "pentadactylrc" ~> ".pentadactylrc"
+    , "pentadactyl/wanker.penta" ~> ".pentadactyl/plugins/wanker.penta"
+    , "gtkrc.mine" ~> ".gtkrc.mine"
+    , "mplayer-config" ~> ".mplayer/config"
+    ]
+  recipes =
+    [ "template.xmobar.hs" ~> ".xmobar/xmobar.hs"
+    , "xmonad/Misc.hs.template" ~> ".xmonad/lib/Misc.hs"
+    , "xmonad/Profile.hs.template" ~> ".xmonad/lib/Profile.hs"
+    , "xmodmap.template" ~> ".xmodmap"
+    , "Xdefaults.template" ~> ".Xdefaults"
+    ]
 
 tools = profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
-    unzipWithM_ link
-      [ "youtube-in-mplayer.sh" ~> "bin/youtube-in-mplayer"
-      , "cue2tracks.sh" ~> "bin/cue2tracks"
-      , "weather.rb" ~> "bin/ask-weather"
-      , "playcount.hs" ~> "bin/playcount"
-      , "mpd/.lastfm.conf" ~> ".lastfm.conf"
-      , "mpd/lastfm.png" ~> ".icons/lastfm.png"
-      , "mpd/love.hs" ~> "bin/lastfm-love-current-mpd-track"
-      , "battery.rb" ~> "bin/vaio-battery"
-      , "pemised.rb" ~> "bin/pemised"
-      , "upload/screenshot.sh" ~> "bin/upload-screenshot"
-      , "upload/budueba.sh" ~> "bin/upload-budueba"
-      , "upload/pastebin.hs" ~> "bin/upload-pastebin"
-      , "isup.sh" ~> "bin/isup"
-      , "pretty-json.py" ~> "bin/pretty-json"
-      , "publish-haddocks.sh" ~> "bin/publish-haddocks"
-      ]
-    unzipWithM_ (\s d -> raw "ghc" ["-O2 ", s, "-fforce-recomp", "-v0", "-o", d] >> link d ("bin" </> d))
-      [ "audio.hs" ~> "vaio-audio"
-      , "shutdown-gui.hs" ~> "shutdown-gui"
-      ]
+    scripts  & unzipWithM_ link
+    binaries & unzipWithM_ (\source destination -> do
+      raw "ghc" ["-O2 ", source, "-fforce-recomp", "-v0", "-o", destination]
+      link destination ("bin" </> destination))
+ where
+  scripts =
+    [ "youtube-in-mplayer.sh" ~> "bin/youtube-in-mplayer"
+    , "cue2tracks.sh" ~> "bin/cue2tracks"
+    , "weather.rb" ~> "bin/ask-weather"
+    , "playcount.hs" ~> "bin/playcount"
+    , "mpd/.lastfm.conf" ~> ".lastfm.conf"
+    , "mpd/lastfm.png" ~> ".icons/lastfm.png"
+    , "mpd/love.hs" ~> "bin/lastfm-love-current-mpd-track"
+    , "battery.rb" ~> "bin/vaio-battery"
+    , "pemised.rb" ~> "bin/pemised"
+    , "upload/screenshot.sh" ~> "bin/upload-screenshot"
+    , "upload/budueba.sh" ~> "bin/upload-budueba"
+    , "upload/pastebin.hs" ~> "bin/upload-pastebin"
+    , "isup.sh" ~> "bin/isup"
+    , "pretty-json.py" ~> "bin/pretty-json"
+    , "publish-haddocks.sh" ~> "bin/publish-haddocks"
+    ]
+  binaries =
+    [ "audio.hs" ~> "vaio-audio"
+    , "shutdown-gui.hs" ~> "shutdown-gui"
+    ]
 
 
 vim = do
