@@ -21,7 +21,7 @@ main = xmobar Config
     , Run (Memory ["-t", "<usedratio>", "-L", "50", "-H", "50", "-l", "#eeccaa", "--normal", "red", "--high", "red"] 10)
     , Run (Network "eth0" ["-t", "<rx>:<tx>", "-L", "512", "-H", "512", "-l", "#eeccaa", "--normal", "red", "--high", "red"] 10)
     , Run (Network "wlan0" ["-t", "<rx>:<tx>", "-L", "512", "-H", "512", "-l", "#eeccaa", "--normal", "red", "--high", "red"] 10)
-    , Run (Com "ask-weather" [] "weather" 600)
+    , Run (Com "ask-weather" [] "myweather" 600)
     , Run (Com "pemised" [] "mypemi" 60)
     , Run (Com "playcount" [] "mypc" 60)
     , Run (Com "vaio-battery" ["--xmobar"] "battery" 600)
