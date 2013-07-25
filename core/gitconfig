@@ -26,3 +26,5 @@
 	df = diff --stat
 [push]
 	default = current
+[rerere]
+	enabled = true
