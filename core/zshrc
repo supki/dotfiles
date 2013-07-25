@@ -70,6 +70,8 @@ alias less='less -R'
 alias lens='ghci'
 alias ghciu='ghci -ignore-dot-ghci'
 alias ka='killall'
+alias b='biegunka'
+alias c='cabal'
 alias g='git'
 alias s='svn'
 
