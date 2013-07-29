@@ -1,11 +1,13 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wall #-}
 module Main (main) where
 
 import Control.Lens
 import Data.Default (def)
+import Data.String (fromString)
 import System.FilePath ((</>))
 
 import Control.Biegunka
@@ -111,7 +113,7 @@ tools = profile "tools" $
     scripts  & unzipWithM_ link
     binaries & unzipWithM_ (\source destination -> do
       raw "ghc" ["-O2 ", source, "-fforce-recomp", "-v0", "-o", destination]
-      link destination ("bin" </> destination))
+      link destination (fromString ("bin" </> destination)))
  where
   scripts =
     [ "youtube-in-mplayer.sh" ~> "bin/youtube-in-mplayer"
@@ -162,7 +164,7 @@ vim = do
       pathogen_ "git@github.com:tpope/vim-unimpaired"
       pathogen_ "git@github.com:def-lkb/vimbufsync"
     group "idris" $ do
-      "git@github.com:edwinb/Idris-dev" ==> "git/" $ def
+      "git@github.com:edwinb/Idris-dev" ==> into "git" $ def
         & remotes .~ ["origin", "stream"]
         & actions .~ do
             link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
@@ -170,23 +172,23 @@ vim = do
     group "haskell" $
       pathogen_ "git@github.com:bitc/hdevtools"
  where
-  pathogen  u = git u ".vim/bundle/"
+  pathogen  u = git u (into ".vim/bundle")
   pathogen_ u = pathogen u (return ())
 
 
 emacs =
   profile "emacs" $ do
     group "colorschemes" $ do
-      git "git@github.com:bbatsov/zenburn-emacs" "git/emacs/" $
+      git "git@github.com:bbatsov/zenburn-emacs" (into "git/emacs") $
         copyFile "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
     group "usable" $ do
-      git "git@github.com:emacsmirror/paredit" "git/emacs/" $
+      git "git@github.com:emacsmirror/paredit" (into "git/emacs") $
         copyFile "paredit.el" ".emacs.d/plugins/paredit.el"
-      git "git@github.com:jlr/rainbow-delimiters" "git/emacs/" $
+      git "git@github.com:jlr/rainbow-delimiters" (into "git/emacs") $
         copyFile "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
-misc = profile "misc" $ mapM_ (--> "git/")
+misc = profile "misc" $ mapM_ (--> into "git/")
   [ "git@github.com:zsh-users/zsh-syntax-highlighting"
   , "git@github.com:zsh-users/zsh-completions"
   , "git@github.com:stepb/urxvt-tabbedex"
@@ -195,7 +197,7 @@ misc = profile "misc" $ mapM_ (--> "git/")
   ]
 
 
-experimental = profile "experimental" $ mapM_ (--> "git/")
+experimental = profile "experimental" $ mapM_ (--> into "git")
   [ "git@github.com:sol/vimus"
   , "git@github.com:sol/libmpd-haskell"
   , "git@github.com:mitchellh/vagrant"
@@ -203,7 +205,7 @@ experimental = profile "experimental" $ mapM_ (--> "git/")
   ]
 
 
-edwardk = profile "edwardk" $ mapM_ (--> "git/")
+edwardk = profile "edwardk" $ mapM_ (--> into "git")
   [ "git@github.com:ekmett/free"
   , "git@github.com:ekmett/reflection"
   , "git@github.com:ekmett/tagged"
@@ -214,7 +216,7 @@ edwardk = profile "edwardk" $ mapM_ (--> "git/")
 
 
 infix 8 -->
-(-->) :: String -> FilePath -> Script Sources ()
+(-->) :: String -> To -> Script Sources ()
 (-->) = git_
 
 infix 4 ~>
