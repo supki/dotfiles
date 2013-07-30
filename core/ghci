@@ -59,6 +59,7 @@ import qualified Data.IntMap                as IM
 import qualified Data.Foldable              as F
 import qualified Data.Traversable           as F
 import qualified Data.Set                   as S
+import qualified Data.List.NonEmpty         as N
 import qualified Data.Sequence              as Q
 import qualified Data.ByteString            as B
 import qualified Data.ByteString.Char8      as BC
