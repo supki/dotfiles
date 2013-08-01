@@ -10,6 +10,7 @@ import System.FilePath ((</>))
 
 import Control.Biegunka
 import Control.Biegunka.Source.Git
+import Control.Biegunka.Templates.HStringTemplate
 
 import qualified Laptop as Laptop
 import qualified Work as Work
@@ -24,8 +25,8 @@ main :: IO ()
 main = do
   (environment, runBiegunka) <- optionsParser
   case environment of
-    Laptop -> runBiegunka (set root "~") (set templates (Templates Laptop.templates)) laptop
-    Work   -> runBiegunka (set root "~") (set templates (Templates Work.templates)) work
+    Laptop -> runBiegunka (set root "~") (set templates (hStringTemplate Laptop.templates)) laptop
+    Work   -> runBiegunka (set root "~") (set templates (hStringTemplate Work.templates)) work
  where
   laptop = sequence_
     [ dotfiles
