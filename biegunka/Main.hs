@@ -1,13 +1,11 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wall #-}
 module Main (main) where
 
 import Control.Lens
 import Data.Default (def)
-import Data.String (fromString)
 import System.FilePath ((</>))
 
 import Control.Biegunka
@@ -113,7 +111,7 @@ tools = profile "tools" $
     scripts  & unzipWithM_ link
     binaries & unzipWithM_ (\source destination -> do
       raw "ghc" ["-O2 ", source, "-fforce-recomp", "-v0", "-o", destination]
-      link destination (fromString ("bin" </> destination)))
+      link destination ("bin" </> destination))
  where
   scripts =
     [ "youtube-in-mplayer.sh" ~> "bin/youtube-in-mplayer"
@@ -216,7 +214,7 @@ edwardk = profile "edwardk" $ mapM_ (--> into "git")
 
 
 infix 8 -->
-(-->) :: String -> To -> Script Sources ()
+(-->) :: Path p => String -> p -> Script Sources ()
 (-->) = git_
 
 infix 4 ~>
