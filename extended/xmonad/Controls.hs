@@ -20,8 +20,10 @@ import qualified XMonad.StackSet as W
 import Themes
 import qualified Profile as P
 import qualified Workspaces as WS
-import qualified Man as Man
-import qualified Tmux as Tmux
+import qualified Man
+import qualified Tmux
+import qualified Startup
+
 
 -- Mouse
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
@@ -91,6 +93,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (shiftMask,   xK_q, spawn "killall trayer; xmonad --recompile; xmonad --restart")
       -- make workspaces screenshots and merge them
       , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook horizontally)
+      , (0,           xK_a, Startup.myStartupHook)
       ]
       ++
       -- switch to workspace

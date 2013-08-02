@@ -1,11 +1,13 @@
-module Startup (myStartupHook) where
+module Startup
+  ( myStartupHook
+  ) where
 
 import XMonad
 
-import qualified Profile         as P
+import qualified Profile
 
 myStartupHook :: X ()
-myStartupHook = mapM_ spawnOnce P.apps
+myStartupHook =
+  mapM_ spawnOnce Profile.apps
  where
   spawnOnce (target, command) = spawn $ "pid=\"$( pgrep -f \"^" ++ target ++ "\")\"; [ -z \"${pid}\" ] && " ++ command
-

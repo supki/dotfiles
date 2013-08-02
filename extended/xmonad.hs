@@ -8,11 +8,11 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run
 import XMonad.Util.WorkspaceScreenshot (initCapturing)
 
-import Controls
-import Layouts
-import Misc
-import Startup
-import Workspaces
+import           Controls
+import           Layouts
+import           Misc
+import qualified Startup
+import           Workspaces
 
 main = do
   initCapturing
@@ -24,7 +24,7 @@ main = do
     , manageHook         = myManageHook
     , layoutHook         = myLayoutHook
     , logHook            = myLogHook xmproc
-    , startupHook        = myStartupHook
+    , startupHook        = Startup.myStartupHook
     -- Key bindings
     , keys               = myKeys
     , mouseBindings      = myMouseBindings
