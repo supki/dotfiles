@@ -23,6 +23,7 @@
 	lo = log --stat
 	lg = log --patch-with-stat
 	prbs = pull --rebase
+	rbs = rebase --preserve-merges
 	df = diff --stat
 [push]
 	default = current
