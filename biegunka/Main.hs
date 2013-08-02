@@ -25,8 +25,8 @@ main :: IO ()
 main = do
   (environment, runBiegunka) <- optionsParser
   case environment of
-    Laptop -> runBiegunka (set root "~") (set templates (hStringTemplate Laptop.templates)) laptop
-    Work   -> runBiegunka (set root "~") (set templates (hStringTemplate Work.templates)) work
+    Laptop -> runBiegunka (set root "~" . set templates (hStringTemplate Laptop.templates)) laptop
+    Work   -> runBiegunka (set root "~" . set templates (hStringTemplate Work.templates)) work
  where
   laptop = sequence_
     [ dotfiles
@@ -187,7 +187,7 @@ emacs =
         copyFile "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
-misc = profile "misc" $ mapM_ (--> into "git/")
+misc = profile "misc" $ mapM_ (--> into "git")
   [ "git@github.com:zsh-users/zsh-syntax-highlighting"
   , "git@github.com:zsh-users/zsh-completions"
   , "git@github.com:stepb/urxvt-tabbedex"
