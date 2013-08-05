@@ -18,12 +18,12 @@ import qualified Work as Work
 
 data Environments = Laptop | Work
 
-makeOptionsParser ''Environments
+biegunkaOptions ''Environments
 
 
 main :: IO ()
 main = do
-  (environment, runBiegunka) <- optionsParser
+  (environment, runBiegunka) <- options
   case environment of
     Laptop -> runBiegunka (set root "~" . set templates (hStringTemplate Laptop.templates)) laptop
     Work   -> runBiegunka (set root "~" . set templates (hStringTemplate Work.templates)) work
