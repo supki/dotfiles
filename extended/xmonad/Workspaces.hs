@@ -1,7 +1,8 @@
 module Workspaces where
 
+import Control.Lens
 import Data.Functor ((<$>))
-import Data.List (isInfixOf, isPrefixOf)
+import Data.List (isInfixOf, isPrefixOf, isSuffixOf)
 import Data.Monoid ((<>), mconcat)
 
 import XMonad
@@ -30,7 +31,16 @@ myWorkspacesKeys = concat
 --
 
 -- Ids
-data Workspace = Talkative | WWW | Texts | Video | Status | Mail | Files | Torrents
+data Workspace =
+    Talkative
+  | WWW
+  | Texts
+  | Video
+  | Status
+  | Mail
+  | Files
+  | Torrents
+  | Stuff
 
 toWsId :: Workspace -> WorkspaceId
 toWsId Talkative = "~"
@@ -41,6 +51,7 @@ toWsId Status = "0"
 toWsId Mail = "-"
 toWsId Files = "="
 toWsId Torrents = "\\"
+toWsId Stuff = "<-"
 
 onWorkspace w = XLPW.onWorkspace (toWsId w)
 onWorkspaces ws = XLPW.onWorkspaces (map toWsId ws)
@@ -60,11 +71,12 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   , myMail       --> doShift (toWsId Mail)
   , myFiles      --> doShift (toWsId Files)
   , myTorrent    --> doShift (toWsId Torrents)
+  , myStuff      --> doShift (toWsId Stuff)
   ]
   <> manageDocks <> manageHook defaultConfig
   where
   myFloat = foldr1 (<||>)
-    [ ("Figure" `isPrefixOf`) <$> title
+    [ title <&> ("Figure" `isPrefixOf`)
     , title     =? "youtube-video"
     , title     =? "xmessage"
     ]
@@ -72,7 +84,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
     [ title     =? "xfce4-notifyd"
     ]
   myStatus = foldr1 (<||>)
-    [ ("htop" `isInfixOf`) <$> title
+    [ title <&> ("htop" `isInfixOf`)
     , title     =? "iotop"
     , title     =? "netstat"
     , title     =? "poneaux"
@@ -111,6 +123,9 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
     [ title     =? "rtorrent"
     , title     =? "Transmission"
     , title     =? "Torrent Options"
+    ]
+  myStuff = foldr1 (<||>)
+    [ title <&> ("stuff" `isSuffixOf`)
     ]
 --
 
