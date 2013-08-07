@@ -182,18 +182,19 @@ tmuxing = Tmux.prompt patterns route myXPConfig
     [ next $ \repos -> do
         guard (repos `elem` ["git", "svn"])
         next $ \repo -> do
-          end
-          let path = repos </> repo
+          nomore
+          path   <- sofar
           exists <- io $ D.doesDirectoryExist path
           guard exists
           return (Tmux.ChangeDirectory path)
     , dir "playground" $ do
-        end
-        return (Tmux.ChangeDirectory "playground")
+        nomore
+        path <- sofar
+        return (Tmux.ChangeDirectory path)
     , dirs ".vim/bundle" $
         next $ \repo -> do
-          end
-          let path = ".vim/bundle" </> repo
+          nomore
+          path   <- sofar
           exists <- io $ D.doesDirectoryExist path
           guard exists
           return (Tmux.ChangeDirectory path)
