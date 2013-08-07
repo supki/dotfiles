@@ -1,6 +1,7 @@
 module Controls where
 
 import           Control.Monad
+import qualified Data.List as L
 import qualified Data.Map as M
 import           Data.Foldable (asum)
 import           Graphics.X11.ExtraTypes.XF86
@@ -191,6 +192,10 @@ tmuxing = Tmux.prompt patterns route myXPConfig
           exists <- io $ D.doesDirectoryExist path
           guard exists
           return (Tmux.ChangeDirectory path)
+    , next $ \part -> do
+        nomore
+        guard ("slave" `L.isPrefixOf` part)
+        return (Tmux.Session ("ssh " ++ part))
     ]
 
 io_ :: MonadIO m => IO a -> m ()
