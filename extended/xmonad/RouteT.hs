@@ -2,7 +2,7 @@
 -- | Simple routing
 module RouteT
   ( -- * RouteT monad
-    RouteT, Route, runRouteT
+    RouteT, Route, runRouteT, runRoute
     -- * Routing
   , nomore, sofar, next, rest, dir, dirs
   ) where
@@ -14,7 +14,7 @@ import Control.Monad (MonadPlus(..), guard)
 import Control.Monad.Reader (ReaderT, runReaderT, ask, local)
 import Control.Monad.Trans.Either (EitherT, runEitherT)
 import Control.Monad.Trans (MonadIO(..))
-import Data.Functor.Identity (Identity)
+import Data.Functor.Identity (Identity(..))
 import Data.Monoid (Monoid(..))
 import System.FilePath (joinPath, makeRelative, splitDirectories)
 import System.FilePath.Lens ((</>~))
@@ -61,9 +61,15 @@ mkRouting :: FilePath -> Routing
 mkRouting path = Routing { _route = splitDirectories (makeRelative "/" path), _routed = [] }
 
 
--- | Running 'RouteT' gives user either routing failure or some useful value
+-- | Running 'RouteT' gives user either routing failure
+-- or some useful value wrapped in underlying monad
 runRouteT :: FilePath -> RouteT e m a -> m (Either e a)
 runRouteT path = runEitherT . flip runReaderT (mkRouting path) . unRouteT
+
+-- | Running 'RouteT' over 'Identity' gives user either
+-- routing failure or some useful value
+runRoute :: FilePath -> RouteT e Identity a -> Either e a
+runRoute path = runIdentity . runRouteT path
 
 
 -- * Routing
