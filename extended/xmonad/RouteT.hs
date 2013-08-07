@@ -13,7 +13,7 @@ import System.FilePath (makeRelative, splitDirectories)
 
 -- * RouteT definition
 
-type Route = RouteT () Identity
+type Route = RouteT ()
 
 newtype RouteT e m a = RouteT { unRouteT :: ReaderT RoutePath (EitherT e m) a }
     deriving (Functor)

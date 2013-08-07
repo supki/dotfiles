@@ -1,28 +1,32 @@
 module Controls where
 
-import Control.Monad
+import           Control.Monad
 import qualified Data.Map as M
-import Graphics.X11.ExtraTypes.XF86
+import           Data.Foldable (asum)
+import           Graphics.X11.ExtraTypes.XF86
 import qualified Network.MPD as MPD
-import System.FilePath ((</>))
-import System.Exit
-import XMonad
-import XMonad.Actions.CycleWS
-import XMonad.Actions.SwapWorkspaces
-import XMonad.Hooks.ManageDocks
-import XMonad.Prompt
-import XMonad.Prompt.Shell
-import XMonad.Prompt.Window
-import XMonad.Util.NamedScratchpad
-import XMonad.Util.WorkspaceScreenshot
+import qualified System.Directory as D
+import           System.Exit
+import           System.FilePath ((</>))
+import           XMonad
+import           XMonad.Actions.CycleWS
+import           XMonad.Actions.SwapWorkspaces
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Prompt
+import           XMonad.Prompt.Shell
+import           XMonad.Prompt.Window
+import           XMonad.Util.NamedScratchpad
+import           XMonad.Util.WorkspaceScreenshot
 import qualified XMonad.StackSet as W
 
-import Themes
 import qualified Profile as P
 import qualified Workspaces as WS
 import qualified Man
+import           Themes
 import qualified Tmux
+import           RouteT
 import qualified Startup
+
 
 
 -- Mouse
@@ -52,7 +56,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- launch a terminal
       [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
       -- launch tmux prompt
-      , (0,           xK_Return, Tmux.prompt sessions ["~/git/*", "~/svn/*"] myXPConfig)
+      , (0,           xK_Return, tmuxing)
       -- launch man prompt
       , (0,           xK_m, Man.prompt myXPConfig)
       -- launch shellPrompt
@@ -170,6 +174,30 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   ]
 --
 
+tmuxing :: X ()
+tmuxing = Tmux.prompt patterns route myXPConfig
+ where
+  patterns = ["git/*", "svn/*", ".vim/bundle/*"]
+  route    = asum
+    [ next $ \repos -> do
+        guard (repos `elem` ["git", "svn"])
+        next $ \repo -> do
+          end
+          let path = repos </> repo
+          exists <- io $ D.doesDirectoryExist path
+          guard exists
+          return (Tmux.ChangeDirectory path)
+    , dir "playground" $ do
+        end
+        return (Tmux.ChangeDirectory "playground")
+    , dirs ".vim/bundle" $
+        next $ \repo -> do
+          end
+          let path = ".vim/bundle" </> repo
+          exists <- io $ D.doesDirectoryExist path
+          guard exists
+          return (Tmux.ChangeDirectory path)
+    ]
 
 io_ :: MonadIO m => IO a -> m ()
 io_ = io . void

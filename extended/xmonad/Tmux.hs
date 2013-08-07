@@ -22,6 +22,8 @@ import XMonad.Prompt
 import XMonad.Prompt.Input
 import XMonad.Util.Run
 
+import RouteT
+
 
 -- | Less typing type synonym
 type Sessions = Map String Command
@@ -33,15 +35,16 @@ data Command =
     deriving (Show, Read, Eq, Ord)
 
 -- | Ask what session user wants to create/attach to
-prompt :: Sessions  -- ^ Default user defined sessions
-       -> [String]  -- ^ Patterns for ChangeDirectory sessions
-       -> XPConfig  -- ^ Prompt theme
-       -> X ()
-prompt db ps c = do
+prompt
+  :: [String]         -- ^ Candidates patterns
+  -> Route IO Command -- ^ Routing
+  -> XPConfig         -- ^ Prompt theme
+  -> X ()
+prompt patterns route xpConfig = do
   cs <- currents
-  ss <- change =<< liftM concat (mapM expand ps)
-  let as = sort . nubBy ((==) `on` un) $ map ('\'' :) cs ++ M.keys (ss `mappend` db)
-  inputPromptWithCompl c "tmux" (compl' as) ?+ start (ss `mappend` db) cs
+  ds <- concatMapM expand patterns
+  let as = sort . nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
+  inputPromptWithCompl xpConfig "tmux" (compl' as) ?+ start cs route
 
 -- | Get current active tmux sessions names
 currents :: X [String]
@@ -73,22 +76,18 @@ expand p = io $
   wordexp p `mplus` return []
 
 
--- | List directories as ChangeDirectory sessions
-change :: [FilePath] -- ^ Directories
-       -> X Sessions -- ^ Sessions for each directory under the root
-change ds = io $
-  M.fromList . map (\x -> (takeFileName x, ChangeDirectory x)) <$> filterM doesDirectoryExist ds
-
-
 -- | Start tmux session terminal
 -- May either start a new tmux session if it does not exist or connect to existing session
-start :: Sessions -> [String] -> String -> X ()
-start as ss (un -> s) = do
+start :: [String] -> Route IO Command -> String -> X ()
+start runningSessions route (un -> userInput) = do
   term <- asks $ terminal . config
-  spawn $ if
-    | s `elem` ss     -> attach  term s
-    | s `M.member` as -> create' term s (as ! s)
-    | otherwise       -> create  term s
+  case userInput `elem` runningSessions of
+    True  -> spawn $ attach  term userInput
+    False -> do
+      routed <- io $ runRouteT userInput route
+      case routed of
+        Right command -> spawn $ create' term userInput command
+        Left  _       -> spawn $ create  term userInput
  where
   attach t e = t ++ " -e tmux attach -d -t " ++ e
   create t e = t ++ " -e tmux new -s "    ++ e
@@ -96,3 +95,6 @@ start as ss (un -> s) = do
     t ++ " -e sh -c \"cd " ++ p ++ "; tmux new -s "    ++ e ++ "\""
   create' t e (Session c) =
     t ++ " -e tmux new -s "    ++ e ++ " '" ++ c ++ "'"
+
+concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
+concatMapM f = liftM concat . mapM f
