@@ -196,6 +196,10 @@ tmuxing = Tmux.prompt patterns route myXPConfig
         nomore
         guard ("slave" `L.isPrefixOf` part)
         return (Tmux.Session ("ssh " ++ part))
+    , next $ \part -> do
+        nomore
+        guard (part `elem` ["dev", "storage"])
+        return (Tmux.Session ("ssh " ++ part))
     ]
 
 io_ :: MonadIO m => IO a -> m ()
