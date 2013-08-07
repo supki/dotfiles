@@ -87,11 +87,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- toggle the status bar gap (used with avoidStruts from Hooks.ManageDocks)
       , (0,           xK_b, sendMessage ToggleStruts)
       -- quit/restart xmonad
-      , (0,           xK_q, restart "xmonad" True)
+      , (0,           xK_q, Startup.myStartupHook)
       , (shiftMask,   xK_q, spawn "killall trayer; xmonad --recompile; xmonad --restart")
       -- make workspaces screenshots and merge them
       , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook horizontally)
-      , (0,           xK_a, Startup.myStartupHook)
       ]
       ++
       -- switch to workspace
