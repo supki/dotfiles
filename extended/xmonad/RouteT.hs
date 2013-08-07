@@ -2,24 +2,39 @@
 module RouteT where
 
 import Control.Applicative (Alternative(..), Applicative(..))
+import Control.Category ((>>>))
+import Control.Lens
 import Control.Monad (MonadPlus(..), guard)
 import Control.Monad.Reader (ReaderT, runReaderT, ask, local)
 import Control.Monad.Trans.Either (EitherT, runEitherT)
 import Control.Monad.Trans (MonadIO(..))
 import Data.Functor.Identity (Identity)
 import Data.Monoid (Monoid(..))
-import System.FilePath (makeRelative, splitDirectories)
+import System.FilePath (joinPath, makeRelative, splitDirectories)
+import System.FilePath.Lens ((</>~))
 
 
 -- * RouteT definition
 
 type Route = RouteT ()
 
-newtype RouteT e m a = RouteT { unRouteT :: ReaderT RoutePath (EitherT e m) a }
+newtype RouteT e m a = RouteT { unRouteT :: ReaderT Routing (EitherT e m) a }
     deriving (Functor)
 
-type RoutePath = [FilePath]
-type RouteError = String
+data Routing = Routing
+  { _route :: [FilePath]
+  , _routed :: FilePath
+  }
+
+route :: Lens' Routing [FilePath]
+route f r = f (_route r) <&> \x -> r { _route = x }
+
+routed :: Lens' Routing FilePath
+routed f r = f (_routed r) <&> \x -> r { _routed = x }
+
+mkRouting :: FilePath -> Routing
+mkRouting path = Routing { _route = splitDirectories (makeRelative "/" path), _routed = [] }
+
 
 instance Monad m => Applicative (RouteT e m) where
   pure = RouteT . pure
@@ -43,7 +58,7 @@ instance (MonadIO m, Monoid e) => MonadIO (RouteT e m) where
 
 -- | Running 'RouteT' gives user either routing failure or some useful value
 runRouteT :: FilePath -> RouteT e m a -> m (Either e a)
-runRouteT path = runEitherT . flip runReaderT (splitDirectories (makeRelative "/" path)) . unRouteT
+runRouteT path = runEitherT . flip runReaderT (mkRouting path) . unRouteT
 
 
 -- * Routing
@@ -51,35 +66,35 @@ runRouteT path = runEitherT . flip runReaderT (splitDirectories (makeRelative "/
 -- | One directory deeper
 dir :: (Monad m, Monoid e) => FilePath -> RouteT e m a -> RouteT e m a
 dir path (RouteT r) = RouteT $ do
-  env <- ask
-  case env of
+  ps <- view route
+  case ps of
     [] -> empty
     d:ds
-      | d == path -> local (const ds) r
+      | d == path -> local (routed </>~ d >>> route .~ ds) r
       | otherwise -> empty
 
 -- | Some directories deeper
 dirs :: (Monad m, Monoid e) => FilePath -> RouteT e m a -> RouteT e m a
-dirs path route =
+dirs path r =
   let directories = splitDirectories (makeRelative "/" path)
-  in foldr dir route directories
+  in foldr dir r directories
 
 -- | Ensure the end of the route
 end :: (Monad m, Monoid e) => RouteT e m ()
 end = RouteT $ do
-  env <- ask
-  guard (null env)
+  ps <- view route
+  guard (null ps)
 
 -- | Make routing decision based on next directory
 next :: (Monad m, Monoid e) => (FilePath -> RouteT e m b) -> RouteT e m b
 next k = RouteT $ do
-  env <- ask
-  case env of
+  ps <- view route
+  case ps of
     []   -> empty
-    d:ds -> local (const ds) (unRouteT (k d))
+    d:ds -> local (routed </>~ d >>> route .~ ds) (unRouteT (k d))
 
 -- | Make routing decision based on the rest of the route
 rest :: (Monad m, Monoid e) => ([FilePath] -> RouteT e m b) -> RouteT e m b
 rest k = RouteT $ do
-  env <- ask
-  local (const []) (unRouteT (k env))
+  ps <- view route
+  local (routed </>~ joinPath ps >>> route .~ []) (unRouteT (k ps))
