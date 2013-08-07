@@ -42,12 +42,6 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 --
 
 
--- Tmux sessions advanced commands
-sessions :: Tmux.Sessions
-sessions = M.fromList $ [("perds", Tmux.ChangeDirectory "~/.vim/bundle/vim-perd")]
---
-
-
 -- Keyboard hotkeys
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- default
@@ -181,7 +175,7 @@ tmuxing = Tmux.prompt patterns route myXPConfig
   route    = asum
     [ next $ \repos -> do
         guard (repos `elem` ["git", "svn"])
-        next $ \repo -> do
+        next $ \_ -> do
           nomore
           path   <- sofar
           exists <- io $ D.doesDirectoryExist path
@@ -192,7 +186,7 @@ tmuxing = Tmux.prompt patterns route myXPConfig
         path <- sofar
         return (Tmux.ChangeDirectory path)
     , dirs ".vim/bundle" $
-        next $ \repo -> do
+        next $ \_ -> do
           nomore
           path   <- sofar
           exists <- io $ D.doesDirectoryExist path
