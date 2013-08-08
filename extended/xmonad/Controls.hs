@@ -181,10 +181,8 @@ tmuxing = Tmux.prompt patterns route myXPConfig
           exists <- io $ D.doesDirectoryExist path
           guard exists
           return (Tmux.ChangeDirectory path)
-    , dir "playground" $ do
-        nomore
-        path <- sofar
-        return (Tmux.ChangeDirectory path)
+    , dir "play" $
+        return (Tmux.ChangeDirectory "playground")
     , dirs ".vim/bundle" $
         next $ \_ -> do
           nomore
