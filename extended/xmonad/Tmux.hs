@@ -36,9 +36,9 @@ data Command =
 
 -- | Ask what session user wants to create/attach to
 prompt
-  :: [String]         -- ^ Candidates patterns
-  -> Route IO Command -- ^ Routing
-  -> XPConfig         -- ^ Prompt theme
+  :: [String]          -- ^ Candidates patterns
+  -> RouteT IO Command -- ^ Routing
+  -> XPConfig          -- ^ Prompt theme
   -> X ()
 prompt patterns route xpConfig = do
   cs <- currents
@@ -78,7 +78,7 @@ expand p = io $
 
 -- | Start tmux session terminal
 -- May either start a new tmux session if it does not exist or connect to existing session
-start :: [String] -> Route IO Command -> String -> X ()
+start :: [String] -> RouteT IO Command -> String -> X ()
 start runningSessions route (un -> userInput) = do
   term <- asks $ terminal . config
   case userInput `elem` runningSessions of
@@ -86,8 +86,8 @@ start runningSessions route (un -> userInput) = do
     False -> do
       routed <- io $ runRouteT userInput route
       case routed of
-        Right command -> spawn $ create' term userInput command
-        Left  _       -> spawn $ create  term userInput
+        Just command -> spawn $ create' term userInput command
+        Nothing      -> spawn $ create  term userInput
  where
   attach t e = t ++ " -e tmux attach -d -t " ++ e
   create t e = t ++ " -e tmux new -s "    ++ e

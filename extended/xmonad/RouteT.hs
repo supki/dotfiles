@@ -10,40 +10,39 @@ module RouteT
 import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Category ((>>>))
 import Control.Lens
-import Control.Monad (MonadPlus(..), guard)
+import Control.Monad (MonadPlus(..), ap, guard, liftM)
 import Control.Monad.Reader (ReaderT, runReaderT, ask, local)
-import Control.Monad.Trans.Either (EitherT, runEitherT)
 import Control.Monad.Trans (MonadIO(..))
+import Control.Monad.Trans.Class (MonadTrans(..))
 import Data.Functor.Identity (Identity(..))
-import Data.Monoid (Monoid(..))
 import System.FilePath (joinPath, makeRelative, splitDirectories)
 import System.FilePath.Lens ((</>~))
 
 
 -- * RouteT definition
 
-type Route = RouteT ()
+type Route = RouteT Identity
 
-newtype RouteT e m a = RouteT { unRouteT :: ReaderT Routing (EitherT e m) a }
+newtype RouteT m a = RouteT { unRouteT :: ReaderT Routing (OptionT m) a }
     deriving (Functor)
 
-instance Monad m => Applicative (RouteT e m) where
+instance Monad m => Applicative (RouteT m) where
   pure = RouteT . pure
   RouteT f <*> RouteT x = RouteT (f <*> x)
 
-instance Monad m => Monad (RouteT e m) where
+instance Monad m => Monad (RouteT m) where
   return = pure
   RouteT m >>= k = RouteT $ m >>= unRouteT . k
 
-instance (Monad m, Monoid e) => Alternative (RouteT e m) where
+instance Monad m => Alternative (RouteT m) where
   empty = RouteT empty
   RouteT a <|> RouteT b = RouteT (a <|> b)
 
-instance (Monad m, Monoid e) => MonadPlus (RouteT e m) where
+instance Monad m => MonadPlus (RouteT m) where
   mzero = empty
   mplus = (<|>)
 
-instance (MonadIO m, Monoid e) => MonadIO (RouteT e m) where
+instance MonadIO m => MonadIO (RouteT m) where
   liftIO = RouteT . liftIO
 
 data Routing = Routing
@@ -63,29 +62,29 @@ mkRouting path = Routing { _route = splitDirectories (makeRelative "/" path), _r
 
 -- | Running 'RouteT' gives user either routing failure
 -- or some useful value wrapped in underlying monad
-runRouteT :: FilePath -> RouteT e m a -> m (Either e a)
-runRouteT path = runEitherT . flip runReaderT (mkRouting path) . unRouteT
+runRouteT :: FilePath -> RouteT m a -> m (Maybe a)
+runRouteT path = runOptionT . flip runReaderT (mkRouting path) . unRouteT
 
 -- | Running 'RouteT' over 'Identity' gives user either
 -- routing failure or some useful value
-runRoute :: FilePath -> RouteT e Identity a -> Either e a
+runRoute :: FilePath -> Route a -> Maybe a
 runRoute path = runIdentity . runRouteT path
 
 
 -- * Routing
 
 -- | Ensure this is the end of the route
-nomore :: (Monad m, Monoid e) => RouteT e m ()
+nomore :: Monad m => RouteT m ()
 nomore = RouteT $ do
   ps <- view route
   guard (null ps)
 
 -- | Get already routed part of the route
-sofar :: (Monad m, Monoid e) => RouteT e m FilePath
+sofar :: Monad m => RouteT m FilePath
 sofar = RouteT $ view routed
 
 -- | Make routing decision based on next directory
-next :: (Monad m, Monoid e) => (FilePath -> RouteT e m b) -> RouteT e m b
+next :: Monad m => (FilePath -> RouteT m b) -> RouteT m b
 next k = RouteT $ do
   ps <- view route
   case ps of
@@ -93,13 +92,13 @@ next k = RouteT $ do
     d:ds -> local (routed </>~ d >>> route .~ ds) (unRouteT (k d))
 
 -- | Make routing decision based on the rest of the route
-rest :: (Monad m, Monoid e) => ([FilePath] -> RouteT e m b) -> RouteT e m b
+rest :: Monad m => ([FilePath] -> RouteT m b) -> RouteT m b
 rest k = RouteT $ do
   ps <- view route
   local (routed </>~ joinPath ps >>> route .~ []) (unRouteT (k ps))
 
 -- | One directory deeper
-dir :: (Monad m, Monoid e) => FilePath -> RouteT e m a -> RouteT e m a
+dir :: Monad m => FilePath -> RouteT m a -> RouteT m a
 dir path (RouteT r) = RouteT $ do
   ps <- view route
   case ps of
@@ -109,7 +108,44 @@ dir path (RouteT r) = RouteT $ do
       | otherwise -> empty
 
 -- | Some directories deeper
-dirs :: (Monad m, Monoid e) => FilePath -> RouteT e m a -> RouteT e m a
+dirs :: Monad m => FilePath -> RouteT m a -> RouteT m a
 dirs path r =
   let directories = splitDirectories (makeRelative "/" path)
   in foldr dir r directories
+
+
+-- | Sorry, but Control.Monad.Trans.Maybe is unusable
+newtype OptionT m a = OptionT { runOptionT :: m (Maybe a) }
+
+instance Monad m => Functor (OptionT m) where
+  fmap f (OptionT m) = OptionT (liftM (fmap f) m)
+
+instance Monad m => Applicative (OptionT m) where
+  pure = return
+  (<*>) = ap
+
+instance Monad m => Monad (OptionT m) where
+  return = OptionT . return . Just
+  OptionT x >>= f = OptionT $ do
+    v <- x
+    case v of
+      Nothing -> return Nothing
+      Just y  -> runOptionT (f y)
+
+instance Monad m => Alternative (OptionT m) where
+  empty = mzero
+  (<|>) = mplus
+
+instance Monad m => MonadPlus (OptionT m) where
+  mzero = OptionT (return Nothing)
+  OptionT x `mplus` OptionT y = OptionT $ do
+    v <- x
+    case v of
+      Nothing -> y
+      Just _  -> return v
+
+instance MonadTrans OptionT where
+  lift = OptionT . liftM Just
+
+instance MonadIO m => MonadIO (OptionT m) where
+  liftIO = lift . liftIO
