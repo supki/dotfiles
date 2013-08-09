@@ -1,6 +1,7 @@
 # Mappings
 map ; :
 map u :update<CR>
+map <Space> :scroll-half-page-down<CR>
 
 # Colors
 color tab red black
