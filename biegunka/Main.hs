@@ -216,7 +216,7 @@ edwardk = profile "edwardk" $ mapM_ (--> into "git")
 
 
 infix 8 -->
-(-->) :: Path p => String -> p -> Script Sources ()
+(-->) :: Target p => String -> p -> Script Sources ()
 (-->) = git_
 
 infix 4 ~>
