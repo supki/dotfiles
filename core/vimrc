@@ -124,6 +124,7 @@
 		autocmd FileType racket  setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType ruby    setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType python  setlocal expandtab shiftwidth=4 softtabstop=4
+		autocmd FileType perl    setlocal expandtab shiftwidth=2 softtabstop=2
 	augroup end
 
 	" save on focus lost
