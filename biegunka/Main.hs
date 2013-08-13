@@ -130,6 +130,7 @@ tools = profile "tools" $
     , "upload/pastebin.hs" ~> "bin/upload-pastebin"
     , "isup.sh" ~> "bin/isup"
     , "pretty-json.py" ~> "bin/pretty-json"
+    , "vaio/touchpad" ~> "bin/vaio-touchpad"
     , "publish-haddocks.sh" ~> "bin/publish-haddocks"
     ]
   binaries =
