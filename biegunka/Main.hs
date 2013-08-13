@@ -132,6 +132,7 @@ tools = profile "tools" $
     , "pretty-json.py" ~> "bin/pretty-json"
     , "vaio/touchpad" ~> "bin/vaio-touchpad"
     , "publish-haddocks.sh" ~> "bin/publish-haddocks"
+    , "suspender" ~> "bin/suspender"
     ]
   binaries =
     [ "audio.hs" ~> "vaio-audio"
