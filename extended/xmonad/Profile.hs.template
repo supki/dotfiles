@@ -1,7 +1,47 @@
 module Profile where
 
+import           Control.Monad
+import           Data.Foldable (asum)
+import qualified Data.List as L
+import qualified System.Directory as D
+import           XMonad
+
 import Misc
+import RouteT
+import Tmux
 
 -- Startup apps
 apps :: [(String, String)]
 apps = $template.xmonad.startup$
+
+patterns :: [String]
+patterns = ["git/*", "svn/*", ".vim/bundle/*"]
+
+route :: RouteT IO Command
+route = asum
+  [ next \$ \\repos -> do
+      guard (repos `elem` ["git", "svn"])
+      next \$ \\_ -> do
+        nomore
+        path   <- sofar
+        exists <- io \$ D.doesDirectoryExist path
+        guard exists
+        return (Tmux.ChangeDirectory path)
+  , dir "play" \$
+      return (Tmux.ChangeDirectory "playground")
+  , dirs ".vim/bundle" \$
+      next \$ \\_ -> do
+        nomore
+        path   <- sofar
+        exists <- io \$ D.doesDirectoryExist path
+        guard exists
+        return (Tmux.ChangeDirectory path)
+  , next \$ \\part -> do
+      nomore
+      guard ("slave" `L.isPrefixOf` part)
+      return (Tmux.Session ("ssh " ++ part))
+  , next \$ \\part -> do
+      nomore
+      guard (part `elem` ["dev", "storage"])
+      return (Tmux.Session ("ssh " ++ part))
+  ]
