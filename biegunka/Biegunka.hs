@@ -1,5 +1,6 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wall #-}
 module Main (main) where
@@ -52,7 +53,7 @@ dotfiles = profile "dotfiles" $
     cores     & mapped._1 <\>~ "core"     & unzipWithM_ link
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
     recipes   & mapped._1 <\>~ "extended" & unzipWithM_ substitute
-    shell "xrdb -merge ~/.Xdefaults"
+    [sh|xrdb -merge ~/.Xdefaults|]
  where
   cores =
     [ "xsession" ~> ".xsession"
@@ -112,7 +113,7 @@ tools = profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     scripts  & unzipWithM_ link
     binaries & unzipWithM_ (\source destination -> do
-      raw "ghc" ["-O2 ", source, "-fforce-recomp", "-v0", "-o", destination]
+      [sh|ghc -O2 ${source} -fforce-recomp -v0 -o ${destination}|]
       link destination ("bin" </> destination))
  where
   scripts =
@@ -144,7 +145,7 @@ vim = do
   profile "vim" $ do
     group "haskell" $ do
       pathogen  "git@github.com:Shougo/vimproc" $
-        shell "make -f make_unix.mak"
+        [sh|make -f make_unix.mak|]
       pathogen_ "git@github.com:eagletmt/ghcmod-vim"
       pathogen_ "git@github.com:ujihisa/neco-ghc"
       pathogen_ "git@github.com:Shougo/neocomplcache"
