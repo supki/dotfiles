@@ -1,8 +1,8 @@
-# launch network-manager applet
-nm-applet &
-
 # set keyboard layouts
 setxkbmap -option "" -layout "us,ru" -option grp:caps_toggle -option grp_led:scroll :2
+
+# ~terminus~
+xset +fp ~/fonts
 
 # enable ctrl-alt-backspace sequence
 setxkbmap -option terminate:ctrl_alt_bksp
