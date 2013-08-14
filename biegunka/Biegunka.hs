@@ -29,7 +29,7 @@ main = do
     Laptop -> runBiegunka (set root "~" . set templates (hStringTemplate Laptop.templates)) laptop
     Work   -> runBiegunka (set root "~" . set templates (hStringTemplate Work.templates)) work
  where
-  laptop = sequence_
+  laptop = sudo (Username "maksenov") $ sequence_
     [ dotfiles
     , tools
     , vim
@@ -111,10 +111,16 @@ dotfiles = profile "dotfiles" $
 
 tools = profile "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
-    scripts  & unzipWithM_ link
-    binaries & unzipWithM_ (\source destination -> do
-      [sh|ghc -O2 ${source} -fforce-recomp -v0 -o ${destination}|]
+    suid_binaries & unzipWithM_ (\source destination ->
+      sudo (Username "root") $ [sh|
+        ghc -O2 #{source} -fforce-recomp -v0 -o #{destination}
+        chown root:root #{destination}
+        chmod +s #{destination}
+      |])
+    user_binaries & unzipWithM_ (\source destination -> do
+      [sh|ghc -O2 #{source} -fforce-recomp -v0 -o #{destination}|]
       link destination ("bin" </> destination))
+    scripts & unzipWithM_ link
  where
   scripts =
     [ "youtube-in-mplayer.sh" ~> "bin/youtube-in-mplayer"
@@ -131,13 +137,17 @@ tools = profile "tools" $
     , "upload/pastebin.hs" ~> "bin/upload-pastebin"
     , "isup.sh" ~> "bin/isup"
     , "pretty-json.py" ~> "bin/pretty-json"
-    , "vaio/touchpad" ~> "bin/vaio-touchpad"
     , "publish-haddocks.sh" ~> "bin/publish-haddocks"
+    , "vaio-audio" ~> "bin/vaio-audio"
+    , "vaio-touchpad" ~> "bin/vaio-touchpad"
     , "suspender" ~> "bin/suspender"
     ]
-  binaries =
+  user_binaries =
     [ "audio.hs" ~> "vaio-audio"
-    , "shutdown-gui.hs" ~> "shutdown-gui"
+    ]
+  suid_binaries =
+    [ "suspender.hs" ~> "suspender"
+    , "vaio/touchpad.hs" ~> "vaio-touchpad"
     ]
 
 
