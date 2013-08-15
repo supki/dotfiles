@@ -119,6 +119,7 @@ import System.Wordexp.Simple
 :set -XMultiWayIf
 :set -XNoMonomorphismRestriction
 :set -XPackageImports
+:set -XQuasiQuotes
 :set -XRankNTypes
 :set -XScopedTypeVariables
 :set -XTupleSections
