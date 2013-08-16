@@ -30,13 +30,13 @@ import           Control.Concurrent.STM.TChan
 import           Control.Concurrent.STM.TQueue
 import           Control.Lens
 import           Control.Comonad
-import           Control.Monad.Error
 import           Control.Monad.Reader
 import           Control.Monad.Writer hiding ((<>))
 import           Control.Monad.State
 import           Control.Monad.Free
 import           Control.Monad.STM
 import           Control.Monad.Trans
+import           Control.Monad.Trans.Either
 import           Control.Monad.Trans.Maybe
 import           Data.Bifunctor
 import           Data.Bits.Lens
@@ -49,16 +49,21 @@ import           Data.Tagged
 import           Numeric.Lens
 import           Prelude.Unicode
 import           System.Directory
+import           System.Environment
+import           System.Exit
 import           System.FilePath
 import           System.FilePath.Lens
 import           Text.Parsec hiding ((<|>), many)
 
 import qualified Control.Exception          as E
-import qualified Data.Map                   as M
-import qualified Data.IntMap                as IM
+import qualified Data.Map.Strict            as M
+import qualified Data.IntMap.Strict         as IM
+import qualified Data.HashMap.Strict        as HM
 import qualified Data.Foldable              as F
 import qualified Data.Traversable           as F
 import qualified Data.Set                   as S
+import qualified Data.IntSet                as IS
+import qualified Data.HashSet               as HS
 import qualified Data.List.NonEmpty         as N
 import qualified Data.Sequence              as Q
 import qualified Data.ByteString            as B
@@ -68,7 +73,8 @@ import qualified Data.ByteString.Lazy.Char8 as BLC
 import qualified Data.Text                  as T
 import qualified Data.Text.Lazy             as TL
 
-import System.Wordexp.Simple
+import           System.Command.QQ
+import           System.Wordexp.Simple
 
 :set -fwarn-alternative-layout-rule-transitional
 :set -fwarn-auto-orphans
