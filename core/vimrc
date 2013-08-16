@@ -281,5 +281,21 @@
 			silent !chmod a+x <afile>
 		endif
 	endfunction
+
 	autocmd BufWritePost * call ModeChange()
+
+
+	" Convert markdown files to html with pandoc
+	function RenderMarkdown()
+		let l:markdown = expand("<afile>")
+		let l:html     = expand("<afile>:r") . ".html"
+		call system("pandoc --from markdown --to html -o " . l:html . " " . l:markdown)
+		redraw!
+	endfunction
+
+	augroup render
+		autocmd!
+		autocmd BufWritePost README.md  call RenderMarkdown()
+		autocmd BufWritePost *.markdown call RenderMarkdown()
+	augroup end
 " }
