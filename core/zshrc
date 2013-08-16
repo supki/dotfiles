@@ -5,6 +5,10 @@ function chpwd {
 autoload -U compinit promptinit colors
 autoload -Uz vcs_info
 
+autoload -U zrecompile
+zrecompile -pq ~/.zshrc
+zrecompile -pq ~/.zshenv
+
 fpath=(/opt/devtools-1.0/completions/zsh ~/git/zsh-completions/src $fpath)
 compinit
 setopt autocd autopushd correct
