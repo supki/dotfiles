@@ -87,6 +87,9 @@
 	" always report about changed lines
 	set report=0
 
+	" let cursor move past the last char
+	set virtualedit=block,onemore
+
 	" minimum line numbers column width
 	set numberwidth=2
 
