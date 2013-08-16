@@ -66,6 +66,7 @@ bindkey "^[[4~" end-of-line
 bindkey "^_" undo
 bindkey -a "'" quote-line
 bindkey -a "q" push-line
+bindkey "^[[Z" reverse-menu-complete
 
 alias ack=ack-grep # stupid debian
 alias ls='ls --color'
