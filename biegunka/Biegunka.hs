@@ -181,6 +181,8 @@ vim = do
         & remotes .~ ["origin", "stream"]
         & actions .~ do
             link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
+    group "text" $ do
+      pathogen_ "git@github.com:godlygeek/tabular"
   profile "vimish" $
     group "haskell" $
       pathogen_ "git@github.com:bitc/hdevtools"
