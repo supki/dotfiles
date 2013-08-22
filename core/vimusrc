@@ -12,3 +12,6 @@ color playstatus white black
 color error white red
 color input white black
 color suggestions yellow black
+
+# Format
+format "%a | %b (%y) | %n. %t"
