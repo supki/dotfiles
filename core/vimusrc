@@ -1,9 +1,9 @@
-# Mappings
+# mappings
 map ; :
 map u :update<CR>
 map <Space> :scroll-half-page-down<CR>
 
-# Colors
+# colors
 color tab red black
 color main yellow black
 color ruler yellow black
@@ -13,5 +13,7 @@ color error white red
 color input white black
 color suggestions yellow black
 
-# Format
-format %artist% | %album% \(%year%\) | %track% (%title%|%filename%/%directory%) [%length%]
+autotitle
+
+# formats
+song-format %artist% | %album% \(%year%\) | (%track%. |)(%title%|%directory%/%filename%) [%length%]
