@@ -1,6 +1,9 @@
+autotitle
+
 # mappings
 map ; :
 map u :update<CR>
+map q :quit<CR>
 map <Space> :scroll-half-page-down<CR>
 
 # colors
@@ -12,8 +15,6 @@ color playstatus white black
 color error white red
 color input white black
 color suggestions yellow black
-
-autotitle
 
 # formats
 song-format %artist% | %album% \(%year%\) | (%track%. |)(%title%|%directory%/%filename%) [%length%]
