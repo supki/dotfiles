@@ -11,19 +11,19 @@ templates :: Template
 templates = def
   { xmobar = def
     { background = "\"#373737\""
-    , position = "BottomW R 94"
+    , position   = "BottomW R 94"
     }
   , xmonad = def
-    { terminal = "urxvt"
-    , ubuntu = "xft:ubuntu:size=9"
-    , terminus = "xft:terminus:size=9"
-    , white = "#ffffff"
-    , grayDark = "#515151"
+    { terminal  = "urxvt"
+    , ubuntu    = "xft:ubuntu:size   = 9"
+    , terminus  = "xft:terminus:size = 9"
+    , white     = "#ffffff"
+    , grayDark  = "#515151"
     , grayLight = "#cccccc"
-    , black = "#373737"
-    , orange = "#dd9977"
-    , yellow = "#eeccaa"
-    , startup =
+    , black     = "#373737"
+    , orange    = "#dd9977"
+    , yellow    = "#eeccaa"
+    , startup   =
       [s|
         [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 78 --heighttype pixel --height 17 --tint 0x" ++ tail blackColor ++ " --alpha 0")
         , ("/usr/lib/firefox/firefox", "firefox")
@@ -37,11 +37,11 @@ templates = def
         , ("htop", "urxvt -title jenkins-htop -e ssh jenkins -t htop")
         ]
       |]
-    , follow = "True"
+    , follow    = "True"
     }
   , urxvt = def
-    { perllib = "/home/pyoseek/git/urxvt-tabbedex:/home/pyoseek/git/urxvt-perls"
+    { perllib     = "/home/pyoseek/git/urxvt-tabbedex:/home/pyoseek/git/urxvt-perls"
     , background_ = "#373737"
-    , browser = "firefox"
+    , browser     = "firefox"
     }
   }

@@ -1,5 +1,5 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wall #-}
@@ -29,7 +29,7 @@ main = do
     Laptop -> runBiegunka (set root "~" . set templates (hStringTemplate Laptop.templates)) laptop
     Work   -> runBiegunka (set root "~" . set templates (hStringTemplate Work.templates)) work
  where
-  laptop = sudo (Username "maksenov") $ sequence_
+  laptop = sudo "maksenov" $ sequence_
     [ dotfiles
     , tools
     , vim
@@ -48,7 +48,7 @@ main = do
 dotfiles, tools, vim, emacs, misc, experimental, edwardk :: Script Sources ()
 
 
-dotfiles = profile "dotfiles" $
+dotfiles = role "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     cores     & mapped._1 <\>~ "core"     & unzipWithM_ link
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
@@ -109,10 +109,10 @@ dotfiles = profile "dotfiles" $
     , "Xdefaults.template"         ~> ".Xdefaults"
     ]
 
-tools = profile "tools" $
+tools = role "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     suid_binaries & unzipWithM_ (\source destination ->
-      sudo (Username "root") $ [sh|
+      sudo "root" $ [sh|
         ghc -O2 #{source} -fforce-recomp -v0 -o #{destination}
         chown root:root #{destination}
         chmod +s #{destination}
@@ -122,6 +122,7 @@ tools = profile "tools" $
       link destination ("bin" </> destination))
     scripts & unzipWithM_ link
  where
+  scripts, user_binaries, suid_binaries :: [(String, String)]
   scripts =
     [ "youtube-in-mplayer.sh" ~> "bin/youtube-in-mplayer"
     , "cue2tracks.sh"         ~> "bin/cue2tracks"
@@ -152,7 +153,7 @@ tools = profile "tools" $
 
 
 vim = do
-  profile "vim" $ do
+  role "vim" $ do
     group "haskell" $ do
       pathogen  "git@github.com:Shougo/vimproc" $
         [sh|make -f make_unix.mak|]
@@ -179,11 +180,11 @@ vim = do
     group "idris" $ do
       "git@github.com:edwinb/Idris-dev" ==> into "git" $ def
         & remotes .~ ["origin", "stream"]
-        & actions .~ do
+        & actions .~
             link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
-    group "text" $ do
+    group "text" $
       pathogen_ "git@github.com:godlygeek/tabular"
-  profile "vimish" $
+  role "vimish" $
     group "haskell" $
       pathogen_ "git@github.com:bitc/hdevtools"
  where
@@ -191,19 +192,18 @@ vim = do
   pathogen_ u = pathogen u (return ())
 
 
-emacs =
-  profile "emacs" $ do
-    group "colorschemes" $ do
-      git "git@github.com:bbatsov/zenburn-emacs" (into "git/emacs") $
-        copyFile "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
-    group "usable" $ do
-      git "git@github.com:emacsmirror/paredit" (into "git/emacs") $
-        copyFile "paredit.el" ".emacs.d/plugins/paredit.el"
-      git "git@github.com:jlr/rainbow-delimiters" (into "git/emacs") $
-        copyFile "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
+emacs = role "emacs" $ do
+  group "colorschemes" $ do
+    git "git@github.com:bbatsov/zenburn-emacs" (into "git/emacs") $
+      copyFile "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
+  group "usable" $ do
+    git "git@github.com:emacsmirror/paredit" (into "git/emacs") $
+      copyFile "paredit.el" ".emacs.d/plugins/paredit.el"
+    git "git@github.com:jlr/rainbow-delimiters" (into "git/emacs") $
+      copyFile "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
-misc = profile "misc" $ mapM_ (--> into "git")
+misc = role "misc" $ mapM_ (--> into "git")
   [ "git@github.com:zsh-users/zsh-syntax-highlighting"
   , "git@github.com:zsh-users/zsh-completions"
   , "git@github.com:stepb/urxvt-tabbedex"
@@ -212,7 +212,7 @@ misc = profile "misc" $ mapM_ (--> into "git")
   ]
 
 
-experimental = profile "experimental" $ mapM_ (--> into "git")
+experimental = role "experimental" $ mapM_ (--> into "git")
   [ "git@github.com:sol/vimus"
   , "git@github.com:sol/libmpd-haskell"
   , "git@github.com:mitchellh/vagrant"
@@ -220,7 +220,7 @@ experimental = profile "experimental" $ mapM_ (--> into "git")
   ]
 
 
-edwardk = profile "edwardk" $ mapM_ (--> into "git")
+edwardk = role "edwardk" $ mapM_ (--> into "git")
   [ "git@github.com:ekmett/free"
   , "git@github.com:ekmett/reflection"
   , "git@github.com:ekmett/tagged"
@@ -231,7 +231,7 @@ edwardk = profile "edwardk" $ mapM_ (--> into "git")
 
 
 infix 8 -->
-(-->) :: Target p => String -> p -> Script Sources ()
+(-->) :: String -> FilePath -> Script Sources ()
 (-->) = git_
 
 infix 4 ~>

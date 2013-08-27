@@ -1,17 +1,16 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 module Defaults where
 
-import Data.Data (Data)
-import Data.Typeable (Typeable)
+import Data.Data (Data, Typeable)
 
 import Data.Default (Default(..))
 
 
 data Template = Template
-  { xmobar :: Xmobar
-  , xmonad :: Xmonad
+  { xmobar  :: Xmobar
+  , xmonad  :: Xmonad
   , xmodmap :: Xmodmap
-  , urxvt :: Urxvt
+  , urxvt   :: Urxvt
   } deriving (Data, Typeable)
 
 instance Default Template where
@@ -25,7 +24,7 @@ instance Default Template where
 
 data Xmobar = Xmobar
   { background, position :: String
-  , battery :: Maybe String
+  , battery              :: Maybe String
   } deriving (Data, Typeable)
 
 instance Default Xmobar where
