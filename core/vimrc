@@ -301,4 +301,26 @@
 		autocmd BufWritePost README.md  call RenderMarkdown()
 		autocmd BufWritePost *.markdown call RenderMarkdown()
 	augroup end
+
+	function HaskellModuleName()
+		let l:parts      = split(expand("%:p:r"), '/\+')
+		let l:uppercased = []
+
+		for l:part in reverse(l:parts)
+			if l:part =~# '^[[:upper:]]'
+				let l:uppercased = [l:part] + l:uppercased
+			else
+				break
+			endif
+		endfor
+
+		let l:name  = join(l:uppercased, ".")
+		if empty(name)
+			return "Main"
+		else
+			return l:name
+		endif
+	endfunction
+
+	command! HaskellModuleName exe "normal! imodule " . HaskellModuleName() . "\n(\n) where\n"
 " }
