@@ -13,8 +13,8 @@ import Control.Biegunka
 import Control.Biegunka.Source.Git
 import Control.Biegunka.Templates.HStringTemplate
 
-import qualified Laptop as Laptop
-import qualified Work as Work
+import qualified Laptop
+import qualified Work
 
 
 data Environments = Laptop | Work
@@ -227,6 +227,7 @@ edwardk = role "edwardk" $ mapM_ (--> into "git")
   , "git@github.com:ekmett/machines"
   , "git@github.com:ekmett/lens"
   , "git@github.com:ekmett/profunctors"
+  , "git@github.com:ekmett/kan-extensions"
   ]
 
 
