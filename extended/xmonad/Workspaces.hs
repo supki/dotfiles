@@ -61,72 +61,75 @@ onWorkspaces ws = XLPW.onWorkspaces (map toWsId ws)
 myManageHook :: ManageHook
 myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   [ isFullscreen --> doFullFloat
-  , myFloat      --> doFloat
-  , myIgnore     --> doIgnore
-  , myRelax      --> doShift (toWsId Talkative)
-  , myChromie    --> doShift (toWsId WWW)
-  , myDocs       --> doShift (toWsId Texts)
-  , myVideo      --> doShift (toWsId Video)
-  , myStatus     --> doShift (toWsId Status)
-  , myMail       --> doShift (toWsId Mail)
-  , myFiles      --> doShift (toWsId Files)
-  , myTorrent    --> doShift (toWsId Torrents)
-  , myStuff      --> doShift (toWsId Stuff)
+  , my float     --> doFloat
+  , my ignore    --> doIgnore
+  , my relax     --> doShift (toWsId Talkative)
+  , my chromie   --> doShift (toWsId WWW)
+  , my docs      --> doShift (toWsId Texts)
+  , my video     --> doShift (toWsId Video)
+  , my status    --> doShift (toWsId Status)
+  , my mail      --> doShift (toWsId Mail)
+  , my files     --> doShift (toWsId Files)
+  , my torrent   --> doShift (toWsId Torrents)
+  , my stuff     --> doShift (toWsId Stuff)
   ]
   <> manageDocks <> manageHook defaultConfig
-  where
-  myFloat = foldr1 (<||>)
-    [ title <&> ("Figure" `isPrefixOf`)
+ where
+  float =
+    [ title     <&> ("Figure" `isPrefixOf`)
     , title     =? "youtube-video"
     , title     =? "xmessage"
     ]
-  myIgnore = foldr1 (<||>)
+  ignore =
     [ title     =? "xfce4-notifyd"
     ]
-  myStatus = foldr1 (<||>)
-    [ title <&> ("htop" `isInfixOf`)
+  status =
+    [ title     <&> ("htop" `isInfixOf`)
     , title     =? "iotop"
     , title     =? "netstat"
     , title     =? "poneaux"
     ]
-  myChromie = foldr1 (<||>)
+  chromie =
     [ className =? "Chromium-browser"
     , className =? "Chromium"
     , className =? "Iceweasel"
     , className =? "Firefox"
     ]
-  myRelax = foldr1 (<||>)
+  relax =
     [ title     =? "mcabber"
     , title     =? "irssi"
     , title     =? "youtube-video"
     ]
-  myDocs = foldr1 (<||>)
+  docs =
     [ className =? "OpenOffice.org 3.2"
     , className =? "Apvlv"
     , className =? "Xchm"
     , className =? "Evince"
     ]
-  myVideo = foldr1 (<||>)
+  video =
     [ className =? "Vlc"
     , className =? "MPlayer"
     , className =? "mplayer2"
     ]
-  myMail = foldr1 (<||>)
+  mail =
     [ className =? "Thunderbird"
     , className =? "Icedove"
     ]
-  myFiles = foldr1 (<||>)
+  files =
     [ className =? "Gnome-commander"
     , title     =? "mc"
     ]
-  myTorrent = foldr1 (<||>)
+  torrent =
     [ title     =? "rtorrent"
     , title     =? "Transmission"
     , title     =? "Torrent Options"
     ]
-  myStuff = foldr1 (<||>)
-    [ title <&> ("stuff" `isSuffixOf`)
+  stuff =
+    [ title     <&> ("stuff" `isSuffixOf`)
+    , title     =? "CuteCom"
     ]
+
+  my = foldr1 (<||>)
 --
 
 -- Scratchpads
