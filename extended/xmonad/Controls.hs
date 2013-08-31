@@ -143,10 +143,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_t, "vaio-touchpad toggle")
       -- screenlock
       , (0,           xK_l, "slock")
-      -- love current track in lastfm
-      , (0,           xK_f, "lastfm-love-current-mpd-track")
-      -- open youtube video in mplayer
-      , (0,           xK_y, "youtube-in-mplayer `xsel`")
       ]
   ]
   ++
