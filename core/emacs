@@ -31,3 +31,9 @@
 ; agda
 (load-file (let ((coding-system-for-read 'utf-8))
            (shell-command-to-string "agda-mode locate")))
+
+;; agda2-mode looks like shit in zenburn :'(
+(add-hook 'agda2-mode-hook
+  (lambda ()
+    (progn
+      (load-theme 'tango t))))
