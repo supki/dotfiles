@@ -177,7 +177,7 @@ vim = do
       pathogen_ "git@github.com:tpope/vim-commentary"
       pathogen_ "git@github.com:tpope/vim-unimpaired"
       pathogen_ "git@github.com:def-lkb/vimbufsync"
-    group "idris" $ do
+    group "idris" $
       "git@github.com:edwinb/Idris-dev" ==> into "git" $ def
         & remotes .~ ["origin", "stream"]
         & actions .~
@@ -193,7 +193,7 @@ vim = do
 
 
 emacs = role "emacs" $ do
-  group "colorschemes" $ do
+  group "colorschemes" $
     git "git@github.com:bbatsov/zenburn-emacs" (into "git/emacs") $
       copyFile "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
   group "usable" $ do

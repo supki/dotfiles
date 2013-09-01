@@ -299,7 +299,6 @@
 	augroup render
 		autocmd!
 		autocmd BufWritePost README.md  call RenderMarkdown()
-		autocmd BufWritePost *.markdown call RenderMarkdown()
 	augroup end
 
 	function HaskellModuleName()
