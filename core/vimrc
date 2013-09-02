@@ -132,6 +132,9 @@
 		autocmd FileType perl    setlocal expandtab shiftwidth=2 softtabstop=2
 	augroup end
 
+	" set detailed colorscheme for ruby
+	autocmd FileType ruby colorscheme detailed
+
 	" save on focus lost
 	autocmd FocusLost * :wa
 
