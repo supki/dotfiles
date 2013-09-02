@@ -78,6 +78,8 @@
 	set wildmode=list:longest,full
 	set wildignore=*.o,*.hi,*.pyc,*~
 
+	au BufNewFile,BufRead *.agda setf agda
+
 	" don't pause big listings
 	set nomore
 
