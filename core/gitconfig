@@ -14,17 +14,18 @@
 	algorithm = patience
 [alias]
 	co = checkout
-	br = branch
+	br = branch -v
 	ci = commit
 	st = status
 	unstage = reset HEAD --
+	unci = reset --soft HEAD~1
 	wipe = reset --hard HEAD --
-	last = log -1 HEAD
 	lo = log --stat
 	lg = log --patch-with-stat
 	prbs = pull --rebase
 	rbs = rebase --preserve-merges
 	df = diff --stat
+	dl = diff HEAD~1
 [push]
 	default = current
 [rerere]
