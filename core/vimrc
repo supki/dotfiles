@@ -296,9 +296,30 @@
 
 	" Convert markdown files to html with pandoc
 	function RenderMarkdown()
-		let l:markdown = expand("<afile>")
-		let l:html     = expand("<afile>:r") . ".html"
+		let l:markdown = expand("<afile>:p")
+		let l:html     = expand("<afile>:p:r") . ".html"
 		call system("pandoc --from markdown --to html -o " . l:html . " " . l:markdown)
+
+		" I am sorry
+		let l:js = "var uri     = \"file://" . l:html . "\";\n" .
+					\ "var opened  = false;\n" .
+					\ "\n" .
+					\ "Array.prototype.forEach.call(\n" .
+					\ "  window.getBrowser().tabContainer.childNodes,\n" .
+					\ "  function (tab) {\n" .
+					\ "    var browser = tab.linkedBrowser;\n" .
+					\ "    if (browser.contentDocument.location == uri) {\n" .
+					\ "      browser.reload(gBrowser.webNavigation.LOAD_FLAGS_BYPASS_CACHE)\n" .
+					\ "      opened = true;\n" .
+					\ "    }\n" .
+					\ "  });\n" .
+					\ "\n" .
+					\ "if (!opened) {\n" .
+					\ "  window.getBrowser().addTab(uri)\n" .
+					\ "}\n"
+
+		" Really :(
+		call system("(netcat localhost 4242 <<< '" . l:js . "') &; sleep 0.2; kill $!")
 		redraw!
 	endfunction
 
