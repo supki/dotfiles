@@ -319,12 +319,13 @@
 					\ "}\n"
 
 		" Really :(
-		call system("(netcat localhost 4242 <<< '" . l:js . "') &; sleep 0.2; kill $!")
+		call system("(netcat localhost 4242 <<< '" . l:js . "') &; sleep 0.2; kill $!; rm '" . l:html . "'" )
 		redraw!
 	endfunction
 
 	augroup render
 		autocmd!
+		autocmd BufWritePost *.markdown call RenderMarkdown()
 		autocmd BufWritePost README.md  call RenderMarkdown()
 	augroup end
 
