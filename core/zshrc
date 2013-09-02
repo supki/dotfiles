@@ -43,7 +43,6 @@ chpwd
 HISTSIZE=10000
 HISTFILE=~/.zhistory
 SAVEHIST=10000
-setopt sharehistory
 
 setopt histignorealldups
 setopt histignorespace
