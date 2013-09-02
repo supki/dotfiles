@@ -177,6 +177,8 @@ vim = do
       pathogen_ "git@github.com:tpope/vim-commentary"
       pathogen_ "git@github.com:tpope/vim-unimpaired"
       pathogen_ "git@github.com:def-lkb/vimbufsync"
+    group "agda" $
+      pathogen_ "git@github.com:supki/agda-vim"
     group "idris" $
       "git@github.com:edwinb/Idris-dev" ==> into "git" $ def
         & remotes .~ ["origin", "stream"]
