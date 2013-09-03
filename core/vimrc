@@ -3,8 +3,6 @@
 	set nocompatible
 	let g:neocomplcache_enable_at_startup = 1
 
-	runtime macros/matchit.vim
-
 	" set history to 1000 lines
 	set history=1000
 
@@ -25,32 +23,12 @@
 	" assume that background is dark
 	set background=dark
 
-	" load a colorscheme
+	" load a colorschemes
 	colorscheme zenburn
+	autocmd FileType ruby colorscheme detailed
 
 	" enable syntax highlighting
 	syntax on
-
-	" relative or no line numbers
-	function SetRelative()
-		if exists("+relativenumber")
-			set relativenumber
-		end
-	endfunction
-
-	function UnsetRelative()
-		if exists("+relativenumber")
-			set norelativenumber
-		end
-	endfunction
-
-	augroup numbers
-		autocmd!
-		autocmd InsertEnter * :call UnsetRelative()
-		autocmd InsertLeave * :call SetRelative()
-	augroup end
-
-	call SetRelative()
 
 	" fix annoying ESC key delays
 	set noesckeys
@@ -73,12 +51,10 @@
 	" show advanced information
 	set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
 
-	" enable autocomplete
+	" enable sane menu
 	set wildmenu
 	set wildmode=list:longest,full
 	set wildignore=*.o,*.hi,*.pyc,*~
-
-	au BufNewFile,BufRead *.agda setf agda
 
 	" don't pause big listings
 	set nomore
@@ -104,6 +80,9 @@
 " }
 
 " Misc {
+	" this crap should really be somewhere else
+	au BufNewFile,BufRead *.agda setf agda
+
 	" automatic tab indent
 	set autoindent
 	" don't unindent on new line
@@ -125,15 +104,13 @@
 	augroup indents
 		autocmd!
 		autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType agda    setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType cabal   setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType racket  setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType ruby    setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType python  setlocal expandtab shiftwidth=4 softtabstop=4
 		autocmd FileType perl    setlocal expandtab shiftwidth=2 softtabstop=2
 	augroup end
-
-	" set detailed colorscheme for ruby
-	autocmd FileType ruby colorscheme detailed
 
 	" save on focus lost
 	autocmd FocusLost * :wa
@@ -172,6 +149,7 @@
 	set backupdir=$HOME/.vim/backups
 	" manage .swp files
 	set directory=$HOME/.vim/temp
+
 	" preserve undo actions even after file has closed
 	if exists("+undofile")
 		set undolevels=1000
@@ -247,22 +225,8 @@
 	" unite command
 	nmap <leader>u :Unite
 
-	" add some hotkeys for rather tedious perd commands
-	nmap <leader>l :PerdLoad<CR>:call system('tmux select-layout main-vertical')<CR>
-	nmap <leader>L :PerdLoad<CR>:call system('tmux select-layout main-vertical')<CR>:PerdSwitch<CR>
-	nmap <leader>z :PerdUnload<CR>
-
 	" fuck it
 	nmap <leader>d :redraw!<CR>
-
-	let g:perd_profiles = {
-		\ 'raw': '',
-		\ '7.6.1': '-isrc -package-db=cabal-dev/packages-7.6.1.conf',
-		\ '7.6.1-dumb': '-package-db=cabal-dev/packages-7.6.1.conf',
-		\ '7.6.2': '-isrc -package-db=cabal-dev/packages-7.6.2.conf',
-		\ '7.6.2-dumb': '-package-db=cabal-dev/packages-7.6.2.conf'
-		\ }
-	let g:perd_profile = '7.6.2'
 
 	nnoremap <Space> <C-D>
 	nnoremap <S-Space> <C-U>
@@ -279,14 +243,33 @@
 
 	" for vim-commentary
 	autocmd FileType haskell set commentstring=--\ %s
-
-	" for vim-perd
-	autocmd VimResized * normal =
-	autocmd VimLeave * bufdo :if exists(':PerdUnload') | execute 'PerdUnload' | endif
-	autocmd BufDelete *.hs PerdUnload '<afile>'
+	autocmd FileType agda    set commentstring=--\ %s
+	autocmd FileType cabal   set commentstring=--\ %s
 " }
 
 " Functions {
+	" relative or no line numbers
+	function SetRelative()
+		if exists("+relativenumber")
+			set relativenumber
+		end
+	endfunction
+
+	function UnsetRelative()
+		if exists("+relativenumber")
+			set norelativenumber
+		end
+	endfunction
+
+	augroup numbers
+		autocmd!
+		autocmd InsertEnter * :call UnsetRelative()
+		autocmd InsertLeave * :call SetRelative()
+	augroup end
+
+	call SetRelative()
+
+
 	" chmod +х to scripts
 	function ModeChange()
 		if getline(1) =~ '^#!'
@@ -332,6 +315,8 @@
 		autocmd BufWritePost README.md  call RenderMarkdown()
 	augroup end
 
+
+	" Insert haskell module name
 	function HaskellModuleName()
 		let l:parts      = split(expand("%:p:r"), '/\+')
 		let l:uppercased = []
