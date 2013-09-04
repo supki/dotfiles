@@ -80,9 +80,6 @@
 " }
 
 " Misc {
-	" this crap should really be somewhere else
-	au BufNewFile,BufRead *.agda setf agda
-
 	" automatic tab indent
 	set autoindent
 	" don't unindent on new line
