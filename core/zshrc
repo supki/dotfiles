@@ -145,5 +145,7 @@ source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export NO_SCRIPTS_NOTIFICATIONS=yes
 
+export PYTHONSTARTUP=${HOME}/.pythonrc
+
 # OPAM configuration
 . /home/maksenov/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

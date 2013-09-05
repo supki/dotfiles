@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+# convenience imports
+import os
+import sys
+import time
+import datetime
+
+# make repl at least mildly usable
+# note: all these modules will be removed from
+# repl environment at the end of startup script
+import readline
+import rlcompleter
+import atexit
+
+def have_a_nice_day():
+    print
+    print "Have a nice day."
+
+# registered functions are run in the reverse order
+atexit.register(have_a_nice_day)
+
+# initialize completion
+readline.parse_and_bind("tab: complete")
+
+# initialize history
+history = os.path.join(os.environ['HOME'], ".pythonhist")
+if os.path.isfile(history):
+    readline.read_history_file(history)
+atexit.register(readline.write_history_file, history)
+
+del readline, rlcompleter, atexit

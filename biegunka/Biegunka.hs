@@ -83,6 +83,7 @@ dotfiles = role "dotfiles" $
     , "emacs"                      ~> ".emacs"
     , "poneaux.rb"                 ~> ".poneaux.rb"
     , "sqliterc"                   ~> ".sqliterc"
+    , "pythonrc"                   ~> ".pythonrc"
     ]
   extendeds =
     [ "xmonad.hs"                  ~> ".xmonad/xmonad.hs"
