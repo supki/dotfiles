@@ -146,6 +146,7 @@ tools = role "tools" $
     ]
   user_binaries =
     [ "audio.hs"              ~> "vaio-audio"
+    , "jenkins-hi.hs"         ~> "jenkins-hi"
     ]
   suid_binaries =
     [ "suspender.hs"          ~> "suspender"
