@@ -112,15 +112,15 @@ dotfiles = role "dotfiles" $
 
 tools = role "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
-    suid_binaries & unzipWithM_ (\source destination ->
+    suid_binaries & unzipWithM_ (\s t ->
       sudo "root" $ [sh|
-        ghc -O2 #{source} -fforce-recomp -v0 -o #{destination}
-        chown root:root #{destination}
-        chmod +s #{destination}
+        ghc -O2 #{s} -fforce-recomp -v0 -o #{t}
+        chown root:root #{t}
+        chmod +s #{t}
       |])
-    user_binaries & unzipWithM_ (\source destination -> do
-      [sh|ghc -O2 #{source} -fforce-recomp -v0 -o #{destination}|]
-      link destination ("bin" </> destination))
+    user_binaries & unzipWithM_ (\s t -> do
+      [sh|ghc -O2 #{s} -fforce-recomp -v0 -o #{t}|]
+      link t ("bin" </> t))
     scripts & unzipWithM_ link
  where
   scripts, user_binaries, suid_binaries :: [(String, String)]
@@ -221,7 +221,6 @@ experimental = role "experimental" $ mapM_ (--> into "git")
   [ "git@github.com:sol/vimus"
   , "git@github.com:sol/libmpd-haskell"
   , "git@github.com:mitchellh/vagrant"
-  , "git@github.com:haskell/cabal"
   ]
 
 
