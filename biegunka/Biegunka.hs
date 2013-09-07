@@ -37,6 +37,7 @@ main = do
     , misc
     , experimental
     , edwardk
+    , mine
     ]
   work = sequence_
     [ dotfiles
@@ -45,7 +46,7 @@ main = do
     , experimental
     ]
 
-dotfiles, tools, vim, emacs, misc, experimental, edwardk :: Script Sources ()
+dotfiles, tools, vim, emacs, misc, experimental, edwardk, mine :: Script Sources ()
 
 
 dotfiles = role "dotfiles" $
@@ -232,6 +233,10 @@ edwardk = role "edwardk" $ mapM_ (--> into "git")
   , "git@github.com:ekmett/lens"
   , "git@github.com:ekmett/profunctors"
   , "git@github.com:ekmett/kan-extensions"
+  ]
+
+mine = role "mine" $ mapM_ (--> into "git")
+  [ "git@github.com:supki/libjenkins"
   ]
 
 
