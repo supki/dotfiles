@@ -26,6 +26,7 @@
 	rbs = rebase --preserve-merges
 	df = diff --stat
 	dl = diff HEAD~1
+	ds = diff --staged
 [push]
 	default = current
 [rerere]
