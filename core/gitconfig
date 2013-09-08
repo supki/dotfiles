@@ -24,6 +24,7 @@
 	lg = log --patch-with-stat
 	prbs = pull --rebase
 	rbs = rebase --preserve-merges
+	d = diff
 	df = diff --stat
 	dl = diff HEAD~1
 	ds = diff --staged
