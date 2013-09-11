@@ -165,6 +165,7 @@ vim = do
       pathogen_ "git@github.com:Shougo/neocomplcache"
       pathogen_ "git@github.com:bitc/vim-hdevtools"
       pathogen_ "git@github.com:merijn/haskellFoldIndent"
+      pathogen_ "git@github.com:supki/syntastic-cabal"
     group "ruby" $ do
       pathogen_ "git@github.com:kana/vim-textobj-user"
       pathogen_ "git@github.com:nelstrom/vim-textobj-rubyblock"
