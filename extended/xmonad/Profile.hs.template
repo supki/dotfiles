@@ -4,6 +4,7 @@ import           Control.Monad
 import           Data.Foldable (asum)
 import qualified Data.List as L
 import qualified System.Directory as D
+import           System.FilePath ((</>))
 import           XMonad
 
 import Misc
@@ -27,8 +28,15 @@ route = asum
         exists <- io \$ D.doesDirectoryExist path
         guard exists
         return (Tmux.ChangeDirectory path)
-  , dir "play" \$
-      return (Tmux.ChangeDirectory "playground")
+  , dir "play" \$ asum
+      [ next \$ \\inside -> do
+          nomore
+          let path = "playground" </> inside
+          exists <- io \$ D.doesDirectoryExist path
+          guard exists
+          return (Tmux.ChangeDirectory path)
+      , return (Tmux.ChangeDirectory "playground")
+      ]
   , dirs ".vim/bundle" \$
       next \$ \\_ -> do
         nomore
