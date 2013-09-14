@@ -87,6 +87,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
     [ title     <&> ("htop" `isInfixOf`)
     , title     =? "iotop"
     , title     =? "netstat"
+    , title     <&> ("vimus" `isPrefixOf`)
     , title     =? "poneaux"
     ]
   chromie =
@@ -136,5 +137,4 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
 scratchpads :: [NamedScratchpad]
 scratchpads =
   [ NS "scratchpad" (myTerminal ++ " -name scratchpad") (resource =? "scratchpad") (customFloating $ W.RationalRect 0.47 0.05 0.5 0.6)
-  , NS "vimus" (myTerminal ++ " -name vimus -e zsh -c vimus") (resource =? "vimus") (customFloating $ W.RationalRect 0.25 0.20 0.5 0.6)
   ]

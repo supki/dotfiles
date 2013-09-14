@@ -41,6 +41,7 @@ templates = def
         , ("procfiled", "procfiled")
         , ("icedove", "icedove")
         , ("suspender", "suspender")
+        , ("vimus", "urxvtcd -title vimus -name vimus -e zsh -c vimus")
         ]
       |]
     , follow    = "False"
