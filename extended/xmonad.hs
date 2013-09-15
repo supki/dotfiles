@@ -10,7 +10,7 @@ import XMonad.Util.WorkspaceScreenshot (initCapturing)
 
 import           Controls
 import           Layouts
-import           Misc
+import           Profile
 import qualified Startup
 import           Workspaces
 

@@ -12,7 +12,7 @@ import qualified XMonad.Layout.PerWorkspace as XLPW
 import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
 
-import Misc
+import Profile
 
 -- Workspaces
 myWorkspaces :: [WorkspaceId]

@@ -105,7 +105,6 @@ dotfiles = role "dotfiles" $
     ]
   recipes =
     [ "template.xmobar.hs"         ~> ".xmobar/xmobar.hs"
-    , "xmonad/Misc.hs.template"    ~> ".xmonad/lib/Misc.hs"
     , "xmonad/Profile.hs.template" ~> ".xmonad/lib/Profile.hs"
     , "xmodmap.template"           ~> ".xmodmap"
     , "Xdefaults.template"         ~> ".Xdefaults"

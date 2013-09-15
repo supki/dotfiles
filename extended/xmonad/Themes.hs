@@ -3,7 +3,7 @@ module Themes where
 import XMonad.Layout.Tabbed
 import XMonad.Prompt
 
-import Misc
+import Profile
 
 -- Theme
 myTheme :: Theme

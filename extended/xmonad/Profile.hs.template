@@ -7,7 +7,6 @@ import qualified System.Directory as D
 import           System.FilePath ((</>))
 import           XMonad
 
-import Misc
 import RouteT
 import Tmux
 
@@ -18,38 +17,60 @@ apps = $template.xmonad.startup$
 patterns :: [String]
 patterns = ["git/*", "svn/*", ".vim/bundle/*"]
 
-route :: RouteT IO Command
-route = asum
-  [ next \$ \\repos -> do
-      guard (repos `elem` ["git", "svn"])
-      next \$ \\_ -> do
-        nomore
-        path   <- sofar
-        exists <- io \$ D.doesDirectoryExist path
-        guard exists
-        return (Tmux.ChangeDirectory path)
-  , dir "play" \$ asum
-      [ next \$ \\inside -> do
-          nomore
-          let path = "playground" </> inside
-          exists <- io \$ D.doesDirectoryExist path
-          guard exists
-          return (Tmux.ChangeDirectory path)
-      , return (Tmux.ChangeDirectory "playground")
-      ]
-  , dirs ".vim/bundle" \$
-      next \$ \\_ -> do
-        nomore
-        path   <- sofar
-        exists <- io \$ D.doesDirectoryExist path
-        guard exists
-        return (Tmux.ChangeDirectory path)
-  , next \$ \\part -> do
-      nomore
-      guard ("slave" `L.isPrefixOf` part)
-      return (Tmux.Session ("ssh " ++ part))
-  , next \$ \\part -> do
-      nomore
-      guard (part `elem` ["dev", "storage"])
-      return (Tmux.Session ("ssh " ++ part))
-  ]
+-- Whether focus follows the mouse pointer.
+myFocusFollowsMouse :: Bool
+myFocusFollowsMouse = $template.xmonad.follow$
+--
+
+-- Whether not pass focusing click to window
+myClickJustFocuses :: Bool
+myClickJustFocuses = False
+--
+
+-- Modificator masks
+myModMask :: KeyMask
+myModMask = mod4Mask
+myNumlockMask :: KeyMask
+myNumlockMask = mod2Mask
+--
+
+-- Borders
+myBorderWidth :: Dimension
+myBorderWidth = 2
+myNormalBorderColor :: String
+myNormalBorderColor = grayDarkColor
+myFocusedBorderColor :: String
+myFocusedBorderColor = yellowColor
+--
+
+-- Terminal emulator
+myTerminal :: String
+myTerminal = "$template.xmonad.terminal$"
+--
+
+-- Fonts
+ubuntuFont :: String
+ubuntuFont = "$template.xmonad.ubuntu$"
+terminusFont :: String
+terminusFont = "$template.xmonad.terminus$"
+--
+
+-- Colors
+whiteColor :: String
+whiteColor = "$template.xmonad.white$"
+
+grayDarkColor :: String
+grayDarkColor = "$template.xmonad.grayDark$"
+
+grayLightColor :: String
+grayLightColor = "$template.xmonad.grayLight$"
+
+blackColor :: String
+blackColor = "$template.xmonad.black$"
+
+orangeColor :: String
+orangeColor = "$template.xmonad.orange$"
+
+yellowColor :: String
+yellowColor = "$template.xmonad.yellow$"
+--

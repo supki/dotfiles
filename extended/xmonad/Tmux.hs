@@ -7,13 +7,15 @@ module Tmux where
 
 import Control.Applicative
 import Control.Monad
+import Data.Foldable (asum)
 import Data.Function (on)
-import Data.List (nubBy, sort)
+import Data.List (isPrefixOf, nubBy, sort)
 import Data.Monoid
 
 import           Data.Map (Map, (!))
 import qualified Data.Map as M
-import           System.FilePath (takeFileName)
+import qualified System.Directory as D
+import           System.FilePath ((</>), takeFileName)
 import           System.Directory (doesDirectoryExist)
 import           System.Wordexp.Simple (wordexp)
 
@@ -98,3 +100,39 @@ start runningSessions route (un -> userInput) = do
 
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = liftM concat . mapM f
+
+route :: RouteT IO Command
+route = asum
+  [ next $ \repos -> do
+      guard (repos `elem` ["git", "svn"])
+      next $ \_ -> do
+        nomore
+        path   <- sofar
+        exists <- io $ D.doesDirectoryExist path
+        guard exists
+        return (Tmux.ChangeDirectory path)
+  , dir "play" $ asum
+      [ next $ \inside -> do
+          nomore
+          let path = "playground" </> inside
+          exists <- io $ D.doesDirectoryExist path
+          guard exists
+          return (Tmux.ChangeDirectory path)
+      , return (Tmux.ChangeDirectory "playground")
+      ]
+  , dirs ".vim/bundle" $
+      next $ \_ -> do
+        nomore
+        path   <- sofar
+        exists <- io $ D.doesDirectoryExist path
+        guard exists
+        return (Tmux.ChangeDirectory path)
+  , next $ \part -> do
+      nomore
+      guard ("slave" `isPrefixOf` part)
+      return (Tmux.Session ("ssh " ++ part))
+  , next $ \part -> do
+      nomore
+      guard (part `elem` ["dev", "storage"])
+      return (Tmux.Session ("ssh " ++ part))
+  ]

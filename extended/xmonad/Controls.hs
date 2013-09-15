@@ -48,7 +48,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- launch a terminal
       [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
       -- launch tmux prompt
-      , (0,           xK_Return, Tmux.prompt Profile.patterns Profile.route myXPConfig)
+      , (0,           xK_Return, Tmux.prompt Profile.patterns Tmux.route myXPConfig)
       -- launch man prompt
       , (0,           xK_m, Man.prompt myXPConfig)
       -- launch shellPrompt
