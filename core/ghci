@@ -133,6 +133,7 @@ import           System.Wordexp.Simple
 :set -XQuasiQuotes
 :set -XRankNTypes
 :set -XScopedTypeVariables
+:set -XStandaloneDeriving
 :set -XTupleSections
 :set -XTypeFamilies
 :set -XTypeOperators
