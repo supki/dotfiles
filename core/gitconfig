@@ -1,6 +1,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
+	whitespace = blank-at-eof,blank-at-eol,space-before-tab,tab-in-indent
 [user]
 	name = Matvey Aksenov
 	email = matvey.aksenov@gmail.com
