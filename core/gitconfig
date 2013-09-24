@@ -23,6 +23,9 @@
 	wipe = reset --hard HEAD --
 	lo = log --stat
 	lg = log --patch-with-stat
+	pus = push
+	puhs = push
+	p = pull
 	prbs = pull --rebase
 	rbs = rebase --preserve-merges
 	d = diff
