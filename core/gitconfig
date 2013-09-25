@@ -18,6 +18,7 @@
 	br = branch -v
 	ci = commit
 	st = status
+	s = status
 	unstage = reset HEAD --
 	unci = reset --soft HEAD~1
 	wipe = reset --hard HEAD --
