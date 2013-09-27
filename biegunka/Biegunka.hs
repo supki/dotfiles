@@ -114,7 +114,7 @@ tools = role "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     suid_binaries & unzipWithM_ (\s t ->
       sudo "root" $ [sh|
-        ghc -O2 #{s} -fforce-recomp -v0 -o #{t}
+        ghc -O2 #{s} -fforce-recomp -threaded -v0 -o #{t}
         chown root:root #{t}
         chmod +s #{t}
       |])
