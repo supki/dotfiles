@@ -33,6 +33,7 @@
 	df = diff --stat
 	dl = diff HEAD~1
 	ds = diff --staged
+	ru = remote update
 [push]
 	default = current
 [rerere]
