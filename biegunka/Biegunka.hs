@@ -181,6 +181,7 @@ vim = do
       pathogen_ "git@github.com:tpope/vim-commentary"
       pathogen_ "git@github.com:tpope/vim-unimpaired"
       pathogen_ "git@github.com:def-lkb/vimbufsync"
+      pathogen_ "git@github.com:junegunn/seoul256.vim"
     group "agda" $
       pathogen_ "git@github.com:supki/agda-vim"
     group "idris" $

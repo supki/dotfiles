@@ -24,7 +24,7 @@
 	set background=dark
 
 	" load a colorschemes
-	colorscheme zenburn
+	colorscheme seoul256
 	autocmd FileType ruby colorscheme detailed
 
 	" enable syntax highlighting
