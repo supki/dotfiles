@@ -27,6 +27,9 @@
 	colorscheme seoul256
 	autocmd FileType ruby colorscheme detailed
 
+	" remove | characters in vertical split line
+	set fillchars+=vert:\ 
+
 	" enable syntax highlighting
 	syntax on
 
