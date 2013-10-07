@@ -78,7 +78,8 @@ alias b='biegunka'
 alias c='cabal'
 alias g='git'
 alias s='svn'
-alias m='vim'
+alias v='vim'
+alias t='tmux'
 
 function man {
 	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
