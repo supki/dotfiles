@@ -39,10 +39,7 @@
 *.underlineColor: #eeccaa
 
 *.urlLauncher: $template.urxvt.browser$
-*.perl-ext-common: default,matcher,tabbedex,keyboard-select,url-select
-
-*.matcher.pattern.0: http[s]*:\\/\\/[^ "]+"?
-*.matcher.button: 1
+*.perl-ext-common: default,tabbedex,keyboard-select,url-select
 
 *.keysym.C-s: perl:keyboard-select:activate
 *.keysym.M-u: perl:url-select:select_next
