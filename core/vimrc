@@ -249,6 +249,7 @@
 	autocmd FileType haskell set commentstring=--\ %s
 	autocmd FileType agda    set commentstring=--\ %s
 	autocmd FileType cabal   set commentstring=--\ %s
+	autocmd FileType ocaml   set commentstring=(*\ %s\ *)
 " }
 
 " Functions {
