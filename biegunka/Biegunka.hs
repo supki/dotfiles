@@ -168,7 +168,6 @@ vim = do
     group "ruby" $ do
       pathogen_ "git@github.com:kana/vim-textobj-user"
       pathogen_ "git@github.com:nelstrom/vim-textobj-rubyblock"
-      pathogen_ "git@github.com:rking/vim-detailed"
     group "coq" $ do
       pathogen_ "git@github.com:vim-scripts/coq-syntax"
       pathogen_ "git@github.com:vim-scripts/Coq-indent"
