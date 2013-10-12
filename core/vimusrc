@@ -3,7 +3,7 @@ autotitle
 # mappings
 map ; :
 map u :update<CR>
-map q :quit<CR>
+map L :!toggle-love<CR>
 map <Space> :scroll-half-page-down<CR>
 
 # colors
