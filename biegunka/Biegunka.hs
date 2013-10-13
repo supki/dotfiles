@@ -3,15 +3,18 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wall #-}
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 module Main (main) where
 
-import Control.Lens
-import Data.Default (def)
-import System.FilePath ((</>))
+import           Control.Applicative
+import           Control.Lens
+import           Data.Default (def)
+import           Data.Foldable (traverse_)
+import           System.FilePath ((</>))
 
-import Control.Biegunka
-import Control.Biegunka.Source.Git
-import Control.Biegunka.Templates.HStringTemplate
+import           Control.Biegunka
+import           Control.Biegunka.Source.Git
+import           Control.Biegunka.Templates.HStringTemplate
 
 import qualified Laptop
 import qualified Work
@@ -25,9 +28,10 @@ biegunkaOptions ''Environments
 main :: IO ()
 main = do
   (environment, runBiegunka) <- options
+  let settings ts = set root "~" . set templates (hStringTemplate ts)
   case environment of
-    Laptop -> runBiegunka (set root "~" . set templates (hStringTemplate Laptop.templates)) laptop
-    Work   -> runBiegunka (set root "~" . set templates (hStringTemplate Work.templates)) work
+    Laptop -> runBiegunka (settings Laptop.templates) laptop
+    Work   -> runBiegunka (settings Work.templates) work
  where
   laptop = sudo "maksenov" $ sequence_
     [ dotfiles
@@ -45,8 +49,6 @@ main = do
     , misc
     , experimental
     ]
-
-dotfiles, tools, vim, emacs, misc, experimental, edwardk, mine :: Script Sources ()
 
 
 dotfiles = role "dotfiles" $
@@ -210,7 +212,7 @@ emacs = role "emacs" $ do
       copyFile "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
-misc = role "misc" $ mapM_ (--> into "git")
+misc = role "misc" $ traverse_ (--> into "git")
   [ "git@github.com:zsh-users/zsh-syntax-highlighting"
   , "git@github.com:zsh-users/zsh-completions"
   , "git@github.com:stepb/urxvt-tabbedex"
@@ -219,14 +221,14 @@ misc = role "misc" $ mapM_ (--> into "git")
   ]
 
 
-experimental = role "experimental" $ mapM_ (--> into "git")
+experimental = role "experimental" $ traverse_ (--> into "git")
   [ "git@github.com:sol/vimus"
   , "git@github.com:sol/libmpd-haskell"
   , "git@github.com:mitchellh/vagrant"
   ]
 
 
-edwardk = role "edwardk" $ mapM_ (--> into "git")
+edwardk = role "edwardk" $ traverse_ (--> into "git")
   [ "git@github.com:ekmett/free"
   , "git@github.com:ekmett/reflection"
   , "git@github.com:ekmett/tagged"
@@ -236,7 +238,7 @@ edwardk = role "edwardk" $ mapM_ (--> into "git")
   , "git@github.com:ekmett/kan-extensions"
   ]
 
-mine = role "mine" $ mapM_ (--> into "git")
+mine = role "mine" $ traverse_ (--> into "git")
   [ "git@github.com:supki/libjenkins"
   ]
 
@@ -245,14 +247,10 @@ infix 8 -->
 (-->) :: String -> FilePath -> Script Sources ()
 (-->) = git_
 
-infix 4 ~>
-(~>) :: a -> b -> (a, b)
-(~>) = (,)
-
 infixr 4 <\>~
 (<\>~) :: Setting (->) s t FilePath FilePath -> FilePath -> s -> t
 l <\>~ n = over l (n </>)
 
 
-unzipWithM_ :: Monad m => (a -> b -> m c) -> [(a, b)] -> m ()
-unzipWithM_ = mapM_ . uncurry
+unzipWithM_ :: Applicative m => (a -> b -> m c) -> [(a, b)] -> m ()
+unzipWithM_ = traverse_ . uncurry
