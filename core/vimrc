@@ -245,6 +245,9 @@
 	nnoremap <leader>w :Unite -no-split -buffer-name=files -start-insert file<CR>
 	nnoremap <leader>e :Unite -no-split -buffer-name=buffer buffer<CR>
 
+	" for vim-bling
+	let g:bling_color=216
+
 	" for vim-commentary
 	autocmd FileType haskell set commentstring=--\ %s
 	autocmd FileType agda    set commentstring=--\ %s
