@@ -1,8 +1,8 @@
 {-# LANGUAGE QuasiQuotes #-}
 module Work where
 
+import Control.Biegunka (multiline)
 import Data.Default (def)
-import Data.String.Quote
 
 import Defaults
 
@@ -24,7 +24,7 @@ templates = def
     , orange    = "#dd9977"
     , yellow    = "#eeccaa"
     , startup   =
-      [s|
+      [multiline|
         [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 78 --heighttype pixel --height 17 --tint 0x" ++ tail blackColor ++ " --alpha 0")
         , ("/usr/lib/firefox/firefox", "firefox")
         , ("thunderbird", "thunderbird")

@@ -1,8 +1,8 @@
 {-# LANGUAGE QuasiQuotes #-}
 module Laptop where
 
+import Control.Biegunka (multiline)
 import Data.Default (def)
-import Data.String.Quote
 
 import Defaults
 
@@ -25,7 +25,7 @@ templates = def
     , orange    = "#dd9977"
     , yellow    = "#eeccaa"
     , startup   =
-      [s|
+      [multiline|
         [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 102 --heighttype pixel --height 18 --tint 0x" ++ tail blackColor ++ " --alpha 0")
         , ("/home/maksenov/.dropbox-dist/dropbox", "${HOME}/.dropbox-dist/dropboxd")
         , ("mpd", "mpd")
