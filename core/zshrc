@@ -119,12 +119,14 @@ function haddock-dev {
 }
 
 function insert_sudo {
+	zle vi-insert
 	zle beginning-of-line
 	zle -U "sudo "
 }
 
 zle -N insert-sudo insert_sudo
-bindkey "^[z" insert-sudo
+bindkey -a "^[z" insert-sudo
+bindkey -v "^[z" insert-sudo
 
 function back_to_vim {
 	fg
@@ -139,8 +141,6 @@ function xrandr-work {
 }
 
 ssh-add 2>/dev/null # add my identity to ssh-agent and don't tell me about this, thanks
-
-compdef _cabal cabal-dev
 
 source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
