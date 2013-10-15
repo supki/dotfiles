@@ -9,6 +9,7 @@ import           System.FilePath ((</>))
 import           XMonad
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.SwapWorkspaces
+import           XMonad.Actions.FindEmptyWorkspace
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Prompt
 import           XMonad.Prompt.Shell
@@ -76,6 +77,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- shrink/expand the master area
       , (0,           xK_h, sendMessage Shrink)
       , (0,           xK_l, sendMessage Expand)
+      -- do stuff with empty workspaces
+      , (0,           xK_a, viewEmptyWorkspace)
+      , (shiftMask,   xK_a, sendToEmptyWorkspace)
       -- push window back into tiling
       , (0,           xK_t, withFocused $ windows . W.sink)
       -- increment/decrement the number of windows in the master area
