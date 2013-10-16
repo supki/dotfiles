@@ -17,6 +17,7 @@
 	co = checkout
 	br = branch -v
 	ci = commit
+	ca = commit -a
 	st = status
 	s = status
 	unstage = reset HEAD --
