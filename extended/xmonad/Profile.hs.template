@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -W #-}
 module Profile where
 
 import           Control.Monad

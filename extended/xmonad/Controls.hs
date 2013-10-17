@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -W #-}
 module Controls where
 
 import           Control.Monad

@@ -1,4 +1,5 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
+{-# OPTIONS_GHC -W #-}
 module Layouts
   ( myLayoutHook
   ) where

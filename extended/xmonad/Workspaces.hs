@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -W #-}
 module Workspaces where
 
 import Control.Lens
@@ -25,7 +26,7 @@ myWorkspaces = concat
 myWorkspacesKeys :: [KeySym]
 myWorkspacesKeys = concat
   [ [xK_grave]
-  , [xK_1..xK_7]
+  , [xK_1 .. xK_7]
   , [xK_8, xK_9, xK_0, xK_minus, xK_equal, xK_backslash, xK_BackSpace]
   ]
 --
@@ -44,14 +45,14 @@ data Workspace =
 
 toWsId :: Workspace -> WorkspaceId
 toWsId Talkative = "~"
-toWsId WWW = "1"
-toWsId Texts = "8"
-toWsId Video = "9"
-toWsId Status = "0"
-toWsId Mail = "-"
-toWsId Files = "="
-toWsId Torrents = "\\"
-toWsId Stuff = "<-"
+toWsId WWW       = "1"
+toWsId Texts     = "8"
+toWsId Video     = "9"
+toWsId Status    = "0"
+toWsId Mail      = "-"
+toWsId Files     = "="
+toWsId Torrents  = "\\"
+toWsId Stuff     = "<-"
 
 onWorkspace w = XLPW.onWorkspace (toWsId w)
 onWorkspaces ws = XLPW.onWorkspaces (map toWsId ws)

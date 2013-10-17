@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -W #-}
 module Themes where
 
 import XMonad.Layout.Tabbed

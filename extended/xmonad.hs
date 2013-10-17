@@ -1,3 +1,6 @@
+{-# OPTIONS_GHC -W #-}
+module Main where
+
 import Data.Functor ((<$>))
 import System.IO
 
