@@ -128,6 +128,9 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   stuff =
     [ title     <&> ("stuff" `isSuffixOf`)
     , title     =? "CuteCom"
+    , title     =? "VT"
+    , className =? "Eog"
+    , className =? "eog"
     ]
 
   my = foldr1 (<||>)
