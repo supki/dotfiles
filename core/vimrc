@@ -344,5 +344,5 @@
 		endif
 	endfunction
 
-	command! HaskellModuleName exe "normal! imodule " . HaskellModuleName() . "\n(\n) where\n"
+	command! HaskellModuleName exe "normal! ggimodule " . HaskellModuleName() . "\n  (\n) where\n\n``"
 " }
