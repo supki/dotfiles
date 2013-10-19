@@ -26,7 +26,7 @@ main = xmobar Config
     , Run (Com "playcount" [] "mypc" 60)
     , Run (Com "vaio-battery" ["--xmobar"] "battery" 600)
     , Run (Com "date"
-        ["+'%b <fc=#eeccaa>%d</fc>, (%a), <fc=#eeccaa>%I</fc>:<fc=#eeccaa>%M</fc> %P'"]
+        ["+'%b <fc=#eeccaa>%d</fc>, (%a), <fc=#eeccaa>%I</fc>:<fc=#eeccaa>%M</fc> %p'"]
         "mydate"
         600)
     , Run StdinReader
