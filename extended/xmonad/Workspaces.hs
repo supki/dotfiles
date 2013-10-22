@@ -2,7 +2,6 @@
 module Workspaces where
 
 import Control.Lens
-import Data.Functor ((<$>))
 import Data.List (isInfixOf, isPrefixOf, isSuffixOf)
 import Data.Monoid ((<>), mconcat)
 

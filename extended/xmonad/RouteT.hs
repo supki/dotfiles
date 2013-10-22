@@ -12,7 +12,7 @@ import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Category ((>>>))
 import Control.Lens
 import Control.Monad (MonadPlus(..), ap, guard, liftM)
-import Control.Monad.Reader (ReaderT, runReaderT, ask, local)
+import Control.Monad.Reader (ReaderT, runReaderT, local)
 import Control.Monad.Trans (MonadIO(..))
 import Control.Monad.Trans.Class (MonadTrans(..))
 import Data.Functor.Identity (Identity(..))

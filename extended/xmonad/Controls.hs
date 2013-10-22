@@ -5,8 +5,6 @@ import           Control.Monad
 import qualified Data.Map as M
 import           Graphics.X11.ExtraTypes.XF86
 import qualified Network.MPD as MPD
-import           System.Exit
-import           System.FilePath ((</>))
 import           XMonad
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.SwapWorkspaces
@@ -14,7 +12,6 @@ import           XMonad.Actions.FindEmptyWorkspace
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Prompt
 import           XMonad.Prompt.Shell
-import           XMonad.Prompt.Window
 import           XMonad.Util.NamedScratchpad
 import           XMonad.Util.WorkspaceScreenshot
 import qualified XMonad.StackSet as W
@@ -24,7 +21,6 @@ import qualified Workspaces as WS
 import qualified Man
 import           Themes
 import qualified Tmux
-import           RouteT
 import qualified Startup
 
 

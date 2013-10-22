@@ -7,7 +7,6 @@ module Layouts
 import XMonad
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.DwmStyle
-import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 import XMonad.Layout.TwoPane

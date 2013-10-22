@@ -1,15 +1,7 @@
 {-# OPTIONS_GHC -W #-}
 module Profile where
 
-import           Control.Monad
-import           Data.Foldable (asum)
-import qualified Data.List as L
-import qualified System.Directory as D
-import           System.FilePath ((</>))
-import           XMonad
-
-import RouteT
-import Tmux
+import XMonad
 
 -- Startup apps
 apps :: [(String, String)]

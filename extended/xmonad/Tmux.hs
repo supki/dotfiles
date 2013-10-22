@@ -11,13 +11,10 @@ import Control.Monad
 import Data.Foldable (asum)
 import Data.Function (on)
 import Data.List (isPrefixOf, nubBy, sort)
-import Data.Monoid
 
-import           Data.Map (Map, (!))
-import qualified Data.Map as M
+import           Data.Map (Map)
 import qualified System.Directory as D
-import           System.FilePath ((</>), takeFileName)
-import           System.Directory (doesDirectoryExist)
+import           System.FilePath ((</>))
 import           System.Wordexp.Simple (wordexp)
 
 import XMonad
