@@ -2,7 +2,6 @@
 :set editor vim
 
 import           Control.Applicative
-import           Control.Arrow
 import           Control.Monad
 import           Data.Bits
 import           Data.Char
