@@ -59,38 +59,41 @@ dotfiles = role "dotfiles" $
     [sh|xrdb -merge ~/.Xdefaults|]
  where
   cores =
-    [ "xsession"                   ~> ".xsession"
-    , "mpdconf"                    ~> ".mpdconf"
-    , "profile"                    ~> ".profile"
-    , "bashrc"                     ~> ".bashrc"
-    , "zshenv"                     ~> ".zshenv"
-    , "zshrc"                      ~> ".zshrc"
-    , "inputrc"                    ~> ".inputrc"
-    , "vimrc"                      ~> ".vimrc"
+    [ dot "xsession"
+    , dot "mpdconf"
+    , dot "profile"
+    , dot "bashrc"
+    , dot "zshenv"
+    , dot "zshrc"
+    , dot "inputrc"
+    , dot "vimrc"
+    , dot "ghci"
+    , dot "irbrc"
+    , dot "haskeline"
+    , dot "racketrc"
+    , dot "gitconfig"
+    , dot "gitignore"
+    , dot "ackrc"
+    , dot "XCompose"
+    , dot "vimusrc"
+    , dot "tmux.conf"
+    , dot "emacs"
+    , dot "poneaux.rb"
+    , dot "sqliterc"
+    , dot "pythonrc"
+    , dot "curlrc"
     , "vim.custom"                 ~> ".vim/plugin/vimrc-local.vim"
-    , "ghci"                       ~> ".ghci"
-    , "irbrc"                      ~> ".irbrc"
-    , "haskeline"                  ~> ".haskeline"
-    , "racketrc"                   ~> ".racketrc"
-    , "gitconfig"                  ~> ".gitconfig"
-    , "gitignore"                  ~> ".gitignore"
-    , "ackrc"                      ~> ".ackrc"
     , "vim/pathogen.vim"           ~> ".vim/autoload/pathogen.vim"
     , "vim/cscope_maps.vim"        ~> ".vim/bundle/cscope_maps.vim"
     , "vim/scratch"                ~> ".vim/bundle/scratch"
     , "vim/indent/haskell.vim"     ~> ".vim/indent/haskell.vim"
     , "conceal/haskell.vim"        ~> ".vim/after/syntax/haskell.vim"
-    , "XCompose"                   ~> ".XCompose"
-    , "vimusrc"                    ~> ".vimusrc"
-    , "tmux.conf"                  ~> ".tmux.conf"
-    , "emacs"                      ~> ".emacs"
-    , "poneaux.rb"                 ~> ".poneaux.rb"
-    , "sqliterc"                   ~> ".sqliterc"
-    , "pythonrc"                   ~> ".pythonrc"
-    , "curlrc"                     ~> ".curlrc"
     ]
   extendeds =
-    [ "xmonad.hs"                  ~> ".xmonad/xmonad.hs"
+    [ dot "gvimrc"
+    , dot "pentadactylrc"
+    , dot "gtkrc.mine"
+    , "xmonad.hs"                  ~> ".xmonad/xmonad.hs"
     , "xmonad/Controls.hs"         ~> ".xmonad/lib/Controls.hs"
     , "xmonad/Layouts.hs"          ~> ".xmonad/lib/Layouts.hs"
     , "xmonad/Startup.hs"          ~> ".xmonad/lib/Startup.hs"
@@ -99,11 +102,8 @@ dotfiles = role "dotfiles" $
     , "xmonad/Tmux.hs"             ~> ".xmonad/lib/Tmux.hs"
     , "xmonad/Man.hs"              ~> ".xmonad/lib/Man.hs"
     , "xmonad/Workspaces.hs"       ~> ".xmonad/lib/Workspaces.hs"
-    , "gvimrc"                     ~> ".gvimrc"
     , "vimcolors"                  ~> ".vim/colors"
-    , "pentadactylrc"              ~> ".pentadactylrc"
     , "pentadactyl/wanker.penta"   ~> ".pentadactyl/plugins/wanker.penta"
-    , "gtkrc.mine"                 ~> ".gtkrc.mine"
     , "mplayer-config"             ~> ".mplayer/config"
     ]
   recipes =
@@ -247,6 +247,9 @@ mine = role "mine" $ traverse_ (--> into "git")
 infix 8 -->
 (-->) :: String -> FilePath -> Script Sources ()
 (-->) = git_
+
+dot :: FilePath -> (FilePath, FilePath)
+dot path = path ~> '.' : path
 
 infixr 4 <\>~
 (<\>~) :: Setting (->) s t FilePath FilePath -> FilePath -> s -> t
