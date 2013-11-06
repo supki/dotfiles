@@ -18,6 +18,7 @@ import           Data.String
 import           Data.Tuple
 import           Data.Typeable
 import           Data.Word
+import           Debug.Trace
 import           Numeric
 import           System.IO
 import           System.IO.Unsafe
