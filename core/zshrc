@@ -79,6 +79,7 @@ alias c='cabal'
 alias g='git'
 alias s='svn'
 alias v='vim'
+alias vm='vagrant'
 alias t='tmux'
 
 function man {
