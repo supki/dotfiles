@@ -82,6 +82,7 @@ dotfiles = role "dotfiles" $
     , dot "sqliterc"
     , dot "pythonrc"
     , dot "curlrc"
+    , dot "codorc"
     , "vim.custom"                 ~> ".vim/plugin/vimrc-local.vim"
     , "vim/pathogen.vim"           ~> ".vim/autoload/pathogen.vim"
     , "vim/cscope_maps.vim"        ~> ".vim/bundle/cscope_maps.vim"
