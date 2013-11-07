@@ -81,6 +81,7 @@ alias s='svn'
 alias v='vim'
 alias vm='vagrant'
 alias t='tmux'
+alias ll='ls -lh'
 
 function man {
 	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
