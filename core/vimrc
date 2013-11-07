@@ -114,6 +114,9 @@
 	" ignore \ when matching {([])} in haskell code
 	autocmd FileType haskell set cpoptions+=M
 
+	" Guardfile is Ruby
+	autocmd BufRead,BufNewFile Guardfile set filetype=ruby
+
 	" save on focus lost
 	autocmd FocusLost * :wa
 
