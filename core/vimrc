@@ -109,6 +109,7 @@
 		autocmd FileType ruby    setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType python  setlocal expandtab shiftwidth=4 softtabstop=4
 		autocmd FileType perl    setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType pyret   setlocal expandtab shiftwidth=2 softtabstop=2
 	augroup end
 
 	" ignore \ when matching {([])} in haskell code
