@@ -256,6 +256,10 @@
 	autocmd FileType agda    set commentstring=--\ %s
 	autocmd FileType cabal   set commentstring=--\ %s
 	autocmd FileType ocaml   set commentstring=(*\ %s\ *)
+
+	" for vim2hs
+	let g:haskell_conceal = 0
+	let g:haskell_folding = 0
 " }
 
 " Functions {
