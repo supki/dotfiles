@@ -216,9 +216,6 @@
 	" disable search results highlighting
 	noremap <leader>h :noh<bar>echo<CR>
 
-	" toggle scratch buffer
-	noremap <leader>s :VScratch<CR>
-
 	" easy move to next bracket
 	nnoremap <tab> %
 	vnoremap <tab> %

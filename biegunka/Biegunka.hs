@@ -57,6 +57,12 @@ dotfiles = role "dotfiles" $
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
     recipes   & mapped._1 <\>~ "extended" & unzipWithM_ substitute
     [sh|xrdb -merge ~/.Xdefaults|]
+    let pathogen_url :: String
+        pathogen_url = "https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
+    [sh|
+      mkdir -p  ~/.vim/autoload ~/.vim/bundle ~/.vim/colors
+      curl -o ~/.vim/autoload/pathogen.vim #{pathogen_url}
+    |]
  where
   cores =
     [ dot "xsession"
@@ -84,12 +90,11 @@ dotfiles = role "dotfiles" $
     , dot "curlrc"
     , dot "codorc"
     , dot "guardrc"
-    , "vim.custom"                 ~> ".vim/plugin/vimrc-local.vim"
-    , "vim/pathogen.vim"           ~> ".vim/autoload/pathogen.vim"
-    , "vim/cscope_maps.vim"        ~> ".vim/bundle/cscope_maps.vim"
-    , "vim/scratch"                ~> ".vim/bundle/scratch"
+    , "vim/vim.custom"             ~> ".vim/plugin/vimrc-local.vim"
     , "vim/indent/haskell.vim"     ~> ".vim/indent/haskell.vim"
-    , "conceal/haskell.vim"        ~> ".vim/after/syntax/haskell.vim"
+    , "vim/camo.vim"               ~> ".vim/colors/camo.vim"
+    , "vim/zenburn.vim"            ~> ".vim/colors/zenburn.vim"
+    , "vim/conceal/haskell.vim"    ~> ".vim/after/syntax/haskell.vim"
     ]
   extendeds =
     [ dot "gvimrc"
@@ -104,7 +109,6 @@ dotfiles = role "dotfiles" $
     , "xmonad/Tmux.hs"             ~> ".xmonad/lib/Tmux.hs"
     , "xmonad/Man.hs"              ~> ".xmonad/lib/Man.hs"
     , "xmonad/Workspaces.hs"       ~> ".xmonad/lib/Workspaces.hs"
-    , "vimcolors"                  ~> ".vim/colors"
     , "pentadactyl/wanker.penta"   ~> ".pentadactyl/plugins/wanker.penta"
     , "mplayer-config"             ~> ".mplayer/config"
     ]
