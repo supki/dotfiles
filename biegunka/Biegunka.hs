@@ -137,7 +137,6 @@ tools = role "tools" $
     [ "youtube-in-mplayer.sh" ~> "bin/youtube-in-mplayer"
     , "cue2tracks.sh"         ~> "bin/cue2tracks"
     , "weather.rb"            ~> "bin/ask-weather"
-    , "playcount.hs"          ~> "bin/playcount"
     , "mpd/.lastfm.conf"      ~> ".lastfm.conf"
     , "mpd/lastfm.png"        ~> ".icons/lastfm.png"
     , "mpd/love.hs"           ~> "bin/lastfm-love-current-mpd-track"
@@ -145,7 +144,6 @@ tools = role "tools" $
     , "pemised.rb"            ~> "bin/pemised"
     , "upload/screenshot.sh"  ~> "bin/upload-screenshot"
     , "upload/budueba.sh"     ~> "bin/upload-budueba"
-    , "upload/pastebin.hs"    ~> "bin/upload-pastebin"
     , "isup.sh"               ~> "bin/isup"
     , "pretty-json.py"        ~> "bin/pretty-json"
     , "publish-haddocks.sh"   ~> "bin/publish-haddocks"
@@ -156,6 +154,7 @@ tools = role "tools" $
   user_binaries =
     [ "audio.hs"              ~> "vaio-audio"
     , "jenkins-hi.hs"         ~> "jenkins-hi"
+    , "playcount.hs"          ~> "playcount"
     ]
   suid_binaries =
     [ "suspender.hs"          ~> "suspender"
