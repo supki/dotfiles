@@ -14,8 +14,11 @@ export GTK_IM_MODULE=xim
 # start kbdd
 kbdd
 
-# enable wallpaper
+# set wallpaper
 xsetroot -solid black
+
+# set non-nonsensical default cursor
+xsetroot -cursor_name arrow
 
 # process .xmodmap
 xmodmap ~/.xmodmap
