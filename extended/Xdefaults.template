@@ -39,7 +39,7 @@
 *.color15: #ffffff
 *.underlineColor: #eeccaa
 
-*.urlLauncher: $template.urxvt.browser$
+*.url-select.launcher: $template.urxvt.browser$
 *.perl-ext-common: default,tabbedex,keyboard-select,url-select
 
 *.keysym.C-s: perl:keyboard-select:activate
