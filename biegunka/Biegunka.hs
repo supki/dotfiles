@@ -90,6 +90,7 @@ dotfiles = role "dotfiles" $
     , dot "curlrc"
     , dot "codorc"
     , dot "guardrc"
+    , dot "guard.rb"
     , "vim/vim.custom"             ~> ".vim/plugin/vimrc-local.vim"
     , "vim/indent/haskell.vim"     ~> ".vim/indent/haskell.vim"
     , "vim/camo.vim"               ~> ".vim/colors/camo.vim"
