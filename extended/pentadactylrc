@@ -23,9 +23,13 @@ nmap -builtin l 5l
 nmap <A-Tab> <C-6>
 nmap <Space> <C-D>
 nmap <S-Space> <C-U>
+nmap d <C-D>
+nmap u <C-U>
 nmap <C-S-p> ;tabmove -1<CR>
 nmap <C-S-n> ;tabmove +1<CR>
 nmap ge <C-S-e> " panorama view
+nmap x -js gBrowser.removeCurrentTab()
+nmap X -js undoCloseTab()
 
 javascript <<EOF
 	dactyl.toggleStatusLine = function () {
