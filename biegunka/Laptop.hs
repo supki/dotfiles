@@ -26,8 +26,7 @@ templates = def
     , yellow    = "#eeccaa"
     , startup   =
       [multiline|
-        [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 102 --heighttype pixel --height 18 --tint 0x" ++ tail blackColor ++ " --alpha 0")
-        , ("/home/maksenov/.dropbox-dist/dropbox", "${HOME}/.dropbox-dist/dropboxd")
+        [ ("/home/maksenov/.dropbox-dist/dropbox", "${HOME}/.dropbox-dist/dropboxd")
         , ("mpd", "mpd")
         , ("x-www-browser", "x-www-browser")
         , ("gnome-commander", "gnome-commander")
