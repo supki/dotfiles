@@ -88,7 +88,6 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_b, sendMessage ToggleStruts)
       -- quit/restart xmonad
       , (0,           xK_q, Startup.myStartupHook)
-      , (shiftMask,   xK_q, spawn "killall trayer; xmonad --recompile; xmonad --restart")
       -- make workspaces screenshots and merge them
       , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook horizontally)
       ]
