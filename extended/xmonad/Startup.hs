@@ -3,9 +3,10 @@ module Startup
   ( myStartupHook
   ) where
 
-import XMonad
+import           XMonad hiding (spawn)
 
 import qualified Profile
+import           Spawn
 
 myStartupHook :: X ()
 myStartupHook =
