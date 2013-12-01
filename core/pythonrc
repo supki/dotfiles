@@ -14,7 +14,7 @@ import rlcompleter
 import atexit
 
 def have_a_nice_day():
-    print
+    print()
     print("Have a nice day.")
 
 # registered functions are run in the reverse order
