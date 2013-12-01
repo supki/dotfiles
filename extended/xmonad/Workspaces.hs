@@ -53,7 +53,14 @@ toWsId Files     = "="
 toWsId Torrents  = "\\"
 toWsId Stuff     = "<-"
 
+onWorkspace
+  :: (LayoutClass i a, LayoutClass j a)
+  => Workspace -> i a -> j a -> XLPW.PerWorkspace i j a
 onWorkspace w = XLPW.onWorkspace (toWsId w)
+
+onWorkspaces
+  :: (LayoutClass i a, LayoutClass j a)
+  => [Workspace] -> i a -> j a -> XLPW.PerWorkspace i j a
 onWorkspaces ws = XLPW.onWorkspaces (map toWsId ws)
 --
 
@@ -61,7 +68,7 @@ onWorkspaces ws = XLPW.onWorkspaces (map toWsId ws)
 myManageHook :: ManageHook
 myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   [ isFullscreen --> doFullFloat
-  , my float     --> doFloat
+  , my floats    --> doFloat
   , my ignore    --> doIgnore
   , my relax     --> doShift (toWsId Talkative)
   , my chromie   --> doShift (toWsId WWW)
@@ -75,7 +82,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   ]
   <> manageDocks <> manageHook defaultConfig
  where
-  float =
+  floats =
     [ title     <&> ("Figure" `isPrefixOf`)
     , title     =? "youtube-video"
     , title     =? "xmessage"

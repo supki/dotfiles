@@ -5,7 +5,7 @@ module RouteT
   ( -- * RouteT monad
     RouteT, Route, runRouteT, runRoute
     -- * Routing
-  , nomore, sofar, next, rest, dir, dirs
+  , nomore, sofar, nofar, next, rest, dir, dirs
   ) where
 
 import Control.Applicative (Alternative(..), Applicative(..))
@@ -19,13 +19,15 @@ import Data.Functor.Identity (Identity(..))
 import System.FilePath (joinPath, makeRelative, splitDirectories)
 import System.FilePath.Lens ((</>~))
 
+{-# ANN module "Hlint: Unused LANGUAGE pragma" #-}
+
 
 -- * RouteT definition
 
 type Route = RouteT Identity
 
 newtype RouteT m a = RouteT { unRouteT :: ReaderT Routing (OptionT m) a }
-    deriving (Functor)
+  deriving (Functor)
 
 instance Monad m => Applicative (RouteT m) where
   pure = RouteT . pure
@@ -83,6 +85,10 @@ nomore = RouteT $ do
 -- | Get already routed part of the route
 sofar :: Monad m => RouteT m FilePath
 sofar = RouteT $ view routed
+
+-- | Get already routed path and ensure it's the end of the route
+nofar :: Monad m => RouteT m FilePath
+nofar = nomore >> sofar
 
 -- | Make routing decision based on next directory
 next :: Monad m => (FilePath -> RouteT m b) -> RouteT m b

@@ -102,7 +102,7 @@ dotfiles = role "dotfiles" $
     , dot "pentadactylrc"
     , dot "gtkrc.mine"
     , "xmonad.hs"                  ~> ".xmonad/xmonad.hs"
-    , "xmonad/Controls.hs"         ~> ".xmonad/lib/Controls.hs"
+    , "xmonad/Bindings.hs"         ~> ".xmonad/lib/Bindings.hs"
     , "xmonad/Layouts.hs"          ~> ".xmonad/lib/Layouts.hs"
     , "xmonad/Startup.hs"          ~> ".xmonad/lib/Startup.hs"
     , "xmonad/Themes.hs"           ~> ".xmonad/lib/Themes.hs"

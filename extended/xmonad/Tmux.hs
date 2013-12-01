@@ -65,7 +65,7 @@ un         s  = s
 isSubsequenceOf :: String -> String -> Bool
 isSubsequenceOf []     _  = True
 isSubsequenceOf (x:xs) ys =
-  case snd (break (== x) ys) of
+  case dropWhile (/= x) ys of
     _ : zs -> xs `isSubsequenceOf` zs
     []     -> False
 
@@ -81,9 +81,9 @@ expand p = io $
 start :: [String] -> RouteT IO Command -> String -> X ()
 start runningSessions route (un -> userInput) = do
   term <- asks $ terminal . config
-  case userInput `elem` runningSessions of
-    True  -> spawn $ attach  term userInput
-    False -> do
+  if userInput `elem` runningSessions
+    then spawn $ attach  term userInput
+    else do
       routed <- io $ runRouteT userInput route
       case routed of
         Just command -> spawn $ create' term userInput command
@@ -99,31 +99,28 @@ start runningSessions route (un -> userInput) = do
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = liftM concat . mapM f
 
-route :: RouteT IO Command
-route = asum
+{-# ANN routes "HLint: Reduce duplication" #-}
+
+routes :: RouteT IO Command
+routes = asum
   [ next $ \repos -> do
       guard (repos `elem` ["git", "svn"])
       next $ \_ -> do
-        nomore
-        path   <- sofar
-        exists <- io $ D.doesDirectoryExist path
-        guard exists
+        path <- nofar
+        exists path
         return (Tmux.ChangeDirectory path)
   , dir "play" $ asum
       [ next $ \inside -> do
           nomore
           let path = "playground" </> inside
-          exists <- io $ D.doesDirectoryExist path
-          guard exists
+          exists path
           return (Tmux.ChangeDirectory path)
       , return (Tmux.ChangeDirectory "playground")
       ]
   , dirs ".vim/bundle" $
       next $ \_ -> do
-        nomore
-        path   <- sofar
-        exists <- io $ D.doesDirectoryExist path
-        guard exists
+        path <- nofar
+        exists path
         return (Tmux.ChangeDirectory path)
   , next $ \part -> do
       nomore
@@ -134,3 +131,8 @@ route = asum
       guard (part `elem` ["dev", "storage", "budueba", "jenkins"])
       return (Tmux.Session ("ssh " ++ part))
   ]
+
+exists :: FilePath -> RouteT IO ()
+exists path = do
+  p <- io (D.doesDirectoryExist path)
+  guard p

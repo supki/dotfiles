@@ -1,11 +1,13 @@
 {-# OPTIONS_GHC -W #-}
-module Controls where
+module Bindings where
 
 import           Control.Monad
+import           Data.Map (Map)
 import qualified Data.Map as M
 import           Graphics.X11.ExtraTypes.XF86
 import qualified Network.MPD as MPD
-import           XMonad
+import           Prelude hiding (mod)
+import           XMonad hiding (spawn)
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.SwapWorkspaces
 import           XMonad.Actions.FindEmptyWorkspace
@@ -26,7 +28,7 @@ import qualified Tmux
 
 
 
--- Mouse
+myMouseBindings :: XConfig t -> Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
   -- swap the focused window and the master window
   [ ((modm, button2), \w -> focus w >> mouseMoveWindow w)
@@ -36,18 +38,17 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
   , ((modm, button4), \w -> focus w >> sendMessage (IncMasterN 1))
   , ((modm, button5), \w -> focus w >> sendMessage (IncMasterN (-1)))
   ]
---
 
 
--- Keyboard hotkeys
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
+myKeyboardBindings :: XConfig Layout -> Map (KeyMask, KeySym) (X ())
+myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- default
   [ ((modm .|. mod, key), command)
     | (mod, key, command) <-
       -- launch a terminal
       [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
       -- launch tmux prompt
-      , (0,           xK_Return, Tmux.prompt Profile.patterns Tmux.route myXPConfig)
+      , (0,           xK_Return, Tmux.prompt Profile.patterns Tmux.routes myXPConfig)
       -- launch man prompt
       , (0,           xK_m, Man.prompt myXPConfig)
       -- launch shellPrompt
@@ -160,7 +161,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,         xF86XK_MonBrightnessUp, "vaio-brightness --increase")
       ]
   ]
---
 
 
 io_ :: MonadIO m => IO a -> m ()

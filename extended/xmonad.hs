@@ -7,16 +7,22 @@ import System.IO
 import XMonad
 import XMonad.Actions.UpdatePointer
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Layout.DwmStyle
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Tabbed
+import XMonad.Layout.TwoPane
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run
 import XMonad.Util.WorkspaceScreenshot (initCapturing)
 
-import           Controls
-import           Layouts
+import           Bindings
 import           Profile
 import qualified Startup
+import           Themes
 import           Workspaces
 
+main :: IO ()
 main = do
   initCapturing
   xmproc <- spawnPipe "xmobar"
@@ -29,7 +35,7 @@ main = do
     , logHook            = myLogHook xmproc
     , startupHook        = Startup.myStartupHook
     -- Key bindings
-    , keys               = myKeys
+    , keys               = myKeyboardBindings
     , mouseBindings      = myMouseBindings
     -- Other stuff
     , focusFollowsMouse  = myFocusFollowsMouse
@@ -41,7 +47,7 @@ main = do
     , focusedBorderColor = myFocusedBorderColor
     }
 
--- Log hook
+myLogHook :: Handle -> X ()
 myLogHook xmproc_handle = do
   updatePointer (Relative 0.5 0.5)
   dynamicLogWithPP $ xmobarPP
@@ -54,5 +60,12 @@ myLogHook xmproc_handle = do
     , ppSep = "<fc=" ++ whiteColor ++ "> | </fc>"
     , ppSort = (. namedScratchpadFilterOutWorkspace) <$> ppSort defaultPP
     }
---
 
+myLayoutHook = smartBorders $ avoidStruts $
+  onWorkspace Texts (tabbed shrinkText myTheme) $
+  onWorkspaces [Video, Mail, Files, Torrents] Full $
+  onWorkspace Status (dwmStyle shrinkText myTheme tall) $
+  onWorkspace Talkative (TwoPane (3/100) (1/2)) $
+  tall ||| Mirror tall |||  Full
+ where
+  tall = Tall 1 0.03 0.5
