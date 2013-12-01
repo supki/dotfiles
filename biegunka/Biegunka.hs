@@ -110,6 +110,7 @@ dotfiles = role "dotfiles" $
     , "xmonad/Tmux.hs"             ~> ".xmonad/lib/Tmux.hs"
     , "xmonad/Man.hs"              ~> ".xmonad/lib/Man.hs"
     , "xmonad/Workspaces.hs"       ~> ".xmonad/lib/Workspaces.hs"
+    , "xmonad/Spawn.hs"            ~> ".xmonad/lib/Spawn.hs"
     , "pentadactyl/wanker.penta"   ~> ".pentadactyl/plugins/wanker.penta"
     , "mplayer-config"             ~> ".mplayer/config"
     ]

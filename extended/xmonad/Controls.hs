@@ -19,9 +19,10 @@ import qualified XMonad.StackSet as W
 import qualified Profile
 import qualified Workspaces as WS
 import qualified Man
+import           Spawn
+import qualified Startup
 import           Themes
 import qualified Tmux
-import qualified Startup
 
 
 
