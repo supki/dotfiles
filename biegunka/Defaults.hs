@@ -36,7 +36,18 @@ instance Default Xmobar where
 
 
 data Xmonad = Xmonad
-  { terminal, ubuntu, terminus, white, grayDark, grayLight, black, orange, yellow, startup, follow :: String
+  { terminal
+  , ubuntu
+  , terminus
+  , white
+  , darkGray
+  , lightGray
+  , black
+  , blue
+  , orange
+  , yellow
+  , startup
+  , follow :: String
   } deriving (Data, Typeable)
 
 instance Default Xmonad where
@@ -45,9 +56,10 @@ instance Default Xmonad where
     , ubuntu    = def
     , terminus  = def
     , white     = def
-    , grayDark  = def
-    , grayLight = def
+    , darkGray  = def
+    , lightGray = def
     , black     = def
+    , blue      = def
     , orange    = def
     , yellow    = def
     , startup   = def

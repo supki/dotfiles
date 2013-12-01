@@ -19,9 +19,10 @@ templates = def
     , ubuntu    = "xft:ubuntu:size   = 9"
     , terminus  = "xft:terminus:size = 9"
     , white     = "#ffffff"
-    , grayDark  = "#474747"
-    , grayLight = "#cccccc"
+    , darkGray  = "#474747"
+    , lightGray = "#cccccc"
     , black     = "#222222"
+    , blue      = "#d7d7ff"
     , orange    = "#dd9977"
     , yellow    = "#eeccaa"
     , startup   =

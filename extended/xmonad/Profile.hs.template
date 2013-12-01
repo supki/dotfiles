@@ -31,9 +31,9 @@ myNumlockMask = mod2Mask
 myBorderWidth :: Dimension
 myBorderWidth = 2
 myNormalBorderColor :: String
-myNormalBorderColor = grayDarkColor
+myNormalBorderColor = darkGray
 myFocusedBorderColor :: String
-myFocusedBorderColor = yellowColor
+myFocusedBorderColor = blue
 --
 
 -- Terminal emulator
@@ -49,21 +49,24 @@ terminusFont = "$template.xmonad.terminus$"
 --
 
 -- Colors
-whiteColor :: String
-whiteColor = "$template.xmonad.white$"
+white :: String
+white = "$template.xmonad.white$"
 
-grayDarkColor :: String
-grayDarkColor = "$template.xmonad.grayDark$"
+darkGray :: String
+darkGray = "$template.xmonad.darkGray$"
 
-grayLightColor :: String
-grayLightColor = "$template.xmonad.grayLight$"
+lightGray :: String
+lightGray = "$template.xmonad.lightGray$"
 
-blackColor :: String
-blackColor = "$template.xmonad.black$"
+black :: String
+black = "$template.xmonad.black$"
 
-orangeColor :: String
-orangeColor = "$template.xmonad.orange$"
+orange :: String
+orange = "$template.xmonad.orange$"
 
-yellowColor :: String
-yellowColor = "$template.xmonad.yellow$"
+yellow :: String
+yellow = "$template.xmonad.yellow$"
+
+blue :: String
+blue = "$template.xmonad.blue$"
 --
