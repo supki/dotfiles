@@ -228,8 +228,11 @@
 	" unite command
 	nmap <leader>u :Unite
 
-	" fuck it
+	" fuck this
 	nmap <leader>d :redraw!<CR>
+
+	" fuck that
+	noremap <S-k> <NOP>
 
 	nnoremap <Space> <C-D>
 	nnoremap <S-Space> <C-U>
