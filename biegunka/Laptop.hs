@@ -32,14 +32,13 @@ templates = def
         , ("x-www-browser", "x-www-browser")
         , ("gnome-commander", "gnome-commander")
         , ("transmission-gtk", "transmission-gtk")
-        , ("ssh .* mcabber", "urxvtcd -title mcabber -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -d -t mcabber'")
-        , ("ssh .* irssi", "urxvtcd -title irssi -e ssh matt@budueba.com -t 'export LANG=en_US.UTF-8; tmux attach -d -t irssi'")
-        , ("/usr/bin/ruby1.9.1 /usr/local/bin/poneaux", "urxvtcd -title poneaux -e poneaux")
+        , ("ssh .* mcabber", "urxvtcd -title mcabber -e ssh budueba -t 'export LANG=en_US.UTF-8; tmux attach -d -t mcabber'")
+        , ("ssh .* irssi", "urxvtcd -title irssi -e ssh budueba -t 'export LANG=en_US.UTF-8; tmux attach -d -t irssi'")
+        , ("/usr/bin/ruby1.9.1 poneaux", "urxvtcd -title poneaux -e poneaux")
         , ("watch -n2 netstat", "urxvtcd -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
         , ("htop", "urxvtcd -title htop -e htop")
         , ("scrobbler-client", "scrobbler-client")
         , ("procfiled", "procfiled")
-        , ("icedove", "icedove")
         , ("suspender", "suspender")
         , ("vimus", "urxvtcd -title vimus -name vimus -e zsh -c vimus")
         ]
@@ -52,6 +51,6 @@ templates = def
   , urxvt = def
     { perllib     = "/home/maksenov/git/urxvt-tabbedex:/home/maksenov/git/urxvt-perls"
     , background_ = "#222222"
-    , browser     = "iceweasel"
+    , browser     = "x-www-browser"
     }
   }
