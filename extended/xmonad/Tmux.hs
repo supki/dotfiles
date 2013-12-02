@@ -6,23 +6,22 @@
 -- Inspired by Simon Gomizelj (@vodik) - https://github.com/vodik/dotfiles/blob/master/xmonad/lib/XMonad/Util/Tmux.hs
 module Tmux where
 
-import Control.Applicative
-import Control.Monad
-import Data.Foldable (asum)
-import Data.Function (on)
-import Data.List (isPrefixOf, nubBy, sort)
-
+import           Control.Applicative
+import           Control.Monad
+import           Data.Foldable (asum)
+import           Data.Function (on)
+import           Data.List (isPrefixOf, nubBy, sort)
 import           Data.Map (Map)
 import qualified System.Directory as D
 import           System.FilePath ((</>))
 import           System.Wordexp.Simple (wordexp)
+import           XMonad hiding (spawn)
+import           XMonad.Prompt
+import           XMonad.Prompt.Input
+import           XMonad.Util.Run
 
-import XMonad
-import XMonad.Prompt
-import XMonad.Prompt.Input
-import XMonad.Util.Run
-
-import RouteT
+import           RouteT
+import           Spawn (spawn)
 
 
 -- | Less typing type synonym
