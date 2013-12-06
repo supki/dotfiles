@@ -252,11 +252,15 @@
 	let g:bling_color=216
 
 	" for vim-commentary
-	autocmd FileType haskell    set commentstring=--\ %s
-	autocmd FileType agda       set commentstring=--\ %s
-	autocmd FileType cabal      set commentstring=--\ %s
-	autocmd FileType ocaml      set commentstring=(*\ %s\ *)
-	autocmd FileType debsources set commentstring=#\ %s
+	augroup comments
+		autocmd!
+		autocmd FileType haskell    set commentstring=--\ %s
+		autocmd FileType agda       set commentstring=--\ %s
+		autocmd FileType cabal      set commentstring=--\ %s
+		autocmd FileType ocaml      set commentstring=(*\ %s\ *)
+		autocmd FileType debsources set commentstring=#\ %s
+		autocmd FileType awk        set commentstring=#\ %s
+	augroup end
 
 	" for vim2hs
 	let g:haskell_conceal = 0
