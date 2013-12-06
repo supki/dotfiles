@@ -50,6 +50,7 @@ setopt histignorespace
 setopt autocd
 
 setopt interactivecomments
+setopt nonomatch
 
 bindkey -v
 bindkey '^[[A' history-beginning-search-backward
