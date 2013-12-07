@@ -176,6 +176,9 @@
 	" enable omni-completion
 	autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
+	" for neco-ghc
+	let g:necoghc_enable_detailed_browse = 1
+
 	" drop occasional hdevtools highlight
 	autocmd BufWrite *.hs HdevtoolsClear
 
