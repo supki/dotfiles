@@ -27,6 +27,8 @@ nmap d <C-D>
 nmap u <C-U>
 nmap <C-S-p> ;tabmove -1<CR>
 nmap <C-S-n> ;tabmove +1<CR>
+nmap J ;tabprevious<CR>
+nmap K ;tabnext<CR>
 nmap ge <C-S-e> " panorama view
 nmap x -js gBrowser.removeCurrentTab()
 nmap X -js undoCloseTab()
