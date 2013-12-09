@@ -98,29 +98,29 @@ function :t {
 function haddock-global {
 	package=$1
 	for index in /usr/local/share/doc/ghc/html/libraries/${package}-*/index.html; do
-		xdg-open file://${index}
+		x-www-browser file://${index}
 	done
 }
 function haddock-local {
 	package=$1
 	for index in ${HOME}/.cabal/share/doc/${package}-*/html/index.html; do
-		xdg-open file://${index}
+		x-www-browser file://${index}
 	done
 }
 function haddock-dist {
 	for index in dist/doc/html/*/index.html; do
-		xdg-open file://$(pwd)/${index}
+		x-www-browser file://$(pwd)/${index}
 	done
 }
 function haddock-sandbox {
 	for index in dist/dist-sandbox-*/doc/html/*/index.html; do
-		xdg-open file://$(pwd)/${index}
+		x-www-browser file://$(pwd)/${index}
 	done
 }
 function haddock-dev {
 	package=$1
 	for index in cabal-dev/share/doc/${package}-*/html/index.html; do
-		xdg-open file://$(pwd)/${index}
+		x-www-browser file://$(pwd)/${index}
 	done
 }
 
