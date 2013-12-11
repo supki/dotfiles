@@ -12,4 +12,5 @@ myStartupHook :: X ()
 myStartupHook =
   mapM_ spawnOnce Profile.apps
  where
-  spawnOnce (target, command) = spawn $ "pid=\"$( pgrep -f \"^" ++ target ++ "\")\"; [ -z \"${pid}\" ] && " ++ command
+  spawnOnce (target, command) = spawn $
+    "pgrep -f \"^" ++ target ++ "\" || " ++ command
