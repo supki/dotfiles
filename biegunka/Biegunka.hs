@@ -57,6 +57,7 @@ dotfiles = role "dotfiles" $
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
     recipes   & mapped._1 <\>~ "extended" & unzipWithM_ substitute
     [sh|xrdb -merge ~/.Xdefaults|]
+    [sh|xmonad --recompile|]
     let pathogen_url :: String
         pathogen_url = "https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
     [sh|
