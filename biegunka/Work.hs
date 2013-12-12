@@ -26,7 +26,7 @@ templates = def
     , yellow    = "#eeccaa"
     , startup   =
       [multiline|
-        [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 78 --heighttype pixel --height 17 --tint 0x" ++ tail blackColor ++ " --alpha 0")
+        [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 78 --heighttype pixel --height 17 --tint 0x" ++ tail black ++ " --alpha 0")
         , ("/usr/lib/firefox/firefox", "firefox")
         , ("thunderbird", "thunderbird")
         , ("gnome-commander", "gnome-commander")
