@@ -29,6 +29,7 @@
 	p = pull
 	prbs = pull --rebase
 	rbs = rebase --preserve-merges
+	ms = merge --squash
 	d = diff
 	df = diff --stat
 	dl = diff HEAD~1
