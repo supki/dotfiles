@@ -26,5 +26,8 @@ xmodmap ~/.xmodmap
 # start ssh-agent
 ssh-agent
 
+# start clipboard/primary selection synchronizer
+parcellite &
+
 # start pakej
 sh -l -c pakej
