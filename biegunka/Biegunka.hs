@@ -97,6 +97,7 @@ dotfiles = role "dotfiles" $
     , "vim/camo.vim"               ~> ".vim/colors/camo.vim"
     , "vim/zenburn.vim"            ~> ".vim/colors/zenburn.vim"
     , "vim/conceal/haskell.vim"    ~> ".vim/after/syntax/haskell.vim"
+    , "pakej.hs"                   ~> ".pakej/pakej.hs"
     ]
   extendeds =
     [ dot "gvimrc"
