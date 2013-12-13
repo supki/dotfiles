@@ -27,4 +27,4 @@ xmodmap ~/.xmodmap
 ssh-agent
 
 # start pakej
-nohup sh -l -c 'pakej' 2>/dev/null 1>/dev/null &
+sh -l -c pakej
