@@ -271,6 +271,8 @@
 		autocmd FileType awk        set commentstring=#\ %s
 	augroup end
 
+	au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
+
 	" for vim2hs
 	let g:haskell_conceal = 0
 	let g:haskell_folding = 0
