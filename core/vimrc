@@ -197,6 +197,7 @@
 
 	" save one key press
 	nnoremap ; :
+	nnoremap : ;
 
 	" map arrows and fix j and k
 	nnoremap <up> <nop>
