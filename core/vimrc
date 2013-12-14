@@ -112,6 +112,11 @@
 		autocmd FileType pyret   setlocal expandtab shiftwidth=2 softtabstop=2
 	augroup end
 
+	augroup swap_exists
+		autocmd!
+		autocmd SwapExists * let v:swapchoice = 'o'
+	augroup end
+
 	" ignore \ when matching {([])} in haskell code
 	autocmd FileType haskell set cpoptions+=M
 
