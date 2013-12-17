@@ -269,6 +269,7 @@
 		autocmd FileType ocaml      set commentstring=(*\ %s\ *)
 		autocmd FileType debsources set commentstring=#\ %s
 		autocmd FileType awk        set commentstring=#\ %s
+		autocmd FileType resolv     set commentstring=#\ %s
 	augroup end
 
 	au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
