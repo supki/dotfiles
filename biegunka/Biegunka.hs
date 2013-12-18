@@ -56,6 +56,7 @@ dotfiles = role "dotfiles" $
     cores     & mapped._1 <\>~ "core"     & unzipWithM_ link
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
     recipes   & mapped._1 <\>~ "extended" & unzipWithM_ substitute
+    miscs     & mapped._1 <\>~ "misc"     & unzipWithM_ link
     [sh|xrdb -merge ~/.Xdefaults|]
     [sh|xmonad --recompile|]
     [sh|pakej --recompile|]
@@ -123,6 +124,15 @@ dotfiles = role "dotfiles" $
     , "xmodmap.template"           ~> ".xmodmap"
     , "Xdefaults.template"         ~> ".Xdefaults"
     ]
+  miscs =
+    [ bin "bat.rb"
+    , bin "cpu.pl"
+    , bin "date.sh"
+    , bin "ip.awk"
+    , bin "loadavg.awk"
+    , bin "mem.awk"
+    , bin "weather.rb"
+    ]
 
 tools = role "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
@@ -141,11 +151,9 @@ tools = role "tools" $
   scripts =
     [ "youtube-in-mplayer.sh" ~> "bin/youtube-in-mplayer"
     , "cue2tracks.sh"         ~> "bin/cue2tracks"
-    , "weather.rb"            ~> "bin/ask-weather"
     , "mpd/.lastfm.conf"      ~> ".lastfm.conf"
     , "mpd/lastfm.png"        ~> ".icons/lastfm.png"
     , "mpd/love.hs"           ~> "bin/lastfm-love-current-mpd-track"
-    , "battery.rb"            ~> "bin/vaio-battery"
     , "pemised.rb"            ~> "bin/pemised"
     , "upload/screenshot.sh"  ~> "bin/upload-screenshot"
     , "upload/budueba.sh"     ~> "bin/upload-budueba"
@@ -227,7 +235,6 @@ misc = role "misc" $ traverse_ (--> into "git")
   [ "git@github.com:zsh-users/zsh-syntax-highlighting"
   , "git@github.com:zsh-users/zsh-completions"
   , "git@github.com:stepb/urxvt-tabbedex"
-  , "git@github.com:dmalikov/xmobar-usable"
   , "git@github.com:muennich/urxvt-perls"
   ]
 
@@ -259,7 +266,10 @@ infix 8 -->
 (-->) = git_
 
 dot :: FilePath -> (FilePath, FilePath)
-dot path = path ~> '.' : path
+dot path = path ~> ('.' : path)
+
+bin :: FilePath -> (FilePath, FilePath)
+bin path = path ~> ("bin" </> path)
 
 infixr 4 <\>~
 (<\>~) :: Setting (->) s t FilePath FilePath -> FilePath -> s -> t
