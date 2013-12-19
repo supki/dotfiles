@@ -17,5 +17,5 @@ main = pakej
       "date" ~> [sh| date.sh |]
   , delayed (60 * defaultTimeout) $
       "weather" ~> [sh| weather.rb |]
-  , "all" |> ["cpu", "mem", "ip", "battery", "loadavg", "weather", "date"]
+  , "all" |> ["cpu", "mem", "ip", "battery", "weather", "date", "loadavg"]
   ]
