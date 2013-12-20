@@ -5,6 +5,7 @@ map ; :
 map u :update<CR>
 map L :!toggle-love<CR>
 map <Space> :scroll-half-page-down<CR>
+map <C-A> :add-artist<CR>
 
 # colors
 color tab red black
