@@ -55,6 +55,7 @@ import           System.Environment
 import           System.Exit
 import           System.FilePath
 import           System.FilePath.Lens
+import           System.Posix
 import           Text.Parsec hiding ((<|>), many)
 
 import qualified Control.Exception          as E
