@@ -33,14 +33,14 @@ def notify(charge)
   end
 end
 
-def starify(charge)
+def heartify(charge)
   filled = (charge.fdiv(100) * 5).round
   empty  = 5 - filled
-  "★" * filled + "☆" * empty
+  "❤" * filled + "♡" * empty
 end
 
 def print_status(charge)
-  puts "#{starify(charge)} #{online? ? "↑" : "↓"}"
+  puts "#{heartify(charge)} #{online? ? "↑" : "↓"}"
 end
 
 def file_read_int(fp)
