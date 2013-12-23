@@ -123,6 +123,9 @@
 	" Guardfile is Ruby
 	autocmd BufRead,BufNewFile Guardfile set filetype=ruby
 
+	" .md files are Markdown
+	autocmd BufRead,BufNewFile *.md set filetype=markdown
+
 	" save on focus lost
 	autocmd FocusLost * :wa
 
