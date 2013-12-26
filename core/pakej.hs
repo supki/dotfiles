@@ -16,6 +16,8 @@ main = pakej
   , delayed (30 * defaultTimeout) $
       "date" ~> [sh| date.sh |]
   , delayed (60 * defaultTimeout) $
+      "loadavg2" ~> [sh| pakej --hostname budueba.com --port 1234 loadavg |]
+  , delayed (60 * defaultTimeout) $
       "weather" ~> [sh| weather.rb |]
-  , "all" |> ["cpu", "mem", "ip", "battery", "loadavg", "weather", "date"]
+  , "all" |> ["cpu", "mem", "ip", "battery", "loadavg", "loadavg2", "weather", "date"]
   ]
