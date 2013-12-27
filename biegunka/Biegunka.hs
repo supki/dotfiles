@@ -203,6 +203,7 @@ vim = do
       pathogen_ "git@github.com:def-lkb/vimbufsync"
       pathogen_ "git@github.com:junegunn/seoul256.vim"
       pathogen_ "git@github.com:ivyl/vim-bling"
+      pathogen_ "git@github.com:Glench/Vim-Jinja2-Syntax"
     group "agda" $
       pathogen_ "git@github.com:supki/agda-vim"
     group "idris" $
