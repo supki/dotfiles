@@ -181,6 +181,7 @@ vim = do
       pathogen  "git@github.com:Shougo/vimproc" $
         [sh|make -f make_unix.mak|]
       pathogen_ "git@github.com:eagletmt/ghcmod-vim"
+      pathogen_ "git@github.com:eagletmt/unite-haddock"
       pathogen_ "git@github.com:ujihisa/neco-ghc"
       pathogen_ "git@github.com:Shougo/neocomplcache"
       pathogen_ "git@github.com:bitc/vim-hdevtools"

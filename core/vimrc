@@ -233,15 +233,12 @@
 	vnoremap <tab> %
 
 	" add some hotkeys for vim-hdevtools commands
-	nmap <leader>i :HdevtoolsInfo<CR>
-	nmap <leader>t :HdevtoolsType<CR>
-	nmap <leader>c :HdevtoolsClear<CR>
-
-	" unite command
-	nmap <leader>u :Unite
+	nnoremap <leader>i :HdevtoolsInfo<CR>
+	nnoremap <leader>t :HdevtoolsType<CR>
+	nnoremap <leader>c :HdevtoolsClear<CR>
 
 	" fuck this
-	nmap <leader>d :redraw!<CR>
+	nnoremap <leader>d :redraw!<CR>
 
 	" fuck that
 	noremap <S-k> <NOP>
@@ -257,8 +254,10 @@
 	let g:syntastic_auto_jump = 1
 
 	call unite#filters#matcher_default#use(['matcher_fuzzy'])
+	let g:unite_source_haddock_browser = 'x-www-browser'
 	nnoremap <leader>w :Unite -no-split -buffer-name=files -start-insert file<CR>
 	nnoremap <leader>e :Unite -no-split -buffer-name=buffer buffer<CR>
+	nnoremap <leader>g :Unite -no-split -buffer-name=haddock haddock<CR>
 
 	" for vim-bling
 	let g:bling_color=216
@@ -276,10 +275,6 @@
 	augroup end
 
 	au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
-
-	" for vim2hs
-	let g:haskell_conceal = 0
-	let g:haskell_folding = 0
 " }
 
 " Functions {
