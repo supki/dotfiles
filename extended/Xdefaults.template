@@ -17,7 +17,7 @@
 
 *.scrollBar: False
 *.cursorBlink: True
-*.cursorUnderline: True
+*.cursorColor: #d7d7ff
 
 *.saveLines: 12000
 
