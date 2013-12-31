@@ -55,6 +55,7 @@ dotfiles = role "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     cores     & mapped._1 <\>~ "core"     & unzipWithM_ link
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
+    corecipes & mapped._1 <\>~ "core"     & unzipWithM_ substitute
     recipes   & mapped._1 <\>~ "extended" & unzipWithM_ substitute
     miscs     & mapped._1 <\>~ "misc"     & unzipWithM_ link
     [sh|xrdb -merge ~/.Xdefaults|]
@@ -68,8 +69,7 @@ dotfiles = role "dotfiles" $
     |]
  where
   cores =
-    [ dot "xsession"
-    , dot "mpdconf"
+    [ dot "mpdconf"
     , dot "profile"
     , dot "bashrc"
     , dot "zshenv"
@@ -118,6 +118,9 @@ dotfiles = role "dotfiles" $
     , "pentadactyl/wanker.penta"   ~> ".pentadactyl/plugins/wanker.penta"
     , "mplayer-config"             ~> ".mplayer/config"
     ]
+  corecipes =
+    [ "template.xsession"          ~> ".xsession"
+    ]
   recipes =
     [ "template.xmobar.hs"         ~> ".xmobar/xmobar.hs"
     , "xmonad/Profile.hs.template" ~> ".xmonad/lib/Profile.hs"
@@ -138,12 +141,12 @@ tools = role "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     suid_binaries & unzipWithM_ (\s t ->
       sudo "root" $ [sh|
-        ghc -O2 #{s} -fforce-recomp -threaded -v0 -o #{t}
+        ghc -O #{s} -fforce-recomp -threaded -v0 -o #{t}
         chown root:root #{t}
         chmod +s #{t}
       |])
     user_binaries & unzipWithM_ (\s t -> do
-      [sh|ghc -O2 #{s} -fforce-recomp -v0 -o #{t}|]
+      [sh|ghc -O #{s} -fforce-recomp -v0 -o #{t}|]
       link t ("bin" </> t))
     scripts & unzipWithM_ link
  where

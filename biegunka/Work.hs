@@ -38,6 +38,9 @@ templates = def
       |]
     , follow    = "True"
     }
+  , xsession = def
+    { setxkbmap = "setxkbmap -option \"\" -layout us,ru -option grp:caps_toggle -option grp_led:scroll :2"
+    }
   , urxvt = def
     { perllib     = "/home/pyoseek/git/urxvt-tabbedex:/home/pyoseek/git/urxvt-perls"
     , background_ = "#373737"

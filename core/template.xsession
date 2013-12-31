@@ -1,5 +1,5 @@
-# set keyboard layouts
-setxkbmap -option "" -layout "us,ru" -option grp:caps_toggle -option grp_led:scroll :2
+# set keyboard layout
+$template.xsession.setxkbmap$
 
 # ~terminus~
 xset +fp ~/fonts

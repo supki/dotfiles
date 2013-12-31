@@ -48,6 +48,9 @@ templates = def
   , xmodmap = def
     { menu = "keysym Menu = Super_R"
     }
+  , xsession = def
+    { setxkbmap = "setxkbmap -option \"\" -layout us,ru -option ctrl:nocaps -option grp:lctrl_toggle -option grp_led:scroll :2"
+    }
   , urxvt = def
     { perllib     = "/home/maksenov/git/urxvt-tabbedex:/home/maksenov/git/urxvt-perls"
     , background_ = "#222222"

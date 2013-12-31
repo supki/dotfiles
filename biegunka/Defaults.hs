@@ -7,18 +7,20 @@ import Data.Default (Default(..))
 
 
 data Template = Template
-  { xmobar  :: Xmobar
-  , xmonad  :: Xmonad
-  , xmodmap :: Xmodmap
-  , urxvt   :: Urxvt
+  { xmobar   :: Xmobar
+  , xmonad   :: Xmonad
+  , xmodmap  :: Xmodmap
+  , xsession :: Xsession
+  , urxvt    :: Urxvt
   } deriving (Data, Typeable)
 
 instance Default Template where
   def = Template
-    { xmobar  = def
-    , xmonad  = def
-    , xmodmap = def
-    , urxvt   = def
+    { xmobar   = def
+    , xmonad   = def
+    , xmodmap  = def
+    , xsession = def
+    , urxvt    = def
     }
 
 
@@ -74,6 +76,16 @@ data Xmodmap = Xmodmap
 instance Default Xmodmap where
   def = Xmodmap
     { menu = def
+    }
+
+
+data Xsession = Xsession
+  { setxkbmap :: String
+  } deriving (Data, Typeable)
+
+instance Default Xsession where
+  def = Xsession
+    { setxkbmap = def
     }
 
 
