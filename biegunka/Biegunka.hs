@@ -4,6 +4,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wall #-}
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 module Main (main) where
 
 import           Control.Applicative
@@ -55,8 +56,7 @@ dotfiles = role "dotfiles" $
   git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
     cores     & mapped._1 <\>~ "core"     & unzipWithM_ link
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
-    corecipes & mapped._1 <\>~ "core"     & unzipWithM_ substitute
-    recipes   & mapped._1 <\>~ "extended" & unzipWithM_ substitute
+    templates & mapped._1 <\>~ "template" & unzipWithM_ substitute
     miscs     & mapped._1 <\>~ "misc"     & unzipWithM_ link
     [sh|xrdb -merge ~/.Xdefaults|]
     [sh|xmonad --recompile|]
@@ -94,38 +94,35 @@ dotfiles = role "dotfiles" $
     , dot "codorc"
     , dot "guardrc"
     , dot "guard.rb"
-    , "vim/vim.custom"             ~> ".vim/plugin/vimrc-local.vim"
-    , "vim/indent/haskell.vim"     ~> ".vim/indent/haskell.vim"
-    , "vim/camo.vim"               ~> ".vim/colors/camo.vim"
-    , "vim/zenburn.vim"            ~> ".vim/colors/zenburn.vim"
-    , "vim/conceal/haskell.vim"    ~> ".vim/after/syntax/haskell.vim"
-    , "pakej.hs"                   ~> ".pakej/pakej.hs"
+    , "vim/vim.custom"           ~> ".vim/plugin/vimrc-local.vim"
+    , "vim/indent/haskell.vim"   ~> ".vim/indent/haskell.vim"
+    , "vim/camo.vim"             ~> ".vim/colors/camo.vim"
+    , "vim/zenburn.vim"          ~> ".vim/colors/zenburn.vim"
+    , "vim/conceal/haskell.vim"  ~> ".vim/after/syntax/haskell.vim"
+    , "pakej.hs"                 ~> ".pakej/pakej.hs"
     ]
   extendeds =
     [ dot "gvimrc"
     , dot "pentadactylrc"
     , dot "gtkrc.mine"
-    , "xmonad.hs"                  ~> ".xmonad/xmonad.hs"
-    , "xmonad/Bindings.hs"         ~> ".xmonad/lib/Bindings.hs"
-    , "xmonad/Layouts.hs"          ~> ".xmonad/lib/Layouts.hs"
-    , "xmonad/Startup.hs"          ~> ".xmonad/lib/Startup.hs"
-    , "xmonad/Themes.hs"           ~> ".xmonad/lib/Themes.hs"
-    , "xmonad/RouteT.hs"           ~> ".xmonad/lib/RouteT.hs"
-    , "xmonad/Tmux.hs"             ~> ".xmonad/lib/Tmux.hs"
-    , "xmonad/Man.hs"              ~> ".xmonad/lib/Man.hs"
-    , "xmonad/Workspaces.hs"       ~> ".xmonad/lib/Workspaces.hs"
-    , "xmonad/Spawn.hs"            ~> ".xmonad/lib/Spawn.hs"
-    , "pentadactyl/wanker.penta"   ~> ".pentadactyl/plugins/wanker.penta"
-    , "mplayer-config"             ~> ".mplayer/config"
+    , "xmonad.hs"                ~> ".xmonad/xmonad.hs"
+    , "xmonad/Bindings.hs"       ~> ".xmonad/lib/Bindings.hs"
+    , "xmonad/Layouts.hs"        ~> ".xmonad/lib/Layouts.hs"
+    , "xmonad/Startup.hs"        ~> ".xmonad/lib/Startup.hs"
+    , "xmonad/Themes.hs"         ~> ".xmonad/lib/Themes.hs"
+    , "xmonad/RouteT.hs"         ~> ".xmonad/lib/RouteT.hs"
+    , "xmonad/Tmux.hs"           ~> ".xmonad/lib/Tmux.hs"
+    , "xmonad/Man.hs"            ~> ".xmonad/lib/Man.hs"
+    , "xmonad/Workspaces.hs"     ~> ".xmonad/lib/Workspaces.hs"
+    , "xmonad/Spawn.hs"          ~> ".xmonad/lib/Spawn.hs"
+    , "pentadactyl/wanker.penta" ~> ".pentadactyl/plugins/wanker.penta"
+    , "mplayer-config"           ~> ".mplayer/config"
     ]
-  corecipes =
-    [ "template.xsession"          ~> ".xsession"
-    ]
-  recipes =
-    [ "template.xmobar.hs"         ~> ".xmobar/xmobar.hs"
-    , "xmonad/Profile.hs.template" ~> ".xmonad/lib/Profile.hs"
-    , "xmodmap.template"           ~> ".xmodmap"
-    , "Xdefaults.template"         ~> ".Xdefaults"
+  templates =
+    [ "xsession"                 ~> ".xsession"
+    , "xmonad/Profile.hs"        ~> ".xmonad/lib/Profile.hs"
+    , "xmodmap"                  ~> ".xmodmap"
+    , "Xdefaults"                ~> ".Xdefaults"
     ]
   miscs =
     [ bin "bat.rb"
