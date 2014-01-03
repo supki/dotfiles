@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 # convenience imports
+from functools import *
+from itertools import *
+import operator
 import os
 import sys
 import time
