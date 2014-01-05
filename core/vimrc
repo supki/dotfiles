@@ -175,9 +175,9 @@
 	let mapleader = ","
 
 	" highlight parentheses
-	autocmd VimEnter *.rkt RainbowParenthesesToggle
-	autocmd BufEnter *.rkt RainbowParenthesesLoadRound
-	autocmd BufEnter *.rkt RainbowParenthesesLoadSquare
+	autocmd VimEnter *.rkt,*.py RainbowParenthesesToggle
+	autocmd BufEnter *.rkt,*.py RainbowParenthesesLoadRound
+	autocmd BufEnter *.rkt,*.py RainbowParenthesesLoadSquare
 
 	" sane shell syntax
 	autocmd BufEnter *.sh set syntax=zsh
