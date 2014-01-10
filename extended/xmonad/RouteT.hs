@@ -19,7 +19,7 @@ import Data.Functor.Identity (Identity(..))
 import System.FilePath (joinPath, makeRelative, splitDirectories)
 import System.FilePath.Lens ((</>~))
 
-{-# ANN module "Hlint: Unused LANGUAGE pragma" #-}
+{-# ANN module "HLint: ignore Unused LANGUAGE pragma" #-}
 
 
 -- * RouteT definition
