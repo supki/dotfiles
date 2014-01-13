@@ -178,10 +178,13 @@
 	" map leader to ,
 	let mapleader = ","
 
-	" highlight parentheses
-	autocmd VimEnter *.rkt,*.py RainbowParenthesesToggle
-	autocmd BufEnter *.rkt,*.py RainbowParenthesesLoadRound
-	autocmd BufEnter *.rkt,*.py RainbowParenthesesLoadSquare
+	" color parens
+	augroup indents
+		autocmd!
+		autocmd VimEnter * RainbowParenthesesToggle
+		autocmd Syntax * RainbowParenthesesLoadRound
+		autocmd Syntax * RainbowParenthesesLoadSquare
+	augroup end
 
 	" sane shell syntax
 	autocmd BufEnter *.sh set syntax=zsh

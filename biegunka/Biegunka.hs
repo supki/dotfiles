@@ -206,6 +206,7 @@ vim = do
       pathogen_ "git@github.com:ivyl/vim-bling"
       pathogen_ "git@github.com:Glench/Vim-Jinja2-Syntax"
       pathogen_ "git@github.com:nelstrom/vim-visual-star-search"
+      pathogen_ "git@github.com:kien/rainbow_parentheses.vim"
     group "agda" $
       pathogen_ "git@github.com:supki/agda-vim"
     group "idris" $
