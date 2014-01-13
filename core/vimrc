@@ -94,7 +94,10 @@
 	set shiftwidth=4
 
 	" place new splits on the right
-	set splitright
+	set splitbelow splitright
+
+	" use already opened buffers
+	set switchbuf=useopen,usetab
 
 	" dot affects yanks
 	set cpoptions+=y
@@ -233,6 +236,9 @@
 	" easy move to next bracket
 	nnoremap <tab> %
 	vnoremap <tab> %
+
+	" easy move to previous buffer
+	nnoremap <leader><leader> <C-^>
 
 	" add some hotkeys for vim-hdevtools commands
 	nnoremap <leader>i :HdevtoolsInfo<CR>
