@@ -17,11 +17,15 @@ import           System.FilePath ((</>))
 import           System.Wordexp.Simple (wordexp)
 import           XMonad hiding (spawn)
 import           XMonad.Prompt
+import qualified XMonad.StackSet as W
 import           XMonad.Prompt.Input
 import           XMonad.Util.Run
+import           XMonad.Util.NamedWindows (getName)
 
 import           RouteT
 import           Spawn (spawn)
+
+{-# ANN routes "HLint: Reduce duplication" #-}
 
 
 -- | Less typing type synonym
@@ -81,7 +85,13 @@ start :: [String] -> RouteT IO Command -> String -> X ()
 start runningSessions route (un -> userInput) = do
   term <- asks $ terminal . config
   if userInput `elem` runningSessions
-    then spawn $ attach  term userInput
+    then do
+      let nameWindows = mapM (\w -> fmap (\n -> (show n, w)) (getName w)) . W.integrate' . W.stack
+      ws <- gets windowset
+      kv <- concatMapM nameWindows (W.workspaces ws)
+      case lookup userInput kv of
+        Nothing -> spawn $ attach term userInput
+        Just w  -> windows (W.focusWindow w)
     else do
       routed <- io $ runRouteT userInput route
       case routed of
@@ -97,8 +107,6 @@ start runningSessions route (un -> userInput) = do
 
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = liftM concat . mapM f
-
-{-# ANN routes "HLint: Reduce duplication" #-}
 
 routes :: RouteT IO Command
 routes = asum
