@@ -179,7 +179,7 @@
 	let mapleader = ","
 
 	" color parens
-	augroup indents
+	augroup rainbows
 		autocmd!
 		autocmd VimEnter * RainbowParenthesesToggle
 		autocmd Syntax * RainbowParenthesesLoadRound
