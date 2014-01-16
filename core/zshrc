@@ -9,7 +9,7 @@ autoload -U zrecompile
 zrecompile -pq ~/.zshrc
 zrecompile -pq ~/.zshenv
 
-fpath=(/opt/devtools-1.0/completions/zsh ~/git/zsh-completions/src $fpath)
+fpath=(/opt/devtools-1.0/completions/zsh ~/git/zsh-completions/src ~/git/dotfiles/completion $fpath)
 compinit
 setopt autocd autopushd correct
 zstyle ':completion:*' use-cache on

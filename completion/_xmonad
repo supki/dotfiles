@@ -1,0 +1,13 @@
+#compdef xmonad
+
+function _xmonad ()
+{
+  _arguments \
+    '--help[show help]' \
+    '--version[print the version number]' \
+    '--recompile[recompile your ~/.xmonad/xmonad.hs]' \
+    '--replace[replace the running window manager with xmonad]' \
+    '--restart[request a running xmonad process to restart]'
+}
+
+_xmonad "$@"
