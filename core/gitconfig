@@ -26,6 +26,7 @@
 	lo = log --stat
 	lg = log --patch-with-stat
 	pu = push
+	puo = push origin
 	p = pull
 	prbs = pull --rebase
 	rbs = rebase --preserve-merges
