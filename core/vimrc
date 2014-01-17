@@ -115,6 +115,7 @@
 		autocmd FileType pyret    setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType markdown setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType sql      setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType html     setlocal expandtab shiftwidth=2 softtabstop=2
 	augroup end
 
 	augroup swap_exists
