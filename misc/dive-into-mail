@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+
+tmux new-session -d -n default -s vmail
+tmux new-window -t vmail:2 -n sub
+tmux new-window -t vmail:3 -n work
+
+tmux send-keys -t vmail:1 vmail C-M
+tmux send-keys -t vmail:2 'VMAIL_HOME=~/.vmail/sub vmail' C-M
+tmux send-keys -t vmail:3 'VMAIL_HOME=~/.vmail/work vmail' C-M
+
+tmux select-window -t vmail:1
+tmux attach-session -t vmail
