@@ -132,6 +132,9 @@
 	" .md files are Markdown
 	autocmd BufRead,BufNewFile *.md set filetype=markdown
 
+	" .tpl files are HTML
+	autocmd BufRead,BufNewFile *.tpl set filetype=html
+
 	" save on focus lost
 	autocmd FocusLost * :wa
 
