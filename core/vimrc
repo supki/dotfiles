@@ -127,13 +127,10 @@
 	" ignore \ when matching {([])} in haskell code
 	autocmd FileType haskell set cpoptions+=M
 
-	" Guardfile is Ruby
+	" filetypes
 	autocmd BufRead,BufNewFile Guardfile set filetype=ruby
-
-	" .md files are Markdown
+	autocmd BufRead,BufNewFile .vim.custom set filetype=vim
 	autocmd BufRead,BufNewFile *.md set filetype=markdown
-
-	" .tpl files are HTML
 	autocmd BufRead,BufNewFile *.tpl set filetype=html
 
 	" save on focus lost
