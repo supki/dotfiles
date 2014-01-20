@@ -325,10 +325,16 @@
 
 
 	" Convert markdown files to html with pandoc
-	function RenderMarkdown()
-		let l:markdown = expand("<afile>:p")
+	function RenderHtml()
+		let l:extension = expand("<afile>:p:e")
+		let l:fullpath  = expand("<afile>:p")
+		if l:extension == "lhs"
+			let l:format = "markdown+lhs"
+		else
+			let l:format = "markdown"
+		endif
 		let l:html     = expand("<afile>:p:r") . ".html"
-		call system("pandoc --from markdown --to html -o " . l:html . " " . l:markdown)
+		call system("pandoc --from " . l:format . " --to html -o " . l:html . " " . l:fullpath)
 
 		" I am sorry
 		let l:js = "var uri     = \"file://" . l:html . "\";\n" .
@@ -355,8 +361,9 @@
 
 	augroup render
 		autocmd!
-		autocmd BufWritePost *.markdown call RenderMarkdown()
-		autocmd BufWritePost README.md  call RenderMarkdown()
+		autocmd BufWritePost *.markdown call RenderHtml()
+		autocmd BufWritePost *.lhs      call RenderHtml()
+		autocmd BufWritePost README.md  call RenderHtml()
 	augroup end
 
 
