@@ -79,6 +79,7 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- do stuff with empty workspaces
       , (0,           xK_a, viewEmptyWorkspace)
       , (shiftMask,   xK_a, sendToEmptyWorkspace)
+      , (controlMask, xK_a, tagToEmptyWorkspace)
       -- push window back into tiling
       , (0,           xK_t, withFocused $ windows . W.sink)
       -- increment/decrement the number of windows in the master area
