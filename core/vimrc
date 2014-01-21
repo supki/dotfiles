@@ -133,6 +133,7 @@
 	autocmd BufRead,BufNewFile .vim.custom set filetype=vim
 	autocmd BufRead,BufNewFile *.md set filetype=markdown
 	autocmd BufRead,BufNewFile *.tpl set filetype=html
+	autocmd BufRead,BufNewFile *.hsc set filetype=haskell
 
 	" save on focus lost
 	autocmd FocusLost * :wa
