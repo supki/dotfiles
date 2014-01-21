@@ -105,18 +105,19 @@
 	" set indents
 	augroup indents
 		autocmd!
-		autocmd FileType haskell  setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType agda     setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType cabal    setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType racket   setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType ruby     setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType python   setlocal expandtab shiftwidth=4 softtabstop=4
-		autocmd FileType perl     setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType pyret    setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType markdown setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType sql      setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType html     setlocal expandtab shiftwidth=2 softtabstop=2
-		autocmd FileType css      setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType haskell    setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType agda       setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType cabal      setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType racket     setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType ruby       setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType python     setlocal expandtab shiftwidth=4 softtabstop=4
+		autocmd FileType perl       setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType pyret      setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType markdown   setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType sql        setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType html       setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType css        setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType javascript setlocal expandtab shiftwidth=4 softtabstop=4
 	augroup end
 
 	augroup swap_exists
