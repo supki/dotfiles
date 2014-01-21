@@ -141,8 +141,6 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       [ (shiftMask,   xK_Print, "upload-screenshot -w")
       , (controlMask, xK_Print, "upload-screenshot -s")
       , (0,           xK_Print, "upload-screenshot -a")
-      -- toggle touchpad driver
-      , (0,           xK_t, "vaio-touchpad toggle")
       -- screenlock
       , (0,           xK_l, "slock")
       ]
