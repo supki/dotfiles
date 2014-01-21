@@ -390,10 +390,6 @@
 		endif
 	endfunction
 
-	function HdevtoolsOptions(rgs)
-		return join(map(a:rgs, "'-g ' . v:val"))
-	endfunction
-
 	command! HaskellModuleName exe "normal! ggimodule " . HaskellModuleName() . "\n(\n) where\n\n``"
 
 	command! Haskell98 exe "normal! ggO{-# LANGUAGE Haskell98 #-}``"
