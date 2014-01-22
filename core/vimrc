@@ -38,7 +38,7 @@
 	" highlight current line and column
 	set cursorline
 	set cursorcolumn
-	set colorcolumn=120
+	set colorcolumn=80,90,120
 
 	" always show current cursor position
 	set ruler
