@@ -336,7 +336,7 @@
 			let l:format = "markdown"
 		endif
 		let l:html     = expand("<afile>:p:r") . ".html"
-		call system("pandoc --from " . l:format . " --to html -o " . l:html . " " . l:fullpath)
+		call system("pandoc --from " . l:format . " --to html --css main.css -o " . l:html . " " . l:fullpath)
 
 		" I am sorry
 		let l:js = "var uri     = \"file://" . l:html . "\";\n" .
