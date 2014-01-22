@@ -1,0 +1,21 @@
+body {
+  background-color: #eee;
+}
+
+pre {
+  padding: 7px;
+  background-color: #fafafa;
+  border: solid black 1px;
+}
+
+p {
+  margin-top: 1.8em;
+  margin-bottom: 1.8em;
+  line-height: 1.7em;
+}
+
+p code {
+  padding: 2px;
+  background-color: #fafafa;
+  border: dotted black 1px;
+}

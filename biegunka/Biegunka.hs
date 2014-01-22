@@ -105,6 +105,7 @@ dotfiles = role "dotfiles" $
     [ dot "gvimrc"
     , dot "pentadactylrc"
     , dot "gtkrc.mine"
+    , dot "readme-gen.css"
     , "xmonad.hs"                ~> ".xmonad/xmonad.hs"
     , "xmonad/Bindings.hs"       ~> ".xmonad/lib/Bindings.hs"
     , "xmonad/Layouts.hs"        ~> ".xmonad/lib/Layouts.hs"
