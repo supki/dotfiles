@@ -3,6 +3,8 @@ body {
 }
 
 pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
   padding: 7px;
   background-color: #fafafa;
   border: solid black 1px;
