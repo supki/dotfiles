@@ -16,6 +16,7 @@
 [alias]
 	co = checkout
 	br = branch -v
+	sup = "!yo() { git branch "$2" --set-upstream "$1/$2"; }; yo"
 	ci = commit
 	ca = commit -a
 	st = status
