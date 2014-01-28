@@ -1,7 +1,7 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes #-}
-{-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -Wall #-}
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -21,35 +21,34 @@ import qualified Laptop
 import qualified Work
 
 
-data Environments = Laptop | Work
-
-biegunkaOptions ''Environments
+data Environments = Laptop | Work deriving (Typeable, Data)
 
 
 main :: IO ()
 main = do
-  (environment, runBiegunka) <- options
+  (environment, runBiegunka) <- options [Laptop, Work]
   let settings ts = set root "~" . set templates (hStringTemplate ts)
   case environment of
     Laptop -> runBiegunka (settings Laptop.templates) laptop
     Work   -> runBiegunka (settings Work.templates) work
- where
-  laptop = sudo "maksenov" $ sequence_
-    [ dotfiles
-    , tools
-    , vim
-    , emacs
-    , misc
-    , experimental
-    , edwardk
-    , mine
-    ]
-  work = sequence_
-    [ dotfiles
-    , vim
-    , misc
-    , experimental
-    ]
+
+laptop, work :: Script Sources ()
+laptop = sudo "maksenov" $ sequence_
+  [ dotfiles
+  , tools
+  , vim
+  , emacs
+  , misc
+  , experimental
+  , edwardk
+  , mine
+  ]
+work = sequence_
+  [ dotfiles
+  , vim
+  , misc
+  , experimental
+  ]
 
 
 dotfiles = role "dotfiles" $
