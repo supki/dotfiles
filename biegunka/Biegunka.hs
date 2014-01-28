@@ -189,9 +189,6 @@ vim = do
       pathogen_ "git@github.com:bitc/vim-hdevtools"
       pathogen_ "git@github.com:merijn/haskellFoldIndent"
       pathogen_ "git@github.com:supki/syntastic-cabal"
-    group "ruby" $ do
-      pathogen_ "git@github.com:kana/vim-textobj-user"
-      pathogen_ "git@github.com:nelstrom/vim-textobj-rubyblock"
     group "coq" $ do
       pathogen_ "git@github.com:vim-scripts/coq-syntax"
       pathogen_ "git@github.com:vim-scripts/Coq-indent"
@@ -209,6 +206,7 @@ vim = do
       pathogen_ "git@github.com:Glench/Vim-Jinja2-Syntax"
       pathogen_ "git@github.com:nelstrom/vim-visual-star-search"
       pathogen_ "git@github.com:kien/rainbow_parentheses.vim"
+      pathogen_ "git@github.com:supki/vim-flipping"
     group "agda" $
       pathogen_ "git@github.com:supki/agda-vim"
     group "idris" $
