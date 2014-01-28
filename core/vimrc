@@ -265,6 +265,14 @@
 	nnoremap <S-Space> <C-U>
 
 	let g:vim_flipping_mkdir = 1
+	let g:vim_flipping_substitutions =
+		\ { 'src/Main(\.l?hs)':      'test/Spec\1'
+		\ , 'test/Spec(\.l?hs)':     'src/Main\1'
+		\ , 'src/(.+)(\.l?hs)':      'test/\1Spec\2'
+		\ , 'test/(.+)Spec(\.l?hs)': 'src/\1\2'
+		\ , 'lib/(.+).rb':           'spec/\1_spec.rb'
+		\ , 'spec/(.+)_spec.rb':     'lib/\1.rb'
+		\ }
 
 	let g:syntastic_check_on_wq = 0
 	let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
