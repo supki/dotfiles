@@ -19,6 +19,7 @@ import           Data.Tuple
 import           Data.Typeable
 import           Data.Word
 import           Debug.Trace
+import           GHC.Generics
 import           Numeric
 import           System.IO
 import           System.IO.Unsafe
@@ -115,6 +116,7 @@ import           System.Wordexp.Simple
 :set -XBangPatterns
 :set -XDataKinds
 :set -XDeriveDataTypeable
+:set -XDeriveGeneric
 :set -XDeriveFoldable
 :set -XDeriveFunctor
 :set -XDeriveTraversable
