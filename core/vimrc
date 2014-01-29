@@ -278,6 +278,34 @@
 		\ , 'static/css/(.+).css':   'template/\1.tpl'
 		\ }
 
+	" Insert haskell module name
+	function HaskellModuleName()
+		let l:parts      = split(expand("%:p:r"), '/\+')
+		let l:uppercased = []
+
+		for l:part in reverse(l:parts)
+			if l:part =~# '^[[:upper:]]'
+				let l:uppercased = [l:part] + l:uppercased
+			else
+				break
+			endif
+		endfor
+
+		let l:name  = join(l:uppercased, ".")
+		if empty(name)
+			return "Main"
+		else
+			return l:name
+		endif
+	endfunction
+
+	let g:vim_jinjing_matches =
+		\ { 'test/Spec.l?hs': ['Spec.tpl',    {}]
+		\ , 'test/.+Spec.hs': ['FooSpec.tpl', {'module': function("HaskellModuleName")}]
+		\ , 'src/.+.hs':      ['Foo.tpl',     {'module': function("HaskellModuleName")}]
+		\ , '^[a-z]+.hs':     ['Main.tpl',    {}]
+		\ }
+
 	let g:syntastic_check_on_wq = 0
 	let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
 	let g:syntastic_python_python_exe = 'python3'
@@ -385,27 +413,6 @@
 		autocmd BufWritePost README.md  call RenderHtml()
 	augroup end
 
-
-	" Insert haskell module name
-	function HaskellModuleName()
-		let l:parts      = split(expand("%:p:r"), '/\+')
-		let l:uppercased = []
-
-		for l:part in reverse(l:parts)
-			if l:part =~# '^[[:upper:]]'
-				let l:uppercased = [l:part] + l:uppercased
-			else
-				break
-			endif
-		endfor
-
-		let l:name  = join(l:uppercased, ".")
-		if empty(name)
-			return "Main"
-		else
-			return l:name
-		endif
-	endfunction
 
 	command! HaskellModuleName exe "normal! ggimodule " . HaskellModuleName() . "\n(\n) where\n\n``"
 
