@@ -306,7 +306,7 @@
 			\ , 'imports': ['Test.Hspec']
 			\ }]
 		\ , 'src/.+.hs':      ['Foo.tpl',     {'module': function("HaskellModuleName")}]
-		\ , '^[a-z]+.hs':     ['Main.tpl',    {}]
+		\ , '^[a-z-]+.hs':     ['Foo.tpl',    {'module': 'Main'}]
 		\ }
 
 	let g:syntastic_check_on_wq = 0
