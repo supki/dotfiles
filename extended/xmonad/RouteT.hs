@@ -15,7 +15,6 @@ import Control.Monad (MonadPlus(..), ap, guard, liftM)
 import Control.Monad.Reader (ReaderT, runReaderT, local)
 import Control.Monad.Trans (MonadIO(..))
 import Control.Monad.Trans.Class (MonadTrans(..))
-import Data.Functor.Identity (Identity(..))
 import System.FilePath (joinPath, makeRelative, splitDirectories)
 import System.FilePath.Lens ((</>~))
 

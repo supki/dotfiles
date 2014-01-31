@@ -10,7 +10,7 @@ import           Prelude hiding (mod)
 import           XMonad hiding (spawn)
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.SwapWorkspaces
-import           XMonad.Actions.FindEmptyWorkspace
+import           XMonad.Actions.UseEmptyWorkspace
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Prompt
 import           XMonad.Prompt.Shell
@@ -77,9 +77,8 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_h, sendMessage Shrink)
       , (0,           xK_l, sendMessage Expand)
       -- do stuff with empty workspaces
-      , (0,           xK_a, viewEmptyWorkspace)
-      , (shiftMask,   xK_a, sendToEmptyWorkspace)
-      , (controlMask, xK_a, tagToEmptyWorkspace)
+      , (0,           xK_a, withEmptyWorkspace (\w -> W.tag w /= "NSP") (windows . W.view . W.tag))
+      , (controlMask, xK_a, withEmptyWorkspace (\w -> W.tag w /= "NSP") (\w -> windows $ W.view (W.tag w) . W.shift (W.tag w)))
       -- push window back into tiling
       , (0,           xK_t, withFocused $ windows . W.sink)
       -- increment/decrement the number of windows in the master area
