@@ -93,6 +93,7 @@ dotfiles = role "dotfiles" $
     , dot "codorc"
     , dot "guardrc"
     , dot "guard.rb"
+    , dot "vim-jinjing"
     , "vim/vim.custom"           ~> ".vim/plugin/vimrc-local.vim"
     , "vim/indent/haskell.vim"   ~> ".vim/indent/haskell.vim"
     , "vim/camo.vim"             ~> ".vim/colors/camo.vim"
