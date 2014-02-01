@@ -307,11 +307,21 @@
 	let g:vim_jinjing_matches =
 		\ { 'test/Spec.l?hs': ['Spec.tpl',    {}]
 		\ , 'test/.+Spec.hs': ['Foo.tpl',
-			\ { 'module': function("HaskellModuleName")
-			\ , 'imports': ['Test.Hspec']
+			\ { 'module':
+				\ { 'name': function("HaskellModuleName")
+				\ , 'imports': ['Test.Hspec']
+				\ }
 			\ }]
-		\ , 'src/.+.hs':      ['Foo.tpl',     {'module': function("HaskellModuleName")}]
-		\ , '^[a-z-]+.hs':     ['Foo.tpl',    {'module': 'Main'}]
+		\ , 'src/.+.hs':      ['Foo.tpl',
+			\ { 'module':
+				\ { 'name': function("HaskellModuleName")
+				\ }
+			\ }]
+		\ , '^[a-z-]+.hs':     ['Foo.tpl',
+			\ { 'module':
+				\ { 'name': 'Main'
+				\ }
+			\ }]
 		\ }
 
 	let g:syntastic_check_on_wq = 0
