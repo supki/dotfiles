@@ -1,6 +1,7 @@
 {-# OPTIONS_GHC -W #-}
 module Bindings where
 
+import           Control.Applicative
 import           Control.Monad
 import           Data.Map (Map)
 import qualified Data.Map as M
@@ -77,8 +78,8 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_h, sendMessage Shrink)
       , (0,           xK_l, sendMessage Expand)
       -- do stuff with empty workspaces
-      , (0,           xK_a, withEmptyWorkspace (\w -> W.tag w /= "NSP") (windows . W.view . W.tag))
-      , (controlMask, xK_a, withEmptyWorkspace (\w -> W.tag w /= "NSP") (\w -> windows $ W.view (W.tag w) . W.shift (W.tag w)))
+      , (0,           xK_a, withEmptyWorkspace real (windows . W.view))
+      , (controlMask, xK_a, withEmptyWorkspace real (\w -> windows $ W.view w . W.shift w))
       -- push window back into tiling
       , (0,           xK_t, withFocused $ windows . W.sink)
       -- increment/decrement the number of windows in the master area
@@ -159,6 +160,9 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ]
   ]
 
+
+real :: WindowSpace -> Maybe WorkspaceId
+real w = let tag = W.tag w in tag <$ guard (tag /= "NSP")
 
 io_ :: MonadIO m => IO a -> m ()
 io_ = io . void
