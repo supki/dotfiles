@@ -128,7 +128,6 @@ dotfiles = role "dotfiles" $
   miscs =
     [ bin "bat.rb"
     , bin "cpu.pl"
-    , bin "date.sh"
     , bin "ip.awk"
     , bin "loadavg.awk"
     , bin "mem.awk"
