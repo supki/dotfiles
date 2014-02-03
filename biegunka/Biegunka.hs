@@ -129,7 +129,6 @@ dotfiles = role "dotfiles" $
     [ bin "bat.rb"
     , bin "cpu.pl"
     , bin "ip.awk"
-    , bin "loadavg.awk"
     , bin "mem.awk"
     , bin "weather.rb"
     , bin "dive-into-mail"

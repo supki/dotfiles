@@ -2,6 +2,7 @@
 module Main (main) where
 
 import Control.Applicative
+import Data.List (intercalate)
 import Data.String (IsString(..))
 import Data.Time (formatTime, getCurrentTime, getCurrentTimeZone, utcToLocalTime)
 import System.Locale (defaultTimeLocale)
@@ -14,7 +15,7 @@ main = pakej
   [ every  5 $ "cpu"       ~> [sh| cpu.pl /proc/stat |]
   , every 10 $ "mem"       ~> [sh| mem.awk /proc/meminfo |]
   , every 30 $ "battery"   ~> [sh| bat.rb |]
-  , every 10 $ "loadavg"   ~> [sh| loadavg.awk /proc/loadavg |]
+  , every 10 $ "loadavg"   ~> loadavg "/proc/loadavg"
   , every 60 $ "ip"        ~> [sh| ip.awk eth0 |]
   , every 30 $ "date"      ~> date
   , every 60 $ "playcount" ~> [sh| playcount |]
@@ -23,6 +24,9 @@ main = pakej
   , run $
       "all" |> ["cpu", "mem", "ip", "battery", "loadavg", "loadavg2", "weather", "playcount", "date"]
   ]
+
+loadavg :: IsString s => FilePath -> IO s
+loadavg path = fromString . intercalate " → " . take 3 . words <$> readFile path
 
 date :: IsString s => IO s
 date = do
