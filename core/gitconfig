@@ -26,6 +26,7 @@
 	wipe = reset --hard HEAD --
 	lo = log --stat
 	lg = log --patch-with-stat
+	lol = log --oneline --decorate
 	pu = push
 	puo = push origin
 	p = pull
