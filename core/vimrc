@@ -427,8 +427,8 @@
 	augroup render
 		autocmd!
 		autocmd BufWritePost *.markdown call RenderHtml()
+		autocmd BufWritePost *.md       call RenderHtml()
 		autocmd BufWritePost *.lhs      call RenderHtml()
-		autocmd BufWritePost README.md  call RenderHtml()
 	augroup end
 
 
