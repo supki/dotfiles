@@ -4,7 +4,7 @@ module Main (main) where
 import Control.Applicative
 import Data.List (intercalate)
 import Data.String (IsString(..))
-import Data.Time (formatTime, getCurrentTime, getCurrentTimeZone, utcToLocalTime)
+import Data.Time (formatTime, getZonedTime)
 import System.Locale (defaultTimeLocale)
 import Pakej
 import System.Command.QQ (sh)
@@ -29,10 +29,7 @@ loadavg :: IsString s => FilePath -> IO s
 loadavg path = fromString . intercalate " → " . take 3 . words <$> readFile path
 
 date :: IsString s => IO s
-date = do
-  tz <- getCurrentTimeZone
-  lt <- utcToLocalTime tz <$> getCurrentTime
-  return (format lt)
+date = fmap format getZonedTime
  where format = fromString . formatTime defaultTimeLocale formatString
        formatString = "%m.%d.%y, %a, %H:%M %p"
 
