@@ -1,11 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: #eee;
+}
+
+h1, h2, h3 {
+  font-family: Lato, Helvetica, Arial, sans-serif;
+  background-color: #e4e4e4;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 13px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 
 pre {
   white-space: pre-wrap;
   word-wrap: break-word;
   padding: 7px;
+  margin: 7px;
   background-color: #fafafa;
   border: solid black 1px;
 }
@@ -13,6 +31,7 @@ pre {
 p {
   margin-top: 1.8em;
   margin-bottom: 1.8em;
+  margin-left: 7px;
   line-height: 1.7em;
 }
 
@@ -20,4 +39,9 @@ p code {
   padding: 2px;
   background-color: #fafafa;
   border: dotted black 1px;
+}
+
+div.figure {
+  margin-left: 7px;
+  padding-left: 7px;
 }
