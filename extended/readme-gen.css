@@ -42,6 +42,8 @@ p code {
 }
 
 div.figure {
+  margin-top: 3em;
+  margin-bottom: 3em;
   margin-left: 7px;
   padding-left: 7px;
 }
