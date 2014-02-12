@@ -48,6 +48,7 @@ work = sequence_
   , vim
   , misc
   , experimental
+  , mine
   ]
 
 
@@ -260,6 +261,8 @@ edwardk = role "edwardk" $ traverse_ (--> into "git")
 
 mine = role "mine" $ traverse_ (--> into "git")
   [ "git@github.com:supki/libjenkins"
+  , "git@github.com:supki/xmonad-screenshot"
+  , "git@github.com:supki/xmonad-use-empty-workspace"
   ]
 
 
