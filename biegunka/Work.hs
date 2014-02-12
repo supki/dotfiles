@@ -26,8 +26,7 @@ templates = def
     , yellow    = "#eeccaa"
     , startup   =
       [multiline|
-        [ ("trayer", "trayer --edge bottom --align left --transparent true --widthtype pixel --width 78 --heighttype pixel --height 17 --tint 0x" ++ tail black ++ " --alpha 0")
-        , ("/usr/lib/firefox/firefox", "firefox")
+        [ ("/usr/lib/firefox/firefox", "firefox")
         , ("thunderbird", "thunderbird")
         , ("gnome-commander", "gnome-commander")
         , ("watch -n2 netstat", "urxvt -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
