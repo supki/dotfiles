@@ -128,7 +128,6 @@ dotfiles = role "dotfiles" $
     ]
   miscs =
     [ bin "bat.rb"
-    , bin "cpu.pl"
     , bin "ip.awk"
     , bin "mem.awk"
     , bin "weather.rb"
