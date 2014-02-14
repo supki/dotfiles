@@ -10,6 +10,7 @@ import Data.Time (formatTime, getZonedTime)
 import Data.Text.Lazy (Text)
 import System.Locale (defaultTimeLocale)
 import System.IO (withFile, hGetLine, IOMode(..))
+import Network (PortID(..))
 import Prelude hiding ((.), id)
 import Pakej
 import System.Command.QQ (sh)
@@ -23,7 +24,7 @@ main = pakej $ private "all" . aggregate
   , private "ip"        . system [sh| ip.awk eth0 |] . every minute
   , private "battery"   . system [sh| bat.rb |] . every (minute `div` 2)
   , private "loadavg"   . loadavg "/proc/loadavg" . every (10 * second)
-  , private "loadavg2"  . system [sh| pakej -h budueba.com -p 1234 loadavg |] . every minute
+  , private "loadavg2"  . query "budueba.com" (PortNumber 1234) "loadavg" . every minute
   , private "weather"   . system [sh| weather.rb |] . every minute
   , private "playcount" . system [sh| playcount |] . every minute
   , private "date"      . date . every (minute `div` 2)
