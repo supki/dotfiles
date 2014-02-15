@@ -7,16 +7,17 @@ body {
   background-color: #eee;
 }
 
+h1 {
+  margin-bottom: 1.1em;
+}
+
 h1, h2, h3 {
   font-family: Lato, Helvetica, Arial, sans-serif;
-  background-color: #e4e4e4;
+  font-weight: normal;
+  background-color: #d4d4d4;
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 13px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
 }
 
 pre {
