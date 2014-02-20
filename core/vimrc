@@ -118,6 +118,7 @@
 		autocmd FileType html       setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType css        setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType javascript setlocal expandtab shiftwidth=4 softtabstop=4
+		autocmd FileType scala      setlocal expandtab shiftwidth=2 softtabstop=2
 	augroup end
 
 	augroup swap_exists
