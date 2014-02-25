@@ -188,6 +188,7 @@ vim = do
       pathogen_ "git@github.com:bitc/vim-hdevtools"
       pathogen_ "git@github.com:merijn/haskellFoldIndent"
       pathogen_ "git@github.com:supki/syntastic-cabal"
+      pathogen_ "git@github.com:supki/vim-languages"
     group "coq" $ do
       pathogen_ "git@github.com:vim-scripts/coq-syntax"
       pathogen_ "git@github.com:vim-scripts/Coq-indent"
