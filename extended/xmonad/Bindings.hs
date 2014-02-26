@@ -58,8 +58,6 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (shiftMask,   xK_c, kill)
       -- rotate through the available layout algorithms
       , (0,           xK_space, sendMessage NextLayout)
-      -- reset the layouts on the current workspace to default
-      , (shiftMask,   xK_space, setLayout $ XMonad.layoutHook conf)
       -- resize viewed windows to the correct size
       , (0,           xK_n, refresh)
       -- toggle scratchpads
@@ -87,8 +85,10 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_period, sendMessage (IncMasterN (-1)))
       -- toggle the status bar gap (used with avoidStruts from Hooks.ManageDocks)
       , (0,           xK_b, sendMessage ToggleStruts)
-      -- quit/restart xmonad
-      , (0,           xK_q, Startup.myStartupHook)
+      -- rerun the startup hook and reset layouts
+      , (0,           xK_q, do
+          Startup.myStartupHook
+          setLayout (XMonad.layoutHook conf))
       -- make workspaces screenshots and merge them
       , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook horizontally)
       ]
