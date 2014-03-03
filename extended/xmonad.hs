@@ -47,7 +47,7 @@ myLayoutHook = smartBorders . avoidStruts $
   onWorkspace Texts (tabbedBottomAlways shrinkText myTheme) $
   onWorkspaces [Video, Mail, Files, Torrents] Full $
   onWorkspace Status (dwmStyle shrinkText myTheme tall) $
-  onWorkspace Talkative (TwoPane (3/100) (1/2)) $
-  tall ||| Mirror tall |||  Full
+  onWorkspace Talkative (TwoPane (3 / 100) (1 / 2) ||| Full) $
+  tall ||| Mirror tall ||| Full
  where
   tall = Tall 1 0.03 0.5
