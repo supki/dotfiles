@@ -4,7 +4,6 @@
 module Main (main) where
 
 import Control.Applicative
-import Control.Wire (mkState)
 import Data.List (intercalate)
 import Data.String (IsString(..))
 import Data.Time (formatTime, getZonedTime)
@@ -32,7 +31,7 @@ main = pakej $ private "all" . aggregate
   ]
 
 cpu :: FilePath -> PakejWidget Text
-cpu path = fmap format compute . constant (cpuData path)
+cpu path = fromWire (fmap format compute) . constant (cpuData path)
  where cpuData = fmap (drop 1 . map read . words) . readLine
        compute = mkState (repeat 0) $ \_dt (v, s) ->
          let
