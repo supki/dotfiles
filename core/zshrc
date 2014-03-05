@@ -166,5 +166,9 @@ function sandboxxy {
 
 # set the sandbox
 function sandbox {
-	export CABAL_SANDBOX_CONFIG="${HOME}/git/${1:-}/cabal.sandbox.config"
+	if [ -n "$1" ]; then
+		export CABAL_SANDBOX_CONFIG="${HOME}/git/$1/cabal.sandbox.config"
+	else
+		unset CABAL_SANDBOX_CONFIG
+	fi
 }
