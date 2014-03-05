@@ -158,9 +158,6 @@ export NO_SCRIPTS_NOTIFICATIONS=yes
 
 export PYTHONSTARTUP=${HOME}/.pythonrc
 
-# OPAM configuration
-. /home/maksenov/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
 # figure out which package-db current sandbox uses
 function sandboxxy {
 	local conf=${CABAL_SANDBOX_CONFIG:-cabal.sandbox.config}
