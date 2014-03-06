@@ -172,3 +172,7 @@ function sandbox {
 		unset CABAL_SANDBOX_CONFIG
 	fi
 }
+
+function mkcdir {
+	mkdir "$1" && "$_";
+}
