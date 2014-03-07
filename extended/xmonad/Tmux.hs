@@ -135,7 +135,7 @@ routes = asum
       return (Tmux.Session ("ssh " ++ part))
   , next $ \part -> do
       nomore
-      guard (part `elem` ["dev", "storage", "budueba", "jenkins"])
+      guard (part `elem` ["dev", "storage", "budueba", "jenkins", "victim"])
       return (Tmux.Session ("ssh " ++ part))
   ]
 
