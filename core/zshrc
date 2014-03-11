@@ -176,3 +176,7 @@ function sandbox {
 function mkcdir {
 	mkdir "$1" && "$_";
 }
+
+function lyank {
+	curl --silent "http://lpaste.net/raw/$1" | HsColour | less
+}
