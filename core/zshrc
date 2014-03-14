@@ -68,7 +68,6 @@ bindkey -a "'" quote-line
 bindkey -a "q" push-line
 bindkey "^[[Z" reverse-menu-complete
 
-alias ack=ack-grep # stupid debian
 alias ls='ls --color'
 alias fap='fab'
 alias less='less -R'
