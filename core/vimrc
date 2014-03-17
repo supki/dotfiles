@@ -306,7 +306,7 @@
 
 	let g:vim_jinjing_matches =
 		\ { 'test/Spec.l?hs': ['Spec.tpl',    {}]
-		\ , 'test/.+Spec.hs': ['Foo.tpl',
+		\ , 'test/.+Spec.hs': ['FooSpec.tpl',
 			\ { 'module':
 				\ { 'name': function("HaskellModuleName")
 				\ , 'imports': ['Test.Hspec']
