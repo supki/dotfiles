@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+
+svn info "$1" 2>/dev/null | grep --perl-regexp --only-matching '(?<=URL: ).*' | {
+	while read; do
+		x-www-browser $REPLY
+		echo $REPLY
+	done
+}

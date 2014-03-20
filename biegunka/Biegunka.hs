@@ -133,6 +133,7 @@ dotfiles = role "dotfiles" $
     , bin "mem.awk"
     , bin "weather.rb"
     , bin "dive-into-mail"
+    , bin "svn-browse"
     ]
 
 tools = role "tools" $

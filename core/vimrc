@@ -442,4 +442,6 @@
 		autocmd BufWritePost *.md       call RenderHtml()
 		autocmd BufWritePost *.lhs      call RenderHtml()
 	augroup end
+
+	command Sbrowse echomsg system('svn-browse ' . expand('%') . ' 2>/dev/null')
 " }
