@@ -177,5 +177,5 @@ function mkcdir {
 }
 
 function lyank {
-	curl --silent "http://lpaste.net/raw/$1" | HsColour | less
+	curl --silent "http://lpaste.net/raw/$1" | HsColour | less -R
 }
