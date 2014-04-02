@@ -92,6 +92,8 @@
 	set tabstop=4
 	" shift width for tabs
 	set shiftwidth=4
+	" round indent shifts
+	set shiftround
 
 	" place new splits on the right
 	set splitbelow splitright
@@ -149,6 +151,8 @@
 
 	" highligh search results
 	set hlsearch
+	" start search before <CR>
+	set incsearch
 	" ignore cases in search queries
 	set ignorecase
 	set smartcase
