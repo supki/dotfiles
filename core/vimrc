@@ -250,8 +250,8 @@
 	noremap <leader>h :noh<bar>echo<CR>
 
 	" easy move to next bracket
-	nnoremap <tab> %
-	vnoremap <tab> %
+	nmap <tab> %
+	vmap <tab> %
 
 	" easy move to previous buffer
 	nnoremap <leader><leader> <C-^>
@@ -448,4 +448,6 @@
 	augroup end
 
 	command Sbrowse echomsg system('svn-browse ' . expand('%') . ' 2>/dev/null')
+
+	runtime! macros/matchit.vim
 " }
