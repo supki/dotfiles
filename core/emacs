@@ -38,6 +38,9 @@
     (progn
       (load-theme 'tango t))))
 
+(setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
+(autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
