@@ -309,7 +309,7 @@
 	endfunction
 
 	let g:vim_jinjing_matches =
-		\ { 'test/Spec.l?hs': ['Spec.tpl',    {}]
+		\ { 'test/Spec.l?hs': ['Spec.tpl', {}]
 		\ , 'test/.+Spec.hs': ['FooSpec.tpl',
 			\ { 'module':
 				\ { 'name': function("HaskellModuleName")
@@ -326,6 +326,7 @@
 				\ { 'name': 'Main'
 				\ }
 			\ }]
+		\ , '.+.py':           ['P3.tpl', {}]
 		\ }
 
 	let g:syntastic_check_on_wq = 0
