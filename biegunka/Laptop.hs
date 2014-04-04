@@ -49,7 +49,7 @@ templates = def
     { menu = "keysym Menu = Super_R"
     }
   , xsession = def
-    { setxkbmap = "setxkbmap -option \"\" -layout us,uk,ru -option ctrl:nocaps -option grp:lctrl_toggle -option grp_led:scroll :2"
+    { setxkbmap = "setxkbmap -option \"\" -layout us,ua,ru -option ctrl:nocaps -option grp:lctrl_toggle -option grp_led:scroll :2"
     }
   , urxvt = def
     { perllib     = "/home/maksenov/git/urxvt-tabbedex:/home/maksenov/git/urxvt-perls"
