@@ -2,6 +2,7 @@
 module Workspaces where
 
 import Control.Lens
+import Control.Monad (liftM)
 import Data.List (isInfixOf, isPrefixOf, isSuffixOf)
 import Data.Monoid ((<>), mconcat)
 
@@ -117,7 +118,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   video =
     [ className =? "Vlc"
     , className =? "MPlayer"
-    , className =? "mplayer2"
+    , (className =? "mplayer2") <&&> liftM not (title =? "youtube-video")
     ]
   mail =
     [ className =? "Thunderbird"
