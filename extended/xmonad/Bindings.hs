@@ -143,6 +143,7 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_Print, "upload-screenshot -a")
       -- screenlock
       , (0,           xK_l, "slock")
+      , (shiftMask,   xK_y, "xsel -o | xargs --no-run-if-empty youtube-in-mplayer")
       ]
   ]
   ++

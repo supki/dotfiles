@@ -107,7 +107,6 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   relax =
     [ title     =? "mcabber"
     , title     =? "irssi"
-    , title     =? "youtube-video"
     ]
   docs =
     [ className =? "OpenOffice.org 3.2"
