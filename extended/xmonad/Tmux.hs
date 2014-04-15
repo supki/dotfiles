@@ -8,9 +8,10 @@ module Tmux where
 
 import           Control.Applicative
 import           Control.Monad
+import           Data.Array ((!), array, listArray)
 import           Data.Foldable (asum)
 import           Data.Function (on)
-import           Data.List (isPrefixOf, nubBy, sort)
+import           Data.List (isPrefixOf, nubBy, sort, sortBy)
 import           Data.Map (Map)
 import qualified System.Directory as D
 import           System.FilePath ((</>))
@@ -55,7 +56,7 @@ currents = io $ lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
-compl' xs s  = return $ filter (\x -> s `isSubsequenceOf` un x) xs
+compl' xs s  = return . sortBy (compare `on` levenstein s) $ filter (\x -> s `isSubsequenceOf` un x) xs
 
 -- | Unquote string if it's quoted
 un :: String -> String
@@ -72,6 +73,19 @@ isSubsequenceOf (x:xs) ys =
     _ : zs -> xs `isSubsequenceOf` zs
     []     -> False
 
+levenstein :: Eq a => [a] -> [a] -> Int
+levenstein xs ys = arr ! (max_i, max_j)
+ where
+  axs   = listArray (1, max_i) xs
+  ays   = listArray (1, max_j) ys
+  arr   = array ((0, 0), (max_i, max_j)) [((i, j), go i j) | i <- [0 .. max_i], j <- [0 .. max_j]]
+  max_i = length xs
+  max_j = length ys
+  go i 0 = i
+  go 0 j = j
+  go i j = minimum [1 + arr ! (i - 1, j), 1 + arr ! (i, j - 1), c + arr ! (i - 1, j - 1)]
+   where
+    c = if axs ! i == ays ! j then 0 else 2
 
 -- | Safely expands wordexp pattern catching IO errors
 expand :: String -> X [FilePath]
