@@ -115,10 +115,10 @@ start runningSessions route (un -> userInput) = do
         Just command -> spawn $ create' term userInput command
         Nothing      -> spawn $ create  term userInput
  where
-  attach t e = t ++ " -e tmux attach -d -t " ++ e
-  create t e = t ++ " -e tmux new -s "    ++ e
+  attach t e = t ++ " -e tmux attach -d -t '" ++ e ++ "'"
+  create t e = t ++ " -e tmux new -s '" ++ e ++ "'"
   create' t e (ChangeDirectory p) =
-    t ++ " -e sh -c \"cd " ++ p ++ "; tmux new -s "    ++ e ++ "\""
+    t ++ " -e tmux new -c \"${PWD}/" ++ p ++ "\" -s '" ++ e ++ "'"
   create' t e (Session c) =
     t ++ " -e tmux new -s "    ++ e ++ " '" ++ c ++ "'"
 
