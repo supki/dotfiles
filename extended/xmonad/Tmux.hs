@@ -56,7 +56,7 @@ currents = io $ lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
-compl' xs s  = return . sortBy (compare `on` levenstein s) $ filter (\x -> s `isSubsequenceOf` un x) xs
+compl' xs s  = return . sortOn (levenstein s) . filter (\x -> s `isSubsequenceOf` un x) $ xs
 
 -- | Unquote string if it's quoted
 un :: String -> String
@@ -72,6 +72,9 @@ isSubsequenceOf (x:xs) ys =
   case dropWhile (/= x) ys of
     _ : zs -> xs `isSubsequenceOf` zs
     []     -> False
+
+sortOn :: Ord b => (a -> b) -> [a] -> [a]
+sortOn f = map fst . sortBy (compare `on` snd) . map (\x -> (x, f x))
 
 levenstein :: Eq a => [a] -> [a] -> Int
 levenstein xs ys = arr ! (max_i, max_j)
