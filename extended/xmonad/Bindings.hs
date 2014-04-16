@@ -4,6 +4,7 @@ module Bindings where
 import           Control.Applicative
 import           Control.Monad
 import           Data.Map (Map)
+import           Data.Foldable (traverse_)
 import qualified Data.Map as M
 import           Graphics.X11.ExtraTypes.XF86
 import qualified Network.MPD as MPD
@@ -101,7 +102,7 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ]
       ++
       -- switch to another screen
-      [ (m,           k, screenWorkspace sc >>= flip whenJust (windows . f))
+      [ (m,           k, screenWorkspace sc >>= traverse_ (windows . f))
         | (k, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
       ]
