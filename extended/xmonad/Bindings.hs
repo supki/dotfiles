@@ -59,6 +59,8 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (shiftMask,   xK_c, kill)
       -- rotate through the available layout algorithms
       , (0,           xK_space, sendMessage NextLayout)
+      -- rotate through the available screens
+      , (shiftMask,   xK_space, swapNextScreen)
       -- resize viewed windows to the correct size
       , (0,           xK_n, refresh)
       -- toggle scratchpads
