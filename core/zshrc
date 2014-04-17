@@ -173,7 +173,7 @@ function sandbox {
 }
 
 function mkcdir {
-	mkdir "$1" && "$_";
+	mkdir --parents "$1" && cd "$_";
 }
 
 function lyank {
