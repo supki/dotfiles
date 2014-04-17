@@ -11,8 +11,7 @@ import           Control.Monad
 import           Data.Array ((!), array, listArray)
 import           Data.Foldable (asum)
 import           Data.Function (on)
-import           Data.List (isPrefixOf, nubBy, sort, sortBy)
-import           Data.Map (Map)
+import           Data.List (isPrefixOf, nubBy, sortBy)
 import qualified System.Directory as D
 import           System.FilePath ((</>))
 import           System.Wordexp.Simple (wordexp)
@@ -29,9 +28,6 @@ import           Spawn (spawn)
 {-# ANN routes "HLint: Reduce duplication" #-}
 
 
--- | Less typing type synonym
-type Sessions = Map String Command
-
 -- | Possible startup commands for tmux sessions
 data Command =
     ChangeDirectory FilePath -- ^ Change directory before starting session
@@ -47,7 +43,7 @@ prompt
 prompt patterns route xpConfig = do
   cs <- currents
   ds <- concatMapM expand patterns
-  let as = sort . nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
+  let as = nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
   inputPromptWithCompl xpConfig "tmux" (compl' as) ?+ start cs route
 
 -- | Get current active tmux sessions names
