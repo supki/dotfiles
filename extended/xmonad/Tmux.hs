@@ -11,6 +11,7 @@ import           Control.Monad
 import           Data.Array ((!), array, listArray)
 import           Data.Foldable (asum)
 import           Data.Function (on)
+import           Data.Ord (comparing)
 import           Data.List (isPrefixOf, nubBy, sortBy)
 import qualified System.Directory as D
 import           System.FilePath ((</>))
@@ -52,7 +53,12 @@ currents = io $ lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
-compl' xs s  = return . sortOn (levenstein s) . filter (\x -> s `isSubsequenceOf` un x) $ xs
+compl' xs s  = return . sortBy status . sortOn (levenstein s) . filter (\x -> s `isSubsequenceOf` un x) $ xs
+ where
+  status ('\'' : _) ('\'' : _) = EQ
+  status ('\'' : _) _          = LT
+  status _          ('\'' : _) = GT
+  status _          _          = EQ
 
 -- | Unquote string if it's quoted
 un :: String -> String
@@ -70,7 +76,7 @@ isSubsequenceOf (x:xs) ys =
     []     -> False
 
 sortOn :: Ord b => (a -> b) -> [a] -> [a]
-sortOn f = map fst . sortBy (compare `on` snd) . map (\x -> (x, f x))
+sortOn f = map fst . sortBy (comparing snd) . map (\x -> (x, f x))
 
 levenstein :: Eq a => [a] -> [a] -> Int
 levenstein xs ys = arr ! (max_i, max_j)
