@@ -1,0 +1,13 @@
+#compdef eztv
+
+_eztv ()
+{
+  _arguments \
+    {-h,--help}'[show help]' \
+    '--max-links=[hackage password]:number:' \
+    '--magnet[display magnet links]' \
+    '--no-magnet[do not display magnet links]' \
+    '*::query::'
+}
+
+_eztv
