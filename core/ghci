@@ -27,63 +27,26 @@ import           System.IO.Unsafe
 import           Text.Printf
 import           Unsafe.Coerce
 
-import           Control.Concurrent.STM.TVar
-import           Control.Concurrent.STM.TChan
-import           Control.Concurrent.STM.TQueue
-import           Control.Lens
-import           Control.Comonad
-import           Control.Monad.Reader
-import           Control.Monad.Writer hiding ((<>))
-import           Control.Monad.State
-import           Control.Monad.Free
-import           Control.Monad.STM
-import           Control.Monad.Trans
-import           Control.Monad.Trans.Either
-import           Control.Monad.Trans.Maybe
-import           Data.Bifunctor
-import           Data.Bits.Lens
-import           Data.Data.Lens
 import           Data.Functor.Identity
-import           Data.List.Lens
 import           Data.Proxy
-import           Data.Reflection
-import           Data.Semigroup
-import           Data.Tagged
-import           Data.Void
-import           Numeric.Lens
-import           Prelude.Unicode
 import           System.Directory
 import           System.Environment
 import           System.Exit
 import           System.FilePath
-import           System.FilePath.Lens
 import           System.Posix
-import           Text.Parsec hiding ((<|>), many)
 
 import qualified Control.Exception          as E
 import qualified Data.Map.Strict            as M
 import qualified Data.IntMap.Strict         as IM
-import qualified Data.HashMap.Strict        as HM
 import qualified Data.Foldable              as F
 import qualified Data.Traversable           as F
 import qualified Data.Set                   as S
 import qualified Data.IntSet                as IS
-import qualified Data.HashSet               as HS
-import qualified Data.List.NonEmpty         as N
 import qualified Data.Sequence              as Q
 import qualified Data.ByteString            as B
 import qualified Data.ByteString.Char8      as BC
 import qualified Data.ByteString.Lazy       as BL
 import qualified Data.ByteString.Lazy.Char8 as BLC
-import qualified Data.Text                  as T
-import qualified Data.Text.IO               as T
-import qualified Data.Text.Encoding         as T
-import qualified Data.Text.Lazy             as TL
-import qualified Data.Text.Lazy.Encoding    as TL
-import qualified Data.Text.Lazy.IO          as TL
-
-import           System.Command.QQ
-import           System.Wordexp.Simple
 
 :set -fwarn-alternative-layout-rule-transitional
 :set -fwarn-auto-orphans
@@ -96,7 +59,6 @@ import           System.Wordexp.Simple
 :set -fwarn-hi-shadowing
 :set -fwarn-incomplete-patterns
 :set -fwarn-incomplete-record-updates
-:set -fwarn-lazy-unlifted-bindings
 :set -fwarn-missing-fields
 :set -fwarn-missing-methods
 :set -fwarn-monomorphism-restriction
@@ -134,6 +96,7 @@ import           System.Wordexp.Simple
 :set -XMultiParamTypeClasses
 :set -XMultiWayIf
 :set -XNoMonomorphismRestriction
+:set -XOverloadedLists
 :set -XPackageImports
 :set -XQuasiQuotes
 :set -XRankNTypes
