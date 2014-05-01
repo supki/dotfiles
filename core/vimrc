@@ -23,6 +23,9 @@
 	" assume that background is dark
 	set background=dark
 
+	" show relative line numbers
+	set relativenumber
+
 	" load a colorschemes
 	colorscheme seoul256
 
@@ -374,28 +377,6 @@
 " }
 
 " Functions {
-	" relative or no line numbers
-	function SetRelative()
-		if exists("+relativenumber")
-			set relativenumber
-		end
-	endfunction
-
-	function UnsetRelative()
-		if exists("+relativenumber")
-			set norelativenumber
-		end
-	endfunction
-
-	augroup numbers
-		autocmd!
-		autocmd InsertEnter * :call UnsetRelative()
-		autocmd InsertLeave * :call SetRelative()
-	augroup end
-
-	call SetRelative()
-
-
 	" chmod +х to scripts
 	function ModeChange()
 		if getline(1) =~ '^#!'
