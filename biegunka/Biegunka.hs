@@ -110,7 +110,6 @@ dotfiles = role "dotfiles" $
     , dot "readme-gen.css"
     , "xmonad.hs"                ~> ".xmonad/xmonad.hs"
     , "xmonad/Bindings.hs"       ~> ".xmonad/lib/Bindings.hs"
-    , "xmonad/Layouts.hs"        ~> ".xmonad/lib/Layouts.hs"
     , "xmonad/Startup.hs"        ~> ".xmonad/lib/Startup.hs"
     , "xmonad/Themes.hs"         ~> ".xmonad/lib/Themes.hs"
     , "xmonad/RouteT.hs"         ~> ".xmonad/lib/RouteT.hs"
