@@ -130,7 +130,6 @@ dotfiles = role "dotfiles" $
   miscs =
     [ bin "bat.rb"
     , bin "ip.awk"
-    , bin "mem.awk"
     , bin "weather.rb"
     , bin "dive-into-mail"
     , bin "svn-browse"
