@@ -207,10 +207,7 @@ vim = do
     group "agda" $
       pathogen_ "git@github.com:supki/agda-vim"
     group "idris" $
-      "git@github.com:edwinb/Idris-dev" ==> into "git" $ def
-        & remotes .~ ["origin", "stream"]
-        & actions .~
-            link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
+      pathogen_ "git@github.com:idris-hackers/idris-vim"
     group "text" $
       pathogen_ "git@github.com:godlygeek/tabular"
     group "mine" $ do
