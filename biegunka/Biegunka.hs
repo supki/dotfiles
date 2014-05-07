@@ -187,8 +187,6 @@ vim = do
       pathogen_ "git@github.com:Shougo/neocomplcache"
       pathogen_ "git@github.com:bitc/vim-hdevtools"
       pathogen_ "git@github.com:merijn/haskellFoldIndent"
-      pathogen_ "git@github.com:supki/syntastic-cabal"
-      pathogen_ "git@github.com:supki/vim-languages"
     group "coq" $ do
       pathogen_ "git@github.com:vim-scripts/coq-syntax"
       pathogen_ "git@github.com:vim-scripts/Coq-indent"
@@ -206,7 +204,6 @@ vim = do
       pathogen_ "git@github.com:Glench/Vim-Jinja2-Syntax"
       pathogen_ "git@github.com:nelstrom/vim-visual-star-search"
       pathogen_ "git@github.com:kien/rainbow_parentheses.vim"
-      pathogen_ "git@github.com:supki/vim-flipping"
       pathogen_ "git@github.com:tpope/vim-fugitive"
     group "agda" $
       pathogen_ "git@github.com:supki/agda-vim"
@@ -217,6 +214,13 @@ vim = do
             link "contribs/tool-support/vim" ".vim/bundle/idris-vim"
     group "text" $
       pathogen_ "git@github.com:godlygeek/tabular"
+    group "mine" $ do
+      git "git@github.com:supki/vim-flipping" (into "git") $
+        register ".vim/bundle/vim-flipping"
+      git "git@github.com:supki/syntastic-cabal" (into "git") $
+        register ".vim/bundle/syntastic-cabal"
+      git "git@github.com:supki/vim-languages" (into "git") $
+        register ".vim/bundle/vim-languages"
   role "vimish" $
     group "haskell" $
       pathogen_ "git@github.com:bitc/hdevtools"
