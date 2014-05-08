@@ -42,6 +42,7 @@
 	ds = diff --staged
 	dsi = diff --staged --ignore-space-change
 	dcw = diff --color-words
+	dni = diff --no-index
 	ru = remote update
 [push]
 	default = current
