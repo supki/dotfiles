@@ -158,6 +158,8 @@ export PYTHONSTARTUP=${HOME}/.pythonrc
 
 export CHO_PREFIX=${HOME}/ghc
 
+export GOROOT=${HOME}/go
+
 # figure out which package-db current sandbox uses
 function sandboxxy {
 	local conf=${CABAL_SANDBOX_CONFIG:-cabal.sandbox.config}
