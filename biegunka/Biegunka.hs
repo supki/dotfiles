@@ -71,7 +71,6 @@ dotfiles = role "dotfiles" $
   cores =
     [ dot "mpdconf"
     , dot "profile"
-    , dot "bashrc"
     , dot "zshenv"
     , dot "zshrc"
     , dot "inputrc"
