@@ -143,11 +143,6 @@ routes = asum
           return (Tmux.ChangeDirectory path)
       , return (Tmux.ChangeDirectory "playground")
       ]
-  , dirs ".vim/bundle" $
-      next $ \_ -> do
-        path <- nofar
-        exists path
-        return (Tmux.ChangeDirectory path)
   , next $ \part -> do
       nomore
       guard ("slave" `isPrefixOf` part)
