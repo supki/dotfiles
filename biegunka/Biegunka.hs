@@ -67,6 +67,7 @@ dotfiles = role "dotfiles" $
       mkdir -p  ~/.vim/autoload ~/.vim/bundle ~/.vim/colors
       curl -o ~/.vim/autoload/pathogen.vim #{pathogen_url}
     |]
+    [sh|lesskey|]
  where
   cores =
     [ dot "mpdconf"
@@ -95,6 +96,7 @@ dotfiles = role "dotfiles" $
     , dot "guard.rb"
     , dot "vim-jinjing"
     , dot "psqlrc"
+    , dot "lesskey"
     , "vim/vim.custom"           ~> ".vim/plugin/vimrc-local.vim"
     , "vim/indent/haskell.vim"   ~> ".vim/indent/haskell.vim"
     , "vim/camo.vim"             ~> ".vim/colors/camo.vim"
