@@ -36,6 +36,7 @@ templates = def
         ]
       |]
     , follow    = "True"
+    , patterns  = "[\"git/*\", \"svn/*\"]"
     }
   , xsession = def
     { setxkbmap = "setxkbmap -option \"\" -layout us,ru -option grp:caps_toggle -option grp_led:scroll :2"

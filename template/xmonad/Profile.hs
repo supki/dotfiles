@@ -8,7 +8,7 @@ apps :: [(String, String)]
 apps = $template.xmonad.startup$
 
 patterns :: [String]
-patterns = ["git/*", "svn/*", ".vim/bundle/*"]
+patterns = $template.xmonad.patterns$
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool

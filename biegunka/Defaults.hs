@@ -49,7 +49,8 @@ data Xmonad = Xmonad
   , orange
   , yellow
   , startup
-  , follow :: String
+  , follow
+  , patterns :: String
   } deriving (Data, Typeable)
 
 instance Default Xmonad where
@@ -66,6 +67,7 @@ instance Default Xmonad where
     , yellow    = def
     , startup   = def
     , follow    = def
+    , patterns  = def
     }
 
 
