@@ -9,7 +9,6 @@ module Main (main) where
 
 import           Control.Applicative
 import           Control.Lens
-import           Data.Default (def)
 import           Data.Foldable (traverse_)
 import           System.FilePath ((</>))
 
