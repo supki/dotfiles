@@ -136,7 +136,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   stuff =
     [ title     <&> ("stuff" `isSuffixOf`)
     , title     =? "CuteCom"
-    , title     =? "gtkterm"
+    , title     =? "GtkTerm"
     , title     =? "VT"
     , className =? "Eog"
     , className =? "eog"
