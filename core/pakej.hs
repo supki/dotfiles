@@ -4,12 +4,17 @@
 module Main (main) where
 
 import Control.Applicative
-import Data.List (intercalate)
+import Control.Monad ((<=<))
+import Data.Foldable (asum)
+import Data.List (intercalate, stripPrefix)
+import Data.Maybe (fromMaybe, listToMaybe, mapMaybe)
 import Data.String (IsString(..))
 import Data.Time (formatTime, getZonedTime)
 import Data.Text.Lazy (Text)
+import Data.Traversable (sequenceA)
 import System.Locale (defaultTimeLocale)
 import System.IO (withFile, hGetLine, IOMode(..))
+import Text.Read (readMaybe)
 import Network (PortID(..))
 import Prelude hiding ((.), id)
 import Pakej
@@ -42,12 +47,25 @@ cpu path = fromWire (fmap format compute) . constant (cpuData path)
        format  = fromString . printf "%2.f%%"
 
 mem :: FilePath -> PakejWidget Text
-mem path = text $ do
-  t : xs <- memData path
-  return (format (usage t xs))
- where memData    = fmap (map (read . (!! 1) . words) . take 4 . lines) . readFile
-       usage t xs = 100.0 * (t - sum xs) / t
-       format     = fromString . printf "%2.0f%%"
+mem path = text $
+  memUsage . lines <$> readFile path
+ where
+  memUsage xs = fromMaybe unknown $ asum
+    [ liftA2 usage available total
+    , liftA2 usage (fmap sum (sequenceA [free, buffers, cached])) total
+    ]
+   where
+    total      = prefixed "MemTotal:" xs
+    free       = prefixed "MemFree:" xs
+    available  = prefixed "MemAvailable:" xs
+    buffers    = prefixed "Buffers:" xs
+    cached     = prefixed "Cached:" xs
+
+    prefixed p = readMaybe <=< listToMaybe . words <=< listToMaybe . mapMaybe (stripPrefix p)
+
+    usage x y  = format (100.0 * (y - x) / y :: Double)
+    format     = fromString . printf "%2.0f%%"
+    unknown    = fromString "??%"
 
 loadavg :: FilePath -> PakejWidget Text
 loadavg path = text $ fromString . intercalate " → " . take 3 . words <$> readFile path
