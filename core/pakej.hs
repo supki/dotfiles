@@ -3,23 +3,23 @@
 {-# LANGUAGE QuasiQuotes #-}
 module Main (main) where
 
-import Control.Applicative
-import Control.Monad ((<=<))
-import Data.Foldable (asum)
-import Data.List (intercalate, stripPrefix)
-import Data.Maybe (fromMaybe, listToMaybe, mapMaybe)
-import Data.String (IsString(..))
-import Data.Time (formatTime, getZonedTime)
-import Data.Text.Lazy (Text)
-import Data.Traversable (sequenceA)
-import System.Locale (defaultTimeLocale)
-import System.IO (withFile, hGetLine, IOMode(..))
-import Text.Read (readMaybe)
-import Network (PortID(..))
-import Prelude hiding ((.), id)
-import Pakej
-import System.Command.QQ (sh)
-import Text.Printf (printf)
+import           Control.Applicative
+import           Data.Foldable (asum)
+import qualified Data.HashMap.Strict as HashMap
+import           Data.List (intercalate)
+import           Data.Maybe (fromMaybe)
+import           Data.String (IsString(..))
+import           Data.Text (Text)
+import           Data.Time (formatTime, getZonedTime)
+import           Data.Traversable (sequenceA)
+import           Network (PortID(..))
+import           Pakej
+import           Pakej.Widget.Memory
+import           Prelude hiding ((.), id)
+import           System.Command.QQ (sh)
+import           System.Locale (defaultTimeLocale)
+import           System.IO (withFile, hGetLine, IOMode(..))
+import           Text.Printf (printf)
 
 
 main :: IO ()
@@ -48,24 +48,24 @@ cpu path = fromWire (fmap format compute) . constant (cpuData path)
 
 mem :: FilePath -> PakejWidget Text
 mem path = text $
-  memUsage . lines <$> readFile path
+  memUsage <$> memoryData path
  where
-  memUsage xs = fromMaybe unknown $ asum
+  memUsage (Left _) = unknown
+  memUsage (Right xs) = fromMaybe unknown $ asum
     [ liftA2 usage available total
     , liftA2 usage (fmap sum (sequenceA [free, buffers, cached])) total
     ]
    where
-    total      = prefixed "MemTotal:" xs
-    free       = prefixed "MemFree:" xs
-    available  = prefixed "MemAvailable:" xs
-    buffers    = prefixed "Buffers:" xs
-    cached     = prefixed "Cached:" xs
+    total      = HashMap.lookup "MemTotal" xs
+    free       = HashMap.lookup "MemFree" xs
+    available  = HashMap.lookup "MemAvailable" xs
+    buffers    = HashMap.lookup "Buffers" xs
+    cached     = HashMap.lookup "Cached" xs
 
-    prefixed p = readMaybe <=< listToMaybe . words <=< listToMaybe . mapMaybe (stripPrefix p)
-
-    usage x y  = format (100.0 * (y - x) / y :: Double)
+    usage x y  = format (100.0 * (fromIntegral y - fromIntegral x) / fromIntegral y :: Double)
     format     = fromString . printf "%2.0f%%"
-    unknown    = fromString "??%"
+
+  unknown    = fromString "??%"
 
 loadavg :: FilePath -> PakejWidget Text
 loadavg path = text $ fromString . intercalate " → " . take 3 . words <$> readFile path
