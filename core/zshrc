@@ -91,7 +91,7 @@ alias diff='git diff --no-index'
 alias xml='xmlstarlet'
 
 function man {
-	/usr/bin/man $@ 2>&1 | vim -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
+	/usr/bin/man $@ | ifne vim -X -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
 }
 
 function :t {
