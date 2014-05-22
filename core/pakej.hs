@@ -4,17 +4,13 @@
 module Main (main) where
 
 import           Control.Applicative
-import           Data.Foldable (asum)
-import qualified Data.HashMap.Strict as HashMap
 import           Data.List (intercalate)
-import           Data.Maybe (fromMaybe)
 import           Data.String (IsString(..))
 import           Data.Text (Text)
 import           Data.Time (formatTime, getZonedTime)
-import           Data.Traversable (sequenceA)
 import           Network (PortID(..))
 import           Pakej
-import           Pakej.Widget.Memory
+import qualified Pakej.Widget.Memory as Mem
 import           Prelude hiding ((.), id)
 import           System.Command.QQ (sh)
 import           System.Locale (defaultTimeLocale)
@@ -47,24 +43,9 @@ cpu path = fromWire (fmap format compute) . constant (cpuData path)
        format  = fromString . printf "%2.f%%"
 
 mem :: FilePath -> PakejWidget Text
-mem path = text $
-  memUsage <$> memoryData path
+mem p = Mem.widget p unknown (fmap percentage . Mem.ratio Mem.used Mem.total)
  where
-  memUsage (Left _) = unknown
-  memUsage (Right xs) = fromMaybe unknown $ asum
-    [ liftA2 usage available total
-    , liftA2 usage (fmap sum (sequenceA [free, buffers, cached])) total
-    ]
-   where
-    total      = HashMap.lookup "MemTotal" xs
-    free       = HashMap.lookup "MemFree" xs
-    available  = HashMap.lookup "MemAvailable" xs
-    buffers    = HashMap.lookup "Buffers" xs
-    cached     = HashMap.lookup "Cached" xs
-
-    usage x y  = format (100.0 * (fromIntegral y - fromIntegral x) / fromIntegral y :: Double)
-    format     = fromString . printf "%2.0f%%"
-
+  percentage = fromString . printf "%2.0f%%" . (100 *)
   unknown    = fromString "??%"
 
 loadavg :: FilePath -> PakejWidget Text
