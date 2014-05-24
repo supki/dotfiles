@@ -158,7 +158,6 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,         xF86XK_AudioRaiseVolume, "vaio-audio --increase")
       , (0,         xF86XK_AudioLowerVolume, "vaio-audio --decrease")
       -- brightness management
-      , (shiftMask, xF86XK_AudioMute, "vaio-brightness --toggle")
       , (0,         xF86XK_MonBrightnessDown, "vaio-brightness --decrease")
       , (0,         xF86XK_MonBrightnessUp, "vaio-brightness --increase")
       ]
