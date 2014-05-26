@@ -365,6 +365,7 @@
 		autocmd FileType agda       set commentstring=--\ %s
 		autocmd FileType cabal      set commentstring=--\ %s
 		autocmd FileType sql        set commentstring=--\ %s
+		autocmd FileType idris      set commentstring=--\ %s
 		" other languages
 		autocmd FileType ocaml      set commentstring=(*\ %s\ *)
 		autocmd FileType debsources set commentstring=#\ %s
