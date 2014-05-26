@@ -371,6 +371,7 @@
 		autocmd FileType debsources set commentstring=#\ %s
 		autocmd FileType awk        set commentstring=#\ %s
 		autocmd FileType resolv     set commentstring=#\ %s
+		autocmd FileType racket     set commentstring=;\ %s
 	augroup end
 
 	au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
