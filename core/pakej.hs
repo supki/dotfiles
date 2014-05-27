@@ -21,7 +21,7 @@ import           Text.Printf (printf)
 main :: IO ()
 main = pakej $ private "all" . aggregate
   [ private "cpu"       . cpu "/proc/stat"
-  , private "mem"       . mem "/proc/meminfo"
+  , private "mem"       . mem
   , private "ip"        . system [sh| ip.awk eth0 |] . every minute
   , private "battery"   . system [sh| bat.rb |] . every (minute `div` 2)
   , private "loadavg"   . loadavg "/proc/loadavg" . every (10 * second)
@@ -42,8 +42,8 @@ cpu path = fromWire (fmap format compute) . constant (cpuData path)
                | otherwise     -> (Right (sum (map (/ t) (take 3 d)) * 100 :: Double), v)
        format  = fromString . printf "%2.f%%"
 
-mem :: FilePath -> PakejWidget Text
-mem p = Mem.widget p unknown (fmap percentage . Mem.ratio Mem.used Mem.total)
+mem :: PakejWidget Text
+mem = Mem.widget unknown (fmap percentage . Mem.ratio Mem.used Mem.total)
  where
   percentage = fromString . printf "%2.0f%%" . (100 *)
   unknown    = fromString "??%"
