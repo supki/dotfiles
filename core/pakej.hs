@@ -10,6 +10,7 @@ import           Data.Text (Text)
 import           Data.Time (formatTime, getZonedTime)
 import           Network (PortID(..))
 import           Pakej
+import qualified Pakej.Widget.Cpu as Cpu
 import qualified Pakej.Widget.Memory as Mem
 import           Prelude hiding ((.), id)
 import           System.Command.QQ (sh)
@@ -20,7 +21,7 @@ import           Text.Printf (printf)
 
 main :: IO ()
 main = pakej $ private "all" . aggregate
-  [ private "cpu"       . cpu "/proc/stat"
+  [ private "cpu"       . cpu
   , private "mem"       . mem
   , private "ip"        . system [sh| ip.awk eth0 |] . every minute
   , private "battery"   . system [sh| bat.rb |] . every (minute `div` 2)
@@ -31,16 +32,8 @@ main = pakej $ private "all" . aggregate
   , private "date"      . date . every (minute `div` 2)
   ]
 
-cpu :: FilePath -> PakejWidget Text
-cpu path = fromWire (fmap format compute) . constant (cpuData path)
- where cpuData = fmap (drop 1 . map read . words) . readLine
-       compute = mkState (repeat 0) $ \_dt (v, s) ->
-         let
-           d = zipWith (-) v s
-         in case sum d of
-             t | abs t < 0.001 -> (Left undefined, s)
-               | otherwise     -> (Right (sum (map (/ t) (take 3 d)) * 100 :: Double), v)
-       format  = fromString . printf "%2.f%%"
+cpu :: PakejWidget Text
+cpu = fmap (fromString . printf "%2.f%%") (Cpu.widget Nothing)
 
 mem :: PakejWidget Text
 mem = Mem.widget unknown (fmap percentage . Mem.ratio Mem.used Mem.total)
