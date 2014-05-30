@@ -208,6 +208,8 @@ vim = do
       pathogen_ "git@github.com:supki/agda-vim"
     group "idris" $
       pathogen_ "git@github.com:idris-hackers/idris-vim"
+    group "rust" $
+      pathogen_ "git@github.com:wting/rust.vim"
     group "text" $
       pathogen_ "git@github.com:godlygeek/tabular"
     group "mine" $ do
