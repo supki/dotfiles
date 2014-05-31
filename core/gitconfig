@@ -44,6 +44,7 @@
 	dcw = diff --color-words
 	dni = diff --no-index
 	ru = remote update
+	g = grep
 [push]
 	default = current
 [rerere]
