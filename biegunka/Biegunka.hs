@@ -263,11 +263,14 @@ edwardk = role "edwardk" $ traverse_ (--> into "git")
   , "git@github.com:ekmett/kan-extensions"
   ]
 
-mine = role "mine" $ traverse_ (--> into "git")
-  [ "git@github.com:supki/libjenkins"
-  , "git@github.com:supki/xmonad-screenshot"
-  , "git@github.com:supki/xmonad-use-empty-workspace"
-  ]
+mine = role "mine" $ do
+  traverse_ (--> into "git")
+    [ "git@github.com:supki/libjenkins"
+    , "git@github.com:supki/xmonad-screenshot"
+    , "git@github.com:supki/xmonad-use-empty-workspace"
+    ]
+  git "git@github.com:supki/whacky" (into "git") $
+    [sh|BUILDDIR=$HOME/bin make|]
 
 
 infix 8 -->
