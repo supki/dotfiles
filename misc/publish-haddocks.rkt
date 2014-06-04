@@ -31,7 +31,7 @@
                      (copy-directory/files (build-path root file) file)))
                 (directory-list root)))
            (directory-list "dist/doc/html" #:build? #t))
-         (git! "add" ".")
+         (git! "add" "--no-ignore-removal" ".")
          (git! "status")
          (unless (zero? (git "diff-index" "--quiet" "HEAD" "--"))
            (git! "commit" "--message" "Update haddock documentation")
