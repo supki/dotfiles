@@ -27,7 +27,6 @@ templates = def
     , startup   =
       [multiline|
         [ ("/usr/lib/firefox/firefox", "firefox")
-        , ("gnome-commander", "gnome-commander")
         , ("watch -n2 netstat", "urxvt -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
         , ("htop", "urxvt -title work-htop -e htop")
         , ("htop", "urxvt -title dev-htop -e ssh dev -t htop")

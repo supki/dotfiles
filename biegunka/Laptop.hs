@@ -30,7 +30,6 @@ templates = def
         [ ("/home/maksenov/.dropbox-dist/dropbox", "${HOME}/.dropbox-dist/dropboxd")
         , ("mpd", "mpd")
         , ("(x-www-browser|/usr/lib/chromium/chromium)", "x-www-browser")
-        , ("gnome-commander", "gnome-commander")
         , ("transmission-gtk", "transmission-gtk")
         , ("ssh .* mcabber", "urxvtcd -title mcabber -e ssh budueba -t 'export LANG=en_US.UTF-8; tmux attach -d -t mcabber'")
         , ("ssh .* irssi", "urxvtcd -title irssi -e ssh budueba -t 'export LANG=en_US.UTF-8; tmux attach -d -t irssi'")
