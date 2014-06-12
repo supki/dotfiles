@@ -4,9 +4,12 @@
 module Main (main) where
 
 import           Control.Applicative
+import           Control.Monad
 import           Data.List (intercalate)
+import           Data.Maybe (mapMaybe, listToMaybe)
 import           Data.String (IsString(..))
 import           Data.Text (Text)
+import qualified Data.Text as Text
 import           Data.Time (formatTime, getZonedTime)
 import           Network (PortID(..))
 import           Pakej
@@ -25,12 +28,19 @@ main = pakej $ private "all" . aggregate
   , private "mem"       . mem
   , private "ip"        . system [sh| ip.awk eth0 |] . every minute
   , private "battery"   . system [sh| bat.rb |] . every (minute `div` 2)
+  , private "cputemp"   . cputemp . every (10 * second)
   , private "loadavg"   . loadavg "/proc/loadavg" . every (10 * second)
   , private "loadavg2"  . query "budueba.com" (PortNumber 1234) "loadavg" . every minute
   , private "weather"   . system [sh| weather.rb |] . every minute
   , private "playcount" . system [sh| playcount |] . every minute
   , private "date"      . date . every (minute `div` 2)
   ]
+
+cputemp :: PakejWidget Text
+cputemp =
+    Text.intercalate " / "
+  . mapMaybe (listToMaybe . drop 1 . Text.words <=< Text.stripPrefix "Core")
+  . Text.lines <$> system [sh|sensors|]
 
 cpu :: PakejWidget Text
 cpu = fmap (fromString . printf "%2.f%%") (Cpu.widget Nothing)
