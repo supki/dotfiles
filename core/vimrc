@@ -377,8 +377,6 @@
 	augroup end
 
 	au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
-
-	call languages#generate(g:vim_languages_default_filter)
 " }
 
 " Functions {
