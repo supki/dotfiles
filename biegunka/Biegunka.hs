@@ -67,6 +67,7 @@ dotfiles = role "dotfiles" $
       curl -o ~/.vim/autoload/pathogen.vim #{pathogen_url}
     |]
     [sh|lesskey|]
+    [sh|chmod +x ~/.xsessionrc|]
  where
   cores =
     [ dot "mpdconf"
@@ -123,6 +124,7 @@ dotfiles = role "dotfiles" $
     ]
   templates =
     [ "xsession"                 ~> ".xsession"
+    , "xsession"                 ~> ".xsessionrc"
     , "xmonad/Profile.hs"        ~> ".xmonad/lib/Profile.hs"
     , "xmodmap"                  ~> ".xmodmap"
     , "Xdefaults"                ~> ".Xdefaults"
