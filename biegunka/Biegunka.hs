@@ -248,9 +248,8 @@ misc = role "misc" $ traverse_ (--> into "git")
 
 
 experimental = role "experimental" $ traverse_ (--> into "git")
-  [ "git@github.com:sol/vimus"
-  , "git@github.com:sol/libmpd-haskell"
-  , "git@github.com:mitchellh/vagrant"
+  [ "git@github.com:vimus/vimus"
+  , "git@github.com:vimus/libmpd-haskell"
   ]
 
 
