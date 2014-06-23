@@ -45,6 +45,7 @@
 	dni = diff --no-index
 	ru = remote update
 	g = grep
+	cur = "!f() { git tag | sort --version-sort --reverse | head -n 1; }; f"
 [push]
 	default = current
 [rerere]
