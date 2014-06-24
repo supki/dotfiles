@@ -38,7 +38,6 @@ templates = def
         , ("htop", "urxvtcd -title htop -e htop")
         , ("scrobbler-client", "scrobbler-client")
         , ("procfiled", "procfiled")
-        , ("suspender", "suspender")
         , ("vimus", "urxvtcd -title vimus -name vimus -e zsh -c vimus")
         ]
       |]
