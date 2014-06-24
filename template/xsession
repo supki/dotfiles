@@ -33,4 +33,4 @@ parcellite &
 sh -l -c pakej
 
 # start suspender
-PATH="$HOME/bin:$PATH" suspender &
+PATH="\$HOME/bin:\$PATH" suspender &
