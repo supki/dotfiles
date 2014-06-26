@@ -162,21 +162,6 @@ export CHO_PREFIX=${HOME}/ghc
 
 export GOROOT=${HOME}/go
 
-# figure out which package-db current sandbox uses
-function sandboxxy {
-	local conf=${CABAL_SANDBOX_CONFIG:-cabal.sandbox.config}
-	grep --perl-regex --only-matching "(?<=package-db: ).*" "${conf}" 2>/dev/null
-}
-
-# set the sandbox
-function sandbox {
-	if [ -n "$1" ]; then
-		export CABAL_SANDBOX_CONFIG="${HOME}/git/$1/cabal.sandbox.config"
-	else
-		unset CABAL_SANDBOX_CONFIG
-	fi
-}
-
 function mkcdir {
 	mkdir --parents "$1" && cd "$_";
 }
