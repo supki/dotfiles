@@ -169,7 +169,3 @@ function mkcdir {
 function lyank {
 	curl --silent "http://lpaste.net/raw/$1" | HsColour | less -R
 }
-
-function ?h {
-	x-www-browser "https://hackage.haskell.org/package/${1:? What?}" >/dev/null 2>&1
-}
