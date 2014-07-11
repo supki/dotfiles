@@ -207,6 +207,8 @@ vim = do
       pathogen_ "git@github.com:nelstrom/vim-visual-star-search"
       pathogen_ "git@github.com:kien/rainbow_parentheses.vim"
       pathogen_ "git@github.com:tpope/vim-fugitive"
+      pathogen  "git@github.com:wincent/Command-T" $
+        [sh|cd ~/.vim/bundle/Command-T/ruby/command-t; /usr/bin/ruby extconf.rb; make|]
     group "idris" $
       pathogen_ "git@github.com:idris-hackers/idris-vim"
     group "rust" $
