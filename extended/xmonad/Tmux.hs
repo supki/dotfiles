@@ -13,6 +13,9 @@ import           Data.Foldable (asum)
 import           Data.Function (on)
 import           Data.Ord (comparing)
 import           Data.List (isPrefixOf, nubBy, sortBy)
+import           Data.Monoid ((<>))
+import           Data.Map (Map)
+import qualified Data.Map as M
 import qualified System.Directory as D
 import           System.FilePath ((</>))
 import           System.Wordexp.Simple (wordexp)
@@ -45,7 +48,14 @@ prompt patterns route xpConfig = do
   cs <- currents
   ds <- concatMapM expand patterns
   let as = nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
-  inputPromptWithCompl xpConfig "tmux" (compl' as) ?+ start cs route
+  inputPromptWithCompl
+    xpConfig { promptKeymap = promptCustomKeymap <> promptKeymap xpConfig }
+    "tmux" (compl' as) ?+ start cs route
+
+type PromptKeymap = Map (KeyMask, KeySym) (XP ())
+
+promptCustomKeymap :: PromptKeymap
+promptCustomKeymap = M.singleton (controlMask, xK_j) (do setSuccess True; setDone True)
 
 -- | Get current active tmux sessions names
 currents :: X [String]
