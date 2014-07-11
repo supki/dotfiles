@@ -63,7 +63,7 @@ currents = io $ lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
-compl' xs s  = return . sortBy status . sortOn (levenstein s) . filter (\x -> s `isSubsequenceOf` un x) $ xs
+compl' xs s  = return . sortBy status . sortOn (levenshtein s) . filter (\x -> s `isSubsequenceOf` un x) $ xs
  where
   status ('\'' : _) ('\'' : _) = EQ
   status ('\'' : _) _          = LT
@@ -88,8 +88,8 @@ isSubsequenceOf (x:xs) ys =
 sortOn :: Ord b => (a -> b) -> [a] -> [a]
 sortOn f = map fst . sortBy (comparing snd) . map (\x -> (x, f x))
 
-levenstein :: Eq a => [a] -> [a] -> Int
-levenstein xs ys = arr ! (max_i, max_j)
+levenshtein :: Eq a => [a] -> [a] -> Int
+levenshtein xs ys = arr ! (max_i, max_j)
  where
   axs   = listArray (1, max_i) xs
   ays   = listArray (1, max_j) ys
