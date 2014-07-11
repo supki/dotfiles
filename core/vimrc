@@ -59,7 +59,7 @@
 	" enable sane menu
 	set wildmenu
 	set wildmode=list:longest,full
-	set wildignore=*.o,*.hi,*.pyc,*~
+	set wildignore=*.o,*.hi,*.pyc,*~,*.dyn_o,*.dyn_hi
 
 	" don't pause big listings
 	set nomore
@@ -275,6 +275,10 @@
 	" fuck that
 	noremap <S-k> <NOP>
 
+	" CommandT keybindings
+	nnoremap <leader>f :CommandT<CR>
+	nnoremap <leader>b :CommandTMRU<CR>
+
 	nnoremap <Space> <C-D>
 	nnoremap <S-Space> <C-U>
 
@@ -345,16 +349,11 @@
 	let g:syntastic_auto_jump = 1
 	let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_filetypes': ['racket'] }
 
-	call unite#filters#matcher_default#use(['matcher_fuzzy'])
-	let g:unite_source_haddock_browser = 'x-www-browser'
-	nnoremap <leader>w :Unite -no-split -buffer-name=files -start-insert file<CR>
-	nnoremap <leader>e :Unite -no-split -buffer-name=buffer buffer<CR>
-
-	nnoremap <leader>gbr :Gbrowse<CR>
-	nnoremap <leader>gbl :Gblame<CR>
-	nnoremap <leader>gs :Gstatus<CR>
-	nnoremap <leader>gd :Gdiff<CR>
-	nnoremap <leader>gc :Gcommit<CR>
+	" Command-T options
+	let g:CommandTFileScanner = 'find'
+	let g:CommandTMatchWindowAtTop = 1
+	let g:CommandTAcceptSelectionMap = '<C-j>'
+	let g:CommandTSelectNextMap = ['Down', '<C-n>']
 
 	" for vim-bling
 	let g:bling_color=216
