@@ -82,6 +82,7 @@ alias unpemi='sudo /etc/init.d/openvpn.pemi stop'
 alias hr='print ${(l:COLUMNS::❤:)}'
 alias diff='git diff --no-index'
 alias xml='xmlstarlet'
+alias be='bundle exec'
 
 function man {
 	/usr/bin/man $@ | ifne vim -X -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
