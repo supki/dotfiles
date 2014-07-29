@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE RankNTypes #-}
 {-# OPTIONS_GHC -W #-}
 -- | Simple routing
 module RouteT
@@ -8,13 +9,13 @@ module RouteT
   , nomore, sofar, nofar, next, rest, dir, dirs
   ) where
 
-import Control.Applicative (Alternative(..), Applicative(..))
+import Control.Applicative
 import Control.Category ((>>>))
-import Control.Lens
 import Control.Monad (MonadPlus(..), ap, guard, liftM)
-import Control.Monad.Reader (ReaderT, runReaderT, local)
+import Control.Monad.Reader (MonadReader, ReaderT, runReaderT, local, asks)
 import Control.Monad.Trans (MonadIO(..))
 import Control.Monad.Trans.Class (MonadTrans(..))
+import Data.Functor.Identity (Identity(..))
 import System.FilePath (joinPath, makeRelative, splitDirectories)
 import System.FilePath.Lens ((</>~))
 
@@ -48,9 +49,23 @@ instance MonadIO m => MonadIO (RouteT m) where
   liftIO = RouteT . liftIO
 
 data Routing = Routing
-  { _route :: [FilePath]
+  { _route  :: [FilePath]
   , _routed :: FilePath
   }
+
+-- MLL
+type Lens s t a b = forall f. Functor f => (a -> f b) -> s -> f t
+type Lens' s a = Lens s s a a
+
+view :: MonadReader s m => Lens s t a b -> m a
+view l = asks (getConst . l Const)
+
+over :: Lens s t a b -> (a -> b) -> s -> t
+over l f = runIdentity . l (Identity . f)
+
+(.~) :: Lens s t a b -> b -> s -> t -- set
+(.~) l = over l . const
+
 
 route :: Lens' Routing [FilePath]
 route f r = f (_route r) <&> \x -> r { _route = x }
@@ -155,3 +170,6 @@ instance MonadTrans OptionT where
 
 instance MonadIO m => MonadIO (OptionT m) where
   liftIO = lift . liftIO
+
+(<&>) :: Functor f => f a -> (a -> b) -> f b
+(<&>) = flip fmap

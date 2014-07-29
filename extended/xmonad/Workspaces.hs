@@ -1,7 +1,6 @@
 {-# OPTIONS_GHC -W #-}
 module Workspaces where
 
-import Control.Lens
 import Control.Monad (liftM)
 import Data.List (isInfixOf, isPrefixOf, isSuffixOf)
 import Data.Monoid ((<>), mconcat)
@@ -15,7 +14,6 @@ import qualified XMonad.StackSet as W
 
 import Profile
 
--- Workspaces
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = concat
   [ ["~"]
@@ -29,9 +27,7 @@ myWorkspacesKeys = concat
   , [xK_1 .. xK_7]
   , [xK_8, xK_9, xK_0, xK_minus, xK_equal, xK_backslash, xK_BackSpace]
   ]
---
 
--- Ids
 data Workspace =
     Talkative
   | WWW
@@ -63,9 +59,7 @@ onWorkspaces
   :: (LayoutClass i a, LayoutClass j a)
   => [Workspace] -> i a -> j a -> XLPW.PerWorkspace i j a
 onWorkspaces ws = XLPW.onWorkspaces (map toWsId ws)
---
 
--- Manage hook
 myManageHook :: ManageHook
 myManageHook = namedScratchpadManageHook scratchpads <> mconcat
   [ isFullscreen --> doFullFloat
@@ -143,10 +137,11 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
     ]
 
   my = foldr1 (<||>)
---
 
--- Scratchpads
 scratchpads :: [NamedScratchpad]
 scratchpads =
   [ NS "scratchpad" (myTerminal ++ " -name scratchpad") (resource =? "scratchpad") (customFloating $ W.RationalRect 0.47 0.05 0.5 0.6)
   ]
+
+(<&>) :: Functor f => f a -> (a -> b) -> f b
+(<&>) = flip fmap
