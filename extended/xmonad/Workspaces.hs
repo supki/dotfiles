@@ -1,18 +1,18 @@
 {-# OPTIONS_GHC -W #-}
 module Workspaces where
 
-import Control.Monad (liftM)
-import Data.List (isInfixOf, isPrefixOf, isSuffixOf)
-import Data.Monoid ((<>), mconcat)
+import           Control.Monad (liftM)
+import           Data.List (isInfixOf, isPrefixOf, isSuffixOf)
+import           Data.Monoid ((<>), mconcat)
 
-import XMonad
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
+import           XMonad
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.ManageHelpers
 import qualified XMonad.Layout.PerWorkspace as XLPW
-import XMonad.Util.NamedScratchpad
+import           XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
 
-import Profile
+import           Profile
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = concat
@@ -108,6 +108,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
     , className =? "Apvlv"
     , className =? "Xchm"
     , className =? "Evince"
+    , stringProperty "WM_CLASS" <&> ("libreoffice" `isPrefixOf`)
     ]
   video =
     [ className =? "Vlc"
