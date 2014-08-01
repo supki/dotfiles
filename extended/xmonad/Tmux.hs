@@ -18,6 +18,7 @@ import qualified Data.Map as M
 import qualified System.Directory as D
 import           System.FilePath ((</>))
 import           System.Wordexp.Simple (wordexp)
+import           Text.Printf (printf)
 import           XMonad hiding (spawn)
 import           XMonad.Prompt
 import qualified XMonad.StackSet as W
@@ -35,6 +36,7 @@ import           Spawn (spawn)
 data Command =
     ChangeDirectory FilePath -- ^ Change directory before starting session
   | Session String           -- ^ Start session for specific command
+  | Remote String String     -- ^ Start session remotely
     deriving (Show, Read, Eq, Ord)
 
 -- | Ask what session user wants to create/attach to
@@ -126,11 +128,14 @@ start runningSessions route (un -> userInput) = do
         Just command -> spawn $ create term userInput command
         Nothing      -> spawn $ createOrAttach term userInput
  where
-  createOrAttach t e = t ++ " -e tmux new-session -AD -s '" ++ e ++ "'"
+  createOrAttach t e =
+    printf "%s -e tmux new-session -AD -s '%s'" t e
   create t e (ChangeDirectory p) =
-    t ++ " -e tmux new -c \"${PWD}/" ++ p ++ "\" -s '" ++ e ++ "'"
+    printf "%s -e tmux new-session -c \"${PWD}/%s\" -s '%s'" t p e
   create t e (Session c) =
-    t ++ " -e tmux new -s "    ++ e ++ " '" ++ c ++ "'"
+    printf "%s -e tmux new-session -s '%s' '%s'" t e c
+  create t e (Remote s n) =
+    printf "%s -e ssh %s -t tmux new-session -AD -s '%s'" t s n
 
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = liftM concat . mapM f
@@ -155,6 +160,10 @@ routes = asum
       nomore
       guard ("slave" `isPrefixOf` part)
       return (Tmux.Session ("ssh " ++ part))
+  , dir "ko" $
+      next $ \name -> do
+        nomore
+        return (Tmux.Remote "kolyskovi" name)
   , next $ \part -> do
       nomore
       guard (part `elem` ["dev", "storage", "budueba", "jenkins", "victim"])
