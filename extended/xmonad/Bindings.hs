@@ -51,8 +51,6 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
       -- launch tmux prompt
       , (0,           xK_Return, Tmux.prompt Profile.patterns Tmux.routes myXPConfig)
-      -- launch man prompt
-      , (0,           xK_m, Man.prompt myXPConfig)
       -- launch shellPrompt
       , (0,           xK_p, shellPrompt myXPConfig { autoComplete = Just 1 })
       -- close focused window

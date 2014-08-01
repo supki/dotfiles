@@ -1,10 +1,14 @@
 {-# OPTIONS_GHC -W #-}
 module Themes where
 
-import XMonad.Layout.Tabbed
-import XMonad.Prompt
+import           Data.Monoid ((<>))
+import           Data.Map (Map)
+import qualified Data.Map as Map
+import           XMonad
+import           XMonad.Layout.Tabbed
+import           XMonad.Prompt
 
-import Profile
+import           Profile
 
 myTheme :: Theme
 myTheme = defaultTheme
@@ -28,4 +32,10 @@ myXPConfig = defaultXPConfig
   , position     = Top
   , height       = 20
   , autoComplete = Nothing
+  , promptKeymap = promptCustomKeymap <> promptKeymap defaultXPConfig
   }
+
+type PromptKeymap = Map (KeyMask, KeySym) (XP ())
+
+promptCustomKeymap :: PromptKeymap
+promptCustomKeymap = Map.singleton (controlMask, xK_j) (do setSuccess True; setDone True)

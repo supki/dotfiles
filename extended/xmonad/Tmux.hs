@@ -12,9 +12,7 @@ import           Data.Foldable (asum)
 import           Data.Function (on)
 import           Data.Ord (comparing)
 import           Data.List (isPrefixOf, nubBy, sortBy)
-import           Data.Monoid ((<>))
 import           Data.Map (Map)
-import qualified Data.Map as M
 import qualified System.Directory as D
 import           System.FilePath ((</>))
 import           System.Wordexp.Simple (wordexp)
@@ -49,14 +47,9 @@ prompt patterns route xpConfig = do
   cs <- currents
   ds <- concatMapM expand patterns
   let as = nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
-  inputPromptWithCompl
-    xpConfig { promptKeymap = promptCustomKeymap <> promptKeymap xpConfig }
-    "tmux" (compl' as) ?+ start cs route
+  inputPromptWithCompl xpConfig "tmux" (compl' as) ?+ start cs route
 
 type PromptKeymap = Map (KeyMask, KeySym) (XP ())
-
-promptCustomKeymap :: PromptKeymap
-promptCustomKeymap = M.singleton (controlMask, xK_j) (do setSuccess True; setDone True)
 
 -- | Get current active tmux sessions names
 currents :: X [String]
@@ -134,7 +127,7 @@ start runningSessions route (un -> userInput) = do
     printf "%s -e tmux new-session -c \"${PWD}/%s\" -s '%s'" t p e
   create t e (Session c) =
     printf "%s -e tmux new-session -s '%s' '%s'" t e c
-  create t e (Remote s n) =
+  create t _ (Remote s n) =
     printf "%s -e ssh %s -t tmux new-session -AD -s '%s'" t s n
 
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
