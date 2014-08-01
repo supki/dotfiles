@@ -1,4 +1,3 @@
-{-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE ViewPatterns #-}
 {-# OPTIONS_GHC -W #-}
 -- | Semi-usable tmux sessions prompt for XMonad
@@ -119,19 +118,18 @@ start runningSessions route (un -> userInput) = do
       ws <- gets windowset
       kv <- concatMapM nameWindows (W.workspaces ws)
       case lookup userInput kv of
-        Nothing -> spawn $ attach term userInput
+        Nothing -> spawn $ createOrAttach term userInput
         Just w  -> windows (W.focusWindow w)
     else do
       routed <- io $ runRouteT userInput route
       case routed of
-        Just command -> spawn $ create' term userInput command
-        Nothing      -> spawn $ create  term userInput
+        Just command -> spawn $ create term userInput command
+        Nothing      -> spawn $ createOrAttach term userInput
  where
-  attach t e = t ++ " -e tmux attach -d -t '" ++ e ++ "'"
-  create t e = t ++ " -e tmux new -s '" ++ e ++ "'"
-  create' t e (ChangeDirectory p) =
+  createOrAttach t e = t ++ " -e tmux new-session -AD -s '" ++ e ++ "'"
+  create t e (ChangeDirectory p) =
     t ++ " -e tmux new -c \"${PWD}/" ++ p ++ "\" -s '" ++ e ++ "'"
-  create' t e (Session c) =
+  create t e (Session c) =
     t ++ " -e tmux new -s "    ++ e ++ " '" ++ c ++ "'"
 
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
