@@ -276,7 +276,7 @@
 	noremap <S-k> <NOP>
 
 	" CommandT keybindings
-	nnoremap <leader>f :CommandT<CR>
+	nnoremap <leader>e :CommandT<CR>
 	nnoremap <leader>b :CommandTMRU<CR>
 
 	nnoremap <Space> <C-D>
