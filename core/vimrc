@@ -434,4 +434,9 @@
 	command Sbrowse echomsg system('svn-browse ' . expand('%') . ' 2>/dev/null')
 
 	runtime! macros/matchit.vim
+
+	let g:go_disable_autoinstall = 1
+	let g:go_fmt_command = "gofmt"
+
+	autocmd FileType go nmap <leader>r <Plug>(go-run)
 " }
