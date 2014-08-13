@@ -38,7 +38,7 @@
 	d = diff
 	di = diff --ignore-space-change
 	df = diff --stat
-	dl = diff HEAD~1..HEAD
+	dl = show HEAD
 	ds = diff --staged
 	dsi = diff --staged --ignore-space-change
 	dcw = diff --color-words
