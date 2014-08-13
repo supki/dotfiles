@@ -7,7 +7,9 @@ import           Data.Map (Map)
 import           Data.Foldable (traverse_)
 import qualified Data.Map as M
 import           Graphics.X11.ExtraTypes.XF86
+#ifdef HAS_VIMUS
 import qualified Network.MPD as MPD
+#endif
 import           Prelude hiding (mod)
 import           XMonad hiding (spawn)
 import           XMonad.Actions.CycleWS
@@ -116,6 +118,7 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (i, k) <- zip WS.myWorkspaces WS.myWorkspacesKeys
       ]
   ]
+#ifdef HAS_VIMUS
   ++
   -- mpd
   [ ((mod1Mask .|. mod, key), script)
@@ -138,6 +141,7 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
           MPD.setVolume nv)
       ]
   ]
+#endif
   ++
   -- third party scripts
   [ ((mod1Mask .|. mod, key), spawn script)
