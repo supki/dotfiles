@@ -101,7 +101,6 @@ dotfiles = role "dotfiles" $
     , "vim/indent/haskell.vim"   ~> ".vim/indent/haskell.vim"
     , "vim/camo.vim"             ~> ".vim/colors/camo.vim"
     , "vim/zenburn.vim"          ~> ".vim/colors/zenburn.vim"
-    , "vim/conceal/haskell.vim"  ~> ".vim/after/syntax/haskell.vim"
     , "pakej.hs"                 ~> ".pakej/pakej.hs"
     , "vifmrc"                   ~> ".vifm/vifmrc"
     ]
