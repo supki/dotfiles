@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# OPTIONS_GHC -W #-}
 module Bindings where
 
@@ -17,7 +18,9 @@ import           XMonad.Hooks.ManageDocks
 import           XMonad.Prompt
 import           XMonad.Prompt.Shell
 import           XMonad.Util.NamedScratchpad
+#ifdef HAS_SCREENSHOTER
 import           XMonad.Util.WorkspaceScreenshot
+#endif
 import qualified XMonad.StackSet as W
 
 import qualified Profile
@@ -90,8 +93,10 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_q, do
           Startup.myStartupHook
           setLayout (XMonad.layoutHook conf))
+#ifdef HAS_SCREENSHOTER
       -- make workspaces screenshots and merge them
       , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook horizontally)
+#endif
       ]
       ++
       -- switch to workspace

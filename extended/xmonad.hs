@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# OPTIONS_GHC -W #-}
 module Main where
 
@@ -8,7 +9,9 @@ import XMonad.Layout.DwmStyle
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 import XMonad.Layout.TwoPane
+#ifdef HAS_SCREENSHOTER
 import XMonad.Util.WorkspaceScreenshot (initCapturing)
+#endif
 
 import           Bindings
 import           Profile
@@ -18,7 +21,9 @@ import           Workspaces
 
 main :: IO ()
 main = do
+#ifdef HAS_SCREENSHOTER
   initCapturing
+#endif
   xmonad defaultConfig
     -- Terminal
     { terminal           = myTerminal
