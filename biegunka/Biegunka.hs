@@ -269,6 +269,7 @@ mine = role "mine" $ do
     [ "git@github.com:supki/libjenkins"
     , "git@github.com:supki/xmonad-screenshot"
     , "git@github.com:supki/xmonad-use-empty-workspace"
+    , "git@github.com:supki/xmonad-2014"
     , "git@github.com:supki/pakej"
     ]
   git "git@github.com:supki/whacky" (into "git") $
