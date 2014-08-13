@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -W #-}
 module Man where
 
 import XMonad

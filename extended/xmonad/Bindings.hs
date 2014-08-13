@@ -1,5 +1,4 @@
 {-# LANGUAGE CPP #-}
-{-# OPTIONS_GHC -W #-}
 module Bindings where
 
 import           Control.Applicative

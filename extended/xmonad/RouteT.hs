@@ -1,6 +1,5 @@
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE RankNTypes #-}
-{-# OPTIONS_GHC -W #-}
 -- | Simple routing
 module RouteT
   ( -- * RouteT monad

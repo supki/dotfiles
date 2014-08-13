@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -W #-}
 module Workspaces where
 
 import           Control.Monad (liftM)

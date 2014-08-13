@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -W #-}
 module Themes where
 
 import           Data.Monoid ((<>))
