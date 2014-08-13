@@ -122,3 +122,9 @@ export GOROOT=${HOME}/go
 function mkcdir {
 	mkdir --parents "$1" && cd "$_";
 }
+
+function fuck-them {
+	for pat in "$@"; do
+		pgrep "${pat}" | xargs kill -9
+	done
+}
