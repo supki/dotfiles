@@ -1,5 +1,5 @@
 typeset -U path
-path=(~/bin ~/ghc/bin ~/go/bin ~/rust/bin ~/.rvm/bin $path /sbin /usr/sbin)
+path=(~/bin ~/ghc/bin ~/go/bin ~/rust/bin ~/racket/bin ~/.rvm/bin $path /sbin /usr/sbin)
 
 if [ -f /opt/robot/set-robot-env.sh ]; then
 	source /opt/robot/set-robot-env.sh
