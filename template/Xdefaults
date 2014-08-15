@@ -44,6 +44,7 @@
 
 *.keysym.C-s: perl:keyboard-select:activate
 *.keysym.M-u: perl:url-select:select_next
+*.keysym.M-g: perl:url-select:select_topmost_visible
 
 vimus.background: #212121
 
