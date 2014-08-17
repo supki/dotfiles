@@ -40,6 +40,7 @@
 *.underlineColor: #eeccaa
 
 *.url-select.launcher: $template.urxvt.browser$
+*.url-select.autocopy: true
 *.perl-ext-common: default,tabbedex,keyboard-select,url-select
 
 *.keysym.C-s: perl:keyboard-select:activate
