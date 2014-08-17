@@ -358,6 +358,20 @@
 	" for vim-bling
 	let g:bling_color=216
 
+	" coquille
+	let g:coquille_auto_move = 'true'
+
+	augroup coquille
+		autocmd!
+		autocmd FileType coq nmap <leader>l :CoqLaunch<CR>
+		autocmd FileType coq nmap <leader>n :CoqNext<CR>
+		autocmd FileType coq imap <leader>n <C-O><leader>n
+		autocmd FileType coq nmap <leader>m :CoqToCursor<CR>
+		autocmd FileType coq imap <leader>m <C-O><leader>m
+		autocmd FileType coq nmap <leader>u :CoqUndo<CR>
+		autocmd FileType coq imap <leader>u <C-O><leader>u
+	augroup end
+
 	" for vim-commentary
 	augroup comments
 		autocmd!
