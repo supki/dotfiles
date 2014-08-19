@@ -46,6 +46,7 @@
 	ru = remote update
 	g = grep
 	cur = "!f() { git tag | sort --version-sort --reverse | head -n 1; }; f"
+	cp = cherry-pick
 [push]
 	default = current
 [rerere]
