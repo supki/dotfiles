@@ -364,6 +364,7 @@
 	augroup coquille
 		autocmd!
 		autocmd FileType coq nmap <leader>l :CoqLaunch<CR>
+		autocmd FileType coq nmap <leader>k :CoqKill<CR>
 		autocmd FileType coq nmap <leader>n :CoqNext<CR>
 		autocmd FileType coq imap <leader>n <C-O><leader>n
 		autocmd FileType coq nmap <leader>m :CoqToCursor<CR>
@@ -373,6 +374,7 @@
 
 		autocmd FileType coq autocmd BufLeave *.v silent! :CoqKill
 		autocmd FileType coq autocmd BufEnter *.v :CoqLaunch
+		autocmd FileType coq nunmap <C-j>
 	augroup end
 
 	" for vim-commentary
