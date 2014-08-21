@@ -128,3 +128,7 @@ function fuck-them {
 		pgrep "${pat}" | xargs kill -9
 	done
 }
+
+function sd {
+	svn diff | colordiff | diff-highlight | less
+}
