@@ -199,10 +199,12 @@
 
 	" color parens
 	augroup rainbows
+		" unfortunately it fucks up (* *)-style comments badly :'(
+		let b:norainbow = ['coq', 'sml', 'ocaml']
 		autocmd!
-		autocmd VimEnter * RainbowParenthesesToggle
-		autocmd Syntax * RainbowParenthesesLoadRound
-		autocmd Syntax * RainbowParenthesesLoadSquare
+		autocmd VimEnter * if index(b:norainbow, &ft) < 0 | RainbowParenthesesToggle
+		autocmd Syntax   * if index(b:norainbow, &ft) < 0 | RainbowParenthesesLoadRound
+		autocmd Syntax   * if index(b:norainbow, &ft) < 0 | RainbowParenthesesLoadSquare
 	augroup end
 
 	" sane shell syntax
