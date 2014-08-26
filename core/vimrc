@@ -388,6 +388,8 @@
 		autocmd FileType idris      set commentstring=--\ %s
 		" other languages
 		autocmd FileType ocaml      set commentstring=(*\ %s\ *)
+		autocmd FileType coq        set commentstring=(*\ %s\ *)
+		autocmd FileType sml        set commentstring=(*\ %s\ *)
 		autocmd FileType debsources set commentstring=#\ %s
 		autocmd FileType awk        set commentstring=#\ %s
 		autocmd FileType resolv     set commentstring=#\ %s
