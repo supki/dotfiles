@@ -373,6 +373,9 @@
 		autocmd FileType coq imap <leader>m <C-O><leader>m
 		autocmd FileType coq nmap <leader>u :CoqUndo<CR>
 		autocmd FileType coq imap <leader>u <C-O><leader>u
+		autocmd FileType coq nmap <leader>r :CoqUndo<CR>:CoqNext<CR>
+		autocmd FileType coq imap <leader>r <C-O>:CoqUndo<CR><C-O>:CoqNext<CR>
+		autocmd FileType coq imap . .<C-O>:CoqToCursor<CR>
 
 		autocmd FileType coq autocmd BufLeave *.v silent! :CoqKill
 		autocmd FileType coq autocmd BufEnter *.v :CoqLaunch
