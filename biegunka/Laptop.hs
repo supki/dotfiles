@@ -2,7 +2,7 @@
 module Laptop where
 
 import Control.Biegunka (multiline)
-import Data.Default (def)
+import Data.Default.Class (def)
 
 import Defaults
 

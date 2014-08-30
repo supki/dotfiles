@@ -3,7 +3,7 @@ module Defaults where
 
 import Data.Data (Data, Typeable)
 
-import Data.Default (Default(..))
+import Data.Default.Class (Default(..))
 
 
 data Template = Template
@@ -31,8 +31,8 @@ data Xmobar = Xmobar
 
 instance Default Xmobar where
   def = Xmobar
-    { background = def
-    , position   = def
+    { background = ""
+    , position   = ""
     , battery    = Just "\"\""
     }
 
@@ -55,19 +55,19 @@ data Xmonad = Xmonad
 
 instance Default Xmonad where
   def = Xmonad
-    { terminal  = def
-    , ubuntu    = def
-    , terminus  = def
-    , white     = def
-    , darkGray  = def
-    , lightGray = def
-    , black     = def
-    , blue      = def
-    , orange    = def
-    , yellow    = def
-    , startup   = def
-    , follow    = def
-    , patterns  = def
+    { terminal  = ""
+    , ubuntu    = ""
+    , terminus  = ""
+    , white     = ""
+    , darkGray  = ""
+    , lightGray = ""
+    , black     = ""
+    , blue      = ""
+    , orange    = ""
+    , yellow    = ""
+    , startup   = ""
+    , follow    = ""
+    , patterns  = ""
     }
 
 
@@ -77,7 +77,7 @@ data Xmodmap = Xmodmap
 
 instance Default Xmodmap where
   def = Xmodmap
-    { menu = def
+    { menu = ""
     }
 
 
@@ -87,7 +87,7 @@ data Xsession = Xsession
 
 instance Default Xsession where
   def = Xsession
-    { setxkbmap = def
+    { setxkbmap = ""
     }
 
 
@@ -97,7 +97,7 @@ data Urxvt = Urxvt
 
 instance Default Urxvt where
   def = Urxvt
-    { perllib     = def
-    , background_ = def
-    , browser     = def
+    { perllib     = ""
+    , background_ = ""
+    , browser     = ""
     }
