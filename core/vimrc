@@ -379,6 +379,7 @@
 
 		autocmd FileType coq autocmd BufLeave *.v silent! :CoqKill
 		autocmd FileType coq autocmd BufEnter *.v :CoqLaunch
+		autocmd FileType coq autocmd InsertEnter *.v :CoqToCursor
 		autocmd FileType coq nunmap <C-j>
 	augroup end
 
