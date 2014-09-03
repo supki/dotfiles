@@ -10,7 +10,7 @@ before_install:
     - hash -r
 
 install:
-    - cabalg https://github.com/biegunka/biegunka@develop
+    - cabalg https://github.com/biegunka/biegunka
 
 script:
     - biegunka run biegunka/ -- --laptop --changes
