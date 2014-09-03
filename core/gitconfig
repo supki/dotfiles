@@ -18,6 +18,7 @@
 	br = branch -v
 	sup = "!yo() { git branch "$2" --set-upstream "$1/$2"; }; yo"
 	releasey = "!f() { git log `git describe --tags --abbrev=0`..HEAD --oneline; }; f"
+	pushey = log --oneline @{u}..HEAD
 	ci = commit
 	ca = commit -a
 	st = status
