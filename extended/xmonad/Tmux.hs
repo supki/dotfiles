@@ -151,7 +151,7 @@ routes = asum
   , next $ \part -> do
       nomore
       guard ("slave" `isPrefixOf` part)
-      return (Tmux.Session ("ssh " ++ part))
+      return (Tmux.Remote part "pain")
   , dir "ko" $
       next $ \name -> do
         nomore
