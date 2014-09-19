@@ -27,16 +27,12 @@ templates = def
     , yellow    = "#eeccaa"
     , startup   =
       [multiline|
-        [ ("/home/maksenov/.dropbox-dist/dropbox", "${HOME}/.dropbox-dist/dropboxd")
-        , ("mpd", "mpd")
+        [ ("mpd", "mpd")
         , ("(x-www-browser|/usr/lib/chromium/chromium)", "x-www-browser")
-        , ("transmission-gtk", "transmission-gtk")
         , ("ssh .* mcabber", "urxvtcd -title mcabber -e ssh kolyskovi -t 'tmux attach -d -t mcabber'")
         , ("ssh .* irssi", "urxvtcd -title irssi -e ssh kolyskovi -t 'tmux attach -d -t irssi'")
-        , ("/usr/bin/ruby1.9.1 poneaux", "urxvtcd -title poneaux -e poneaux")
         , ("watch -n2 netstat", "urxvtcd -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
         , ("htop", "urxvtcd -title htop -e htop")
-        , ("scrobbler-client", "scrobbler-client")
         , ("procfiled", "procfiled")
         , ("vimus", "urxvtcd -title vimus -name vimus -e zsh -c vimus")
         ]
