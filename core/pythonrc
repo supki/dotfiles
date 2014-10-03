@@ -3,12 +3,13 @@
 # convenience imports
 from functools import *
 from itertools import *
+import datetime
 import operator
 import os
 import re
+import subprocess
 import sys
 import time
-import datetime
 
 # make repl at least mildly usable
 # note: all these modules will be removed from
