@@ -15,8 +15,8 @@ templates = def
     }
   , xmonad = def
     { terminal  = "urxvt"
-    , ubuntu    = "xft:ubuntu:size   = 9"
-    , terminus  = "xft:terminus:size = 9"
+    , ubuntu    = "xft:ubuntu:size=8"
+    , terminus  = "xft:terminus:size=8"
     , white     = "#ffffff"
     , darkGray  = "#515151"
     , lightGray = "#cccccc"
