@@ -90,6 +90,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
     , title     =? "netstat"
     , title     <&> ("vimus" `isPrefixOf`)
     , title     =? "poneaux"
+    , title     =? "jm"
     , className =? "Pavucontrol"
     ]
   chromie =

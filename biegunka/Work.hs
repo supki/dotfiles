@@ -26,11 +26,9 @@ templates = def
     , yellow    = "#eeccaa"
     , startup   =
       [multiline|
-        [ ("/usr/lib/firefox/firefox", "firefox")
-        , ("watch -n2 netstat", "urxvt -title netstat -e watch -n2 netstat -anptu | egrep '^Proto|:80' | sort")
+        [ ("(x-www-browser|/usr/lib/chromium/chromium|/usr/lib/chromium-browser/chro)", "x-www-browser")
         , ("htop", "urxvt -title work-htop -e htop")
-        , ("htop", "urxvt -title dev-htop -e ssh dev -t htop")
-        , ("htop", "urxvt -title jenkins-htop -e ssh jenkins -t htop")
+        , ("jm", "urxvt -title jm -e sh -c '. ~/.jm/jm.env; jm'")
         ]
       |]
     , follow    = "True"
