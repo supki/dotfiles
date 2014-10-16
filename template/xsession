@@ -1,4 +1,4 @@
-# set keyboard layout
+# set keyboard layouts
 $template.xsession.setxkbmap$
 
 # ~terminus~
@@ -6,18 +6,16 @@ xset +fp ~/fonts
 
 # enable ctrl-alt-backspace sequence
 setxkbmap -option terminate:ctrl_alt_bksp
-# enable right alt for xcompose
+# give up right alt key to xcompose
 setxkbmap -option compose:ralt
-# fix xcompose in gtk applications
-export GTK_IM_MODULE=xim
 
 # start kbdd
 kbdd
 
-# set wallpaper
+# set the wallpaper
 xsetroot -solid black
 
-# set non-nonsensical default cursor
+# set a non-nonsensical default cursor
 xsetroot -cursor_name arrow
 
 # process .xmodmap
