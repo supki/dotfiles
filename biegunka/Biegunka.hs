@@ -105,6 +105,7 @@ dotfiles = role "dotfiles" $
     , "pakej.hs"                          ~> ".pakej/pakej.hs"
     , "vifmrc"                            ~> ".vifm/vifmrc"
     , "transmission-daemon/settings.json" ~> ".transmission-daemon/settings.json"
+    , "profile"                           ~> ".xmonad/xmonad-session-rc"
     ]
   extendeds =
     [ dot "gvimrc"
