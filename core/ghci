@@ -25,6 +25,7 @@ import           Numeric
 import           System.IO
 import           System.IO.Unsafe
 import           Text.Printf
+import           Text.Show.Functions
 import           Unsafe.Coerce
 
 import           Data.Functor.Identity
