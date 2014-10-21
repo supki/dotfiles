@@ -36,13 +36,10 @@ import qualified Tmux
 
 myMouseBindings :: XConfig t -> Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
-  -- swap the focused window and the master window
-  [ ((modm, button2), \w -> focus w >> mouseMoveWindow w)
-  -- resize window
+  -- move the window
+  [ ((modm, button1), \w -> focus w >> mouseMoveWindow w)
+  -- resize the window
   , ((modm, button3), \w -> focus w >> mouseResizeWindow w)
-  -- copy modm+. and mod+, actions on mouse wheel
-  , ((modm, button4), \w -> focus w >> sendMessage (IncMasterN 1))
-  , ((modm, button5), \w -> focus w >> sendMessage (IncMasterN (-1)))
   ]
 
 
