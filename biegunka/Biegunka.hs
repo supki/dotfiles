@@ -203,7 +203,6 @@ vim = do
       pathogen_ "git@github.com:tpope/vim-commentary"
       pathogen_ "git@github.com:tpope/vim-unimpaired"
       pathogen_ "git@github.com:def-lkb/vimbufsync"
-      pathogen_ "git@github.com:junegunn/seoul256.vim"
       pathogen_ "git@github.com:ivyl/vim-bling"
       pathogen_ "git@github.com:Glench/Vim-Jinja2-Syntax"
       pathogen_ "git@github.com:nelstrom/vim-visual-star-search"
@@ -224,6 +223,7 @@ vim = do
         register ".vim/bundle/syntastic-cabal"
       git "git@github.com:supki/vim-languages" (into "git") $
         register ".vim/bundle/vim-languages"
+      pathogen_ "git@github.com:supki/seoul256.vim"
   role "vimish" $
     group "haskell" $
       pathogen_ "git@github.com:bitc/hdevtools"
