@@ -69,20 +69,18 @@ bindkey "^[[Z" reverse-menu-complete
 
 alias ls='ls --color'
 alias less='less -R'
-alias lens='cabal exec ghci --'
 alias ka='killall'
 alias c='cabal'
 alias g='git'
 alias s='svn'
-alias e='vim'
-alias vm='vagrant'
+alias e='editor'
+alias v='vagrant'
 alias t='tmux'
+alias k='knife'
 alias pemi='sudo /etc/init.d/openvpn.pemi start'
 alias unpemi='sudo /etc/init.d/openvpn.pemi stop'
-alias hr='print ${(l:COLUMNS::❤:)}'
+alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
 alias diff='git diff --no-index'
-alias xml='xmlstarlet'
-alias be='bundle exec'
 
 function man {
 	/usr/bin/man $@ | ifne vim -X -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
