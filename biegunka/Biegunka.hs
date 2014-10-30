@@ -118,9 +118,9 @@ dotfiles = role "dotfiles" $
     , "xmonad/Themes.hs"         ~> ".xmonad/lib/Themes.hs"
     , "xmonad/RouteT.hs"         ~> ".xmonad/lib/RouteT.hs"
     , "xmonad/Tmux.hs"           ~> ".xmonad/lib/Tmux.hs"
-    , "xmonad/Man.hs"            ~> ".xmonad/lib/Man.hs"
     , "xmonad/Workspaces.hs"     ~> ".xmonad/lib/Workspaces.hs"
     , "xmonad/Spawn.hs"          ~> ".xmonad/lib/Spawn.hs"
+    , "xmonad/PackagePrompt.hs"  ~> ".xmonad/lib/PackagePrompt.hs"
     , "pentadactyl/wanker.penta" ~> ".pentadactyl/plugins/wanker.penta"
     , "mplayer-config"           ~> ".mplayer/config"
     ]

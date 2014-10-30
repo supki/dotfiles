@@ -26,11 +26,11 @@ import qualified XMonad.StackSet as W
 
 import qualified Profile
 import qualified Workspaces as WS
-import qualified Man
 import           Spawn
 import qualified Startup
 import           Themes
 import qualified Tmux
+import           PackagePrompt (packagePrompt)
 
 
 
@@ -52,6 +52,8 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
       -- launch tmux prompt
       , (0,           xK_Return, Tmux.prompt Profile.patterns Tmux.routes myXPConfig)
+      -- launch packagePrompt
+      , (0,           xK_o, packagePrompt myXPConfig)
       -- launch shellPrompt
       , (0,           xK_p, shellPrompt myXPConfig { autoComplete = Just 1 })
       -- close focused window
