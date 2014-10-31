@@ -18,9 +18,12 @@ data Hackage = Hackage [String]
 
 instance XPrompt Hackage where
   showXPrompt _ = "hackage: "
-  modeAction _ q c = safeSpawn "x-www-browser" [package (bool c q (null c))]
-  completionFunction (Hackage _)  ""  = return []
-  completionFunction (Hackage ps) str =
+  modeAction _ q c =
+    safeSpawn "x-www-browser" . pure . package . bool c q $ c == noPackages || null c
+  completionFunction (Hackage [p])  _
+    | p == noPackages                   = return [p]
+  completionFunction (Hackage _)    ""  = return []
+  completionFunction (Hackage ps)   str =
     return . heads . filter (str `isPrefixOf`) $ ps
 
 package :: String -> String
@@ -39,7 +42,10 @@ packages = do
   db <- cabalCache
   mapMaybe (fmap Text.unpack . listToMaybe . drop 1 . Text.words) . Text.lines <$> Text.readFile db
  `catchIOError`
-  \_ -> return []
+  \_ -> return [noPackages]
+
+noPackages :: String
+noPackages = "Please run ‘cabal update’ for the prompt completions to appear"
 
 cabalCache :: IO FilePath
 cabalCache = fmap (</> ".cabal/packages/hackage.haskell.org/00-index.cache") home
