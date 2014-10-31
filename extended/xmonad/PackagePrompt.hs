@@ -3,7 +3,6 @@ module PackagePrompt
   ) where
 
 import           Control.Applicative
-import           Data.Bool (bool)
 import           Data.List (group, isPrefixOf)
 import           Data.Maybe (mapMaybe, listToMaybe)
 import qualified Data.Text as Text
@@ -47,3 +46,7 @@ cabalCache = fmap (</> ".cabal/packages/hackage.haskell.org/00-index.cache") hom
 
 home :: IO FilePath
 home = getHomeDirectory
+
+bool :: a -> a -> Bool -> a
+bool f _ False = f
+bool _ t True  = t
