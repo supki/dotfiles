@@ -34,7 +34,7 @@ function vcs_info_wrapper {
 
 promptinit
 colors
-PROMPT="%F{blue}%n%f@%M:%F{yellow}%~$prompt_newline%(?,%F{green},%F{red})%#%f  "
+PROMPT="%F{blue}%n%f@%M:%F{yellow}%~$prompt_newline%(?,%F{green},%F{red})%#%f "
 PROMPT2="%F{blue}%_%f> "
 RPROMPT="%{"$'\e[1A'"%}"$'$(vcs_info_wrapper)'"%{"$'\e[1B'"%"
 
