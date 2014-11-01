@@ -117,6 +117,8 @@ export CHO_PREFIX=${HOME}/ghc
 
 export GOROOT=${HOME}/go
 
+export TERM=screen-256color
+
 function mkcdir {
 	mkdir --parents "$1" && cd "$_";
 }
