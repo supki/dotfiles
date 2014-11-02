@@ -363,6 +363,11 @@
 	" coquille
 	let g:coquille_auto_move = 'true'
 
+	" for vim-airline
+	let g:airline_left_sep=''
+	let g:airline_right_sep=''
+	let g:airline_theme='zenburn'
+
 	augroup coquille
 		autocmd!
 		autocmd FileType coq nmap <leader>l :CoqLaunch<CR>
