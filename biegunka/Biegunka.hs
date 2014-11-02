@@ -186,36 +186,27 @@ vim = do
       pathogen  "git@github.com:Shougo/vimproc" $
         [sh|make -f make_unix.mak|]
       pathogen_ "git@github.com:eagletmt/ghcmod-vim"
-      pathogen_ "git@github.com:eagletmt/unite-haddock"
       pathogen_ "git@github.com:ujihisa/neco-ghc"
       pathogen_ "git@github.com:Shougo/neocomplcache"
       pathogen_ "git@github.com:bitc/vim-hdevtools"
-      pathogen_ "git@github.com:merijn/haskellFoldIndent"
     group "coq" $ do
       pathogen_ "git@github.com:vim-scripts/coq-syntax"
       pathogen_ "git@github.com:vim-scripts/Coq-indent"
       pathogen_ "git@github.com:trefis/coquille"
     group "misc" $ do
-      pathogen_ "git@github.com:wikitopian/hardmode"
       pathogen_ "git@github.com:scrooloose/syntastic"
-      pathogen_ "git@github.com:Shougo/unite.vim"
-      pathogen_ "git@github.com:spolu/dwm.vim"
       pathogen_ "git@github.com:tpope/vim-commentary"
       pathogen_ "git@github.com:tpope/vim-unimpaired"
       pathogen_ "git@github.com:def-lkb/vimbufsync"
       pathogen_ "git@github.com:ivyl/vim-bling"
-      pathogen_ "git@github.com:Glench/Vim-Jinja2-Syntax"
       pathogen_ "git@github.com:nelstrom/vim-visual-star-search"
       pathogen_ "git@github.com:kien/rainbow_parentheses.vim"
-      pathogen_ "git@github.com:tpope/vim-fugitive"
       pathogen  "git@github.com:wincent/Command-T" $
         [sh|cd ~/.vim/bundle/Command-T/ruby/command-t; /usr/bin/ruby extconf.rb; make|]
     group "idris" $
       pathogen_ "git@github.com:idris-hackers/idris-vim"
     group "rust" $
       pathogen_ "git@github.com:wting/rust.vim"
-    group "text" $
-      pathogen_ "git@github.com:godlygeek/tabular"
     group "mine" $ do
       git "git@github.com:supki/vim-flipping" (into "git") $
         register ".vim/bundle/vim-flipping"
