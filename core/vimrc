@@ -363,6 +363,11 @@
 	" coquille
 	let g:coquille_auto_move = 'true'
 
+	" for haskell-vim
+	let g:haskell_enable_quantification = 1
+	let g:haskell_enable_pattern_synonyms = 1
+	let g:haskell_enable_typeroles = 1
+
 	" for vim-airline
 	let g:airline_left_sep=''
 	let g:airline_right_sep=''

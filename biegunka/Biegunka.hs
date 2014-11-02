@@ -216,6 +216,7 @@ vim = do
       git "git@github.com:supki/vim-languages" (into "git") $
         register ".vim/bundle/vim-languages"
       pathogen_ "git@github.com:supki/seoul256.vim"
+      pathogen_ "git@github.com:supki/haskell-vim"
   role "vimish" $
     group "haskell" $
       pathogen_ "git@github.com:bitc/hdevtools"
