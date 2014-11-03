@@ -365,8 +365,9 @@
 
 	" for haskell-vim
 	let g:haskell_enable_quantification = 1
-	let g:haskell_enable_pattern_synonyms = 1
 	let g:haskell_enable_typeroles = 1
+	let g:haskell_indent_if = 2
+	let g:haskell_indent_case = 2
 
 	" for vim-airline
 	let g:airline_left_sep=''
