@@ -426,49 +426,6 @@
 
 	autocmd BufWritePost * call ModeChange()
 
-
-	" Convert markdown files to html with pandoc
-	function RenderHtml()
-		let l:extension = expand("<afile>:p:e")
-		let l:fullpath  = expand("<afile>:p")
-		if l:extension == "lhs"
-			let l:format = "markdown+lhs"
-		else
-			let l:format = "markdown"
-		endif
-		let l:html     = expand("<afile>:p:r") . ".html"
-		call system("pandoc --from " . l:format . " --to html --css ~/.readme-gen.css -o " . l:html . " " . l:fullpath)
-
-		" I am sorry
-		let l:js = "var uri     = \"file://" . l:html . "\";\n" .
-					\ "var opened  = false;\n" .
-					\ "\n" .
-					\ "Array.prototype.forEach.call(\n" .
-					\ "  window.getBrowser().tabContainer.childNodes,\n" .
-					\ "  function (tab) {\n" .
-					\ "    var browser = tab.linkedBrowser;\n" .
-					\ "    if (browser.contentDocument.location == uri) {\n" .
-					\ "      browser.reload(gBrowser.webNavigation.LOAD_FLAGS_BYPASS_CACHE)\n" .
-					\ "      opened = true;\n" .
-					\ "    }\n" .
-					\ "  });\n" .
-					\ "\n" .
-					\ "if (!opened) {\n" .
-					\ "  window.getBrowser().addTab(uri)\n" .
-					\ "}\n"
-
-		" Really :(
-		call system("(netcat localhost 4242 <<< '" . l:js . "') &; sleep 0.2; kill $!; rm '" . l:html . "'" )
-		redraw!
-	endfunction
-
-	augroup render
-		autocmd!
-		autocmd BufWritePost *.markdown call RenderHtml()
-		autocmd BufWritePost *.md       call RenderHtml()
-		autocmd BufWritePost *.lhs      call RenderHtml()
-	augroup end
-
 	command Sbrowse echomsg system('svn-browse ' . expand('%') . ' 2>/dev/null')
 
 	runtime! macros/matchit.vim
