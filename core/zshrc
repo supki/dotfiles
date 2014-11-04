@@ -82,6 +82,12 @@ alias unpemi='sudo /etc/init.d/openvpn.pemi stop'
 alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
 alias diff='git diff --no-index'
 
+alias nzsh='nix-shell --command zsh'
+alias nb='nix-build'
+alias ns='nix-store'
+alias ne='nix-env'
+alias ngc='nix-collect-garbage'
+
 function man {
 	/usr/bin/man $@ | ifne vim -X -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
 }
