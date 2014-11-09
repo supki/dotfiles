@@ -90,6 +90,7 @@ alias ngc='nix-collect-garbage'
 alias nr='nix-repl'
 
 alias c2n='cabal2nix *.cabal --sha256=penis > default.nix'
+alias dive='nix-build env.nix && ./result/bin/load-env-$(basename $PWD)'
 
 function man {
 	/usr/bin/man $@ | ifne vim -X -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
