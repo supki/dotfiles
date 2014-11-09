@@ -24,7 +24,7 @@
     "incomplete-dir-enabled": true, 
     "lpd-enabled": false, 
     "max-peers-global": 200, 
-    "message-level": 2, 
+    "message-level": 1, 
     "peer-congestion-algorithm": "", 
     "peer-id-ttl-hours": 6, 
     "peer-limit-global": 240, 
