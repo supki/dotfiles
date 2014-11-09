@@ -92,6 +92,24 @@ alias nr='nix-repl'
 alias c2n='cabal2nix *.cabal --sha256=penis > default.nix'
 alias dive='nix-build env.nix && ./result/bin/load-env-$(basename $PWD)'
 
+function generate-env.nix {
+	cat <<- ENV
+let
+  pkgs = import <nixpkgs> {};
+  env  = pkgs.haskellPackages.ghcWithPackagesOld (ghc:
+    ([ ghc.hlint ghc.doctest ] ++ [(import ../hdevtools {})] ++ (ghc.callPackage ./. {}).nativeBuildInputs));
+in
+  pkgs.myEnvFun {
+    name = "$1";
+    shell = "$SHELL";
+    buildInputs = [ pkgs.haskellPackages.cabalInstall env ];
+    extraCmds = ''
+      \$(grep export \${env.outPath}/bin/ghc)
+    '';
+    }
+			ENV
+}
+
 function man {
 	/usr/bin/man $@ | ifne vim -X -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
 }
