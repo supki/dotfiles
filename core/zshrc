@@ -87,6 +87,7 @@ alias nb='nix-build'
 alias ns='nix-store'
 alias ne='nix-env'
 alias ngc='nix-collect-garbage'
+alias nr='nix-repl'
 
 alias c2n='cabal2nix *.cabal --sha256=penis > default.nix'
 
