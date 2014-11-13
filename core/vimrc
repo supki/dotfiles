@@ -126,6 +126,7 @@
 		autocmd FileType scala      setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType treetop    setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType rust       setlocal expandtab shiftwidth=4 softtabstop=4
+		autocmd FileType groovy     setlocal expandtab shiftwidth=2 softtabstop=2
 	augroup end
 
 	augroup swap_exists
