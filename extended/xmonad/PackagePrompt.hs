@@ -1,10 +1,13 @@
+{-# LANGUAGE OverloadedStrings #-}
 module PackagePrompt
   ( packagePrompt
   ) where
 
 import           Control.Applicative
+import           Control.Monad
 import           Data.List (group, isPrefixOf)
 import           Data.Maybe (mapMaybe, listToMaybe)
+import           Data.Text (Text)
 import qualified Data.Text as Text
 import qualified Data.Text.IO as Text
 import           System.Directory (getHomeDirectory)
@@ -40,9 +43,12 @@ packagePrompt conf = do
 packages :: IO [String]
 packages = do
   db <- cabalCache
-  mapMaybe (fmap Text.unpack . listToMaybe . drop 1 . Text.words) . Text.lines <$> Text.readFile db
+  mapMaybe (fmap Text.unpack . firstWord <=< Text.stripPrefix "pkg:") . Text.lines <$> Text.readFile db
  `catchIOError`
   \_ -> return [noPackages]
+
+firstWord :: Text -> Maybe Text
+firstWord = listToMaybe . Text.words
 
 noPackages :: String
 noPackages = "Please run ‘cabal update’ for the prompt completions to appear"
