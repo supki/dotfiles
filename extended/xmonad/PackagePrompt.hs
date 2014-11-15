@@ -27,13 +27,10 @@ instance XPrompt Hackage where
     | p == noPackages                   = return [p]
   completionFunction (Hackage _)    ""  = return []
   completionFunction (Hackage ps)   str =
-    return . heads . filter (str `isPrefixOf`) $ ps
+    return . filter (str `isPrefixOf`) $ ps
 
 package :: String -> String
 package p = "https://hackage.haskell.org/package" </> p
-
-heads :: Eq a => [a] -> [a]
-heads = map head . group
 
 packagePrompt :: XPConfig -> X ()
 packagePrompt conf = do
@@ -43,12 +40,15 @@ packagePrompt conf = do
 packages :: IO [String]
 packages = do
   db <- cabalCache
-  mapMaybe (fmap Text.unpack . firstWord <=< Text.stripPrefix "pkg:") . Text.lines <$> Text.readFile db
+  fmap Text.unpack . heads . mapMaybe (firstWord <=< Text.stripPrefix "pkg:") . Text.lines <$> Text.readFile db
  `catchIOError`
   \_ -> return [noPackages]
 
 firstWord :: Text -> Maybe Text
 firstWord = listToMaybe . Text.words
+
+heads :: Eq a => [a] -> [a]
+heads = map head . group
 
 noPackages :: String
 noPackages = "Please run ‘cabal update’ for the prompt completions to appear"
