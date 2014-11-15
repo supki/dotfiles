@@ -30,9 +30,7 @@ main = pakej $ private "all" . aggregate
   , private "battery"   . system [sh| bat.rb |] . every (minute `div` 2)
   , private "cputemp"   . cputemp . every (10 * second)
   , private "loadavg"   . loadavg "/proc/loadavg" . every (10 * second)
-  , private "loadavg2"  . query "budueba.com" (PortNumber 1234) "loadavg" . every minute
   , private "weather"   . system [sh| weather.rb |] . every minute
-  , private "playcount" . system [sh| playcount |] . every minute
   , private "date"      . date . every (minute `div` 2)
   ]
 
