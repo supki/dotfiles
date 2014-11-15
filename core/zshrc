@@ -82,7 +82,6 @@ alias unpemi='sudo /etc/init.d/openvpn.pemi stop'
 alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
 alias diff='git diff --no-index'
 
-alias nzsh='nix-shell --command zsh'
 alias nb='nix-build'
 alias ns='nix-store'
 alias ne='nix-env'
@@ -91,6 +90,10 @@ alias nr='nix-repl'
 
 alias c2n='cabal2nix *.cabal --sha256=penis > default.nix'
 alias dive='nix-build env.nix && ./result/bin/load-env-$(basename $PWD)'
+
+function nzsh() {
+	nix-shell --command zsh ${(z)@/#/-p haskellPackages.}
+}
 
 function generate-env.nix {
 	cat <<- ENV
