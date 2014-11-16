@@ -55,7 +55,7 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- launch packagePrompt
       , (0,           xK_o, packagePrompt myXPConfig)
       -- launch shellPrompt
-      , (0,           xK_p, shellPrompt myXPConfig { autoComplete = Just 1 })
+      , (0,           xK_p, shellPrompt myXPConfig)
       -- close focused window
       , (shiftMask,   xK_c, kill)
       -- rotate through the available layout algorithms
