@@ -202,7 +202,7 @@ routes = do
         arg "host" <&> \host -> tmux host (command ("ssh " ++ show host))
     , route "work/.session" $
         arg "session" <&> \session ->
-          hop "ce837848" (hop "d378e6d3" (tmux session mempty))
+          hop "ce837848" (hop "d378e6d3" (tmux (replace '.' '/' session) mempty))
     ]
 
 getHome :: RouteT IO FilePath
@@ -213,6 +213,9 @@ mkdir_p = liftIO . D.createDirectoryIfMissing True
 
 minusd :: FilePath -> RouteT IO Bool
 minusd = liftIO . D.doesDirectoryExist
+
+replace :: (Eq a, Functor f) => a -> a -> f a -> f a
+replace y z = fmap (\x -> if x == y then z else x)
 
 infixl 1 <&>
 (<&>) :: Functor f => f a -> (a -> b) -> f b
