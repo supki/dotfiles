@@ -171,14 +171,14 @@ routes = do
   asum $
     [ route "git/.repo" $ do
         repo <- arg "repo"
-        let dir = home </> "git" </> repo
+        let dir = "git" </> repo
         mkdir_p dir
-        return (tmux dir (directory dir))
+        return (tmux dir (directory (home </> dir)))
     , route "svn/.repo" $ do
         repo <- arg "repo"
-        let dir = home </> "svn" </> repo
+        let dir = "svn" </> repo
         minusd dir <&> \y ->
-          tmux dir (directory (if y then dir else home </> "svn"))
+          tmux dir (directory (if y then home </> dir else home </> "svn"))
     , route "play/.bucket" $ do
         bucket <- arg "bucket"
         let dir = home </> "playground" </> bucket
