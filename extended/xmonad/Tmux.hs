@@ -178,7 +178,7 @@ routes = do
         repo <- arg "repo"
         let dir = home </> "svn" </> repo
         minusd dir <&> \y ->
-          tmux dir (directory (if y then dir else "svn"))
+          tmux dir (directory (if y then dir else home </> "svn"))
     , route "play/.bucket" $ do
         bucket <- arg "bucket"
         let dir = home </> "playground" </> bucket
