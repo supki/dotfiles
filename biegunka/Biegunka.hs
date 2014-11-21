@@ -9,6 +9,7 @@ module Main (main) where
 
 import           Control.Applicative
 import           Control.Lens
+import           Data.Default.Class (def)
 import           Data.Foldable (traverse_)
 import           System.FilePath ((</>))
 
@@ -216,7 +217,7 @@ vim = do
         register ".vim/bundle/syntastic-cabal"
       git "git@github.com:supki/vim-languages" (into "git") $
         register ".vim/bundle/vim-languages"
-      pathogen_ "git@github.com:supki/seoul256.vim"
+      git' "git@github.com:supki/seoul256.vim" (into ".vim/bundle") (def & branch .~ "f/m")
       pathogen_ "git@github.com:supki/haskell-vim"
   role "vimish" $
     group "haskell" $
