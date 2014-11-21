@@ -71,7 +71,7 @@ infix 1 .=
 (.=) = (,)
 
 defaultSettings :: Settings
-defaultSettings = Settings { _directory = Nothing, _command = Nothing }
+defaultSettings = Settings { _directory = Nothing, _command = Nothing, _env = [] }
 
 
 -- | Ask what session user wants to create/attach to
