@@ -54,6 +54,7 @@ instance Monoid (Mod t) where
 data Settings = Settings
   { _directory :: Maybe FilePath
   , _command   :: Maybe String
+  , _env       :: [(String, String)]
   }
 
 directory :: FilePath -> Mod Settings
@@ -61,6 +62,13 @@ directory p = Mod $ \s -> s { _directory = Just p }
 
 command :: String -> Mod Settings
 command c = Mod $ \s -> s { _command = Just c }
+
+env :: [(String, String)] -> Mod Settings
+env xs = Mod $ \s -> s { _env = xs }
+
+infix 1 .=
+(.=) :: a -> b -> (a, b)
+(.=) = (,)
 
 defaultSettings :: Settings
 defaultSettings = Settings { _directory = Nothing, _command = Nothing }
@@ -157,8 +165,9 @@ start runningSessions route (un -> userInput) = do
 compile :: Command -> [String]
 compile = go where
   go (Hop h xs) = ["ssh", h, "-t"] ++ go xs
-  go (Tmux n Settings { _command, _directory }) =
-       ["tmux", "new-session", "-AD", "-s", n]
+  go (Tmux n Settings { _command, _directory, _env }) =
+       map (\(k, v) -> k ++ "=" ++ v) _env
+    ++ ["tmux", "new-session", "-AD", "-s", n]
     ++ maybe [] (\d -> ["-c", "${HOME}" </> d]) _directory -- change working directory
     ++ maybeToList _command                                -- run this command
 
@@ -189,15 +198,8 @@ routes = do
         arg "dir" <&> \dir -> hop "kolyskovi" (tmux dir (directory ("work" </> dir)))
     , route "re/ko" $
         return (hop "kolyskovi" (tmux "main" mempty))
-    , route "re/slave/.id" $ do
-        arg "id" <&> \n ->
-          let
-            host = "slave" ++ show n
-          in
-          if n > 1 then
-            hop host (tmux "main" mempty)
-          else
-            tmux host (command ("ssh " ++ host))
+    , route "re/slave/.id" $
+        arg "id" <&> \n -> hop ("slave" ++ show n) (tmux "main" (env ["TERM" .= "screen-256color"]))
     , route "re/.host" $
         arg "host" <&> \host -> tmux host (command ("ssh " ++ show host))
     , route "work/.session" $
