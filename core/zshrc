@@ -32,6 +32,15 @@ function vcs_info_wrapper {
   fi
 }
 
+function nix_env_wrapper {
+  if [ -n "${NIX_MYENV_NAME:-}" ]; then
+    echo -n "[$NIX_MYENV_NAME]"
+  fi
+  if [ "${IN_NIX_SHELL:-0}" -eq 1 ]; then
+    echo -n "[nix-shell]"
+  fi
+}
+
 promptinit
 colors
 PROMPT="%F{blue}%n%f@%M:%F{yellow}%~$prompt_newline%(?,%F{green},%F{red})%#%f "
