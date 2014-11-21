@@ -12,6 +12,7 @@ import           Control.Lens
 import           Data.Default.Class (def)
 import           Data.Foldable (traverse_)
 import           System.FilePath ((</>))
+import           Text.Printf (printf)
 
 import           Control.Biegunka
 import           Control.Biegunka.Source.Git
@@ -53,7 +54,7 @@ work = sequence_
 
 
 dotfiles = role "dotfiles" $
-  git "git@github.com:supki/.dotfiles" "git/dotfiles" $ do
+  git (github "supki" ".dotfiles") "git/dotfiles" $ do
     cores     & mapped._1 <\>~ "core"     & unzipWithM_ link
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
     templates & mapped._1 <\>~ "template" & unzipWithM_ substitute
@@ -184,44 +185,44 @@ tools = role "tools" $
 vim = do
   role "vim" $ do
     group "haskell" $ do
-      pathogen  "git@github.com:Shougo/vimproc" $
+      pathogen  (github "Shougo" "vimproc") $
         [sh|make -f make_unix.mak|]
-      pathogen_ "git@github.com:eagletmt/ghcmod-vim"
-      pathogen_ "git@github.com:ujihisa/neco-ghc"
-      pathogen_ "git@github.com:Shougo/neocomplcache"
-      pathogen_ "git@github.com:bitc/vim-hdevtools"
+      pathogen_ (github "eagletmt" "ghcmod-vim")
+      pathogen_ (github "ujihisa" "neco-ghc")
+      pathogen_ (github "Shougo" "neocomplcache")
+      pathogen_ (github "bitc" "vim-hdevtools")
     group "coq" $ do
-      pathogen_ "git@github.com:vim-scripts/coq-syntax"
-      pathogen_ "git@github.com:vim-scripts/Coq-indent"
-      pathogen_ "git@github.com:trefis/coquille"
+      pathogen_ (github "vim-scripts" "coq-syntax")
+      pathogen_ (github "vim-scripts" "Coq-indent")
+      pathogen_ (github "trefis" "coquille")
     group "misc" $ do
-      pathogen_ "git@github.com:scrooloose/syntastic"
-      pathogen_ "git@github.com:tpope/vim-commentary"
-      pathogen_ "git@github.com:tpope/vim-unimpaired"
-      pathogen_ "git@github.com:def-lkb/vimbufsync"
-      pathogen_ "git@github.com:ivyl/vim-bling"
-      pathogen_ "git@github.com:nelstrom/vim-visual-star-search"
-      pathogen_ "git@github.com:kien/rainbow_parentheses.vim"
-      pathogen  "git@github.com:wincent/Command-T" $
+      pathogen_ (github "scrooloose" "syntastic")
+      pathogen_ (github "tpope" "vim-commentary")
+      pathogen_ (github "tpope" "vim-unimpaired")
+      pathogen_ (github "def-lkb" "vimbufsync")
+      pathogen_ (github "ivyl" "vim-bling")
+      pathogen_ (github "nelstrom" "vim-visual-star-search")
+      pathogen_ (github "kien" "rainbow_parentheses.vim")
+      pathogen  (github "wincent" "Command-T") $
         [sh|cd ~/.vim/bundle/Command-T/ruby/command-t; /usr/bin/ruby extconf.rb; make|]
-      pathogen_ "git@github.com:bling/vim-airline"
-      pathogen_ "git@github.com:stephpy/vim-yaml"
+      pathogen_ (github "bling" "vim-airline")
+      pathogen_ (github "stephpy" "vim-yaml")
     group "idris" $
-      pathogen_ "git@github.com:idris-hackers/idris-vim"
+      pathogen_ (github "idris-hackers" "idris-vim")
     group "rust" $
-      pathogen_ "git@github.com:wting/rust.vim"
+      pathogen_ (github "wting" "rust.vim")
     group "mine" $ do
-      git "git@github.com:supki/vim-flipping" (into "git") $
+      git (github "supki" "vim-flipping") (into "git") $
         register ".vim/bundle/vim-flipping"
-      git "git@github.com:supki/syntastic-cabal" (into "git") $
+      git (github "supki" "syntastic-cabal") (into "git") $
         register ".vim/bundle/syntastic-cabal"
-      git "git@github.com:supki/vim-languages" (into "git") $
+      git (github "supki" "vim-languages") (into "git") $
         register ".vim/bundle/vim-languages"
-      git' "git@github.com:supki/seoul256.vim" (into ".vim/bundle") (def & branch .~ "f/m")
-      pathogen_ "git@github.com:supki/haskell-vim"
+      git' (github "supki" "seoul256.vim") (into ".vim/bundle") (def & branch .~ "f/m")
+      pathogen_ (github "supki" "haskell-vim")
   role "vimish" $
     group "haskell" $
-      pathogen_ "git@github.com:bitc/hdevtools"
+      pathogen_ (github "bitc" "hdevtools")
  where
   pathogen  u = git u (into ".vim/bundle")
   pathogen_ u = pathogen u (return ())
@@ -229,48 +230,48 @@ vim = do
 
 emacs = role "emacs" $ do
   group "colorschemes" $
-    git "git@github.com:bbatsov/zenburn-emacs" (into "git/emacs") $
+    git (github "bbatsov" "zenburn-emacs") (into "git/emacs") $
       copyFile "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
   group "usable" $ do
-    git "git@github.com:emacsmirror/paredit" (into "git/emacs") $
+    git (github "emacsmirror" "paredit") (into "git/emacs") $
       copyFile "paredit.el" ".emacs.d/plugins/paredit.el"
-    git "git@github.com:jlr/rainbow-delimiters" (into "git/emacs") $
+    git (github "jlr" "rainbow-delimiters") (into "git/emacs") $
       copyFile "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
 misc = role "misc" $ traverse_ (--> into "git")
-  [ "git@github.com:zsh-users/zsh-syntax-highlighting"
-  , "git@github.com:zsh-users/zsh-completions"
-  , "git@github.com:stepb/urxvt-tabbedex"
-  , "git@github.com:muennich/urxvt-perls"
+  [ github "zsh-users" "zsh-syntax-highlighting"
+  , github "zsh-users" "zsh-completions"
+  , github "stepb" "urxvt-tabbedex"
+  , github "muennich" "urxvt-perls"
   ]
 
 
-experimental = role "experimental" $ traverse_ (--> into "git")
-  [ "git@github.com:vimus/vimus"
-  , "git@github.com:vimus/libmpd-haskell"
+experimental = role "experimental" $ traverse_ (--> into "git") . map (github "vimus") $
+  [ "vimus"
+  , "libmpd-haskell"
   ]
 
 
-edwardk = role "edwardk" $ traverse_ (--> into "git")
-  [ "git@github.com:ekmett/free"
-  , "git@github.com:ekmett/reflection"
-  , "git@github.com:ekmett/tagged"
-  , "git@github.com:ekmett/machines"
-  , "git@github.com:ekmett/lens"
-  , "git@github.com:ekmett/profunctors"
-  , "git@github.com:ekmett/kan-extensions"
+edwardk = role "edwardk" $ traverse_ (--> into "git") . map (github "ekmett") $
+  [ "free"
+  , "reflection"
+  , "tagged"
+  , "machines"
+  , "lens"
+  , "profunctors"
+  , "kan-extensions"
   ]
 
 mine = role "mine" $ do
-  traverse_ (--> into "git")
-    [ "git@github.com:supki/libjenkins"
-    , "git@github.com:supki/xmonad-screenshot"
-    , "git@github.com:supki/xmonad-use-empty-workspace"
-    , "git@github.com:supki/xmonad-2014"
-    , "git@github.com:supki/pakej"
+  traverse_ (--> into "git") . map (github "supki") $
+    [ "libjenkins"
+    , "xmonad-screenshot"
+    , "xmonad-use-empty-workspace"
+    , "xmonad-2014"
+    , "pakej"
     ]
-  git "git@github.com:supki/whacky" (into "git") $
+  git (github "supki" "whacky") (into "git") $
     [sh|BUILDDIR=$HOME/bin make|]
 
 
@@ -291,3 +292,6 @@ l <\>~ n = over l (n </>)
 
 unzipWithM_ :: Applicative m => (a -> b -> m c) -> [(a, b)] -> m ()
 unzipWithM_ = traverse_ . uncurry
+
+github :: String -> String -> String
+github = printf "git@github.com:%s/%s"
