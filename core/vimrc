@@ -357,6 +357,7 @@
 	let g:CommandTMatchWindowAtTop = 1
 	let g:CommandTAcceptSelectionMap = '<C-j>'
 	let g:CommandTSelectNextMap = ['Down', '<C-n>']
+	let g:CommandTWildIgnore = &wildignore . ',cookbooks/*'
 
 	" for vim-bling
 	let g:bling_color=216
