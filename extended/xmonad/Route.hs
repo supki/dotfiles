@@ -77,7 +77,7 @@ match (Route r) i = do
  where
   bind (x, y)
     | x == y = Just []
-    | Just k <- stripPrefix "." y
+    | Just k <- stripPrefix "$" y
              = Just [(k, [x])]
     | otherwise
              = Nothing
