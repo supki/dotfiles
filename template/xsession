@@ -35,3 +35,6 @@ PATH="\$HOME/bin:\$PATH" suspender &
 
 # start unclutter
 unclutter -idle 2 &
+
+# start autolocker
+xautolock -time 5 -locker slock &
