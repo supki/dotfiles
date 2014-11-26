@@ -178,31 +178,31 @@ routes :: RouteT IO Command
 routes = do
   home <- getHome
   asum $
-    [ route "git/.repo" $ do
+    [ route "git .repo" $ do
         repo <- arg "repo"
         let dir = "git" </> repo
         mkdir_p dir
         return (tmux dir (directory (home </> dir)))
-    , route "svn/.repo" $ do
+    , route "svn .repo" $ do
         repo <- arg "repo"
         let dir = "svn" </> repo
         minusd dir <&> \y ->
           tmux dir (directory (if y then home </> dir else home </> "svn"))
-    , route "play/.bucket" $ do
+    , route "play .bucket" $ do
         bucket <- arg "bucket"
         let dir = home </> "playground" </> bucket
         name <- input
         mkdir_p dir
         return (tmux name (directory dir))
-    , route "re/ko/.dir" $
+    , route "re ko .dir" $
         arg "dir" <&> \dir -> hop "kolyskovi" (tmux dir (directory ("work" </> dir)))
-    , route "re/ko" $
+    , route "re ko" $
         return (hop "kolyskovi" (tmux "main" mempty))
-    , route "re/slave/.id" $
+    , route "re slave .id" $
         arg "id" <&> \n -> hop ("slave" ++ show n) (tmux "main" (env ["TERM" .= "screen-256color"]))
-    , route "re/.host" $
+    , route "re .host" $
         arg "host" <&> \host -> tmux host (command ("ssh " ++ show host))
-    , route "work/.session" $
+    , route "work .session" $
         arg "session" <&> \session ->
           hop "ce837848" (hop "d378e6d3" (tmux (replace '.' '/' session) mempty))
     ]

@@ -20,7 +20,7 @@ import           Control.Monad
 import           Control.Monad.IO.Class (MonadIO(..))
 import           Data.Function (on)
 import           Data.Int (Int8, Int16, Int32, Int64)
-import           Data.List (dropWhileEnd,stripPrefix)
+import           Data.List (stripPrefix)
 import           Data.Map (Map)
 import qualified Data.Map as Map
 import           Data.Maybe (listToMaybe)
@@ -72,7 +72,7 @@ route r (RouteT f) = RouteT $ \(_, i) -> maybe (return Nothing) (\m -> f (m, i))
 
 match :: Route -> Input -> Maybe Match
 match (Route r) i = do
-  ps <- (zip' `on` split isSep . dropAround isSep) i r
+  ps <- (zip' `on` words) i r
   Map.fromListWith (flip (++)) . concat <$> traverse bind ps
  where
   bind (x, y)
@@ -82,22 +82,10 @@ match (Route r) i = do
     | otherwise
              = Nothing
 
-dropAround :: (a -> Bool) -> [a] -> [a]
-dropAround p = dropWhileEnd p . dropWhile p
-
-split :: (a -> Bool) -> [a] -> [[a]]
-split p = go
- where
-  go [] = []
-  go xs = case break p xs of ~(ys, zs) -> ys : go (drop 1 zs)
-
 zip' :: [a] -> [b] -> Maybe [(a, b)]
 zip' []       []       = Just []
 zip' (x : xs) (y : ys) = fmap ((x, y) :) (zip' xs ys)
 zip' _        _        = Nothing
-
-isSep :: Char -> Bool
-isSep = (== '/')
 
 
 class Param a where
