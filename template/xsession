@@ -32,3 +32,6 @@ sh -l -c pakej
 
 # start suspender
 PATH="\$HOME/bin:\$PATH" suspender &
+
+# start unclutter
+unclutter -idle 2 &
