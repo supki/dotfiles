@@ -40,6 +40,6 @@ templates = def
   , urxvt = def
     { perllib     = "/home/pyoseek/git/urxvt-tabbedex:/home/pyoseek/git/urxvt-perls"
     , background_ = "#373737"
-    , browser     = "firefox"
+    , browser     = "x-www-browser"
     }
   }
