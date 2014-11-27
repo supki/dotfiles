@@ -10,7 +10,7 @@ module Tmux where
 import           Control.Applicative
 import           Control.Monad
 import           Data.Array ((!), array, listArray)
-import           Data.Foldable (asum)
+import           Data.Foldable (asum, traverse_)
 import           Data.Function (on)
 import           Data.Ord (comparing)
 import           Data.List (isPrefixOf, nubBy, sortBy)
@@ -24,7 +24,6 @@ import           Text.Printf (printf)
 import           XMonad hiding (spawn)
 import           XMonad.Prompt
 import qualified XMonad.StackSet as W
-import           XMonad.Prompt.Input
 import           XMonad.Util.Run
 import           XMonad.Util.NamedWindows (getName)
 
@@ -84,7 +83,15 @@ prompt patterns route xpConfig = do
   cs <- currents
   ds <- concatMapM expand patterns
   let as = nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
-  inputPromptWithCompl xpConfig "tmux" (compl' as) ?+ start cs route
+  mkXPromptWithReturn (UnfuckedInputPrompt "tmux") xpConfig (compl' as) return
+    >>= traverse_ (start cs route)
+
+newtype UnfuckedInputPrompt = UnfuckedInputPrompt String
+
+instance XPrompt UnfuckedInputPrompt  where
+  showXPrompt (UnfuckedInputPrompt s) = s ++ ": "
+  commandToComplete _ = id
+  nextCompletion _ = getNextCompletion
 
 type PromptKeymap = Map (KeyMask, KeySym) (XP ())
 
