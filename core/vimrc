@@ -358,7 +358,7 @@
 	let g:CommandTAcceptSelectionMap = '<C-j>'
 	let g:CommandTSelectNextMap = ['Down', '<C-n>']
 	let g:CommandTCancelMap = ['<C-c>', '<Esc>']
-	let g:CommandTWildIgnore = &wildignore . ',cookbooks/*'
+	let g:CommandTWildIgnore = &wildignore . ',cookbooks/*,.env_*'
 
 	" for vim-bling
 	let g:bling_color=216
