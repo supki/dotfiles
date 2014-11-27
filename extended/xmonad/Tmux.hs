@@ -135,8 +135,7 @@ levenshtein xs ys = arr ! (max_i, max_j)
 
 -- | Safely expands wordexp pattern catching IO errors
 expand :: String -> X [FilePath]
-expand p = io $
-  wordexp p `mplus` return []
+expand p = io $ fmap (fmap (replace  '/' ' ')) (wordexp p) `mplus` return []
 
 
 -- | Start tmux session terminal
