@@ -213,7 +213,7 @@ routes = do
         arg "host" <&> \host -> tmux host (command ("ssh " ++ show host))
     , route "work +session" $
         args "session" <&> \session ->
-          hop "ce837848" (hop "d378e6d3" (tmux (intercalate "/" session) mempty))
+          hop "ce837848" (hop "d378e6d3" (tmux (intercalate "\\\\\\ " session) mempty))
     ]
 
 getHome :: RouteT IO FilePath
