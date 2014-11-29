@@ -358,6 +358,10 @@
 	let g:CommandTAcceptSelectionMap = '<C-j>'
 	let g:CommandTSelectNextMap = ['Down', '<C-n>']
 	let g:CommandTCancelMap = ['<C-c>', '<Esc>']
+	let g:CommandTBackspaceMap = ['<BS>', '<C-h>']
+	let g:CommandTDeleteMap = ['<DEL>', '<C-l>']
+	let g:CommandTCursorLeftMap = '<Left>'
+	let g:CommandTCursorRightMap = '<Right>'
 	let g:CommandTWildIgnore = &wildignore . ',cookbooks/*,.env_*'
 
 	" for vim-bling
