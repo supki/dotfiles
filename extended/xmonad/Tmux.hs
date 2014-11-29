@@ -13,7 +13,7 @@ import           Data.Array ((!), array, listArray)
 import           Data.Foldable (asum, traverse_)
 import           Data.Function (on)
 import           Data.Ord (comparing)
-import           Data.List (isPrefixOf, nubBy, sortBy)
+import           Data.List (intercalate, isPrefixOf, nubBy, sortBy)
 import           Data.Maybe (maybeToList)
 import           Data.Monoid (Monoid(..))
 import           Data.Map (Map)
@@ -185,35 +185,35 @@ routes :: RouteT IO Command
 routes = do
   home <- getHome
   asum $
-    [ route "git $repo" $ do
+    [ route "git .repo" $ do
         repo <- arg "repo"
         name <- input
         let dir = "git" </> repo
         mkdir_p dir
         return (tmux name (directory (home </> dir)))
-    , route "svn $repo" $ do
+    , route "svn .repo" $ do
         repo <- arg "repo"
         name <- input
         let dir = "svn" </> repo
         minusd dir <&> \y ->
           tmux name (directory (if y then home </> dir else home </> "svn"))
-    , route "play $bucket" $ do
+    , route "play .bucket" $ do
         bucket <- arg "bucket"
         name   <- input
         let dir = home </> "playground" </> bucket
         mkdir_p dir
         return (tmux name (directory dir))
-    , route "re ko $dir" $
+    , route "re ko .dir" $
         arg "dir" <&> \dir -> hop "kolyskovi" (tmux dir (directory ("work" </> dir)))
     , route "re ko" $
         return (hop "kolyskovi" (tmux "main" mempty))
-    , route "re slave $id" $
+    , route "re slave .id" $
         arg "id" <&> \n -> hop ("slave" ++ show n) (tmux "main" (env ["TERM" .= "screen-256color"]))
-    , route "re $host" $
+    , route "re .host" $
         arg "host" <&> \host -> tmux host (command ("ssh " ++ show host))
-    , route "work $session" $
-        arg "session" <&> \session ->
-          hop "ce837848" (hop "d378e6d3" (tmux (replace '.' '/' session) mempty))
+    , route "work +session" $
+        args "session" <&> \session ->
+          hop "ce837848" (hop "d378e6d3" (tmux (intercalate "/" session) mempty))
     ]
 
 getHome :: RouteT IO FilePath

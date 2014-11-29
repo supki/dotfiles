@@ -20,7 +20,6 @@ import           Control.Monad
 import           Control.Monad.IO.Class (MonadIO(..))
 import           Data.Function (on)
 import           Data.Int (Int8, Int16, Int32, Int64)
-import           Data.List (stripPrefix)
 import           Data.Map (Map)
 import qualified Data.Map as Map
 import           Data.Maybe (listToMaybe)
@@ -71,21 +70,14 @@ route :: Monad m => Route -> RouteT m a -> RouteT m a
 route r (RouteT f) = RouteT $ \(_, i) -> maybe (return Nothing) (\m -> f (m, i)) (match r i)
 
 match :: Route -> Input -> Maybe Match
-match (Route r) i = do
-  ps <- (zip' `on` words) i r
-  Map.fromListWith (flip (++)) . concat <$> traverse bind ps
- where
-  bind (x, y)
-    | x == y = Just []
-    | Just k <- stripPrefix "$" y
-             = Just [(k, [x])]
-    | otherwise
-             = Nothing
+match (Route r) i = Map.fromListWith (flip (++)) <$> (bind `on` words) i r
 
-zip' :: [a] -> [b] -> Maybe [(a, b)]
-zip' []       []       = Just []
-zip' (x : xs) (y : ys) = fmap ((x, y) :) (zip' xs ys)
-zip' _        _        = Nothing
+bind :: [String] -> [String] -> Maybe [(String, [String])]
+bind (x : xs) (('.' : y) : ys) = ([(y, x : [])] ++) <$> bind xs ys
+bind (x : xs) (('+' : y) : ys) = ([(y, x : xs)] ++) <$> bind [] ys
+bind (x : xs) (y         : ys) = if x == y then         bind xs ys else Nothing
+bind []       []               = Just []
+bind _        _                = Nothing
 
 
 class Param a where
