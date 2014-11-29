@@ -186,18 +186,20 @@ routes = do
   asum $
     [ route "git $repo" $ do
         repo <- arg "repo"
+        name <- input
         let dir = "git" </> repo
         mkdir_p dir
-        return (tmux dir (directory (home </> dir)))
+        return (tmux name (directory (home </> dir)))
     , route "svn $repo" $ do
         repo <- arg "repo"
+        name <- input
         let dir = "svn" </> repo
         minusd dir <&> \y ->
-          tmux dir (directory (if y then home </> dir else home </> "svn"))
+          tmux name (directory (if y then home </> dir else home </> "svn"))
     , route "play $bucket" $ do
         bucket <- arg "bucket"
+        name   <- input
         let dir = home </> "playground" </> bucket
-        name <- input
         mkdir_p dir
         return (tmux name (directory dir))
     , route "re ko $dir" $
