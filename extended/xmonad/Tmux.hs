@@ -19,7 +19,6 @@ import           Data.Monoid (Monoid(..))
 import           Data.Map (Map)
 import qualified System.Directory as D
 import           System.FilePath ((</>))
-import           System.Wordexp.Simple (wordexp)
 import           Text.Printf (printf)
 import           XMonad hiding (spawn)
 import           XMonad.Prompt
@@ -75,13 +74,13 @@ defaultSettings = Settings { _directory = Nothing, _command = Nothing, _env = []
 
 -- | Ask what session user wants to create/attach to
 prompt
-  :: [String]          -- ^ Candidates patterns
+  :: [FilePath]        -- ^ Candidate directoroes
   -> RouteT IO Command -- ^ Routing
   -> XPConfig          -- ^ Prompt theme
   -> X ()
-prompt patterns route xpConfig = do
+prompt dirs route xpConfig = do
   cs <- currents
-  ds <- concatMapM expand patterns
+  ds <- concatMapM ls dirs
   let as = nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
   mkXPromptWithReturn (UnfuckedInputPrompt "tmux") xpConfig (compl' as) return
     >>= traverse_ (start cs route)
@@ -140,9 +139,11 @@ levenshtein xs ys = arr ! (max_i, max_j)
    where
     c = if axs ! i == ays ! j then 0 else 2
 
--- | Safely expands wordexp pattern catching IO errors
-expand :: String -> X [FilePath]
-expand p = io $ fmap (fmap (replace  '/' ' ')) (wordexp p) `mplus` return []
+ls :: String -> X [FilePath]
+ls p = io $ do
+  map (\x -> p ++ " " ++ x) . filter (`notElem` [".", ".."]) <$> D.getDirectoryContents p
+ `mplus`
+  return []
 
 
 -- | Start tmux session terminal

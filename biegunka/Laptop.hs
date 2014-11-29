@@ -38,7 +38,7 @@ templates = def
         ]
       |]
     , follow    = "False"
-    , patterns  = "[\"git/*\"]"
+    , patterns  = "[\"git\"]"
     }
   , xmodmap = def
     { menu = "keysym Menu = Super_R"
