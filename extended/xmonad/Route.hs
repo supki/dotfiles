@@ -75,6 +75,7 @@ match (Route r) i = Map.fromListWith (flip (++)) <$> (bind `on` words) i r
 bind :: [String] -> [String] -> Maybe [(String, [String])]
 bind (x : xs) (('.' : y) : ys) = ([(y, x : [])] ++) <$> bind xs ys
 bind (x : xs) (('+' : y) : ys) = ([(y, x : xs)] ++) <$> bind [] ys
+bind xs       (('*' : y) : ys) = ([(y,     xs)] ++) <$> bind [] ys
 bind (x : xs) (y         : ys) = if x == y then         bind xs ys else Nothing
 bind []       []               = Just []
 bind _        _                = Nothing

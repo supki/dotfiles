@@ -207,8 +207,12 @@ routes = do
         arg "dir" <&> \dir -> hop "kolyskovi" (tmux dir (directory ("work" </> dir)))
     , route "re ko" $
         return (hop "kolyskovi" (tmux "main" mempty))
-    , route "re slave .id" $
-        arg "id" <&> \n -> hop ("slave" ++ show n) (tmux "main" (env ["TERM" .= "screen-256color"]))
+    , route "re slave .id *session" $
+        arg  "id"      >>= \n ->
+        args "session" >>= \xs ->
+        return (hop ("slave" ++ show n)
+                    (tmux (nonempty "main" (intercalate "\\ ") xs)
+                          (env ["TERM" .= "screen-256color"])))
     , route "re .host" $
         arg "host" <&> \host -> tmux host (command ("ssh " ++ show host))
     , route "work +session" $
@@ -227,6 +231,9 @@ minusd = liftIO . D.doesDirectoryExist
 
 replace :: (Eq a, Functor f) => a -> a -> f a -> f a
 replace y z = fmap (\x -> if x == y then z else x)
+
+nonempty :: b -> ([a] -> b) -> [a] -> b
+nonempty z f xs = case xs of [] -> z; _ -> f xs
 
 infixl 1 <&>
 (<&>) :: Functor f => f a -> (a -> b) -> f b
