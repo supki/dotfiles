@@ -141,7 +141,10 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
 
 scratchpads :: [NamedScratchpad]
 scratchpads =
-  [ NS "scratchpad" (myTerminal ++ " -name scratchpad") (resource =? "scratchpad") (customFloating $ W.RationalRect 0.47 0.05 0.5 0.6)
+  [ NS "scratchpad"
+       (myTerminal ++ " -name scratchpad -e tmux new-session -AD -s scratchpad")
+       (resource =? "scratchpad")
+       (customFloating (W.RationalRect 0.47 0.05 0.5 0.6))
   ]
 
 (<&>) :: Functor f => f a -> (a -> b) -> f b
