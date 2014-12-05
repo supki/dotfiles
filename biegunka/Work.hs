@@ -28,7 +28,7 @@ templates = def
       [multiline|
         [ ("(x-www-browser|/usr/lib/chromium/chromium|/usr/lib/chromium-browser/chro)", "x-www-browser")
         , ("htop", "urxvt -title work-htop -e htop")
-        , ("jm", "urxvt -title jm -e sh -c '. ~/.jm/jm.env; jm'")
+        , ("jm", "urxvt -title jm -e sh -c '. ~/.j/j.env; jm'")
         ]
       |]
     , follow    = "True"
