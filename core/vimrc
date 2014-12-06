@@ -59,7 +59,7 @@
 	" enable sane menu
 	set wildmenu
 	set wildmode=list:longest,full
-	set wildignore=*.o,*.hi,*.pyc,*~,*.dyn_o,*.dyn_hi
+	set wildignore=*.o,*.hi,*.pyc,*~,*.dyn_o,*.dyn_hi,*.class
 
 	" don't pause big listings
 	set nomore
