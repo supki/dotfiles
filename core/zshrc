@@ -132,11 +132,18 @@ function haddock-dist {
 	done
 }
 
-function back_to_vim {
-	fg
+function j* {
+	declare xs
+	xs=("${jobtexts[@]}")
+
+	case ${#xs} in
+		0) kill -SIGINT $$ ;; # totally not a hack
+		1) fg "${xs[@]}" ;;
+		*) fg "$(for x in "${xs[@]}"; do echo "$x"; done | wybor --prompt 'job> ')" ;;
+	esac
 }
 
-zle -N back-to-vim back_to_vim
+zle -N back-to-vim 'j*'
 bindkey -a "^z" back-to-vim
 bindkey -v "^z" back-to-vim
 bindkey -v "^k" kill-whole-line
