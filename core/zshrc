@@ -175,3 +175,5 @@ function fuck-them {
 function sd {
 	svn diff | colordiff | diff-highlight | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
 }
+
+export VAGRANT_DEFAULT_PROVIDER='docker'
