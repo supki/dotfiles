@@ -139,6 +139,7 @@ dotfiles = role "dotfiles" $
     , bin "weather.rb"
     , bin "dive-into-mail"
     , bin "svn-browse"
+    , bin "whereami"
     ]
 
 tools = role "tools" $

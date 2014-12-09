@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+curl --silent -I 'https://www.google.com/search?q=everybody%20dies' | grep Location: | cut -d' ' -f2 | xargs dirname | tr '.' $'\n' | tail -n -1
