@@ -293,10 +293,8 @@
 		\ , 'test/(.+)Spec(\.l?hs)': 'src/\1\2'
 		\ , 'lib/(.+).rb':           'spec/\1_spec.rb'
 		\ , 'spec/(.+)_spec.rb':     'lib/\1.rb'
-		\ , 'template/app.tpl':      'static/css/main.css'
-		\ , 'template/(.+).tpl':     'static/css/\1.css'
-		\ , 'static/css/main.css':   'template/app.tpl'
-		\ , 'static/css/(.+).css':   'template/\1.tpl'
+		\ , 'src/(.+).clj':          'test/\1_test.clj'
+		\ , 'test/(.+)_test.clj':    'src/\1.clj'
 		\ }
 
 	" Insert haskell module name
