@@ -87,8 +87,6 @@ alias v='vagrant'
 alias t='tmux'
 alias k='knife'
 alias d='docker'
-alias pemi='sudo /etc/init.d/openvpn.pemi start'
-alias unpemi='sudo /etc/init.d/openvpn.pemi stop'
 alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
 alias diff='git diff --no-index'
 
