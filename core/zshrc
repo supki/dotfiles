@@ -131,7 +131,7 @@ function haddock-dist {
 	done
 }
 
-function j* {
+function j\* {
 	declare xs
 	xs=("${jobtexts[@]}")
 
@@ -142,7 +142,7 @@ function j* {
 	esac
 }
 
-zle -N back-to-vim 'j*'
+zle -N back-to-vim 'j\*'
 bindkey -a "^z" back-to-vim
 bindkey -v "^z" back-to-vim
 bindkey -v "^k" kill-whole-line
