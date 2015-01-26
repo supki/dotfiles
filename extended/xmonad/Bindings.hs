@@ -107,9 +107,8 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ]
       ++
       -- switch to another screen
-      [ (m,           k, screenWorkspace sc >>= traverse_ (windows . f))
-        | (k, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+      [ (0,           xK_w, nextScreen)
+      , (shiftMask,   xK_w, shiftNextScreen)
       ]
       ++
       -- swap workspaces and return to old one
