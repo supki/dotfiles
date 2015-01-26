@@ -13,7 +13,7 @@ import           Data.Array ((!), array, listArray)
 import           Data.Foldable (asum, traverse_)
 import           Data.Function (on)
 import           Data.Ord (comparing)
-import           Data.List (intercalate, isPrefixOf, nubBy, sortBy)
+import           Data.List (intercalate, isPrefixOf, nubBy, sortBy, delete)
 import           Data.Maybe (maybeToList)
 import           Data.Monoid (Monoid(..))
 import           Data.Map (Map)
@@ -79,7 +79,7 @@ prompt
   -> XPConfig          -- ^ Prompt theme
   -> X ()
 prompt dirs route xpConfig = do
-  cs <- currents
+  cs <- active
   ds <- concatMapM ls dirs
   let as = nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
   mkXPromptWithReturn (UnfuckedInputPrompt "tmux") xpConfig (compl' as) return
@@ -94,9 +94,9 @@ instance XPrompt UnfuckedInputPrompt  where
 
 type PromptKeymap = Map (KeyMask, KeySym) (XP ())
 
--- | Get current active tmux sessions names
-currents :: X [String]
-currents = io $ lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{session_name}"] ""
+-- | Get currently active tmux sessions' names, except \"scratchpad\" that is
+active :: X [String]
+active = io $ delete "scratchpad" . lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{session_name}"] ""
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
