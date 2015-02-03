@@ -80,6 +80,7 @@ myManageHook = namedScratchpadManageHook scratchpads <> mconcat
     [ title     <&> ("Figure" `isPrefixOf`)
     , title     =? "youtube-video"
     , title     =? "xmessage"
+    , title     =? "Page(s) Unresponsive"
     ]
   ignore =
     [ title     =? "xfce4-notifyd"
