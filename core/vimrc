@@ -296,6 +296,10 @@
 		\ , 'spec/(.+)_spec.rb':     'lib/\1.rb'
 		\ , 'src/(.+).clj':          'test/\1_test.clj'
 		\ , 'test/(.+)_test.clj':    'src/\1.clj'
+		\ , 'site-cookbooks/(.+)/resources/(.+)\.rb':
+		\                            'site-cookbooks/\1/providers/\2.rb'
+		\ , 'site-cookbooks/(.+)/providers/(.+)\.rb':
+		\                            'site-cookbooks/\1/resources/\2.rb'
 		\ }
 
 	" Insert haskell module name
