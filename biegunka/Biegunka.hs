@@ -208,6 +208,7 @@ vim = do
         [sh|cd ~/.vim/bundle/Command-T/ruby/command-t; /usr/bin/ruby extconf.rb; make|]
       pathogen_ (github "bling" "vim-airline")
       pathogen_ (github "stephpy" "vim-yaml")
+      pathogen_ (github "roman" "golden-ratio")
     group "idris" $
       pathogen_ (github "idris-hackers" "idris-vim")
     group "rust" $
