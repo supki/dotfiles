@@ -43,3 +43,6 @@
 <Multi_key> <space>      <e>       : "υ"
 <Multi_key> <space>      <a>       : "φ"
 <Multi_key> <less>       <3>       : "❤"
+<Multi_key> <Ukrainian_i>          : "ы"
+<Multi_key> <Ukrainian_yi>         : "ъ"
+<Multi_key> <Ukrainian_ie>         : "э"
