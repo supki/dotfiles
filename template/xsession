@@ -13,7 +13,7 @@ setxkbmap -option compose:ralt
 kbdd
 
 # set the wallpaper
-xsetroot -solid black
+xsetroot -solid '#220000'
 
 # set a non-nonsensical default cursor
 xsetroot -cursor_name arrow
