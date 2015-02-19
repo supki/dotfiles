@@ -93,6 +93,7 @@ alias v='vagrant'
 alias t='tmux'
 alias k='knife'
 alias d='docker'
+alias x='container'
 alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
 alias diff='git diff --no-index'
 
