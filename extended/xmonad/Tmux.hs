@@ -156,17 +156,10 @@ start runningSessions route (un -> userInput) = do
       let nameWindows = mapM (\w -> fmap (\n -> (show n, w)) (getName w)) . W.integrate' . W.stack
       ws <- gets windowset
       kv <- concatMapM nameWindows (W.workspaces ws)
-      case lookup userInput kv of
-        Nothing -> spawn $ createOrAttach term userInput
-        Just w  -> windows (W.focusWindow w)
-    else do
-      routed <- io $ Route.run route userInput
-      case routed of
-        Just command -> create term command
-        Nothing      -> spawn $ createOrAttach term userInput
+      maybe (create term (tmux userInput mempty)) (windows . W.focusWindow) (lookup userInput kv)
+    else
+      create term . maybe (tmux userInput mempty) id =<< io (Route.run route userInput)
  where
-  createOrAttach t e =
-    printf "%s -e tmux new-session -AD -s '%s'" t e
   create t c = safeSpawn t ("-e" : compile c)
 
 compile :: Command -> [String]
