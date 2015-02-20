@@ -96,7 +96,7 @@ type PromptKeymap = Map (KeyMask, KeySym) (XP ())
 
 -- | Get currently active tmux sessions' names, except \"scratchpad\" that is
 active :: X [String]
-active = io $ delete "scratchpad" . lines <$> runProcessWithInput "tmux" ["list-sessions", "-F", "#{session_name}"] ""
+active = io $ delete "scratchpad" . lines <$> runProcessWithInput "tmux" ["-S", "/tmp/tmux-1000/default", "list-sessions", "-F", "#{session_name}"] ""
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
@@ -167,7 +167,7 @@ compile = go where
   go (Hop h xs) = ["ssh", h, "-t"] ++ go xs
   go (Tmux n Settings { _command, _directory, _env }) =
        map (\(k, v) -> k ++ "=" ++ v) _env
-    ++ ["tmux", "new-session", "-AD", "-s", n]
+    ++ ["tmux", "-S", "/tmp/tmux-1000/default", "new-session", "-AD", "-s", n]
     ++ maybe [] (\d -> ["-c", "${HOME}" </> d]) _directory -- change working directory
     ++ maybeToList _command                                -- run this command
 
