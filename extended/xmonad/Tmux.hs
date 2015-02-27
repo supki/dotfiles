@@ -7,7 +7,7 @@
 -- Inspired by Simon Gomizelj (@vodik) - https://github.com/vodik/dotfiles/blob/master/xmonad/lib/XMonad/Util/Tmux.hs
 module Tmux where
 
-import           Control.Applicative
+import           Control.Applicative ((<$>))
 import           Control.Monad
 import           Data.Array ((!), array, listArray)
 import           Data.Foldable (asum, traverse_)
@@ -15,7 +15,7 @@ import           Data.Function (on)
 import           Data.Ord (comparing)
 import           Data.List (intercalate, isPrefixOf, nubBy, sortBy, delete)
 import           Data.Maybe (maybeToList)
-import           Data.Monoid (Monoid(..))
+import           Data.Monoid (Monoid(..), (<>))
 import           Data.Map (Map)
 import qualified System.Directory as D
 import           System.FilePath ((</>))
@@ -26,57 +26,15 @@ import qualified XMonad.StackSet as W
 import           XMonad.Util.Run
 import           XMonad.Util.NamedWindows (getName)
 
-import           Route
+import           Damit
 import           Spawn (spawn)
-
-
-type Host = String
-type Session = String
-
-data Command
-  = Hop Host Command
-  | Tmux Session Settings
-
-hop :: Host -> Command -> Command
-hop = Hop
-
-tmux :: Session -> Mod Settings -> Command
-tmux n (Mod f) = Tmux n (f defaultSettings)
-
-newtype Mod t = Mod (t -> t)
-
-instance Monoid (Mod t) where
-  mempty = Mod id
-  Mod f `mappend` Mod g = Mod (g . f)
-
-data Settings = Settings
-  { _directory :: Maybe FilePath
-  , _command   :: Maybe String
-  , _env       :: [(String, String)]
-  }
-
-directory :: FilePath -> Mod Settings
-directory p = Mod $ \s -> s { _directory = Just p }
-
-command :: String -> Mod Settings
-command c = Mod $ \s -> s { _command = Just c }
-
-env :: [(String, String)] -> Mod Settings
-env xs = Mod $ \s -> s { _env = xs }
-
-infix 1 .=
-(.=) :: a -> b -> (a, b)
-(.=) = (,)
-
-defaultSettings :: Settings
-defaultSettings = Settings { _directory = Nothing, _command = Nothing, _env = [] }
 
 
 -- | Ask what session user wants to create/attach to
 prompt
-  :: [FilePath]        -- ^ Candidate directoroes
-  -> RouteT IO Command -- ^ Routing
-  -> XPConfig          -- ^ Prompt theme
+  :: [FilePath]               -- ^ Candidate directoroes
+  -> RouteT String IO Command -- ^ Routing
+  -> XPConfig                 -- ^ Prompt theme
   -> X ()
 prompt dirs route xpConfig = do
   cs <- active
@@ -148,7 +106,7 @@ ls p = io $ do
 
 -- | Start tmux session terminal
 -- May either start a new tmux session if it does not exist or connect to existing session
-start :: [String] -> RouteT IO Command -> String -> X ()
+start :: [String] -> RouteT String IO Command -> String -> X ()
 start runningSessions route (un -> userInput) = do
   term <- asks $ terminal . config
   if userInput `elem` runningSessions
@@ -158,68 +116,59 @@ start runningSessions route (un -> userInput) = do
       kv <- concatMapM nameWindows (W.workspaces ws)
       maybe (create term (tmux userInput mempty)) (windows . W.focusWindow) (lookup userInput kv)
     else
-      create term . maybe (tmux userInput mempty) id =<< io (Route.run route userInput)
+      create term . maybe (tmux userInput mempty) id =<< io (Damit.runT route (words userInput))
  where
-  create t c = safeSpawn t ("-e" : compile c)
-
-compile :: Command -> [String]
-compile = go where
-  go (Hop h xs) = ["ssh", h, "-t"] ++ go xs
-  go (Tmux n Settings { _command, _directory, _env }) =
-       map (\(k, v) -> k ++ "=" ++ v) _env
-    ++ ["tmux", "-S", "/tmp/tmux-1000/default", "new-session", "-AD", "-s", n]
-    ++ maybe [] (\d -> ["-c", "${HOME}" </> d]) _directory -- change working directory
-    ++ maybeToList _command                                -- run this command
+  create t c = safeSpawn t ("-e" : command c)
 
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = liftM concat . mapM f
 
-routes :: RouteT IO Command
+routes :: RouteT String IO Command
 routes = do
   home <- getHome
   asum $
-    [ route "git .repo" $ do
+    [ string "git" <> one "repo" ~~> do
         repo <- arg "repo"
-        name <- input
+        name <- inputs
         let dir = "git" </> repo
         mkdir_p dir
-        return (tmux name (directory (home </> dir)))
-    , route "svn .repo" $ do
+        return (tmux (unwords name) (directory (home </> dir)))
+    , string "svn" <> one "repo" ~~> do
         repo <- arg "repo"
-        name <- input
+        name <- inputs
         let dir = "svn" </> repo
         minusd dir <&> \y ->
-          tmux name (directory (if y then home </> dir else home </> "svn"))
-    , route "play .bucket" $ do
+          tmux (unwords name) (directory (if y then home </> dir else home </> "svn"))
+    , string "play" <> one "bucket" ~~> do
         bucket <- arg "bucket"
-        name   <- input
+        name   <- inputs
         let dir = home </> "playground" </> bucket
         mkdir_p dir
-        return (tmux name (directory dir))
-    , route "re ko .dir" $
+        return (tmux (unwords name) (directory dir))
+    , string "re" <> string "ko" <> one "dir" ~~>
         arg "dir" <&> \dir -> hop "kolyskovi" (tmux dir (directory ("work" </> dir)))
-    , route "re ko" $
+    , string "re" <> string "ko" ~~>
         return (hop "kolyskovi" (tmux "main" mempty))
-    , route "re slave .id *session" $
-        arg  "id"      >>= \n ->
-        args "session" >>= \xs ->
-        return (hop ("slave" ++ show n)
-                    (tmux (nonempty "main" (intercalate "\\ ") xs)
+    , string "re" <> string "slave" <> one "id" <> many "session" ~~> do
+        n  <- arg "id"
+        xs <- args "session"
+        return (hop ("slave" ++ show (n :: Int))
+                    (tmux (nonempty "main" unwords xs)
                           (env ["TERM" .= "screen-256color"])))
-    , route "re .host" $
-        arg "host" <&> \host -> tmux host (command ("ssh " ++ show host))
-    , route "work +session" $
+    , string "re" <> one "host" ~~>
+        arg "host" <&> \host -> tmux host (cmd ("ssh " ++ show host))
+    , string "work" <> some "session" ~~>
         args "session" <&> \session ->
-          hop "ce837848" (hop "d378e6d3" (tmux (intercalate "\\\\\\ " session) mempty))
+          hop "ce837848" (hop "d378e6d3" (tmux (unwords session) mempty))
     ]
 
-getHome :: RouteT IO FilePath
+getHome :: RouteT String IO FilePath
 getHome = liftIO (D.getHomeDirectory)
 
-mkdir_p :: FilePath -> RouteT IO ()
+mkdir_p :: FilePath -> RouteT String IO ()
 mkdir_p = liftIO . D.createDirectoryIfMissing True
 
-minusd :: FilePath -> RouteT IO Bool
+minusd :: FilePath -> RouteT String IO Bool
 minusd = liftIO . D.doesDirectoryExist
 
 replace :: (Eq a, Functor f) => a -> a -> f a -> f a
