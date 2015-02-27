@@ -118,7 +118,6 @@ dotfiles = role "dotfiles" $
     , "xmonad/Bindings.hs"       ~> ".xmonad/lib/Bindings.hs"
     , "xmonad/Startup.hs"        ~> ".xmonad/lib/Startup.hs"
     , "xmonad/Themes.hs"         ~> ".xmonad/lib/Themes.hs"
-    , "xmonad/Route.hs"          ~> ".xmonad/lib/Route.hs"
     , "xmonad/Tmux.hs"           ~> ".xmonad/lib/Tmux.hs"
     , "xmonad/Workspaces.hs"     ~> ".xmonad/lib/Workspaces.hs"
     , "xmonad/Spawn.hs"          ~> ".xmonad/lib/Spawn.hs"
