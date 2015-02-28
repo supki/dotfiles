@@ -33,15 +33,14 @@ import           Spawn (spawn)
 -- | Ask what session user wants to create/attach to
 prompt
   :: [FilePath]               -- ^ Candidate directoroes
-  -> RouteT String IO Command -- ^ Routing
   -> XPConfig                 -- ^ Prompt theme
   -> X ()
-prompt dirs route xpConfig = do
+prompt dirs xpConfig = do
   cs <- active
   ds <- concatMapM ls dirs
   let as = nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
   mkXPromptWithReturn (UnfuckedInputPrompt "tmux") xpConfig (compl' as) return
-    >>= traverse_ (start cs route)
+    >>= traverse_ (start cs)
 
 newtype UnfuckedInputPrompt = UnfuckedInputPrompt String
 
@@ -106,77 +105,19 @@ ls p = io $ do
 
 -- | Start tmux session terminal
 -- May either start a new tmux session if it does not exist or connect to existing session
-start :: [String] -> RouteT String IO Command -> String -> X ()
-start runningSessions route (un -> userInput) = do
-  term <- asks $ terminal . config
+start :: [String] -> String -> X ()
+start runningSessions (un -> userInput) = do
+  term <- asks (terminal . config)
   if userInput `elem` runningSessions
     then do
       let nameWindows = mapM (\w -> fmap (\n -> (show n, w)) (getName w)) . W.integrate' . W.stack
       ws <- gets windowset
       kv <- concatMapM nameWindows (W.workspaces ws)
-      maybe (create term (tmux userInput mempty)) (windows . W.focusWindow) (lookup userInput kv)
+      maybe (create term) (windows . W.focusWindow) (lookup userInput kv)
     else
-      create term . maybe (tmux userInput mempty) id =<< io (Damit.runT route (words userInput))
+      create term
  where
-  create t c = safeSpawn t ("-e" : command c)
+  create t = safeSpawn t ("-e" : "damit" : words userInput)
 
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = liftM concat . mapM f
-
-routes :: RouteT String IO Command
-routes = do
-  home <- getHome
-  asum $
-    [ string "git" <> one "repo" ~~> do
-        repo <- arg "repo"
-        name <- inputs
-        let dir = "git" </> repo
-        mkdir_p dir
-        return (tmux (unwords name) (directory (home </> dir)))
-    , string "svn" <> one "repo" ~~> do
-        repo <- arg "repo"
-        name <- inputs
-        let dir = "svn" </> repo
-        minusd dir <&> \y ->
-          tmux (unwords name) (directory (if y then home </> dir else home </> "svn"))
-    , string "play" <> one "bucket" ~~> do
-        bucket <- arg "bucket"
-        name   <- inputs
-        let dir = home </> "playground" </> bucket
-        mkdir_p dir
-        return (tmux (unwords name) (directory dir))
-    , string "re" <> string "ko" <> one "dir" ~~>
-        arg "dir" <&> \dir -> hop "kolyskovi" (tmux dir (directory ("work" </> dir)))
-    , string "re" <> string "ko" ~~>
-        return (hop "kolyskovi" (tmux "main" mempty))
-    , string "re" <> string "slave" <> one "id" <> many "session" ~~> do
-        n  <- arg "id"
-        xs <- args "session"
-        return (hop ("slave" ++ show (n :: Int))
-                    (tmux (nonempty "main" unwords xs)
-                          (env ["TERM" .= "screen-256color"])))
-    , string "re" <> one "host" ~~>
-        arg "host" <&> \host -> tmux host (cmd ("ssh " ++ show host))
-    , string "work" <> some "session" ~~>
-        args "session" <&> \session ->
-          hop "ce837848" (hop "d378e6d3" (tmux (unwords session) mempty))
-    ]
-
-getHome :: RouteT String IO FilePath
-getHome = liftIO (D.getHomeDirectory)
-
-mkdir_p :: FilePath -> RouteT String IO ()
-mkdir_p = liftIO . D.createDirectoryIfMissing True
-
-minusd :: FilePath -> RouteT String IO Bool
-minusd = liftIO . D.doesDirectoryExist
-
-replace :: (Eq a, Functor f) => a -> a -> f a -> f a
-replace y z = fmap (\x -> if x == y then z else x)
-
-nonempty :: b -> ([a] -> b) -> [a] -> b
-nonempty z f xs = case xs of [] -> z; _ -> f xs
-
-infixl 1 <&>
-(<&>) :: Functor f => f a -> (a -> b) -> f b
-(<&>) = flip fmap

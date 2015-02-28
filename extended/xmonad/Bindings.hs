@@ -51,7 +51,7 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- launch a terminal
       [ (shiftMask,   xK_Return, spawn $ XMonad.terminal conf)
       -- launch tmux prompt
-      , (0,           xK_Return, Tmux.prompt Profile.patterns Tmux.routes myXPConfig)
+      , (0,           xK_Return, Tmux.prompt Profile.patterns myXPConfig)
       -- launch packagePrompt
       , (0,           xK_o, packagePrompt myXPConfig)
       -- launch shellPrompt
