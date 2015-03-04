@@ -1,1 +1,2 @@
 notification :tmux
+clearing :on

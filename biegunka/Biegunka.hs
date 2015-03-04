@@ -94,7 +94,6 @@ dotfiles = role "dotfiles" $
     , dot "pythonrc"
     , dot "curlrc"
     , dot "codorc"
-    , dot "guardrc"
     , dot "guard.rb"
     , dot "vim-jinjing"
     , dot "psqlrc"
