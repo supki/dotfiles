@@ -7,18 +7,20 @@
 -- Inspired by Simon Gomizelj (@vodik) - https://github.com/vodik/dotfiles/blob/master/xmonad/lib/XMonad/Util/Tmux.hs
 module Tmux where
 
-import           Control.Applicative ((<$>))
+import           Control.Applicative ((<$>), liftA2)
+import           Control.Exception (IOException)
 import           Control.Monad
 import           Data.Array ((!), array, listArray)
 import           Data.Foldable (asum, traverse_)
 import           Data.Function (on)
 import           Data.Ord (comparing)
-import           Data.List (intercalate, isPrefixOf, nubBy, sortBy, delete)
+import qualified Data.List as List
 import           Data.Maybe (maybeToList)
 import           Data.Monoid (Monoid(..), (<>))
 import           Data.Map (Map)
 import qualified System.Directory as D
 import           System.FilePath ((</>))
+import           System.IO.Error (catchIOError)
 import           Text.Printf (printf)
 import           XMonad hiding (spawn)
 import           XMonad.Prompt
@@ -37,8 +39,8 @@ prompt
   -> X ()
 prompt dirs xpConfig = do
   cs <- active
-  ds <- concatMapM ls dirs
-  let as = nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
+  ds <- concatMapM (io . repos) dirs
+  let as = List.nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
   mkXPromptWithReturn (UnfuckedInputPrompt "tmux") xpConfig (compl' as) return
     >>= traverse_ (start cs)
 
@@ -53,11 +55,11 @@ type PromptKeymap = Map (KeyMask, KeySym) (XP ())
 
 -- | Get currently active tmux sessions' names, except \"scratchpad\" that is
 active :: X [String]
-active = io $ delete "scratchpad" . lines <$> runProcessWithInput "tmux" ["-S", "/tmp/tmux-1000/default", "list-sessions", "-F", "#{session_name}"] ""
+active = io $ List.delete "scratchpad" . lines <$> runProcessWithInput "tmux" ["-S", "/tmp/tmux-1000/default", "list-sessions", "-F", "#{session_name}"] ""
 
 -- | Semifuzzy completion function
 compl' :: [String] -> ComplFunction
-compl' xs s  = return . sortBy status . sortOn (levenshtein s) . filter (\x -> s `isSubsequenceOf` un x) $ xs
+compl' xs s  = return . List.sortBy status . sortOn (levenshtein s) . filter (\x -> s `isSubsequenceOf` un x) $ xs
  where
   status ('\'' : _) ('\'' : _) = EQ
   status ('\'' : _) _          = LT
@@ -80,7 +82,7 @@ isSubsequenceOf (x:xs) ys =
     []     -> False
 
 sortOn :: Ord b => (a -> b) -> [a] -> [a]
-sortOn f = map fst . sortBy (comparing snd) . map (\x -> (x, f x))
+sortOn f = map fst . List.sortBy (comparing snd) . map (\x -> (x, f x))
 
 levenshtein :: Eq a => [a] -> [a] -> Int
 levenshtein xs ys = arr ! (max_i, max_j)
@@ -96,12 +98,29 @@ levenshtein xs ys = arr ! (max_i, max_j)
    where
     c = if axs ! i == ays ! j then 0 else 2
 
-ls :: String -> X [FilePath]
-ls p = io $ do
-  map (\x -> p ++ " " ++ x) . filter (`notElem` [".", ".."]) <$> D.getDirectoryContents p
- `mplus`
-  return []
+repos :: FilePath -> IO [FilePath]
+repos p = fmap (map (unwords . (p :) . return . List.foldr1 (</>))) (go [] p)
+ where
+  go acc x = do
+    ys <- ls x
+    zs <- forM ys $ \y -> do
+      d <- liftA2 (||) (exists (x </> y </> ".git")) (exists (x </> y </> ".svn"))
+      if d
+        then return [reverse (y : acc)]
+        else go (y : acc) (x </> y)
+    return (concat zs)
 
+ls :: FilePath -> IO [FilePath]
+ls = handleIOError_ (return []) . fmap (filter (`notElem` [".", ".."])) . D.getDirectoryContents
+
+exists :: FilePath -> IO Bool
+exists = handleIOError_ (return False) . D.doesDirectoryExist
+
+handleIOError :: (IOException -> IO a) -> IO a -> IO a
+handleIOError = flip catchIOError
+
+handleIOError_ :: IO a -> IO a -> IO a
+handleIOError_ h = handleIOError (\_ -> h)
 
 -- | Start tmux session terminal
 -- May either start a new tmux session if it does not exist or connect to existing session
