@@ -9,8 +9,8 @@ import           Data.Char
 import           Data.Data
 import           Data.Fixed
 import           Data.Function (fix, on)
-import           Data.Foldable (Foldable)
-import           Data.Traversable (Traversable)
+import           Data.Foldable (Foldable, foldMap)
+import           Data.Traversable (Traversable, traverse)
 import           Data.Int
 import           Data.List
 import           Data.Maybe
@@ -20,7 +20,6 @@ import           Data.Tuple
 import           Data.Typeable
 import           Data.Word
 import           Debug.Trace
-import           GHC.Generics
 import           Numeric
 import           System.IO
 import           System.IO.Unsafe
@@ -49,33 +48,8 @@ import qualified Data.ByteString.Char8      as BC
 import qualified Data.ByteString.Lazy       as BL
 import qualified Data.ByteString.Lazy.Char8 as BLC
 
-:set -fwarn-alternative-layout-rule-transitional
-:set -fwarn-auto-orphans
-:set -fwarn-deprecated-flags
-:set -fwarn-deprecations
-:set -fwarn-dodgy-exports
-:set -fwarn-dodgy-foreign-imports
-:set -fwarn-dodgy-imports
-:set -fwarn-duplicate-exports
-:set -fwarn-hi-shadowing
-:set -fwarn-incomplete-patterns
-:set -fwarn-incomplete-record-updates
-:set -fwarn-missing-fields
-:set -fwarn-missing-methods
-:set -fwarn-monomorphism-restriction
-:set -fwarn-name-shadowing
-:set -fwarn-orphans
-:set -fwarn-overlapping-patterns
-:set -fwarn-tabs
-:set -fwarn-unrecognised-pragmas
-:set -fwarn-unused-binds
-:set -fwarn-unused-imports
-:set -fwarn-unused-matches
-:set -fwarn-warnings-deprecations
-:set -fwarn-wrong-do-bind
-
+:set -Wall
 :set -fno-warn-type-defaults
-:set -fno-warn-unused-do-bind
 
 :set -XBangPatterns
 :set -XDataKinds
@@ -84,7 +58,6 @@ import qualified Data.ByteString.Lazy.Char8 as BLC
 :set -XDeriveFoldable
 :set -XDeriveFunctor
 :set -XDeriveTraversable
-:set -XEmptyDataDecls
 :set -XExistentialQuantification
 :set -XFlexibleContexts
 :set -XFlexibleInstances
@@ -96,8 +69,6 @@ import qualified Data.ByteString.Lazy.Char8 as BLC
 :set -XLambdaCase
 :set -XMultiParamTypeClasses
 :set -XMultiWayIf
-:set -XNoMonomorphismRestriction
-:set -XOverloadedLists
 :set -XPackageImports
 :set -XQuasiQuotes
 :set -XRankNTypes
@@ -109,11 +80,6 @@ import qualified Data.ByteString.Lazy.Char8 as BLC
 :set -XUndecidableInstances
 :set -XUnicodeSyntax
 :set -XViewPatterns
-
-:{
-let asAppliedTo :: (a -> b) -> a -> (a -> b)
-    asAppliedTo = const
-:}
 
 deriving instance Show a => Show (Identity a)
 deriving instance Eq a => Eq (Identity a)
