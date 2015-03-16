@@ -94,6 +94,7 @@ alias t='tmux'
 alias k='knife'
 alias d='docker'
 alias x='container'
+alias l='less'
 alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
 alias diff='git diff --no-index'
 
