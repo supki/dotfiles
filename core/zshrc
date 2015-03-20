@@ -183,3 +183,17 @@ function sd {
 	svn diff | colordiff | diff-highlight | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
 }
 
+function svn {
+	case $1 in
+		st|status|up|update|sw|switch)
+			command svn --ignore-externals "$@" && \
+				if type externals >/dev/null; then
+					externals up
+				fi
+			;;
+
+		*)
+			command svn "$@"
+			;;
+		esac
+}
