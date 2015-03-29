@@ -188,6 +188,8 @@
 	set backupdir=$HOME/.vim/backups
 	" manage .swp files
 	set directory=$HOME/.vim/temp
+	" manage un~ files
+	set undodir=$HOME/.vim/undo
 
 	" preserve undo actions even after file has closed
 	if exists("+undofile")
