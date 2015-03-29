@@ -425,7 +425,9 @@
 		autocmd FileType racket     set commentstring=;\ %s
 	augroup end
 
-	au BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
+	autocmd BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+
+	autocmd FileType hackernews syntax on
 " }
 
 " Functions {
