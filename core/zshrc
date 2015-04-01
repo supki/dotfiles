@@ -82,7 +82,7 @@ bindkey "^_" undo
 bindkey -a "q" push-line
 bindkey "^[[Z" reverse-menu-complete
 
-alias ls='ls --color'
+alias ls='ls --color -1'
 alias less='less -R'
 alias ka='killall'
 alias c='cabal'
