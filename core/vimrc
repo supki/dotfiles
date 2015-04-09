@@ -283,7 +283,7 @@
 	noremap <S-k> <NOP>
 
 	" CommandT keybindings
-	nnoremap <leader>e :CommandT<CR>
+	nnoremap <leader>e :CommandT .<CR>
 	nnoremap <leader>b :CommandTMRU<CR>
 	nnoremap <leader>f :CommandTFlush<CR>
 
