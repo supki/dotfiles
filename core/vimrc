@@ -272,7 +272,9 @@
 	nnoremap <leader>c :HdevtoolsClear<CR>
 
 	" vim-flipping
-	nnoremap <leader>m :Flip<CR>
+	nnoremap <leader>m :FlipEdit<CR>
+	nnoremap <leader>v :FlipVsplit<CR>
+	nnoremap <leader>s :FlipSplit<CR>
 
 	" fuck this
 	nnoremap <leader>d :redraw!<CR>
