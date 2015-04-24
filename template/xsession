@@ -21,9 +21,6 @@ xsetroot -cursor_name arrow
 # process .xmodmap
 xmodmap ~/.xmodmap
 
-# start ssh-agent
-ssh-agent
-
 # start clipboard/primary selection synchronizer
 parcellite &
 
