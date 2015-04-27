@@ -288,6 +288,9 @@
 	nnoremap <leader>b :CommandTMRU<CR>
 	nnoremap <leader>f :CommandTFlush<CR>
 
+	" easy-align
+	vmap <Enter> <Plug>(EasyAlign)
+
 	nnoremap <Space> <C-D>
 	nnoremap <S-Space> <C-U>
 
