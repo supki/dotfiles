@@ -81,12 +81,4 @@ import qualified Data.ByteString.Lazy.Char8 as BLC
 :set -XUnicodeSyntax
 :set -XViewPatterns
 
-deriving instance Show a => Show (Identity a)
-deriving instance Eq a => Eq (Identity a)
-deriving instance Ord a => Ord (Identity a)
-
-deriving instance Show a => Show (Const a b)
-deriving instance Eq a => Eq (Const a b)
-deriving instance Ord a => Ord (Const a b)
-
 :set +t
