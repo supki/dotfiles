@@ -153,8 +153,6 @@ function j\* {
 
 zle -N back-to-vim 'j\*'
 bindkey -a "^z" back-to-vim
-bindkey -v "^z" back-to-vim
-bindkey -v "^k" kill-whole-line
 
 ssh-add 2>/dev/null # add my identity to ssh-agent and don't tell me about this, thanks
 
