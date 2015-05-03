@@ -362,6 +362,7 @@
 	let g:syntastic_auto_loc_list = 1
 	let g:syntastic_auto_jump = 1
 	let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_filetypes': ['racket'] }
+	let g:syntastic_sml_smlnj_args = ['-Cparser.lazy-keyword=true']
 
 	" Command-T options
 	let g:CommandTFileScanner = 'find'
