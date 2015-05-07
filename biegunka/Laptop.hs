@@ -1,20 +1,21 @@
 {-# LANGUAGE QuasiQuotes #-}
-module Laptop where
+module Laptop
+  ( Laptop.template
+  ) where
 
 import Control.Biegunka (multiline)
-import Data.Default.Class (def)
 
 import Defaults
 
 
-templates :: Template
-templates = def
-  { xmobar = def
+template :: Template
+template = Defaults.template
+  (\xmobar -> xmobar
     { background = "\"#222222\""
     , position   = "Static { xpos       = 102, ypos = 750, width = 1264, height = 20 }"
     , battery    = Just "\"%battery%\""
-    }
-  , xmonad = def
+    })
+  (\xmonad -> xmonad
     { terminal  = "urxvtcd"
     , ubuntu    = "xft:ubuntu:size=8"
     , terminus  = "xft:terminus:size=8"
@@ -39,16 +40,15 @@ templates = def
       |]
     , follow    = "False"
     , patterns  = "[\"git\"]"
-    }
-  , xmodmap = def
+    })
+  (\xmodmap -> xmodmap
     { menu = "keysym Menu = Super_R"
-    }
-  , xsession = def
+    })
+  (\xsession -> xsession
     { setxkbmap = "setxkbmap -option \"\" -layout us,ua -option ctrl:nocaps -option grp:lctrl_toggle -option grp_led:scroll :2"
-    }
-  , urxvt = def
+    })
+  (\urxvt -> urxvt
     { perllib     = "/home/maksenov/git/urxvt-tabbedex:/home/maksenov/git/urxvt-perls"
     , background_ = "#222222"
     , browser     = "x-www-browser"
-    }
-  }
+    })

@@ -1,19 +1,20 @@
 {-# LANGUAGE QuasiQuotes #-}
-module Work where
+module Work
+  ( Work.template
+  ) where
 
 import Control.Biegunka (multiline)
-import Data.Default.Class (def)
 
 import Defaults
 
 
-templates :: Template
-templates = def
-  { xmobar = def
+template :: Template
+template = Defaults.template
+  (\xmobar -> xmobar
     { background = "\"#373737\""
     , position   = "BottomW R 94"
-    }
-  , xmonad = def
+    })
+  (\xmonad -> xmonad
     { terminal  = "urxvt"
     , ubuntu    = "xft:ubuntu:size=8"
     , terminus  = "xft:terminus:size=8"
@@ -33,13 +34,13 @@ templates = def
       |]
     , follow    = "True"
     , patterns  = "[\"git\", \"svn\"]"
-    }
-  , xsession = def
+    })
+  (\xmodmap -> xmodmap)
+  (\xsession -> xsession
     { setxkbmap = "setxkbmap -option \"\" -layout us,ru -option grp:caps_toggle -option grp_led:scroll :2"
-    }
-  , urxvt = def
+    })
+  (\urxvt -> urxvt
     { perllib     = "/home/pyoseek/git/urxvt-tabbedex:/home/pyoseek/git/urxvt-perls"
     , background_ = "#373737"
     , browser     = "x-www-browser"
-    }
-  }
+    })

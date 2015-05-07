@@ -9,7 +9,6 @@ module Main (main) where
 
 import           Control.Applicative
 import           Control.Lens
-import           Data.Default.Class (def)
 import           Data.Foldable (traverse_)
 import           System.FilePath ((</>))
 import           Text.Printf (printf)
@@ -30,8 +29,8 @@ main = do
   (environment, runBiegunka) <- options [Laptop, Work]
   let settings ts = set root "~" . set templates (hStringTemplate ts)
   case environment of
-    Laptop -> runBiegunka (settings Laptop.templates) laptop
-    Work   -> runBiegunka (settings Work.templates) work
+    Laptop -> runBiegunka (settings Laptop.template) laptop
+    Work   -> runBiegunka (settings Work.template) work
 
 laptop, work :: Script Sources ()
 laptop = sudo "maksenov" $ sequence_
@@ -40,7 +39,6 @@ laptop = sudo "maksenov" $ sequence_
   , vim
   , emacs
   , misc
-  , experimental
   , edwardk
   , mine
   ]
@@ -48,7 +46,6 @@ work = sequence_
   [ dotfiles
   , vim
   , misc
-  , experimental
   , mine
   ]
 
@@ -200,7 +197,6 @@ vim = do
       pathogen_ (github "tpope" "vim-unimpaired")
       pathogen_ (github "def-lkb" "vimbufsync")
       pathogen_ (github "ivyl" "vim-bling")
-      pathogen_ (github "nelstrom" "vim-visual-star-search")
       pathogen_ (github "kien" "rainbow_parentheses.vim")
       pathogen  (github "wincent" "Command-T") $
         [sh|cd ~/.vim/bundle/Command-T/ruby/command-t; /usr/bin/ruby extconf.rb; make|]
@@ -218,7 +214,7 @@ vim = do
         register ".vim/bundle/syntastic-cabal"
       git (github "supki" "vim-languages") (into "git") $
         register ".vim/bundle/vim-languages"
-      git' (github "supki" "seoul256.vim") (into ".vim/bundle") (def & branch .~ "f/m")
+      git' (github "supki" "seoul256.vim") (into ".vim/bundle") (set branch "f/m" defaultGit)
       pathogen_ (github "supki" "haskell-vim")
   role "vimish" $
     group "haskell" $
@@ -242,14 +238,7 @@ emacs = role "emacs" $ do
 misc = role "misc" $ traverse_ (--> into "git")
   [ github "zsh-users" "zsh-syntax-highlighting"
   , github "zsh-users" "zsh-completions"
-  , github "stepb" "urxvt-tabbedex"
   , github "muennich" "urxvt-perls"
-  ]
-
-
-experimental = role "experimental" $ traverse_ (--> into "git") . map (github "vimus") $
-  [ "vimus"
-  , "libmpd-haskell"
   ]
 
 
@@ -265,14 +254,11 @@ edwardk = role "edwardk" $ traverse_ (--> into "git") . map (github "ekmett") $
 
 mine = role "mine" $ do
   traverse_ (--> into "git") . map (github "supki") $
-    [ "libjenkins"
-    , "xmonad-screenshot"
+    [ "xmonad-screenshot"
     , "xmonad-use-empty-workspace"
     , "xmonad-2014"
     , "pakej"
     ]
-  git (github "supki" "whacky") (into "git") $
-    [sh|BUILDDIR=$HOME/bin make|]
 
 
 infix 8 -->

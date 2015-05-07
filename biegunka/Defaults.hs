@@ -1,9 +1,15 @@
 {-# LANGUAGE DeriveDataTypeable #-}
-module Defaults where
+module Defaults
+  ( Template
+  , Xmobar(..)
+  , Xmodmap(..)
+  , Xmonad(..)
+  , Xsession(..)
+  , Urxvt(..)
+  , template
+  ) where
 
 import Data.Data (Data, Typeable)
-
-import Data.Default.Class (Default(..))
 
 
 data Template = Template
@@ -14,28 +20,28 @@ data Template = Template
   , urxvt    :: Urxvt
   } deriving (Data, Typeable)
 
-instance Default Template where
-  def = Template
-    { xmobar   = def
-    , xmonad   = def
-    , xmodmap  = def
-    , xsession = def
-    , urxvt    = def
-    }
+type Mod a = a -> a
 
+template :: Mod Xmobar -> Mod Xmonad -> Mod Xmodmap -> Mod Xsession -> Mod Urxvt -> Template
+template f g h j k = Template
+  { xmobar   = f defaultXmobar
+  , xmonad   = g defaultXmonad
+  , xmodmap  = h defaultXmodmap
+  , xsession = j defaultXsession
+  , urxvt    = k defaultUrxvt
+  }
 
 data Xmobar = Xmobar
   { background, position :: String
   , battery              :: Maybe String
   } deriving (Data, Typeable)
 
-instance Default Xmobar where
-  def = Xmobar
-    { background = ""
-    , position   = ""
-    , battery    = Just "\"\""
-    }
-
+defaultXmobar :: Xmobar
+defaultXmobar = Xmobar
+  { background = ""
+  , position   = ""
+  , battery    = Just "\"\""
+  }
 
 data Xmonad = Xmonad
   { terminal
@@ -53,51 +59,48 @@ data Xmonad = Xmonad
   , patterns :: String
   } deriving (Data, Typeable)
 
-instance Default Xmonad where
-  def = Xmonad
-    { terminal  = ""
-    , ubuntu    = ""
-    , terminus  = ""
-    , white     = ""
-    , darkGray  = ""
-    , lightGray = ""
-    , black     = ""
-    , blue      = ""
-    , orange    = ""
-    , yellow    = ""
-    , startup   = ""
-    , follow    = ""
-    , patterns  = ""
-    }
+defaultXmonad :: Xmonad
+defaultXmonad = Xmonad
+  { terminal  = ""
+  , ubuntu    = ""
+  , terminus  = ""
+  , white     = ""
+  , darkGray  = ""
+  , lightGray = ""
+  , black     = ""
+  , blue      = ""
+  , orange    = ""
+  , yellow    = ""
+  , startup   = ""
+  , follow    = ""
+  , patterns  = ""
+  }
 
-
-data Xmodmap = Xmodmap
+newtype Xmodmap = Xmodmap
   { menu :: String
   } deriving (Data, Typeable)
 
-instance Default Xmodmap where
-  def = Xmodmap
-    { menu = ""
-    }
+defaultXmodmap :: Xmodmap
+defaultXmodmap = Xmodmap
+  { menu = ""
+  }
 
-
-data Xsession = Xsession
+newtype Xsession = Xsession
   { setxkbmap :: String
   } deriving (Data, Typeable)
 
-instance Default Xsession where
-  def = Xsession
-    { setxkbmap = ""
-    }
-
+defaultXsession :: Xsession
+defaultXsession = Xsession
+  { setxkbmap = ""
+  }
 
 data Urxvt = Urxvt
   { perllib, background_, browser :: String
   } deriving (Data, Typeable)
 
-instance Default Urxvt where
-  def = Urxvt
-    { perllib     = ""
-    , background_ = ""
-    , browser     = ""
-    }
+defaultUrxvt :: Urxvt
+defaultUrxvt = Urxvt
+  { perllib     = ""
+  , background_ = ""
+  , browser     = ""
+  }
