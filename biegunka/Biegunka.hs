@@ -41,12 +41,14 @@ laptop = sudo "maksenov" $ sequence_
   , misc
   , edwardk
   , mine
+  , vimpager
   ]
 work = sequence_
   [ dotfiles
   , vim
   , misc
   , mine
+  , vimpager
   ]
 
 
@@ -260,6 +262,11 @@ mine = role "mine" $ do
     , "pakej"
     ]
 
+vimpager = role "vimpager" $ do
+  git (github "rkitover" "vimpager") "git/vimpager" $ do
+    [sh|PREFIX=$HOME/git/vimpager make install|]
+    link "bin/vimpager" "bin/vless"
+    link "bin/vimcat" "bin/vcat"
 
 infix 8 -->
 (-->) :: String -> FilePath -> Script Sources ()
