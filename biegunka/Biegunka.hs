@@ -27,7 +27,7 @@ data Environments = Laptop | Work deriving (Typeable, Data)
 main :: IO ()
 main = do
   (environment, runBiegunka) <- options [Laptop, Work]
-  let settings ts = set root "~" . set templates (hStringTemplate ts)
+  let settings ts = set templates (hStringTemplate ts)
   case environment of
     Laptop -> runBiegunka (settings Laptop.template) laptop
     Work   -> runBiegunka (settings Work.template) work
@@ -201,7 +201,7 @@ vim = do
       pathogen_ (github "ivyl" "vim-bling")
       pathogen_ (github "kien" "rainbow_parentheses.vim")
       pathogen  (github "wincent" "Command-T") $
-        [sh|cd ~/.vim/bundle/Command-T/ruby/command-t; /usr/bin/ruby extconf.rb; make|]
+        [sh|cd $SOURCE_ROOT/ruby/command-t; /usr/bin/ruby extconf.rb; make|]
       pathogen_ (github "bling" "vim-airline")
       pathogen_ (github "stephpy" "vim-yaml")
       pathogen_ (github "roman" "golden-ratio")
@@ -264,7 +264,7 @@ mine = role "mine" $ do
 
 vimpager = role "vimpager" $ do
   git (github "rkitover" "vimpager") "git/vimpager" $ do
-    [sh|PREFIX=$HOME/git/vimpager make install|]
+    [sh|PREFIX=$SOURCE_ROOT make install|]
     link "bin/vimpager" "bin/vless"
     link "bin/vimcat" "bin/vcat"
 
