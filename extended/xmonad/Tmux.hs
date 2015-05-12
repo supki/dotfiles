@@ -84,6 +84,7 @@ isSubsequenceOf (x:xs) ys =
 sortOn :: Ord b => (a -> b) -> [a] -> [a]
 sortOn f = map fst . List.sortBy (comparing snd) . map (\x -> (x, f x))
 
+-- TODO: Apparently, there's a O(n) algorithm <http://www.cs.helsinki.fi/u/ukkonen/InfCont85.PDF>
 levenshtein :: Eq a => [a] -> [a] -> Int
 levenshtein xs ys = arr ! (max_i, max_j)
  where
