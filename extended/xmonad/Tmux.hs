@@ -41,7 +41,7 @@ prompt dirs xpConfig = do
   cs <- active
   ds <- concatMapM (io . repos) dirs
   let as = List.nubBy ((==) `on` un) $ map ('\'' :) cs ++ ds
-  mkXPromptWithReturn (UnfuckedInputPrompt "tmux") xpConfig (compl' as) return
+  mkXPromptWithReturn (UnfuckedInputPrompt "damit") xpConfig (compl' as) return
     >>= traverse_ (start cs)
 
 newtype UnfuckedInputPrompt = UnfuckedInputPrompt String
