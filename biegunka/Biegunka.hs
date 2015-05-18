@@ -1,5 +1,5 @@
-{-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes #-}
 {-# OPTIONS_GHC -Wall #-}
@@ -21,12 +21,14 @@ import qualified Laptop
 import qualified Work
 
 
-data Environments = Laptop | Work deriving (Typeable, Data)
+data E = Laptop | Work deriving (Enum, Bounded, Generic)
+
+instance Environments E
 
 
 main :: IO ()
 main = do
-  (environment, runBiegunka) <- options [Laptop, Work]
+  (environment, runBiegunka) <- runnerOf (Proxy :: Proxy E)
   let settings ts = set templates (hStringTemplate ts)
   case environment of
     Laptop -> runBiegunka (settings Laptop.template) laptop
@@ -52,7 +54,7 @@ work = sequence_
   ]
 
 
-dotfiles = role "dotfiles" $
+dotfiles = namespace "dotfiles" $
   git (github "supki" ".dotfiles") "git/dotfiles" $ do
     cores     & mapped._1 <\>~ "core"     & unzipWithM_ link
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
@@ -139,7 +141,7 @@ dotfiles = role "dotfiles" $
     , bin "whereami"
     ]
 
-tools = role "tools" $
+tools = namespace "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     suid_binaries & unzipWithM_ (\s t ->
       sudo "root" $ [sh|
@@ -181,19 +183,19 @@ tools = role "tools" $
 
 
 vim = do
-  role "vim" $ do
-    group "haskell" $ do
+  namespace "vim" $ do
+    namespace "haskell" $ do
       pathogen  (github "Shougo" "vimproc") $
         [sh|make -f make_unix.mak|]
       pathogen_ (github "eagletmt" "ghcmod-vim")
       pathogen_ (github "ujihisa" "neco-ghc")
       pathogen_ (github "Shougo" "neocomplcache")
       pathogen_ (github "bitc" "vim-hdevtools")
-    group "coq" $ do
+    namespace "coq" $ do
       pathogen_ (github "vim-scripts" "coq-syntax")
       pathogen_ (github "vim-scripts" "Coq-indent")
       pathogen_ (github "trefis" "coquille")
-    group "misc" $ do
+    namespace "misc" $ do
       pathogen_ (github "scrooloose" "syntastic")
       pathogen_ (github "tpope" "vim-commentary")
       pathogen_ (github "tpope" "vim-unimpaired")
@@ -205,11 +207,11 @@ vim = do
       pathogen_ (github "bling" "vim-airline")
       pathogen_ (github "stephpy" "vim-yaml")
       pathogen_ (github "roman" "golden-ratio")
-    group "idris" $
+    namespace "idris" $
       pathogen_ (github "idris-hackers" "idris-vim")
-    group "rust" $
+    namespace "rust" $
       pathogen_ (github "wting" "rust.vim")
-    group "mine" $ do
+    namespace "mine" $ do
       git (github "supki" "vim-flipping") (into "git") $
         register ".vim/bundle/vim-flipping"
       git (github "supki" "syntastic-cabal") (into "git") $
@@ -218,33 +220,33 @@ vim = do
         register ".vim/bundle/vim-languages"
       git' (github "supki" "seoul256.vim") (into ".vim/bundle") (set branch "f/m" defaultGit)
       pathogen_ (github "supki" "haskell-vim")
-  role "vimish" $
-    group "haskell" $
+  namespace "vimish" $
+    namespace "haskell" $
       pathogen_ (github "bitc" "hdevtools")
  where
   pathogen  u = git u (into ".vim/bundle")
   pathogen_ u = pathogen u (return ())
 
 
-emacs = role "emacs" $ do
-  group "colorschemes" $
+emacs = namespace "emacs" $ do
+  namespace "colorschemes" $
     git (github "bbatsov" "zenburn-emacs") (into "git/emacs") $
       copyFile "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
-  group "usable" $ do
+  namespace "usable" $ do
     git (github "emacsmirror" "paredit") (into "git/emacs") $
       copyFile "paredit.el" ".emacs.d/plugins/paredit.el"
     git (github "jlr" "rainbow-delimiters") (into "git/emacs") $
       copyFile "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
-misc = role "misc" $ traverse_ (--> into "git")
+misc = namespace "misc" $ traverse_ (--> into "git")
   [ github "zsh-users" "zsh-syntax-highlighting"
   , github "zsh-users" "zsh-completions"
   , github "muennich" "urxvt-perls"
   ]
 
 
-edwardk = role "edwardk" $ traverse_ (--> into "git") . map (github "ekmett") $
+edwardk = namespace "edwardk" $ traverse_ (--> into "git") . map (github "ekmett") $
   [ "free"
   , "reflection"
   , "tagged"
@@ -254,7 +256,7 @@ edwardk = role "edwardk" $ traverse_ (--> into "git") . map (github "ekmett") $
   , "kan-extensions"
   ]
 
-mine = role "mine" $ do
+mine = namespace "mine" $ do
   traverse_ (--> into "git") . map (github "supki") $
     [ "xmonad-screenshot"
     , "xmonad-use-empty-workspace"
@@ -262,7 +264,7 @@ mine = role "mine" $ do
     , "pakej"
     ]
 
-vimpager = role "vimpager" $ do
+vimpager = namespace "vimpager" $ do
   git (github "rkitover" "vimpager") "git/vimpager" $ do
     [sh|PREFIX=$SOURCE_ROOT make install|]
     link "bin/vimpager" "bin/vless"
