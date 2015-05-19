@@ -4,6 +4,10 @@ module Work
   ) where
 
 import Control.Biegunka (multiline)
+import Data.List (intercalate)
+import System.Environment
+import System.FilePath ((</>))
+import System.IO.Unsafe (unsafePerformIO)
 
 import Defaults
 
@@ -40,7 +44,9 @@ template = Defaults.template
     { setxkbmap = "setxkbmap -option \"\" -layout us,ru -option grp:caps_toggle -option grp_led:scroll :2"
     })
   (\urxvt -> urxvt
-    { perllib     = "/home/pyoseek/git/urxvt-tabbedex:/home/pyoseek/git/urxvt-perls"
+    { perllib     = intercalate ":" [ home </> "git/urxvt-tabbedex", home </> "git/urxvt-perls" ]
     , background_ = "#373737"
     , browser     = "x-www-browser"
     })
+ where
+  home = unsafePerformIO (getEnv "HOME")
