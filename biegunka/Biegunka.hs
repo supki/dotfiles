@@ -71,6 +71,7 @@ dotfiles = namespace "dotfiles" $
     |]
     [sh|lesskey|]
     [sh|chmod +x ~/.xsessionrc|]
+    [sh|chmod '0600' "${SOURCE_ROOT}/core/ghci"|]
  where
   cores =
     [ dot "mpdconf"
