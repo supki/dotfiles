@@ -219,7 +219,7 @@ vim = do
         register ".vim/bundle/syntastic-cabal"
       git (github "supki" "vim-languages") (into "git") $
         register ".vim/bundle/vim-languages"
-      git' (github "supki" "seoul256.vim") (into ".vim/bundle") (set branch "f/m" defaultGit)
+      git' (github "supki" "seoul256.vim") (into ".vim/bundle") (branch "f/m")
       pathogen_ (github "supki" "haskell-vim")
   namespace "vimish" $
     namespace "haskell" $
