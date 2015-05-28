@@ -60,7 +60,7 @@ dotfiles = namespace "dotfiles" $
     extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
     templates & mapped._1 <\>~ "template" & unzipWithM_ substitute
     miscs     & mapped._1 <\>~ "misc"     & unzipWithM_ link
-    [sh|xrdb -merge ~/.Xdefaults|]
+    [sh|DISPLAY=:0 xrdb -merge ~/.Xdefaults|]
     [sh|xmonad --recompile|]
     [sh|pakej --recompile|]
     let pathogen_url :: String
