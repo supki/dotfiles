@@ -101,6 +101,7 @@ dotfiles = namespace "dotfiles" $
     , dot "psqlrc"
     , dot "lesskey"
     , dot "colordiffrc"
+    , dot "gtktermrc"
     , "vim/vim.custom"                    ~> ".vim/plugin/vimrc-local.vim"
     , "vim/indent/haskell.vim"            ~> ".vim/indent/haskell.vim"
     , "vim/camo.vim"                      ~> ".vim/colors/camo.vim"
