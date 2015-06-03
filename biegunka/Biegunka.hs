@@ -233,12 +233,12 @@ vim = do
 emacs = namespace "emacs" $ do
   namespace "colorschemes" $
     git (github "bbatsov" "zenburn-emacs") (into "git/emacs") $
-      copyFile "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
+      copy "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
   namespace "usable" $ do
     git (github "emacsmirror" "paredit") (into "git/emacs") $
-      copyFile "paredit.el" ".emacs.d/plugins/paredit.el"
+      copy "paredit.el" ".emacs.d/plugins/paredit.el"
     git (github "jlr" "rainbow-delimiters") (into "git/emacs") $
-      copyFile "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
+      copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
 misc = namespace "misc" $ traverse_ (--> into "git")
