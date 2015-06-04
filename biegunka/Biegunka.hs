@@ -3,14 +3,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes #-}
 {-# OPTIONS_GHC -Wall #-}
-{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
-{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 module Main (main) where
 
 import           Control.Applicative
 import           Control.Lens
 import           Data.Foldable (traverse_)
-import           System.FilePath ((</>))
+import           System.FilePath (combine)
 import           Text.Printf (printf)
 
 import           Control.Biegunka
@@ -34,7 +32,7 @@ main = do
     Laptop -> runBiegunka (settings Laptop.template) laptop
     Work   -> runBiegunka (settings Work.template) work
 
-laptop, work :: Script Sources ()
+laptop, work :: Script 'Sources ()
 laptop = sudo "maksenov" $ sequence_
   [ dotfiles
   , tools
@@ -54,12 +52,13 @@ work = sequence_
   ]
 
 
+dotfiles :: Script 'Sources ()
 dotfiles = namespace "dotfiles" $
   git (github "supki" ".dotfiles") "git/dotfiles" $ do
-    cores     & mapped._1 <\>~ "core"     & unzipWithM_ link
-    extendeds & mapped._1 <\>~ "extended" & unzipWithM_ link
-    templates & mapped._1 <\>~ "template" & unzipWithM_ substitute
-    miscs     & mapped._1 <\>~ "misc"     & unzipWithM_ link
+    traverse_ (uncurry link)
+              (concat [cores, extendeds, miscs])
+    traverse_ (uncurry substitute)
+              templates
     [sh|DISPLAY=:0 xrdb -merge ~/.Xdefaults|]
     [sh|xmonad --recompile|]
     [sh|pakej --recompile|]
@@ -73,7 +72,7 @@ dotfiles = namespace "dotfiles" $
     [sh|chmod +x ~/.xsessionrc|]
     [sh|chmod '0600' "${SOURCE_ROOT}/core/ghci"|]
  where
-  cores =
+  cores = over (mapped._1) (combine "core")
     [ dot "mpdconf"
     , dot "profile"
     , dot "zshenv"
@@ -111,7 +110,7 @@ dotfiles = namespace "dotfiles" $
     , "transmission-daemon/settings.json" ~> ".transmission-daemon/settings.json"
     , "profile"                           ~> ".xmonad/xmonad-session-rc"
     ]
-  extendeds =
+  extendeds = over (mapped._1) (combine "extended")
     [ dot "gvimrc"
     , dot "pentadactylrc"
     , dot "gtkrc.mine"
@@ -127,14 +126,14 @@ dotfiles = namespace "dotfiles" $
     , "pentadactyl/wanker.penta" ~> ".pentadactyl/plugins/wanker.penta"
     , "mplayer-config"           ~> ".mplayer/config"
     ]
-  templates =
+  templates = over (mapped._1) (combine "template")
     [ "xsession"                 ~> ".xsession"
     , "xsession"                 ~> ".xsessionrc"
     , "xmonad/Profile.hs"        ~> ".xmonad/lib/Profile.hs"
     , "xmodmap"                  ~> ".xmodmap"
     , "Xdefaults"                ~> ".Xdefaults"
     ]
-  miscs =
+  miscs = over (mapped._1) (combine "misc")
     [ bin "bat.rb"
     , bin "ip.awk"
     , bin "weather.rb"
@@ -143,6 +142,7 @@ dotfiles = namespace "dotfiles" $
     , bin "whereami"
     ]
 
+tools :: Script 'Sources ()
 tools = namespace "tools" $
   git "git@budueba.com:tools" "git/tools" $ do
     suid_binaries & unzipWithM_ (\s t ->
@@ -153,8 +153,8 @@ tools = namespace "tools" $
       |])
     user_binaries & unzipWithM_ (\s t -> do
       [sh|ghc -O #{s} -fforce-recomp -v0 -o #{t}|]
-      link t ("bin" </> t))
-    scripts & unzipWithM_ link
+      link t (combine "bin" t))
+    unzipWithM_ link scripts
  where
   scripts, user_binaries, suid_binaries :: [(String, String)]
   scripts =
@@ -184,6 +184,7 @@ tools = namespace "tools" $
     ]
 
 
+vim :: Script 'Sources ()
 vim = do
   namespace "vim" $ do
     namespace "haskell" $ do
@@ -230,6 +231,7 @@ vim = do
   pathogen_ u = pathogen u (return ())
 
 
+emacs :: Script 'Sources ()
 emacs = namespace "emacs" $ do
   namespace "colorschemes" $
     git (github "bbatsov" "zenburn-emacs") (into "git/emacs") $
@@ -241,6 +243,7 @@ emacs = namespace "emacs" $ do
       copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 
+misc :: Script 'Sources ()
 misc = namespace "misc" $ traverse_ (--> into "git")
   [ github "zsh-users" "zsh-syntax-highlighting"
   , github "zsh-users" "zsh-completions"
@@ -248,6 +251,7 @@ misc = namespace "misc" $ traverse_ (--> into "git")
   ]
 
 
+edwardk :: Script 'Sources ()
 edwardk = namespace "edwardk" $ traverse_ (--> into "git") . map (github "ekmett") $
   [ "free"
   , "reflection"
@@ -258,7 +262,8 @@ edwardk = namespace "edwardk" $ traverse_ (--> into "git") . map (github "ekmett
   , "kan-extensions"
   ]
 
-mine = namespace "mine" $ do
+mine :: Script 'Sources ()
+mine = namespace "mine" $
   traverse_ (--> into "git") . map (github "supki") $
     [ "xmonad-screenshot"
     , "xmonad-use-empty-workspace"
@@ -266,7 +271,8 @@ mine = namespace "mine" $ do
     , "pakej"
     ]
 
-vimpager = namespace "vimpager" $ do
+vimpager :: Script 'Sources ()
+vimpager = namespace "vimpager" $
   git (github "rkitover" "vimpager") "git/vimpager" $ do
     [sh|PREFIX=$SOURCE_ROOT make install|]
     link "bin/vimpager" "bin/vless"
@@ -280,12 +286,7 @@ dot :: FilePath -> (FilePath, FilePath)
 dot path = path ~> ('.' : path)
 
 bin :: FilePath -> (FilePath, FilePath)
-bin path = path ~> ("bin" </> path)
-
-infixr 4 <\>~
-(<\>~) :: Setting (->) s t FilePath FilePath -> FilePath -> s -> t
-l <\>~ n = over l (n </>)
-
+bin path = path ~> combine "bin" path
 
 unzipWithM_ :: Applicative m => (a -> b -> m c) -> [(a, b)] -> m ()
 unzipWithM_ = traverse_ . uncurry
