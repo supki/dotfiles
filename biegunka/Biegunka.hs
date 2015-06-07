@@ -144,6 +144,8 @@ dotfiles = namespace "dotfiles" $
     ]
   nix = do
     link "nix/config.nix" ".nixpkgs/config.nix"
+    link "nix/hdevtools-7.8.nix" ".nixpkgs/hdevtools-7.8.nix"
+    link "nix/hdevtools-7.10.nix" ".nixpkgs/hdevtools-7.10.nix"
 
 tools :: Script 'Sources ()
 tools = namespace "tools" $
