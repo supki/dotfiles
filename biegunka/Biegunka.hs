@@ -59,6 +59,7 @@ dotfiles = namespace "dotfiles" $
               (concat [cores, extendeds, miscs])
     traverse_ (uncurry substitute)
               templates
+    nix
     [sh|DISPLAY=:0 xrdb -merge ~/.Xdefaults|]
     [sh|xmonad --recompile|]
     [sh|pakej --recompile|]
@@ -141,6 +142,8 @@ dotfiles = namespace "dotfiles" $
     , bin "svn-browse"
     , bin "whereami"
     ]
+  nix = do
+    link "nix/config.nix" ".nixpkgs/config.nix"
 
 tools :: Script 'Sources ()
 tools = namespace "tools" $
