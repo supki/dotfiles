@@ -48,7 +48,7 @@ myLogHook :: X ()
 myLogHook = updatePointer (Relative 0.5 0.5)
 
 myLayoutHook = smartBorders . avoidStruts $
-  onWorkspaces [Texts, Stuff] (tabbedBottomAlways shrinkText myTheme) $
+  onWorkspaces [Texts] (tabbedBottomAlways shrinkText myTheme) $
   onWorkspaces [Video, Mail, Files, Torrents] Full $
   onWorkspace Talkative (TwoPane (3 / 100) (1 / 2) ||| Full) $
   tall ||| Mirror tall ||| Full
