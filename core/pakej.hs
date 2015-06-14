@@ -25,7 +25,7 @@ import           Text.Printf (printf)
 main :: IO ()
 main = pakej $ private "all" . aggregate
   [ private "cpu"     . cpu
-  , private "mem"     . mem
+  , private "mem"     . oom "90%" . mem . every (3 * second)
   , private "ip"      . system [sh| ip.awk eth0 |] . every minute
   , private "battery" . system [sh| bat.rb |] . every (minute `div` 2)
   , private "cputemp" . cputemp . every (10 * second)
@@ -48,6 +48,13 @@ mem = Mem.widget unknown (fmap percentage . Mem.ratio Mem.used Mem.total)
  where
   percentage = fromString . printf "%2.0f%%" . (100 *)
   unknown    = fromString "??%"
+
+oom :: Text -> Widget IO Text Text Text Text
+oom threshold =
+  fromWire (mkStateM "00%" (\_ (used, was) ->
+    do when (and [used /= was, used > threshold])
+            ([sh| notify-send "OOM is coming" "#{used} of memory has already\nbeen used" -i info |] :: IO ())
+       return (Right used, used)))
 
 date :: PakejWidget Text
 date = text $ fmap format getZonedTime
