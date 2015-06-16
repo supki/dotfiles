@@ -82,6 +82,7 @@ bindkey "^[[4~" end-of-line
 bindkey "^_" undo
 bindkey -a "q" push-line
 bindkey "^[[Z" reverse-menu-complete
+bindkey '\e#' pound-insert
 
 alias ls='ls --color -1'
 alias less='less -R'
