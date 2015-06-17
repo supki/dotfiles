@@ -20,4 +20,6 @@
       };
     };
   };
+
+  allowUnfree = true;
 }
