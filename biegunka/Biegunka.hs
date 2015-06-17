@@ -110,6 +110,7 @@ dotfiles = namespace "dotfiles" $
     , "vifmrc"                            ~> ".vifm/vifmrc"
     , "transmission-daemon/settings.json" ~> ".transmission-daemon/settings.json"
     , "profile"                           ~> ".xmonad/xmonad-session-rc"
+    , "profile"                           ~> ".zprofile"
     ]
   extendeds = over (mapped._1) (combine "extended")
     [ dot "gvimrc"
