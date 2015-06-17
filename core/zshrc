@@ -33,11 +33,8 @@ function vcs_info_wrapper {
 }
 
 function nix_env_wrapper {
-  if [ -n "${NIX_MYENV_NAME:-}" ]; then
-    echo -n "[$NIX_MYENV_NAME]"
-  fi
-  if [ "${IN_NIX_SHELL:-0}" -eq 1 ]; then
-    echo -n "[nix-shell]"
+  if [ -n "${IN_WHICH_NIX_SHELL:-}" ]; then
+    echo -n "[${IN_WHICH_NIX_SHELL}]"
   fi
 }
 
@@ -100,35 +97,8 @@ alias l='less'
 alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
 alias diff='git diff --no-index'
 
-alias nb='nix-build'
-alias ns='nix-store'
-alias ne='nix-env'
-alias ngc='nix-collect-garbage'
-alias nr='nix-repl'
-
-alias c2n='cabal2nix . > default.nix'
-alias dive='nix-build env.nix && ./result/bin/load-env-$(basename $PWD)'
-
-function nzsh() {
-	nix-shell --command zsh ${(z)@/#/-p haskellPackages.}
-}
-
-function generate-env.nix {
-	cat <<- ENV
-let
-  pkgs = import <nixpkgs> {};
-  env  = pkgs.haskellPackages.ghcWithPackagesOld (ghc:
-    ([ ghc.hlint ghc.doctest ] ++ [(import ../hdevtools {})] ++ (ghc.callPackage ./. {}).nativeBuildInputs));
-in
-  pkgs.myEnvFun {
-    name = "$1";
-    shell = "$SHELL";
-    buildInputs = [ pkgs.haskellPackages.cabalInstall env ];
-    extraCmds = ''
-      \$(grep export \${env.outPath}/bin/ghc)
-    '';
-    }
-			ENV
+function nix-zsh() {
+	nix-shell --command "$SHELL"
 }
 
 function man {
