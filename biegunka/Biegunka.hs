@@ -147,6 +147,7 @@ dotfiles = namespace "dotfiles" $
     link "nix/config.nix" ".nixpkgs/config.nix"
     link "nix/hdevtools-7.8.nix" ".nixpkgs/hdevtools-7.8.nix"
     link "nix/hdevtools-7.10.nix" ".nixpkgs/hdevtools-7.10.nix"
+    link "nix/biegunka.nix" ".nixpkgs/biegunka.nix"
 
 tools :: Script 'Sources ()
 tools = namespace "tools" $
@@ -285,7 +286,7 @@ vimpager = namespace "vimpager" $
     link "bin/vimcat" "bin/vcat"
 
 infix 8 -->
-(-->) :: String -> FilePath -> Script Sources ()
+(-->) :: String -> FilePath -> Script 'Sources ()
 (-->) = git_
 
 dot :: FilePath -> (FilePath, FilePath)
