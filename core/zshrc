@@ -167,3 +167,7 @@ function svn {
 			;;
 		esac
 }
+
+if [ -n "$NIX_GHC" ]; then
+	NIX_GHCI=${NIX_GHC}i
+fi
