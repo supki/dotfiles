@@ -4,7 +4,7 @@
     hdevtools biegunka
   ]);
   cabal-install = pkgs.haskell.packages.${compiler}.cabal-install;
-  biegunka = pkgs.haskell.packages.${compiler}.biegunka;
+  biegunka = pkgs.haskell.packages.${compiler}.callPackage ./nix/biegunka.nix {};
 in
   pkgs.stdenv.mkDerivation rec {
     name = "dotfiles";

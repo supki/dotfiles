@@ -7,11 +7,26 @@ If you *really* want to know what's going on here, here's [a link][biegunka]
 
 ---
 
-In case of the memory loss:
+In case of memory loss
+----------------------
+
+Install [Nix](https://nixos.org/nix):
 
 ```
-% cabal install biegunka
-% biegunka run --force biegunka -- [--work|--laptop]
+% curl https://nixos.org/nix/install | sh
+% source $HOME/.nix-profile/etc/profile.d/nix.sh
+```
+
+Prepare the environment:
+
+```
+% nix-shell
+```
+
+Run biegunka to populate `~` with dotfiles:
+
+```
+[nix-shell]$ biegunka run biegunka -- [--work|--laptop]
 ```
 
  [biegunka]: http://biegunka.budueba.com/

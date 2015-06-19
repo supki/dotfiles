@@ -1,17 +1,10 @@
-language: haskell
-
-ghc:
-    - 7.8
-
 before_install:
-    - cabal install alex --constraint='transformers >= 0.4'
-    - cabal install happy
-    - cabal install c2hs cabal-install cabalg
-    - hash -r
+    - curl https://nixos.org/nix/install | sh
+    - source $HOME/.nix-profile/etc/profile.d/nix.sh
 
 install:
-    - cabalg https://github.com/biegunka/biegunka
+    - nix-shell --run 'biegunka --version'
 
 script:
-    - biegunka run biegunka/ -- --laptop --changes
-    - biegunka run biegunka/ -- --work --changes
+    - nix-shell --run 'biegunka run biegunka -- --laptop --changes'
+    - nix-shell --run 'biegunka run biegunka -- --work --changes'
