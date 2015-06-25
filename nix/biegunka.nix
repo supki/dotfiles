@@ -11,8 +11,8 @@ mkDerivation {
   version = "0.2";
   src = fetchgit {
     url = "https://github.com/biegunka/biegunka";
-    sha256 = "c8db6f10ad054d7a2211ecc3bbfa477e42dcaaa45a825da1f86ae5f8c172ccca";
-    rev = "0e42cf3e244ad4541a275906d0b02c5e575c976c";
+    sha256 = "5c96a4ccc21f7cacba7c869aeccb1a40c3e4358a9dd8c722e2fccca32136d18c";
+    rev = "b77d698be8cfcaa854c0018a4707c77fb2cf5055";
   };
   isLibrary = true;
   isExecutable = true;
@@ -31,5 +31,4 @@ mkDerivation {
   homepage = "http://biegunka.budueba.com/";
   description = "Configuration development";
   license = stdenv.lib.licenses.mit;
-  doCheck = false;
 }

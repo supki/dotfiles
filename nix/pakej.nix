@@ -9,8 +9,8 @@ mkDerivation {
   version = "0.2.0.0";
   src = fetchgit {
     url = "https://github.com/supki/pakej";
-    sha256 = "87f57df6cf3325a5c489035aa4a32eca16c009730228acec1c08d7853c1d7c48";
-    rev = "647667031917bba4b4854e56e7e78ba8b16c14b1";
+    sha256 = "c8dbfe43dfb8dfdc2b638c03e5b956c1fb968026fab2a4e35723899db0280c51";
+    rev = "e09effc82ba7dac06e36bd0981bf7c0cf86526c7";
   };
   isLibrary = true;
   isExecutable = true;
