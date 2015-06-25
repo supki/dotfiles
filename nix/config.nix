@@ -15,6 +15,8 @@
         ghc7101 = unusable.haskell.packages.ghc7101.override {
           overrides = self: _: {
             hdevtools = self.callPackage ./hdevtools-7.10.nix {};
+            biegunka = self.callPackage ./biegunka.nix {};
+            pakej = self.callPackage ./pakej.nix {};
           };
         };
       };

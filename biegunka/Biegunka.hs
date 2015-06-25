@@ -5,7 +5,6 @@
 {-# OPTIONS_GHC -Wall #-}
 module Main (main) where
 
-import           Control.Applicative
 import           Control.Lens
 import           Data.Foldable (traverse_)
 import           System.FilePath (combine)
@@ -148,6 +147,7 @@ dotfiles = namespace "dotfiles" $
     link "nix/hdevtools-7.8.nix" ".nixpkgs/hdevtools-7.8.nix"
     link "nix/hdevtools-7.10.nix" ".nixpkgs/hdevtools-7.10.nix"
     link "nix/biegunka.nix" ".nixpkgs/biegunka.nix"
+    link "nix/pakej.nix" ".nixpkgs/pakej.nix"
 
 tools :: Script 'Sources ()
 tools = namespace "tools" $

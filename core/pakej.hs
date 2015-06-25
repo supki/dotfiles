@@ -10,14 +10,13 @@ import           Data.Maybe (mapMaybe, listToMaybe)
 import           Data.String (IsString(..))
 import           Data.Text (Text)
 import qualified Data.Text as Text
-import           Data.Time (formatTime, getZonedTime)
+import           Data.Time (formatTime, getZonedTime, defaultTimeLocale)
 import           Network (PortID(..))
 import           Pakej
 import qualified Pakej.Widget.Cpu as Cpu
 import qualified Pakej.Widget.Memory as Mem
 import           Prelude hiding ((.), id)
 import           System.Command.QQ (sh)
-import           System.Locale (defaultTimeLocale)
 import           System.IO (withFile, hGetLine, IOMode(..))
 import           Text.Printf (printf)
 
@@ -55,6 +54,7 @@ oom threshold =
     do when (and [used /= was, used > threshold])
             ([sh| notify-send "OOM is coming" "#{used} of memory has already\nbeen used" -i info |] :: IO ())
        return (Right used, used)))
+{-# ANN oom "HLint: ignore Use &&" #-}
 
 date :: PakejWidget Text
 date = text $ fmap format getZonedTime

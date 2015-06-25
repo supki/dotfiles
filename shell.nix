@@ -3,8 +3,8 @@
 , devel ? false
 }: let
   inherit (nixpkgs) pkgs;
-  ghc = pkgs.haskell.packages.${compiler}.ghcWithPackages(ps: with ps; [
-    hdevtools biegunka
+  ghc = pkgs.haskell.packages.${compiler}.ghcWithPackages(ps: [
+    ps.hdevtools biegunka pakej
   ]);
   cabal-install = pkgs.haskell.packages.${compiler}.cabal-install;
   biegunka = pkgs.haskell.packages.${compiler}.callPackage (if devel then ../biegunka/biegunka.nix else ./nix/biegunka.nix) {
@@ -14,10 +14,11 @@
         doHaddock = false;
     });
   };
+  pakej = pkgs.haskell.packages.${compiler}.callPackage ./nix/pakej.nix {};
 in
   pkgs.stdenv.mkDerivation rec {
     name = "dotfiles";
-    buildInputs = [ ghc cabal-install biegunka ];
+    buildInputs = [ ghc cabal-install biegunka pakej ];
     shellHook = ''
       export NIX_GHC="${ghc}/bin/ghc"
       export NIX_GHCPKG="${ghc}/bin/ghc-pkg"
