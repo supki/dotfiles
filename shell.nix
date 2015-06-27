@@ -5,7 +5,7 @@
   inherit (nixpkgs) pkgs;
   everyone-dies = pkgs.haskell.packages.${compiler};
   ghc = everyone-dies.ghcWithPackages(ps: [
-    ps.hdevtools biegunka pakej
+    ps.hdevtools alone-and-afraid pakej
   ]);
   cabal-install = everyone-dies.cabal-install;
   cabal2nix = everyone-dies.cabal2nix;

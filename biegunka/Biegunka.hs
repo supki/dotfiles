@@ -2,7 +2,6 @@
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes #-}
-{-# OPTIONS_GHC -Wall #-}
 module Main (main) where
 
 import           Control.Lens
@@ -11,7 +10,7 @@ import           System.FilePath (combine)
 import           Text.Printf (printf)
 
 import           Control.Biegunka
-import           Control.Biegunka.Source.Git
+import           Control.Biegunka.Source.Git (git, git', git_, branch)
 import           Control.Biegunka.Templates.HStringTemplate
 
 import qualified Laptop
@@ -46,18 +45,18 @@ work = sequence_
   [ dotfiles
   , vim
   , misc
+  , edwardk
   , mine
   , vimpager
   ]
-
 
 dotfiles :: Script 'Sources ()
 dotfiles = namespace "dotfiles" $
   git (github "supki" ".dotfiles") "git/dotfiles" $ do
     traverse_ (uncurry link)
-              (concat [cores, extendeds, miscs])
+              (concat [core, extended, script])
     traverse_ (uncurry substitute)
-              templates
+              template
     nix
     [sh|DISPLAY=:0 xrdb -merge ~/.Xdefaults|]
     [sh|xmonad --recompile|]
@@ -76,7 +75,7 @@ dotfiles = namespace "dotfiles" $
        cabal2nix "https://github.com/biegunka/biegunka" > "nix/biegunka.nix"
     |]
  where
-  cores = over (mapped._1) (combine "core")
+  core = over (mapped._1) (combine "core")
     [ dot "mpdconf"
     , dot "profile"
     , dot "zshenv"
@@ -115,7 +114,7 @@ dotfiles = namespace "dotfiles" $
     , "profile"                           ~> ".xmonad/xmonad-session-rc"
     , "profile"                           ~> ".zprofile"
     ]
-  extendeds = over (mapped._1) (combine "extended")
+  extended = over (mapped._1) (combine "extended")
     [ dot "gvimrc"
     , dot "pentadactylrc"
     , dot "gtkrc.mine"
@@ -131,14 +130,14 @@ dotfiles = namespace "dotfiles" $
     , "pentadactyl/wanker.penta" ~> ".pentadactyl/plugins/wanker.penta"
     , "mplayer-config"           ~> ".mplayer/config"
     ]
-  templates = over (mapped._1) (combine "template")
+  template = over (mapped._1) (combine "template")
     [ "xsession"                 ~> ".xsession"
     , "xsession"                 ~> ".xsessionrc"
     , "xmonad/Profile.hs"        ~> ".xmonad/lib/Profile.hs"
     , "xmodmap"                  ~> ".xmodmap"
     , "Xdefaults"                ~> ".Xdefaults"
     ]
-  miscs = over (mapped._1) (combine "misc")
+  script = over (mapped._1) (combine "script")
     [ bin "bat.rb"
     , bin "ip.awk"
     , bin "weather.rb"
@@ -147,11 +146,11 @@ dotfiles = namespace "dotfiles" $
     , bin "whereami"
     ]
   nix = do
-    link "nix/config.nix" ".nixpkgs/config.nix"
-    link "nix/hdevtools-7.8.nix" ".nixpkgs/hdevtools-7.8.nix"
+    link "nix/config.nix"         ".nixpkgs/config.nix"
+    link "nix/hdevtools-7.8.nix"  ".nixpkgs/hdevtools-7.8.nix"
     link "nix/hdevtools-7.10.nix" ".nixpkgs/hdevtools-7.10.nix"
-    link "nix/biegunka.nix" ".nixpkgs/biegunka.nix"
-    link "nix/pakej.nix" ".nixpkgs/pakej.nix"
+    link "nix/biegunka.nix"       ".nixpkgs/biegunka.nix"
+    link "nix/pakej.nix"          ".nixpkgs/pakej.nix"
 
 tools :: Script 'Sources ()
 tools = namespace "tools" $
@@ -193,7 +192,6 @@ tools = namespace "tools" $
     [ "suspender.hs"          ~> "suspender"
     , "vaio/touchpad.hs"      ~> "vaio-touchpad"
     ]
-
 
 vim :: Script 'Sources ()
 vim = do
@@ -241,7 +239,6 @@ vim = do
   pathogen  u = git u (into ".vim/bundle")
   pathogen_ u = pathogen u (return ())
 
-
 emacs :: Script 'Sources ()
 emacs = namespace "emacs" $ do
   namespace "colorschemes" $
@@ -253,7 +250,6 @@ emacs = namespace "emacs" $ do
     git (github "jlr" "rainbow-delimiters") (into "git/emacs") $
       copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
-
 misc :: Script 'Sources ()
 misc = namespace "misc" $ traverse_ (--> into "git")
   [ github "zsh-users" "zsh-syntax-highlighting"
@@ -261,16 +257,19 @@ misc = namespace "misc" $ traverse_ (--> into "git")
   , github "muennich" "urxvt-perls"
   ]
 
-
 edwardk :: Script 'Sources ()
 edwardk = namespace "edwardk" $ traverse_ (--> into "git") . map (github "ekmett") $
-  [ "free"
+  [ "categories"
+  , "discrimination"
+  , "free"
+  , "hyperfunctions"
+  , "kan-extensions"
+  , "lens"
+  , "machines"
+  , "profunctors"
+  , "promises"
   , "reflection"
   , "tagged"
-  , "machines"
-  , "lens"
-  , "profunctors"
-  , "kan-extensions"
   ]
 
 mine :: Script 'Sources ()
