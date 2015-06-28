@@ -284,7 +284,7 @@ mine = namespace "mine" $
 vimpager :: Script 'Sources ()
 vimpager = namespace "vimpager" $
   git (github "rkitover" "vimpager") "git/vimpager" $ do
-    [sh|PREFIX=$SOURCE_ROOT make install|]
+    [sh|make PREFIX=$SOURCE_ROOT install|]
     link "bin/vimpager" "bin/vless"
     link "bin/vimcat" "bin/vcat"
 
