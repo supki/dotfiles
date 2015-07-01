@@ -223,6 +223,8 @@ vim = do
       pathogen_ (github "idris-hackers" "idris-vim")
     namespace "rust" $
       pathogen_ (github "wting" "rust.vim")
+    namespace "purescript" $
+      pathogen_ (github "supki" "purescript-vim")
     namespace "mine" $ do
       git (github "supki" "vim-flipping") (into "git") $
         register ".vim/bundle/vim-flipping"
@@ -251,11 +253,14 @@ emacs = namespace "emacs" $ do
       copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 misc :: Script 'Sources ()
-misc = namespace "misc" $ traverse_ (--> into "git")
-  [ github "zsh-users" "zsh-syntax-highlighting"
-  , github "zsh-users" "zsh-completions"
-  , github "muennich" "urxvt-perls"
-  ]
+misc =
+  namespace "misc" $ do
+    traverse_ (--> into "git")
+      [ github "zsh-users" "zsh-syntax-highlighting"
+      , github "zsh-users" "zsh-completions"
+      , github "muennich" "urxvt-perls"
+      ]
+    github "purescript-contrib" "grunt-init-purescript" --> into ".grunt-init"
 
 edwardk :: Script 'Sources ()
 edwardk = namespace "edwardk" $ traverse_ (--> into "git") . map (github "ekmett") $

@@ -128,6 +128,7 @@
 		autocmd FileType treetop    setlocal expandtab shiftwidth=2 softtabstop=2
 		autocmd FileType rust       setlocal expandtab shiftwidth=4 softtabstop=4
 		autocmd FileType groovy     setlocal expandtab shiftwidth=2 softtabstop=2
+		autocmd FileType purescript setlocal expandtab shiftwidth=2 softtabstop=2
 	augroup end
 
 	augroup swap_exists
@@ -375,7 +376,7 @@
 	let g:CommandTDeleteMap = ['<DEL>', '<C-l>']
 	let g:CommandTCursorLeftMap = '<Left>'
 	let g:CommandTCursorRightMap = '<Right>'
-	let g:CommandTWildIgnore = &wildignore . ',cookbooks/*,.env_*'
+	let g:CommandTWildIgnore = &wildignore . ',cookbooks/*,.env_*,bower_components/*,node_modules/*,output/*,tmp/*,dist/*'
 
 	" for vim-bling
 	let g:bling_color=216
