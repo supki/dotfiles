@@ -11,8 +11,8 @@ mkDerivation {
   version = "0.2";
   src = fetchgit {
     url = "https://github.com/biegunka/biegunka";
-    sha256 = "8303766dad3cb19b65d5dadba23c4e1b0b5b816af4e5045a494206e28df860c4";
-    rev = "eaa66c6b05a96f27bf37bfd7ddf32b13b3e6a8b9";
+    sha256 = "b790159215ee3056e587cac602cd2bbc95f14d4a348255687658c43966ff6d10";
+    rev = "d04b445f2fc43a2499f439fc72d9bc2f1600bbe2";
   };
   isLibrary = true;
   isExecutable = true;

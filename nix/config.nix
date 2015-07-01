@@ -16,6 +16,7 @@
           overrides = self: _: {
             hdevtools = self.callPackage ./hdevtools-7.10.nix {};
             biegunka = self.callPackage ./biegunka.nix {};
+            biegunka-svn = self.callPackage ./biegunka-svn.nix {};
             pakej = self.callPackage ./pakej.nix {};
           };
         };

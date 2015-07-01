@@ -73,6 +73,7 @@ dotfiles = namespace "dotfiles" $
     [sh|
        cabal2nix "https://github.com/supki/pakej" > "nix/pakej.nix"
        cabal2nix "https://github.com/biegunka/biegunka" > "nix/biegunka.nix"
+       cabal2nix "https://github.com/biegunka/biegunka-svn" > "nix/biegunka-svn.nix"
     |]
  where
   core = over (mapped._1) (combine "core")
@@ -150,6 +151,7 @@ dotfiles = namespace "dotfiles" $
     link "nix/hdevtools-7.8.nix"  ".nixpkgs/hdevtools-7.8.nix"
     link "nix/hdevtools-7.10.nix" ".nixpkgs/hdevtools-7.10.nix"
     link "nix/biegunka.nix"       ".nixpkgs/biegunka.nix"
+    link "nix/biegunka-svn.nix"   ".nixpkgs/biegunka-svn.nix"
     link "nix/pakej.nix"          ".nixpkgs/pakej.nix"
 
 tools :: Script 'Sources ()
