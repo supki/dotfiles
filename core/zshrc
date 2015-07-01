@@ -98,7 +98,7 @@ alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
 alias diff='git diff --no-index'
 
 function nix-zsh() {
-	nix-shell --command "$SHELL"
+	nix-shell --command "$SHELL" "$@"
 }
 
 function man {
@@ -150,7 +150,7 @@ function fuck-them {
 }
 
 function sd {
-	svn diff | colordiff | diff-highlight | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
+	svn diff "$@" | colordiff | diff-highlight | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
 }
 
 function svn {
