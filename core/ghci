@@ -1,6 +1,5 @@
 :set prompt ">>> "
 :set prompt2 ""
-:set editor vim
 
 import           Control.Applicative
 import           Control.Monad
