@@ -13,12 +13,17 @@
   alone = everyone-dies.callPackage biegunka {
     mkDerivation = args: everyone-dies.mkDerivation(args // {
       buildTools = (if args ? buildTools then args.buildTools else []) ++ [ pkgs.git ];
-        doCheck = (biegunka == ./nix/biegunka.nix);
-        doHaddock = false;
+      doCheck = (biegunka == ./nix/biegunka.nix);
+      doHaddock = false;
     });
   };
   pakej = everyone-dies.callPackage ./nix/pakej.nix {};
   afraid = everyone-dies.callPackage biegunka-svn {
+    mkDerivation = args: everyone-dies.mkDerivation(args // {
+      buildTools = (if args ? buildTools then args.buildTools else []) ++ [ pkgs.subversion ];
+      doCheck = (biegunka-svn == ./nix/biegunka-svn.nix);
+      doHaddock = false;
+    });
     biegunka = alone;
   };
 in
