@@ -7,8 +7,8 @@ mkDerivation {
   version = "0.1.0";
   src = fetchgit {
     url = "https://github.com/biegunka/biegunka-svn";
-    sha256 = "602de4a07843ae9f30a5814c07baa0929a5d150b8786474069b2dc7eab37a1c7";
-    rev = "cd9c1d46dac750a506a3ca66ab07f20087ef8b75";
+    sha256 = "5d23ddd9e9d1b209b629381ae934e412354fb4f276b296b8dfd1cd968e7d20c1";
+    rev = "9e605fb4cfc7292799960e3008b92538d990f566";
   };
   buildDepends = [
     base biegunka directory lens process transformers

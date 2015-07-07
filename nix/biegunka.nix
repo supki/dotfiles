@@ -11,8 +11,8 @@ mkDerivation {
   version = "0.2";
   src = fetchgit {
     url = "https://github.com/biegunka/biegunka";
-    sha256 = "36e73043d4232a1fab2cca038ca1dffc9d3fd9349f0f35f4b2ec630551dbff89";
-    rev = "ef80756eeac4bc52f13808791783e7f2ae389b4b";
+    sha256 = "e22747a126a4ea3c97a1ba20ff2458e8a94b79a55295ffcb8d73b5afa830b5a8";
+    rev = "5238a87c4033fb7df8d4c839f7e7ae3a34aa431a";
   };
   isLibrary = true;
   isExecutable = true;
@@ -26,7 +26,8 @@ mkDerivation {
   testDepends = [
     base containers data-default-class directory directory-layout
     filepath free hspec hspec-expectations-lens lens
-    optparse-applicative semigroups temporary text transformers unix
+    optparse-applicative process semigroups temporary text transformers
+    unix
   ];
   homepage = "http://biegunka.budueba.com/";
   description = "Configuration development";
