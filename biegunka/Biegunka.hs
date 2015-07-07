@@ -1,6 +1,8 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PartialTypeSignatures #-}
 {-# LANGUAGE QuasiQuotes #-}
 module Main (main) where
 
@@ -10,7 +12,9 @@ import           System.FilePath (combine)
 import           Text.Printf (printf)
 
 import           Control.Biegunka
-import           Control.Biegunka.Source.Git (git, git', git_, branch)
+import           Control.Biegunka.Source (Url, HasUrl(url), path)
+import           Control.Biegunka.Source.Git (git, branch)
+import qualified Control.Biegunka.Source.Git as Git
 import           Control.Biegunka.Templates.HStringTemplate
 
 import qualified Laptop
@@ -52,7 +56,7 @@ work = sequence_
 
 dotfiles :: Script 'Sources ()
 dotfiles = namespace "dotfiles" $
-  git (github "supki" ".dotfiles") "git/dotfiles" $ do
+  github "supki" ".dotfiles" (path "git/dotfiles") $ do
     traverse_ (uncurry link)
               (concat [core, extended, script])
     traverse_ (uncurry substitute)
@@ -156,7 +160,7 @@ dotfiles = namespace "dotfiles" $
 
 tools :: Script 'Sources ()
 tools = namespace "tools" $
-  git "git@budueba.com:tools" "git/tools" $ do
+  git (url "git@budueba.com:tools" . path "git/tools") $ do
     suid_binaries & unzipWithM_ (\s t ->
       sudo "root" $ [sh|
         ghc -O #{s} -fforce-recomp -threaded -v0 -o #{t}
@@ -228,60 +232,61 @@ vim = do
     namespace "purescript" $
       pathogen_ (github "supki" "purescript-vim")
     namespace "mine" $ do
-      git (github "supki" "vim-flipping") (into "git") $
+      github "supki" "vim-flipping" (path (into "git")) $
         register ".vim/bundle/vim-flipping"
-      git (github "supki" "syntastic-cabal") (into "git") $
+      github "supki" "syntastic-cabal" (path (into "git")) $
         register ".vim/bundle/syntastic-cabal"
-      git (github "supki" "vim-languages") (into "git") $
+      github "supki" "vim-languages" (path (into "git")) $
         register ".vim/bundle/vim-languages"
-      git' (github "supki" "seoul256.vim") (into ".vim/bundle") (branch "f/m")
+      github "supki" "seoul256.vim" (path (into ".vim/bundle") . branch "f/m") pass
       pathogen_ (github "supki" "haskell-vim")
   namespace "vimish" $
     namespace "haskell" $
       pathogen_ (github "bitc" "hdevtools")
  where
-  pathogen  u = git u (into ".vim/bundle")
-  pathogen_ u = pathogen u (return ())
+  pathogen  g = g (path (into ".vim/bundle"))
+  pathogen_ g = pathogen g pass
 
 emacs :: Script 'Sources ()
 emacs = namespace "emacs" $ do
   namespace "colorschemes" $
-    git (github "bbatsov" "zenburn-emacs") (into "git/emacs") $
+    github "bbatsov" "zenburn-emacs" (path (into "git/emacs")) $
       copy "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
   namespace "usable" $ do
-    git (github "emacsmirror" "paredit") (into "git/emacs") $
+    github "emacsmirror" "paredit" (path (into "git/emacs")) $
       copy "paredit.el" ".emacs.d/plugins/paredit.el"
-    git (github "jlr" "rainbow-delimiters") (into "git/emacs") $
+    github "jlr" "rainbow-delimiters" (path (into "git/emacs")) $
       copy "rainbow-delimiters.el" ".emacs.d/plugins/rainbow-delimiters.el"
 
 misc :: Script 'Sources ()
 misc =
   namespace "misc" $ do
-    traverse_ (--> into "git")
+    traverse_ (\g -> g (path (into "git")) pass)
       [ github "zsh-users" "zsh-syntax-highlighting"
       , github "zsh-users" "zsh-completions"
       , github "muennich" "urxvt-perls"
       ]
-    github "purescript-contrib" "grunt-init-purescript" --> into ".grunt-init"
+    github "purescript-contrib" "grunt-init-purescript" (path (into ".grunt-init")) pass
 
 edwardk :: Script 'Sources ()
-edwardk = namespace "edwardk" $ traverse_ (--> into "git") . map (github "ekmett") $
-  [ "categories"
-  , "discrimination"
-  , "free"
-  , "hyperfunctions"
-  , "kan-extensions"
-  , "lens"
-  , "machines"
-  , "profunctors"
-  , "promises"
-  , "reflection"
-  , "tagged"
-  ]
+edwardk = namespace "edwardk" $
+  traverse_ (\p -> github "ekmett" p (path (into "git/edwardk")) pass)
+    [ "categories"
+    , "discrimination"
+    , "free"
+    , "hyperfunctions"
+    , "kan-extensions"
+    , "lens"
+    , "machines"
+    , "profunctors"
+    , "promises"
+    , "reflection"
+    , "tagged"
+    ]
 
 mine :: Script 'Sources ()
 mine = namespace "mine" $
-  traverse_ (--> into "git") . map (github "supki") $
+  traverse_ (\p -> github "supki" p (path (into "git")) pass)
     [ "xmonad-screenshot"
     , "xmonad-use-empty-workspace"
     , "xmonad-2014"
@@ -290,23 +295,19 @@ mine = namespace "mine" $
 
 vimpager :: Script 'Sources ()
 vimpager = namespace "vimpager" $
-  git (github "rkitover" "vimpager") "git/vimpager" $ do
+  github "rkitover" "vimpager" (path "git/vimpager") $ do
     [sh|make PREFIX=$SOURCE_ROOT install|]
     link "bin/vimpager" "bin/vless"
     link "bin/vimcat" "bin/vcat"
 
-infix 8 -->
-(-->) :: String -> FilePath -> Script 'Sources ()
-(-->) = git_
-
 dot :: FilePath -> (FilePath, FilePath)
-dot path = path ~> ('.' : path)
+dot fp = fp ~> ('.' : fp)
 
 bin :: FilePath -> (FilePath, FilePath)
-bin path = path ~> combine "bin" path
+bin fp = fp ~> combine "bin" fp
 
 unzipWithM_ :: Applicative m => (a -> b -> m c) -> [(a, b)] -> m ()
 unzipWithM_ = traverse_ . uncurry
 
-github :: String -> String -> String
-github = printf "git@github.com:%s/%s"
+github :: HasUrl s (Git.Config Url FilePath) Url => String -> String -> (Git.Config _ _ -> s) -> Script 'Actions () -> Script 'Sources ()
+github user project f = git (url (printf "git@github.com:%s/%s" user project) . f)
