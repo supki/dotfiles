@@ -21,14 +21,14 @@ import qualified Laptop
 import qualified Work
 
 
-data E = Laptop | Work deriving (Enum, Bounded, Generic)
+data E = Laptop | Work deriving (Generic)
 
 instance Environments E
 
 
 main :: IO ()
 main = do
-  (environment, runBiegunka) <- runnerOf (Proxy :: Proxy E)
+  (environment, runBiegunka) <- runnerOf
   let settings ts = set templates (hStringTemplate ts)
   case environment of
     Laptop -> runBiegunka (settings Laptop.template) laptop

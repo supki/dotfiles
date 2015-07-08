@@ -6,5 +6,5 @@ install:
     - nix-shell --run 'biegunka --version'
 
 script:
-    - nix-shell --run 'biegunka run biegunka -- --laptop --changes'
-    - nix-shell --run 'biegunka run biegunka -- --work --changes'
+    - nix-shell --run 'biegunka run biegunka -- --laptop --diff'
+    - nix-shell --run 'biegunka run biegunka -- --work --diff'
