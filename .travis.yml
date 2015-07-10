@@ -1,10 +1,10 @@
 before_install:
-    - curl https://nixos.org/nix/install | sh
-    - source $HOME/.nix-profile/etc/profile.d/nix.sh
+  - curl https://nixos.org/nix/install | sh
+  - source $HOME/.nix-profile/etc/profile.d/nix.sh
 
 install:
-    - nix-shell --run 'biegunka --version'
+  - nix-shell --run 'biegunka version'
 
 script:
-    - nix-shell --run 'biegunka run biegunka -- --laptop --diff'
-    - nix-shell --run 'biegunka run biegunka -- --work --diff'
+  - nix-shell --run 'biegunka run --diff --laptop'
+  - nix-shell --run 'biegunka run --diff --work'
