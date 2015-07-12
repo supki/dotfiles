@@ -221,7 +221,7 @@ vim = do
       pathogen_ (github "ivyl" "vim-bling")
       pathogen_ (github "kien" "rainbow_parentheses.vim")
       pathogen  (github "wincent" "Command-T") $
-        [sh|cd $SOURCE_ROOT/ruby/command-t; /usr/bin/ruby extconf.rb; make|]
+        [sh|cd $SOURCE_ROOT/ruby/command-t; /usr/bin/ruby extconf.rb; make; git checkout metadata.rb|]
       pathogen_ (github "bling" "vim-airline")
       pathogen_ (github "stephpy" "vim-yaml")
       pathogen_ (github "roman" "golden-ratio")
