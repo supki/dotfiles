@@ -120,10 +120,7 @@ dotfiles = namespace "dotfiles" $
     , "profile"                           ~> ".zprofile"
     ]
   extended = over (mapped._1) (combine "extended")
-    [ dot "gvimrc"
-    , dot "pentadactylrc"
-    , dot "gtkrc.mine"
-    , dot "readme-gen.css"
+    [ dot "gtkrc.mine"
     , "xmonad.hs"                ~> ".xmonad/xmonad.hs"
     , "xmonad/Bindings.hs"       ~> ".xmonad/lib/Bindings.hs"
     , "xmonad/Startup.hs"        ~> ".xmonad/lib/Startup.hs"
