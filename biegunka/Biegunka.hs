@@ -246,9 +246,11 @@ vim = do
 
 emacs :: Script 'Sources ()
 emacs = namespace "emacs" $ do
-  namespace "colorschemes" $
+  namespace "colorschemes" $ do
     github "bbatsov" "zenburn-emacs" (path (into "git/emacs")) $
       copy "zenburn-theme.el" ".emacs.d/themes/zenburn-theme.el"
+    github "fommil" "darcula-theme-emacs" (path (into "git/emacs")) $
+      copy "darcula-theme.el" ".emacs.d/themes/darcula-theme.el"
   namespace "usable" $ do
     github "emacsmirror" "paredit" (path (into "git/emacs")) $
       copy "paredit.el" ".emacs.d/plugins/paredit.el"
