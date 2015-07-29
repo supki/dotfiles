@@ -15,7 +15,7 @@ import Defaults
 template :: Template
 template = Defaults.template
   (\xmobar -> xmobar
-    { background = "\"#373737\""
+    { background = "\"#272727\""
     , position   = "BottomW R 94"
     })
   (\xmonad -> xmonad
