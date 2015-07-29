@@ -60,3 +60,5 @@
  )
 
 (windmove-default-keybindings)
+
+(setq-default indicate-empty-lines t)
