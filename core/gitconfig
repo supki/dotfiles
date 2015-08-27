@@ -21,8 +21,8 @@
 	pushey = log --oneline @{u}..HEAD
 	ci = commit
 	ca = commit -a
-	st = status
-	s = status
+	st = status --short
+	s = status --short
 	unstage = reset HEAD --
 	unci = reset --soft HEAD~1
 	wipe = reset --hard HEAD --
