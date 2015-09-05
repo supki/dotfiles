@@ -72,6 +72,7 @@ _pass () {
 					"config:Show git config"
 					"log:Show git log"
 					"reflog:Show git reflog"
+					"remote:Manage remotes"
 				)
 				_describe -t commands 'pass git' subcommands
 				;;
