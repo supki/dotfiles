@@ -1,5 +1,5 @@
 { nixpkgs ? import <nixpkgs> {}
-, compiler ? "ghc7101"
+, compiler ? "ghc7102"
 , biegunka ? ./nix/biegunka.nix
 , biegunka-svn ? ./nix/biegunka-svn.nix
 }: let

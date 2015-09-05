@@ -12,31 +12,23 @@
           };
         };
 
-        ghc7101 = unusable.haskell.packages.ghc7101.override {
-          overrides = self: _: {
-            hdevtools = self.callPackage ./hdevtools-7.10.nix {};
-            biegunka = self.callPackage ./biegunka.nix {
-			  mkDerivation = args: self.mkDerivation(args // {
-			    buildTools = (if args ? buildTools then args.buildTools else []) ++ [ unusable.git ];
-			  });
-			};
-            biegunka-svn = self.callPackage ./biegunka-svn.nix {};
-            pakej = self.callPackage ./pakej.nix {};
-          };
-        };
-
         ghc7102 = unusable.haskell.packages.ghc7102.override {
           overrides = self: _: {
             hdevtools = self.callPackage ./hdevtools-7.10.nix {};
-            biegunka = self.callPackage ./biegunka.nix {
-			  mkDerivation = args: self.mkDerivation(args // {
-			    buildTools = (if args ? buildTools then args.buildTools else []) ++ [ unusable.git ];
-			  });
-			};
-            biegunka-svn = self.callPackage ./biegunka-svn.nix {};
-            pakej = self.callPackage ./pakej.nix {};
           };
-        };
+        } // (let
+            ghc = unusable.haskell.packages.ghc7102;
+            package = ghc.callPackage;
+            derive = ghc.mkDerivation;
+          in {
+            biegunka = package ./biegunka.nix {
+              mkDerivation = args: derive(args // {
+                buildTools = (if args ? buildTools then args.buildTools else []) ++ [ unusable.git ];
+              });
+            };
+            biegunka-svn = package ./biegunka-svn.nix {};
+            pakej = package ./pakej.nix {};
+          });
       };
     };
   };
