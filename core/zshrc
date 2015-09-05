@@ -34,7 +34,11 @@ function vcs_info_wrapper {
 
 function nix_env_wrapper {
   if [ -n "${IN_NIX_SHELL:-}" ]; then
-    echo -n "[$name]"
+    if [ "$name" = 'shell' ]; then
+      echo -n "❤"
+    else
+      echo -n "[${name}]"
+    fi
   fi
 }
 
