@@ -223,6 +223,7 @@ vim = do
       pathogen_ (github "bling" "vim-airline")
       pathogen_ (github "stephpy" "vim-yaml")
       pathogen_ (github "roman" "golden-ratio")
+      pathogen_ (github "markcornick" "vim-bats")
     namespace "idris" $
       pathogen_ (github "idris-hackers" "idris-vim")
     namespace "rust" $
