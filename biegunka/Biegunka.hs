@@ -154,6 +154,7 @@ dotfiles = namespace "dotfiles" $
     link "nix/biegunka.nix"       ".nixpkgs/biegunka.nix"
     link "nix/biegunka-svn.nix"   ".nixpkgs/biegunka-svn.nix"
     link "nix/pakej.nix"          ".nixpkgs/pakej.nix"
+    link "nix/bats.nix"           ".nixpkgs/bats.nix"
 
 tools :: Script 'Sources ()
 tools = namespace "tools" $
