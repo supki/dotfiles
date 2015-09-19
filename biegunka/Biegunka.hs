@@ -148,7 +148,7 @@ dotfiles = namespace "dotfiles" $
     , bin "whereami"
     ]
   nix = do
-    link "nix/config.nix"         ".nixpkgs/config.nix"
+    copy "nix/config.nix"         ".nixpkgs/config.nix"
     link "nix/hdevtools-7.8.nix"  ".nixpkgs/hdevtools-7.8.nix"
     link "nix/hdevtools-7.10.nix" ".nixpkgs/hdevtools-7.10.nix"
     link "nix/biegunka.nix"       ".nixpkgs/biegunka.nix"
