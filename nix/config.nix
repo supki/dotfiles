@@ -31,6 +31,8 @@
           });
       };
     };
+
+    bats = unusable.callPackage ./bats.nix {};
   };
 
   allowUnfree = true;
