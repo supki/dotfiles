@@ -1,3 +1,2 @@
-editMode: Vi
 completionPromptLimit: Just 20
 historyDuplicates: IgnoreConsecutive
