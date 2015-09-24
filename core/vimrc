@@ -358,6 +358,7 @@
 		let g:syntastic_python_python_exec = 'python3'
 	endif
 	let g:syntastic_cpp_compiler_options = '-std=c++11'
+	let g:syntastic_sh_shellcheck_args = '--external-sources --exclude=1090,1091'
 	let g:syntastic_always_populate_loc_list = 1
 	let g:syntastic_auto_loc_list = 1
 	let g:syntastic_auto_jump = 1
