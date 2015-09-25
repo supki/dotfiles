@@ -28,7 +28,6 @@ import qualified XMonad.StackSet as W
 import           XMonad.Util.Run
 import           XMonad.Util.NamedWindows (getName)
 
-import           Damit
 import           Spawn (spawn)
 
 
