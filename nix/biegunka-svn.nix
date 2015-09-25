@@ -10,10 +10,10 @@ mkDerivation {
     sha256 = "5d23ddd9e9d1b209b629381ae934e412354fb4f276b296b8dfd1cd968e7d20c1";
     rev = "9e605fb4cfc7292799960e3008b92538d990f566";
   };
-  buildDepends = [
+  libraryHaskellDepends = [
     base biegunka directory lens process transformers
   ];
-  testDepends = [
+  testHaskellDepends = [
     base directory filepath hspec hspec-expectations-lens lens process
     temporary transformers
   ];

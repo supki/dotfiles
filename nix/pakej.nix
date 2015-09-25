@@ -14,13 +14,15 @@ mkDerivation {
   };
   isLibrary = true;
   isExecutable = true;
-  buildDepends = [
+  libraryHaskellDepends = [
     base bytestring cereal cereal-conduit conduit conduit-extra
     directory filepath hashable lens netwire network
-    optparse-applicative process text transformers unix
-    unordered-containers
+    optparse-applicative text transformers unix unordered-containers
   ];
-  testDepends = [
+  executableHaskellDepends = [
+    base bytestring directory filepath process unix
+  ];
+  testHaskellDepends = [
     base bytestring cereal cereal-conduit conduit conduit-extra
     directory filepath hashable hspec hspec-expectations-lens lens
     netwire network optparse-applicative text transformers unix
