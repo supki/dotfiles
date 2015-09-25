@@ -45,7 +45,7 @@ template = Defaults.template
     })
   (\urxvt -> urxvt
     { perllib     = home </> "git/urxvt-perls"
-    , background_ = "#373737"
+    , background_ = "#272727"
     , browser     = "x-www-browser"
     })
  where
