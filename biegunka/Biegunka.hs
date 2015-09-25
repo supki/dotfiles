@@ -289,13 +289,15 @@ edwardk = namespace "edwardk" $
     ]
 
 mine :: Script 'Sources ()
-mine = namespace "mine" $
+mine = namespace "mine" $ do
   traverse_ (\p -> github "supki" p (path (into "git")) pass)
     [ "xmonad-screenshot"
     , "xmonad-use-empty-workspace"
     , "xmonad-2014"
     , "pakej"
     ]
+  github "supki" "slock" (path (into "git") . branch "feature/usable") $
+    pure ()
 
 vimpager :: Script 'Sources ()
 vimpager = namespace "vimpager" $
