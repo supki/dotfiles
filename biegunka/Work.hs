@@ -4,7 +4,6 @@ module Work
   ) where
 
 import Control.Biegunka (multiline)
-import Data.List (intercalate)
 import System.Environment
 import System.FilePath ((</>))
 import System.IO.Unsafe (unsafePerformIO)
@@ -12,6 +11,8 @@ import System.IO.Unsafe (unsafePerformIO)
 import Defaults
 
 
+{-# NOINLINE template #-}
+{-# ANN template "HLint: ignore Use id" #-}
 template :: Template
 template = Defaults.template
   (\xmobar -> xmobar
@@ -33,7 +34,6 @@ template = Defaults.template
       [multiline|
         [ ("(x-www-browser|/usr/lib/chromium/chromium|/usr/lib/chromium-browser/chro)", "x-www-browser")
         , ("htop", "urxvt -title work-htop -e htop")
-        , ("jm", "urxvt -title jm -e sh -c '. ~/.j/j.env; jm'")
         ]
       |]
     , follow    = "True"
@@ -44,7 +44,7 @@ template = Defaults.template
     { setxkbmap = "setxkbmap -option \"\" -layout us,ru -option grp:caps_toggle -option grp_led:scroll :2"
     })
   (\urxvt -> urxvt
-    { perllib     = intercalate ":" [ home </> "git/urxvt-tabbedex", home </> "git/urxvt-perls" ]
+    { perllib     = home </> "git/urxvt-perls"
     , background_ = "#373737"
     , browser     = "x-www-browser"
     })
