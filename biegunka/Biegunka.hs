@@ -65,11 +65,14 @@ dotfiles = namespace "dotfiles" $
     [sh|DISPLAY=:0 xrdb -merge ~/.Xdefaults|]
     [sh|xmonad --recompile|]
     [sh|pakej --recompile|]
-    let pathogen :: String
+    let pathogen, diff_highlight :: String
         pathogen = "https://raw.githubusercontent.com/tpope/vim-pathogen/b4174e4d1a16e7f0c5c6dfca923269a20a9f50c2/autoload/pathogen.vim"
+        diff_highlight = "https://raw.githubusercontent.com/git/git/8d530c4d64ffcc853889f7b385f554d53db375ed/contrib/diff-highlight/diff-highlight"
     [sh|
       mkdir -p  ~/.vim/{autoload,backups,bundle,colors,temp,undo}
       curl --fail --location #{pathogen} -o ~/.vim/autoload/pathogen.vim
+      curl --fail --location #{diff_highlight} -o ~/bin/diff-highlight
+      chmod +x ~/bin/diff-highlight
     |]
     [sh|lesskey|]
     [sh|chmod +x ~/.xsessionrc|]
