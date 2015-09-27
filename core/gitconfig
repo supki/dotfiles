@@ -43,7 +43,7 @@
 	puom = push origin master
 	puo = push origin
 	pu = push
-	pu? = log --oneline @{u}..HEAD
+	puq = log --oneline @{u}..HEAD
 	rbs = rebase
 	releasey = "!f() { git log `git describe --tags --abbrev=0`..HEAD --oneline; }; f"
 	ru = remote update
