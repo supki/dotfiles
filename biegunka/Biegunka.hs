@@ -268,6 +268,7 @@ misc =
   namespace "misc" $ do
     traverse_ (\g -> g (path (into "git")) pass)
       [ github "zsh-users" "zsh-syntax-highlighting"
+      , github "jimhester" "per-directory-history"
       , github "zsh-users" "zsh-completions"
       , github "muennich" "urxvt-perls"
       ]
