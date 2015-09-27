@@ -139,8 +139,6 @@ export NO_SCRIPTS_NOTIFICATIONS=yes
 
 export PYTHONSTARTUP=${HOME}/.pythonrc
 
-export CHO_PREFIX=${HOME}/ghc
-
 export GOROOT=${HOME}/go
 
 export TERM=screen-256color
