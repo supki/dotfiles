@@ -76,7 +76,7 @@ dotfiles = namespace "dotfiles" $
     |]
     [sh|lesskey|]
     [sh|chmod +x ~/.xsessionrc|]
-    [sh|chmod '0600' "${SOURCE_ROOT}/core/ghci"|]
+    [sh|chmod '0755' "${SOURCE_ROOT}/core/"; chmod '0644' "${SOURCE_ROOT}/core/ghci"|]
     [sh|
        cabal2nix "https://github.com/supki/pakej" > "nix/pakej.nix"
        cabal2nix "https://github.com/biegunka/biegunka" > "nix/biegunka.nix"
