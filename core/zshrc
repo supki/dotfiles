@@ -101,6 +101,7 @@ alias l='less'
 alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
 alias diff='git diff --no-index'
 alias update-package.nix="nix-shell -p 'cabal2nix' --run 'cabal2nix . > package.nix'"
+alias p='gulp'
 
 function nix-zsh() {
 	nix-shell --command "$SHELL" "$@"
