@@ -134,7 +134,6 @@ bindkey -a "^z" back-to-vim
 ssh-add 2>/dev/null # add my identity to ssh-agent and don't tell me about this, thanks
 
 source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/git/per-directory-history/per-directory-history.zsh
 
 export NO_SCRIPTS_NOTIFICATIONS=yes
 
