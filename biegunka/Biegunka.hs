@@ -69,7 +69,7 @@ dotfiles = namespace "dotfiles" $
         pathogen = "https://raw.githubusercontent.com/tpope/vim-pathogen/b4174e4d1a16e7f0c5c6dfca923269a20a9f50c2/autoload/pathogen.vim"
         diff_highlight = "https://raw.githubusercontent.com/git/git/8d530c4d64ffcc853889f7b385f554d53db375ed/contrib/diff-highlight/diff-highlight"
     [sh|
-      mkdir -p  ~/.vim/{autoload,backups,bundle,colors,temp,undo}
+      mkdir -p  ~/.vim/{autoload,backups,bundle,colors,ftdetect,syntax,temp,undo}
       curl --fail --location #{pathogen} -o ~/.vim/autoload/pathogen.vim
       curl --fail --location #{diff_highlight} -o ~/bin/diff-highlight
       chmod +x ~/bin/diff-highlight
@@ -114,6 +114,8 @@ dotfiles = namespace "dotfiles" $
     , dot "gtktermrc"
     , "vim/vim.custom"                    ~> ".vim/plugin/vimrc-local.vim"
     , "vim/indent/haskell.vim"            ~> ".vim/indent/haskell.vim"
+    , "vim/ftdetect/json.vim"             ~> ".vim/ftdetect/json.vim"
+    , "vim/syntax/json.vim"               ~> ".vim/syntax/json.vim"
     , "vim/camo.vim"                      ~> ".vim/colors/camo.vim"
     , "vim/zenburn.vim"                   ~> ".vim/colors/zenburn.vim"
     , "pakej.hs"                          ~> ".pakej/pakej.hs"
