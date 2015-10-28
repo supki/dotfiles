@@ -353,12 +353,13 @@
 
 	let g:syntastic_check_on_wq = 0
 	let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
-	let g:syntastic_ruby_checkers = ['rubocop', 'foodcritic']
+	let g:syntastic_ruby_checkers = ['foodcritic', 'rubocop']
 	let g:syntastic_json_checkers = ['davon']
 	if executable("python3")
 		let g:syntastic_python_python_exec = 'python3'
 	endif
 	let g:syntastic_cpp_compiler_options = '-std=c++11'
+	let g:syntastic_ruby_foodcritic_args = '--include ~/git/dotfiles/foodcritic/rules.rb'
 	let g:syntastic_sh_shellcheck_args = '--external-sources --exclude=1090,1091'
 	let g:syntastic_always_populate_loc_list = 1
 	let g:syntastic_auto_loc_list = 1
