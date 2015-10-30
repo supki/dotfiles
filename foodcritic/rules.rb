@@ -1,4 +1,11 @@
-require 'chef'
+class ::Chef
+  class Provider
+    class Deploy
+    end
+  end
+end
+
+require 'chef/resources'
 
 rule 'EBLO001', 'Specified action is the default' do
   tags %w(style recipe eblo)
@@ -11,7 +18,7 @@ rule 'EBLO001', 'Specified action is the default' do
 
       chef_const = command.split('_').map(&:capitalize).join
       begin
-        chef_resource = Object.const_get("Chef::Resource::#{chef_const}")
+        chef_resource = ::Object.const_get("Chef::Resource::#{chef_const}")
       rescue ::NameError
         next
       end
