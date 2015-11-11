@@ -108,6 +108,10 @@
 	" dot affects yanks
 	set cpoptions+=y
 
+	" wait for chord completion forever
+	set notimeout
+	set ttimeout
+
 	" set indents
 	augroup indents
 		autocmd!
