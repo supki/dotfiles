@@ -376,7 +376,7 @@
 	let g:CommandTDeleteMap = ['<DEL>', '<C-l>']
 	let g:CommandTCursorLeftMap = '<Left>'
 	let g:CommandTCursorRightMap = '<Right>'
-	let g:CommandTWildIgnore = &wildignore . ',cookbooks/*,.env_*,bower_components/*,node_modules/*,output/*,tmp/*,dist/*,cabal.config'
+	let g:CommandTWildIgnore = &wildignore . ',cookbooks/*,.env_*,bower_components/*,node_modules/*,output/*,tmp/*,dist/*,cabal.config,build/*'
 
 	" for vim-bling
 	let g:bling_color=216
