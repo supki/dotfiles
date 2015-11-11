@@ -151,11 +151,6 @@
 	autocmd BufRead,BufNewFile *.tpl set filetype=html
 	autocmd BufRead,BufNewFile *.hsc set filetype=haskell
 
-	" vim from the stone age has no json syntax highlight
-	if !filereadable(expand('$VIMRUNTIME/syntax/json.vim'))
-		autocmd BufRead,BufNewFile *.json set filetype=javascript
-	endif
-
 	" save on focus lost
 	autocmd FocusLost * :wa
 
