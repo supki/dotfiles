@@ -175,3 +175,5 @@ function svn {
 if [ -n "$NIX_GHC" ]; then
 	NIX_GHCI=${NIX_GHC}i
 fi
+
+export DEPLOY_DEFAULT_CMD=run
