@@ -2,6 +2,8 @@ class ::Chef
   class Provider
     class Deploy
     end
+    class Link
+    end
   end
 end
 
@@ -25,6 +27,16 @@ rule 'EBLO001', 'Specified action is the default' do
       default_action = chef_resource.new('M').action.to_s
 
       action == default_action
+    end
+  end
+end
+
+rule 'EBLO002', 'Stop doing this' do
+  tags %w(style recipe eblo)
+  resource_types = %(cookbook_file directory file link remote_file template)
+  recipe do |ast|
+    find_resources(ast).find_all do |resource|
+      resource_types.include?(resource_type(resource)) && resource_name(resource).start_with?("~")
     end
   end
 end
