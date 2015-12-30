@@ -230,6 +230,7 @@ vim = do
       pathogen_ (github "roman" "golden-ratio")
       pathogen_ (github "markcornick" "vim-bats")
       pathogen_ (github "machakann" "vim-sandwich")
+      pathogen_ (github "junegunn" "vim-easy-align")
     namespace "idris" $
       pathogen_ (github "idris-hackers" "idris-vim")
     namespace "rust" $
