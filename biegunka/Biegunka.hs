@@ -237,6 +237,9 @@ vim = do
       pathogen_ (github "wting" "rust.vim")
     namespace "purescript" $
       pathogen_ (github "supki" "purescript-vim")
+    namespace "javascript" $ do
+      pathogen_ (github "pangloss" "vim-javascript")
+      pathogen_ (github "mxw" "vim-jsx")
     namespace "mine" $ do
       github "supki" "vim-flipping" (path (into "git")) $
         register ".vim/bundle/vim-flipping"
