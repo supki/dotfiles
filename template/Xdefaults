@@ -16,7 +16,7 @@
 *.boldFont: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
 
 *.scrollBar: False
-*.cursorBlink: True
+*.cursorBlink: False
 *.cursorColor: #d7d7ff
 
 *.saveLines: 12000

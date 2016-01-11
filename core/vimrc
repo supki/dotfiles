@@ -83,6 +83,15 @@
 	" show matching parens
 	set showmatch
 	set matchtime=2
+
+	" blinking underline in insert mode; steady block in normal mode
+	if empty($TMUX)
+		let &t_SI = "\<Esc>[3 q"
+		let &t_EI = "\<Esc>[2 q"
+	else
+		let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>[3 q\<Esc>\\"
+		let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>[2 q\<Esc>\\"
+	endif
 " }
 
 " Misc {
