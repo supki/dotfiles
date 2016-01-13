@@ -177,5 +177,7 @@ if [ -n "$NIX_GHC" ]; then
 	NIX_GHCI=${NIX_GHC}i
 fi
 
+WORDCHARS="${WORDCHARS//\//}"
+
 export DEPLOY_DEFAULT_CMD=run
 export NIX_PATH="nix-rehash=https://github.com/supki/nix-rehash/archive/master.tar.gz:$NIX_PATH"
