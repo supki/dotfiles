@@ -2,9 +2,7 @@ function chpwd {
 	print -Pn "\e]2;%~\a"
 }
 
-autoload -U compinit promptinit colors select-word-style
-select-word-style bash
-
+autoload -U compinit promptinit colors
 autoload -Uz vcs_info
 
 autoload -U zrecompile
