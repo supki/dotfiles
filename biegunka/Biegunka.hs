@@ -68,11 +68,13 @@ dotfiles = namespace "dotfiles" $
     let pathogen, diff_highlight :: String
         pathogen = "https://raw.githubusercontent.com/tpope/vim-pathogen/b4174e4d1a16e7f0c5c6dfca923269a20a9f50c2/autoload/pathogen.vim"
         diff_highlight = "https://raw.githubusercontent.com/git/git/8d530c4d64ffcc853889f7b385f554d53db375ed/contrib/diff-highlight/diff-highlight"
+        diff_so_fancy = "https://raw.githubusercontent.com/so-fancy/diff-so-fancy/6b9ddf8af4ce068088ab6d089f08169df6134b67/diff-so-fancy"
     [sh|
       mkdir -p  ~/.vim/{autoload,backups,bundle,colors,ftdetect,syntax,temp,undo}
       curl --fail --location #{pathogen} -o ~/.vim/autoload/pathogen.vim
       curl --fail --location #{diff_highlight} -o ~/bin/diff-highlight
-      chmod +x ~/bin/diff-highlight
+      curl --fail --location #{diff_so_fancy} -o ~/bin/diff-so-fancy
+      chmod +x ~/bin/diff-highlight ~/bin/diff-so-fancy
     |]
     [sh|lesskey|]
     [sh|chmod +x ~/.xsessionrc|]

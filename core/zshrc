@@ -155,7 +155,7 @@ function fuck-them {
 }
 
 function sd {
-	svn diff "$@" | colordiff | diff-highlight | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
+	svn diff "$@" | colordiff | diff-highlight | diff-so-fancy | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
 }
 
 function svn {
