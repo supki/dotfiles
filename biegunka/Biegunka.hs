@@ -231,6 +231,7 @@ vim = do
       pathogen_ (github "markcornick" "vim-bats")
       pathogen_ (github "machakann" "vim-sandwich")
       pathogen_ (github "junegunn" "vim-easy-align")
+      pathogen_ (github "ap" "vim-css-color")
     namespace "idris" $
       pathogen_ (github "idris-hackers" "idris-vim")
     namespace "rust" $
@@ -302,6 +303,7 @@ mine = namespace "mine" $ do
     , "xmonad-use-empty-workspace"
     , "xmonad-2014"
     , "pakej"
+    , "da"
     ]
   github "supki" "slock" (path (into "git") . branch "feature/usable") $
     pure ()
