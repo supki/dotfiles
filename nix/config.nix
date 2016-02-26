@@ -12,12 +12,12 @@
           };
         };
 
-        ghc7102 = unusable.haskell.packages.ghc7102.override {
+        ghc7103 = unusable.haskell.packages.ghc7103.override {
           overrides = self: _: {
             hdevtools = self.callPackage ./hdevtools-7.10.nix {};
           };
         } // (let
-            ghc = unusable.haskell.packages.ghc7102;
+            ghc = unusable.haskell.packages.ghc7103;
             package = ghc.callPackage;
             derive = ghc.mkDerivation;
           in {
