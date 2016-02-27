@@ -28,6 +28,7 @@
             };
             biegunka-svn = package ./biegunka-svn.nix {};
             pakej = package ./pakej.nix {};
+            sensei = package ./sensei.nix {};
           });
       };
     };
