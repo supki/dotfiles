@@ -163,6 +163,7 @@ dotfiles = namespace "dotfiles" $
     link "nix/biegunka-svn.nix"   ".nixpkgs/biegunka-svn.nix"
     link "nix/pakej.nix"          ".nixpkgs/pakej.nix"
     link "nix/bats.nix"           ".nixpkgs/bats.nix"
+    link "nix/shpec.nix"          ".nixpkgs/shpec.nix"
     link "nix/sensei.nix"         ".nixpkgs/sensei.nix"
 
 tools :: Script 'Sources ()
