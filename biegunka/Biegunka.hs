@@ -228,7 +228,8 @@ vim = do
       pathogen_ (github "kien" "rainbow_parentheses.vim")
       pathogen  (github "wincent" "Command-T") $
         [sh|cd $SOURCE_ROOT/ruby/command-t; /usr/bin/ruby extconf.rb; make; git checkout metadata.rb|]
-      pathogen_ (github "bling" "vim-airline")
+      pathogen_ (github "vim-airline" "vim-airline")
+      pathogen_ (github "vim-airline" "vim-airline-themes")
       pathogen_ (github "stephpy" "vim-yaml")
       pathogen_ (github "roman" "golden-ratio")
       pathogen_ (github "markcornick" "vim-bats")
@@ -244,6 +245,7 @@ vim = do
     namespace "javascript" $ do
       pathogen_ (github "pangloss" "vim-javascript")
       pathogen_ (github "mxw" "vim-jsx")
+      pathogen_ (github "mhinz" "vim-signify")
     namespace "mine" $ do
       github "supki" "vim-flipping" (path (into "git")) $
         register ".vim/bundle/vim-flipping"
