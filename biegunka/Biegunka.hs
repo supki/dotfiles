@@ -62,7 +62,7 @@ dotfiles = namespace "dotfiles" $
     traverse_ (uncurry substitute)
               template
     nix
-    [sh|DISPLAY=:0 xrdb -merge ~/.Xdefaults|]
+    [sh|DISPLAY=:0 xrdb -merge ~/.Xresources|]
     [sh|xmonad --recompile|]
     [sh|pakej --recompile|]
     let pathogen, diff_highlight :: String
@@ -145,7 +145,7 @@ dotfiles = namespace "dotfiles" $
     , "xsession"                 ~> ".xsessionrc"
     , "xmonad/Profile.hs"        ~> ".xmonad/lib/Profile.hs"
     , "xmodmap"                  ~> ".xmodmap"
-    , "Xdefaults"                ~> ".Xdefaults"
+    , "Xresources"               ~> ".Xresources"
     ]
   script = over (mapped._1) (combine "script")
     [ bin "bat.rb"
