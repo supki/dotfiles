@@ -103,6 +103,7 @@ alias diff='git diff --no-index'
 alias update-package.nix="nix-shell -p 'cabal2nix' --run 'cabal2nix . > package.nix'"
 alias p='gulp'
 alias sc='supervisorctl'
+alias wc='lwc'
 
 function nix-zsh() {
 	nix-shell --command "$SHELL" "$@"
