@@ -174,6 +174,11 @@ function svn {
 		esac
 }
 
+# Stream the contents of the file escaping the newlines.
+function databagify {
+	perl -p -e 's/\R/\\n/g' "$@"
+}
+
 if [ -n "$NIX_GHC" ]; then
 	NIX_GHCI=${NIX_GHC}i
 fi
