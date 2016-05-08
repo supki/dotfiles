@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+declare -r TRAVIS_CI=${TRAVIS_CI:-'https://travis-ci.org'}
+declare -r API_TRAVIS_CI=${API_TRAVIS_CI:-'https://api.travis-ci.org'}
+
+
+main() {
+	declare -r remote=${1:-origin}
+	declare repo last_build jobs
+	repo=$(git remote show "$remote" | grep 'Push  URL:' | sed -e 's/.*://')
+	branch=$(git rev-parse --abbrev-ref HEAD)
+
+	last_build=$(build | jq '{sha: .commit.sha, message: .commit.message, state: .branch.state, jobs: .branch.job_ids}')
+
+	jobs=$(jq '.jobs | .[]' <<< "$last_build" | while read -r; do
+		job "$REPLY" |
+		jq "{url: \"${TRAVIS_CI}/${repo}/jobs/${REPLY}\", config: .job.config | del(.sudo,.before_install,.install,.script,.addons,.dist,.group,.os,.\".result\"), status: .job.state}"
+	done | jq -s .)
+
+	jq ".jobs = ${jobs}" <<< "$last_build"
+	test "$(jq '.state == "failed"' <<< "$last_build")" = 'false'
+}
+
+build() {
+	curl --silent -H'Accept: application/vnd.travis-ci.2+json' \
+		"${API_TRAVIS_CI}/repos/${repo}/branches/$(urlencode ${branch})"
+}
+
+job() {
+	declare -r job_id=$1
+
+	curl --silent -H'Accept: application/vnd.travis-ci.2+json' \
+		"${API_TRAVIS_CI}/jobs/${job_id}"
+}
+
+urlencode() {
+	echo -n $1 | xxd -plain | tr -d '\n' | sed -e 's/\(..\)/%\1/g'
+}
+
+main "$@"

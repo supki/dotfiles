@@ -153,6 +153,7 @@ dotfiles = namespace "dotfiles" $
     , bin "dive-into-mail"
     , bin "svn-browse"
     , bin "whereami"
+    , bin "so?"
     ]
   nix = do
     copy "nix/config.nix"         ".nixpkgs/config.nix"
