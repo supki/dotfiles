@@ -293,10 +293,14 @@
 	" fuck that
 	noremap <S-k> <NOP>
 
-	" CommandT keybindings
-	nnoremap <leader>e :CommandT .<CR>
-	nnoremap <leader>b :CommandTMRU<CR>
-	nnoremap <leader>f :CommandTFlush<CR>
+	" fzf keybindings
+	set rtp+=~/git/fzf
+	let $FZF_DEFAULT_COMMAND="find . -not \\( \\( -path ./node_modules -o -path ./.git -o -path '*/tmp/*' -o -path './dist' \\) -prune \\)"
+	let $FZF_DEFAULT_OPTS="--reverse --inline-info"
+	let g:fzf_layout = { 'up': '30%' }
+	nnoremap <leader>e :Files<CR>
+	nnoremap <leader>b :Buffers<CR>
+	nnoremap <leader>g :GitFiles<CR>
 
 	" easy-align
 	vmap <Enter> <Plug>(EasyAlign)
@@ -377,18 +381,6 @@
 	let g:syntastic_auto_jump = 1
 	let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_filetypes': ['racket'] }
 	let g:syntastic_sml_smlnj_args = ['-Cparser.lazy-keyword=true']
-
-	" Command-T options
-	let g:CommandTFileScanner = 'find'
-	let g:CommandTMatchWindowAtTop = 1
-	let g:CommandTAcceptSelectionMap = '<C-j>'
-	let g:CommandTSelectNextMap = ['Down', '<C-n>']
-	let g:CommandTCancelMap = ['<C-c>', '<Esc>']
-	let g:CommandTBackspaceMap = ['<BS>', '<C-h>']
-	let g:CommandTDeleteMap = ['<DEL>', '<C-l>']
-	let g:CommandTCursorLeftMap = '<Left>'
-	let g:CommandTCursorRightMap = '<Right>'
-	let g:CommandTWildIgnore = &wildignore . ',cookbooks/*,.env_*,bower_components/*,node_modules/*,output/*,tmp/*,dist/*,cabal.config,build/*'
 
 	" for vim-bling
 	let g:bling_color=216

@@ -229,8 +229,9 @@ vim = do
       pathogen_ (github "def-lkb" "vimbufsync")
       pathogen_ (github "ivyl" "vim-bling")
       pathogen_ (github "kien" "rainbow_parentheses.vim")
-      pathogen  (github "wincent" "Command-T") $
-        [sh|cd $SOURCE_ROOT/ruby/command-t; /usr/bin/ruby extconf.rb; make; git checkout metadata.rb|]
+      pathogen_ (github "junegunn" "fzf.vim")
+      github "junegunn" "fzf" (path (into "git")) $
+        [sh|./install --bin|]
       pathogen_ (github "vim-airline" "vim-airline")
       pathogen_ (github "vim-airline" "vim-airline-themes")
       pathogen_ (github "stephpy" "vim-yaml")
