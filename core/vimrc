@@ -295,7 +295,7 @@
 
 	" fzf keybindings
 	set rtp+=~/git/fzf
-	let $FZF_DEFAULT_COMMAND="find . -not \\( \\( -path ./node_modules -o -path ./.git -o -path '*/tmp/*' -o -path './dist' \\) -prune \\)"
+	let $FZF_DEFAULT_COMMAND="find . -not \\( \\( -path ./node_modules -or -path ./.git -or -path '*/tmp/*' -or -path './dist' \\) -prune \\) -and -type f"
 	let $FZF_DEFAULT_OPTS="--reverse --inline-info"
 	let g:fzf_layout = { 'up': '30%' }
 	nnoremap <leader>e :Files<CR>
