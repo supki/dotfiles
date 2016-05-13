@@ -345,26 +345,12 @@
 		endif
 	endfunction
 
-	let g:vim_jinjing_matches =
-		\ { 'test/Spec.l?hs': ['Spec.tpl', {}]
-		\ , 'test/.+Spec.hs': ['FooSpec.tpl',
-			\ { 'module':
-				\ { 'name': function("HaskellModuleName")
-				\ , 'imports': ['Test.Hspec']
-				\ }
-			\ }]
-		\ , 'src/.+.hs':      ['Foo.tpl',
-			\ { 'module':
-				\ { 'name': function("HaskellModuleName")
-				\ }
-			\ }]
-		\ , '^[a-z-]+.hs':     ['Foo.tpl',
-			\ { 'module':
-				\ { 'name': 'Main'
-				\ }
-			\ }]
-		\ , '.+.py':           ['P3.tpl', {}]
-		\ }
+	let g:templates_directory = '~/.vim/templates'
+	let g:templates_global_name_prefix = ''
+	let g:templates_no_builtin_templates = 1
+	let g:templates_user_variables = [
+		\ ['HASKELL_MODULE_NAME', 'HaskellModuleName'],
+	\ ]
 
 	let g:syntastic_check_on_wq = 0
 	let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']

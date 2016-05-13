@@ -120,6 +120,7 @@ dotfiles = namespace "dotfiles" $
     , "vim/syntax/json.vim"               ~> ".vim/syntax/json.vim"
     , "vim/camo.vim"                      ~> ".vim/colors/camo.vim"
     , "vim/zenburn.vim"                   ~> ".vim/colors/zenburn.vim"
+    , "vim/templates"                     ~> ".vim/templates"
     , "pakej.hs"                          ~> ".pakej/pakej.hs"
     , "vifmrc"                            ~> ".vifm/vifmrc"
     , "transmission-daemon/settings.json" ~> ".transmission-daemon/settings.json"
@@ -240,6 +241,7 @@ vim = do
       pathogen_ (github "machakann" "vim-sandwich")
       pathogen_ (github "junegunn" "vim-easy-align")
       pathogen_ (github "ap" "vim-css-color")
+      pathogen_ (github "aperezdc" "vim-template")
     namespace "idris" $
       pathogen_ (github "idris-hackers" "idris-vim")
     namespace "rust" $
