@@ -37,6 +37,4 @@
     bats = unusable.callPackage ./bats.nix {};
     shpec = unusable.callPackage ./shpec.nix {};
   };
-
-  allowUnfree = true;
 }
