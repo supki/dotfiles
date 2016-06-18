@@ -31,13 +31,14 @@
 	dsi = diff --staged --ignore-space-change
 	dw = diff --color-words
 	g = grep
-	l = log
+	l = log --oneline --decorate
 	lf = log --stat
 	lg = log --patch-with-stat
 	ll = log HEAD~1..HEAD
 	llf = log HEAD~1..HEAD --stat
 	llp = log HEAD~1..HEAD --patch-with-stat
 	ms = merge --squash
+	mf = merge --ff-only
 	p = pull
 	prbs = pull --rebase
 	puom = push origin master
@@ -47,7 +48,7 @@
 	rbs = rebase
 	releasey = "!f() { git log `git describe --tags --abbrev=0`..HEAD --oneline; }; f"
 	ru = remote update
-	s = status --short
+	s = status --short --branch
 	sub = reset HEAD --
 	sup = "!yo() { git branch "$2" --set-upstream "$1/$2"; }; yo"
 	unci = reset --soft HEAD~1
