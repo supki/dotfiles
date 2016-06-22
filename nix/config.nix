@@ -37,4 +37,20 @@
     bats = unusable.callPackage ./bats.nix {};
     shpec = unusable.callPackage ./shpec.nix {};
   };
+
+  # When working with an unfree Haskell package, instead of allowing unfree packages everywhere:
+  #
+  # allowUnfree = true;
+  #
+  # it's possible to import the package's `default.nix` with a bespoken `nixpkgs` import:
+  #
+  # this = (import ./default.nix {
+  #   inherit compiler;
+  #   nixpkgs = import <nixpkgs> {
+  #     config.allowUnfree = true;
+  #   };
+  # });
+  #
+  # Doing this at the top level without repeating the import won't work though, `hdevtools`
+  # inexplicably stops working at all, complaining about missing dependencies.
 }
