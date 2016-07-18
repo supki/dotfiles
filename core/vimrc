@@ -249,6 +249,12 @@
 	" save one key press
 	nnoremap ; :
 
+	" kill Ex for good
+	nnoremap Q <nop>
+
+	" just use :<C-f> if you ever need this
+	nnoremap q: <nop>
+
 	" map arrows and fix j and k
 	nnoremap <up> <nop>
 	nnoremap <down> <nop>
