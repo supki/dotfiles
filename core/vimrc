@@ -242,10 +242,6 @@
 " }
 
 " Keys mappings {
-	" fix broken regex syntax
-	nnoremap / /\v
-	vnoremap / /\v
-
 	" save one key press
 	nnoremap ; :
 
