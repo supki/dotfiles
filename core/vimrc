@@ -452,3 +452,15 @@
 
 	autocmd FileType go nmap <leader>r <Plug>(go-run)
 " }
+
+" Painkillers {
+	let g:am_normal = 1
+
+	augroup BeingRussian
+		autocmd InsertEnter *.{md,markdown} if ! g:am_normal | :silent !dbus-send --dest=ru.gentoo.KbddService /ru/gentoo/KbddService ru.gentoo.kbdd.set_layout uint32:1
+		autocmd InsertLeave *.{md,markdown} if ! g:am_normal | :silent !dbus-send --dest=ru.gentoo.KbddService /ru/gentoo/KbddService ru.gentoo.kbdd.set_layout uint32:0
+	augroup end
+
+	command AmRussian let g:am_normal = 0
+	command AmNormal let g:am_normal = 1
+" }
