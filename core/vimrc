@@ -163,6 +163,13 @@
 	" save on focus lost
 	autocmd FocusLost * :wa
 
+	" automatically create non-existent parent directories on save
+	augroup auto_mkdir_p
+		autocmd!
+		autocmd BufWritePre * if !isdirectory(expand("%:h")) | execute "silent! !mkdir -p " . shellescape(expand('%:h'), 1) | endif
+	augroup end
+
+
 	" enable filetype detection, plus loading of filetype plugins
 	filetype plugin indent on
 
