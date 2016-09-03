@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reading</title>
+  <style type="text/css">
+    body {
+      margin: 0px auto;
+      max-width: 40em;
+      background-color: #f6f6f6;
+      line-height: 1.5;
+      font-family: Droid Serif, serif;
+      font-size: 16px;
+    }
+
+    div.container {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+
+    h1, h2, h3 {
+      font-family: Open Sans, sans-serif;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-top: 50px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 40px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 5px;
+    }
+
+    ul {
+      list-style-type: none;
+      margin-left: 0em;
+      padding-left: 0em;
+    }
+
+    li+li {
+      margin-top: 8px;
+    }
+
+    a {
+      color: #E8472E;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #E81F00;
+    }
+
+    .author {
+      line-height: 1.1;
+      color: #555;
+      font-size: 70%;
+    }
+
+    .paper-url {
+      line-height: 1.1;
+      font-size: 70%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+  <%= Enum.reverse(Enum.map(@reading, fn {year, year_reading} -> %>
+
+    <h1><%= year %></h1>
+
+    <%= if length(year_reading[:books][:fiction]) > 0 do %>
+      <h2>Fiction</h2>
+
+      <ul>
+      <%= Enum.map(year_reading[:books][:fiction], fn %{title: title, author: author} -> %>
+        <li>
+          <%= title %>
+          <div class="author">
+            <%= author %>
+          </div>
+        </li>
+      <% end) %>
+      </ul>
+    <% end %>
+
+    <%= if Map.size(year_reading[:books][:"non-fiction"]) > 0 do %>
+      <h2>Non-fiction</h2>
+
+      <%= if length(year_reading[:books][:"non-fiction"][:programming]) > 0 do %>
+        <h3>Programming</h3>
+
+        <ul>
+        <%= Enum.map(year_reading[:books][:"non-fiction"][:programming], fn %{title: title, author: author} -> %>
+          <li>
+            <%= title %>
+            <div class="author">
+              <%= author %>
+            </div>
+          </li>
+        <% end) %>
+        </ul>
+      <% end %>
+
+      <%= if length(year_reading[:books][:"non-fiction"][:other]) > 0 do %>
+        <h3>Other</h3>
+
+        <ul>
+        <%= Enum.map(year_reading[:books][:"non-fiction"][:other], fn %{title: title, author: author} -> %>
+          <li>
+            <%= title %>
+            <div class="author">
+              <%= author %>
+            </div>
+          </li>
+        <% end) %>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <%= if year_reading[:papers] && length(year_reading[:papers]) > 0 do %>
+      <h3>Papers</h3>
+
+      <ul>
+      <%= Enum.map(year_reading[:papers], fn %{title: title, url: url} -> %>
+        <li>
+          <%= title %>
+          <div class="paper-url">
+            <a href="<%= url %>">
+              <%= url %>
+            </a>
+          </div>
+        </li>
+      <% end) %>
+      </ul>
+    <% end %>
+  <% end)) %>
+  </div>
+</body>
+</html>
