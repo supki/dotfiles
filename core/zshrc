@@ -104,6 +104,7 @@ alias update-package.nix="nix-shell -p 'cabal2nix' --run 'cabal2nix . > package.
 alias p='gulp'
 alias sc='supervisorctl'
 alias wc='lwc'
+alias b='bundle exec'
 
 function nix-zsh() {
 	nix-shell --command "$SHELL" "$@"
