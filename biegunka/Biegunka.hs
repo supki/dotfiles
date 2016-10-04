@@ -41,7 +41,6 @@ laptop = sudo "maksenov" $ sequence_
   , vim
   , emacs
   , misc
-  , edwardk
   , mine
   , vimpager
   ]
@@ -49,7 +48,6 @@ work = sequence_
   [ dotfiles
   , vim
   , misc
-  , edwardk
   , mine
   , vimpager
   ]
@@ -98,38 +96,30 @@ dotfiles = namespace "dotfiles" $
     , dot "racketrc"
     , dot "gitconfig"
     , dot "gitignore"
-    , dot "ackrc"
     , dot "XCompose"
     , dot "vimusrc"
     , dot "tmux.conf"
     , dot "emacs"
-    , dot "poneaux.rb"
     , dot "sqliterc"
     , dot "pythonrc"
     , dot "curlrc"
-    , dot "codorc"
     , dot "guard.rb"
     , dot "vim-jinjing"
     , dot "psqlrc"
     , dot "lesskey"
     , dot "colordiffrc"
-    , dot "gtktermrc"
     , "vim/vim.custom"                    ~> ".vim/plugin/vimrc-local.vim"
     , "vim/indent/haskell.vim"            ~> ".vim/indent/haskell.vim"
     , "vim/ftdetect/json.vim"             ~> ".vim/ftdetect/json.vim"
     , "vim/syntax/json.vim"               ~> ".vim/syntax/json.vim"
-    , "vim/camo.vim"                      ~> ".vim/colors/camo.vim"
-    , "vim/zenburn.vim"                   ~> ".vim/colors/zenburn.vim"
     , "vim/templates"                     ~> ".vim/templates"
     , "pakej.hs"                          ~> ".pakej/pakej.hs"
-    , "vifmrc"                            ~> ".vifm/vifmrc"
     , "transmission-daemon/settings.json" ~> ".transmission-daemon/settings.json"
     , "profile"                           ~> ".xmonad/xmonad-session-rc"
     , "profile"                           ~> ".zprofile"
     ]
   extended = over (mapped._1) (combine "extended")
-    [ dot "gtkrc.mine"
-    , "xmonad.hs"                ~> ".xmonad/xmonad.hs"
+    [ "xmonad.hs"                ~> ".xmonad/xmonad.hs"
     , "xmonad/Bindings.hs"       ~> ".xmonad/lib/Bindings.hs"
     , "xmonad/Startup.hs"        ~> ".xmonad/lib/Startup.hs"
     , "xmonad/Themes.hs"         ~> ".xmonad/lib/Themes.hs"
@@ -137,8 +127,6 @@ dotfiles = namespace "dotfiles" $
     , "xmonad/Workspaces.hs"     ~> ".xmonad/lib/Workspaces.hs"
     , "xmonad/Spawn.hs"          ~> ".xmonad/lib/Spawn.hs"
     , "xmonad/PackagePrompt.hs"  ~> ".xmonad/lib/PackagePrompt.hs"
-    , "pentadactyl/wanker.penta" ~> ".pentadactyl/plugins/wanker.penta"
-    , "mplayer-config"           ~> ".mplayer/config"
     ]
   template = over (mapped._1) (combine "template")
     [ "xsession"                 ~> ".xsession"
@@ -148,12 +136,7 @@ dotfiles = namespace "dotfiles" $
     , "Xresources"               ~> ".Xresources"
     ]
   script = over (mapped._1) (combine "script")
-    [ bin "bat.rb"
-    , bin "ip.awk"
-    , bin "weather.rb"
-    , bin "dive-into-mail"
-    , bin "svn-browse"
-    , bin "whereami"
+    [ bin "whereami"
     , bin "so?"
     ]
   nix = do
@@ -186,27 +169,18 @@ tools = namespace "tools" $
   scripts =
     [ "youtube-in-mplayer.sh" ~> "bin/youtube-in-mplayer"
     , "cue2tracks.sh"         ~> "bin/cue2tracks"
-    , "mpd/.lastfm.conf"      ~> ".lastfm.conf"
-    , "mpd/lastfm.png"        ~> ".icons/lastfm.png"
-    , "mpd/love.hs"           ~> "bin/lastfm-love-current-mpd-track"
     , "pemised.rb"            ~> "bin/pemised"
     , "upload/screenshot.sh"  ~> "bin/upload-screenshot"
-    , "upload/budueba.sh"     ~> "bin/upload-budueba"
-    , "isup.sh"               ~> "bin/isup"
     , "pretty-json.py"        ~> "bin/pretty-json"
     , "publish-haddocks.sh"   ~> "bin/publish-haddocks"
     , "vaio-audio"            ~> "bin/vaio-audio"
     , "vaio-touchpad"         ~> "bin/vaio-touchpad"
-    , "suspender"             ~> "bin/suspender"
     ]
   user_binaries =
     [ "audio.hs"              ~> "vaio-audio"
-    , "jenkins-hi.hs"         ~> "jenkins-hi"
-    , "playcount.hs"          ~> "playcount"
     ]
   suid_binaries =
-    [ "suspender.hs"          ~> "suspender"
-    , "vaio/touchpad.hs"      ~> "vaio-touchpad"
+    [ "vaio/touchpad.hs"      ~> "vaio-touchpad"
     ]
 
 vim :: Script 'Sources ()
@@ -293,22 +267,6 @@ misc =
     github "purescript-contrib" "grunt-init-purescript" (path (into ".grunt-init")) pass
     github "so-fancy" "diff-so-fancy" (path (into "git")) $
       link "diff-so-fancy" "bin/diff-so-fancy"
-
-edwardk :: Script 'Sources ()
-edwardk = namespace "edwardk" $
-  traverse_ (\p -> github "ekmett" p (path (into "git/edwardk")) pass)
-    [ "categories"
-    , "discrimination"
-    , "free"
-    , "hyperfunctions"
-    , "kan-extensions"
-    , "lens"
-    , "machines"
-    , "profunctors"
-    , "promises"
-    , "reflection"
-    , "tagged"
-    ]
 
 mine :: Script 'Sources ()
 mine = namespace "mine" $ do

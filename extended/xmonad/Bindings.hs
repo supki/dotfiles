@@ -19,9 +19,6 @@ import           XMonad.Hooks.ManageDocks
 import           XMonad.Prompt
 import           XMonad.Prompt.Shell
 import           XMonad.Util.NamedScratchpad
-#ifdef HAS_SCREENSHOTER
-import           XMonad.Util.WorkspaceScreenshot
-#endif
 import qualified XMonad.StackSet as W
 
 import qualified Profile
@@ -93,10 +90,6 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       , (0,           xK_q, do
           Startup.myStartupHook
           setLayout (XMonad.layoutHook conf))
-#ifdef HAS_SCREENSHOTER
-      -- make workspaces screenshots and merge them
-      , (shiftMask,   xK_u, captureWorkspacesWhenId (\x -> return $ x `notElem` ["4","5","-","\\"]) defaultHook horizontally)
-#endif
       ]
       ++
       -- switch to workspace
@@ -144,13 +137,8 @@ myKeyboardBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- third party scripts
   [ ((mod1Mask .|. mod, key), spawn script)
     | (mod, key, script) <-
-      -- take a window/selected area/entire screen screenshot
-      [ (shiftMask,   xK_Print, "upload-screenshot -w")
-      , (controlMask, xK_Print, "upload-screenshot -s")
-      , (0,           xK_Print, "upload-screenshot -a")
       -- screenlock
-      , (0,           xK_l, "slock")
-      , (shiftMask,   xK_y, "xsel -o | xargs --no-run-if-empty youtube-in-mplayer")
+      [ (0,           xK_l, "slock")
       ]
   ]
   ++
