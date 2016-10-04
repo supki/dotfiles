@@ -1,5 +1,5 @@
 { mkDerivation, acid-state, aeson, async, base, bytestring
-, command-qq, conduit, conduit-extra, containers, cryptohash
+, command-qq, conduit, conduit-extra, containers, cryptonite
 , data-default-class, directory, directory-layout, exceptions
 , fetchgit, filepath, free, hspec, hspec-expectations-lens
 , HStringTemplate, lens, meep, mtl, optparse-applicative, process
@@ -11,14 +11,14 @@ mkDerivation {
   version = "0.2";
   src = fetchgit {
     url = "https://github.com/biegunka/biegunka";
-    sha256 = "aad51535223f9ac7237a2d27ea7b4998466377edfd5ee43da4e6a1206e85a5f8";
-    rev = "aa1515dfec51f6468475c13828b5119f4eb2b9d1";
+    sha256 = "1pwxj3s603r4vpn184da1p6jfn7fgr4yv3gw42blqj1fjwj4axca";
+    rev = "67eb816875fd692c67c637789fc9e172d463bd21";
   };
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
     acid-state async base bytestring command-qq conduit conduit-extra
-    containers cryptohash directory directory-layout exceptions
+    containers cryptonite directory directory-layout exceptions
     filepath free hspec HStringTemplate lens meep mtl
     optparse-applicative process resourcet safecopy semigroups stm
     template-haskell temporary text transformers unix

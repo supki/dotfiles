@@ -1,7 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 module Defaults
   ( Template
-  , Xmobar(..)
   , Xmodmap(..)
   , Xmonad(..)
   , Xsession(..)
@@ -13,8 +12,7 @@ import Data.Data (Data, Typeable)
 
 
 data Template = Template
-  { xmobar   :: Xmobar
-  , xmonad   :: Xmonad
+  { xmonad   :: Xmonad
   , xmodmap  :: Xmodmap
   , xsession :: Xsession
   , urxvt    :: Urxvt
@@ -22,25 +20,12 @@ data Template = Template
 
 type Mod a = a -> a
 
-template :: Mod Xmobar -> Mod Xmonad -> Mod Xmodmap -> Mod Xsession -> Mod Urxvt -> Template
-template f g h j k = Template
-  { xmobar   = f defaultXmobar
-  , xmonad   = g defaultXmonad
+template :: Mod Xmonad -> Mod Xmodmap -> Mod Xsession -> Mod Urxvt -> Template
+template g h j k = Template
+  { xmonad   = g defaultXmonad
   , xmodmap  = h defaultXmodmap
   , xsession = j defaultXsession
   , urxvt    = k defaultUrxvt
-  }
-
-data Xmobar = Xmobar
-  { background, position :: String
-  , battery              :: Maybe String
-  } deriving (Data, Typeable)
-
-defaultXmobar :: Xmobar
-defaultXmobar = Xmobar
-  { background = ""
-  , position   = ""
-  , battery    = Just "\"\""
   }
 
 data Xmonad = Xmonad

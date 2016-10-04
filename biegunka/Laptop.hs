@@ -10,11 +10,6 @@ import Defaults
 
 template :: Template
 template = Defaults.template
-  (\xmobar -> xmobar
-    { background = "\"#222222\""
-    , position   = "Static { xpos       = 102, ypos = 750, width = 1264, height = 20 }"
-    , battery    = Just "\"%battery%\""
-    })
   (\xmonad -> xmonad
     { terminal  = "urxvtcd"
     , ubuntu    = "xft:ubuntu:size=8"

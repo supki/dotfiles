@@ -12,8 +12,7 @@
 *.background: $template.urxvt.background_$
 *.foreground: #ffffff
 
-*.font: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
-*.boldFont: -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-1
+*.font: xft:terminus:size=8;antialias=false
 
 *.scrollBar: False
 *.cursorBlink: False
@@ -22,20 +21,20 @@
 *.saveLines: 12000
 
 *.color0:  #000000
-*.color1:  #ff6a6a
-*.color2:  #bbbb66
-*.color3:  #dd9977
-*.color4:  #cccccc
-*.color5:  #eeccaa
-*.color6:  #00aaaa
-*.color7:  #ffffff
-*.color8:  $template.urxvt.background_$
-*.color9:  #ff5555
-*.color10: #55ff55
-*.color11: #ffff55
-*.color12: #aaaaff
-*.color13: #ff55ff
-*.color14: #55ffff
+*.color1:  #ffdddd
+*.color2:  #ddffdd
+*.color3:  #ffeedd
+*.color4:  #ddddff
+*.color5:  #ffddff
+*.color6:  #ddffff
+*.color7:  #dddddd
+*.color8:  #777777
+*.color9:  #ffa6a6
+*.color10: #a6ffa6
+*.color11: #ffeea6
+*.color12: #a6a6ff
+*.color13: #ffa6ff
+*.color14: #a6ffff
 *.color15: #ffffff
 *.underlineColor: #eeccaa
 
@@ -46,18 +45,3 @@
 *.keysym.C-s: perl:keyboard-select:activate
 *.keysym.M-u: perl:url-select:select_next
 *.keysym.M-g: perl:url-select:select_topmost_visible
-
-vimus.background: #212121
-
-vimus.saveLines: 12000
-vimus.color0:  #212121
-vimus.color1:  #AA0000
-vimus.color2:  #00AA00
-vimus.color3:  #BB6622
-vimus.color4:  #0000AA
-vimus.color5:  #AA00AA
-vimus.color6:  #00AAAA
-vimus.color7:  #AAAAAA
-vimus.color8:  #555555
-
-vimus.perl-ext-common: default,matcher

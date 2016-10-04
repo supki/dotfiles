@@ -15,10 +15,6 @@ import Defaults
 {-# ANN template "HLint: ignore Use id" #-}
 template :: Template
 template = Defaults.template
-  (\xmobar -> xmobar
-    { background = "\"#272727\""
-    , position   = "BottomW R 94"
-    })
   (\xmonad -> xmonad
     { terminal  = "urxvt"
     , ubuntu    = "xft:ubuntu:size=8"
@@ -45,7 +41,7 @@ template = Defaults.template
     })
   (\urxvt -> urxvt
     { perllib     = home </> "git/urxvt-perls"
-    , background_ = "#272727"
+    , background_ = "#222222"
     , browser     = "x-www-browser"
     })
  where
