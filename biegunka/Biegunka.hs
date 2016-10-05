@@ -117,6 +117,7 @@ dotfiles = namespace "dotfiles" $
     , "transmission-daemon/settings.json" ~> ".transmission-daemon/settings.json"
     , "profile"                           ~> ".xmonad/xmonad-session-rc"
     , "profile"                           ~> ".zprofile"
+    , "docker/config.json"                ~> ".docker/config.json"
     ]
   extended = over (mapped._1) (combine "extended")
     [ "xmonad.hs"                ~> ".xmonad/xmonad.hs"
