@@ -1,0 +1,16 @@
+Fix the outrageous behavior of another disgraceful piece-of-shit software by GNOME developers.
+
+A surprisingly useful link: <https://help.ubuntu.com/community/UpdatingADeb>
+diff --git a/src/applet-main.c.orig b/src/applet-main.c
+index b056a18..dab3696 100644
+--- a/src/applet-main.c.orig
++++ b/src/applet-main.c
+@@ -1117,7 +1117,7 @@ applet_fill_cb (PanelApplet * applet, const gchar * iid G_GNUC_UNUSED,
+   gtk_container_set_border_width(GTK_CONTAINER(menubar), 0);
+ 
+   /* Add in filter func */
+-  tomboy_keybinder_bind(hotkey_keycode, hotkey_filter, menubar);
++  //tomboy_keybinder_bind(hotkey_keycode, hotkey_filter, menubar);
+ 
+ 	/* load indicators */
+ 	load_modules(menubar, &indicators_loaded);
