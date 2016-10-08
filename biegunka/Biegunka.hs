@@ -128,6 +128,7 @@ dotfiles = namespace "dotfiles" $
     , "xmonad/Workspaces.hs"     ~> ".xmonad/lib/Workspaces.hs"
     , "xmonad/Spawn.hs"          ~> ".xmonad/lib/Spawn.hs"
     , "xmonad/PackagePrompt.hs"  ~> ".xmonad/lib/PackagePrompt.hs"
+    , "parcelliterc"             ~> ".config/parcellite/parcelliterc"
     ]
   template = over (mapped._1) (combine "template")
     [ "xsession"                 ~> ".xsession"
