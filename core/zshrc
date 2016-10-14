@@ -105,6 +105,7 @@ alias p='gulp'
 alias sc='supervisorctl'
 alias wc='lwc'
 alias b='bundle exec'
+alias y='youtube-dl'
 
 function nix-zsh() {
 	nix-shell --command "$SHELL" "$@"
