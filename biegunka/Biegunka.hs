@@ -118,6 +118,7 @@ dotfiles = namespace "dotfiles" $
     , "profile"                           ~> ".xmonad/xmonad-session-rc"
     , "profile"                           ~> ".zprofile"
     , "docker/config.json"                ~> ".docker/config.json"
+    , "gpg-agent.conf"                    ~> ".gnupg/gpg-agent.conf"
     ]
   extended = over (mapped._1) (combine "extended")
     [ "xmonad.hs"                ~> ".xmonad/xmonad.hs"
