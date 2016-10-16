@@ -264,7 +264,7 @@ misc =
   namespace "misc" $ do
     traverse_ (\g -> g (path (into "git")) pass)
       [ github "zsh-users" "zsh-syntax-highlighting"
-      , github "zsh-users" "zsh-completions"
+      , github "zsh-users" "zsh-autosuggestions"
       , github "muennich" "urxvt-perls"
       ]
     github "purescript-contrib" "grunt-init-purescript" (path (into ".grunt-init")) pass

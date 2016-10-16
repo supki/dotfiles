@@ -1,6 +1,11 @@
-typeset -U path
-path=(~/bin ~/ghc/bin ~/go/bin ~/rust/bin ~/racket/bin ~/.rvm/bin $path /sbin /usr/sbin)
+export GOROOT=${HOME}/go
+export PYTHONSTARTUP=${HOME}/.pythonrc
+export NIX_PATH="nix-rehash=https://github.com/supki/nix-rehash/archive/master.tar.gz:${NIX_PATH}"
 
-if [ -f /opt/robot/set-robot-env.sh ]; then
-	source /opt/robot/set-robot-env.sh
+export NO_SCRIPTS_NOTIFICATIONS=yes
+export DEPLOY_DEFAULT_CMD=run
+
+if [ -n "$NIX_GHC" ]; then
+  NIX_GHCI=${NIX_GHC}i
 fi
+TERM=screen-256color

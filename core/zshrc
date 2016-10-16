@@ -1,29 +1,59 @@
-function chpwd {
-	print -Pn "\e]2;%~\a"
-}
+# The following lines were added by compinstall
 
-autoload -U compinit promptinit colors
-autoload -Uz vcs_info
+zstyle ':completion:*' auto-description '%B%d:%b'
+zstyle ':completion:*' completer _expand _complete _ignored _approximate _prefix
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' format '%B%d:%b'
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list '' 'r:|[._-]=* r:|=*'
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' substitute 1
+zstyle :compinstall filename '/home/m/.zshrc'
 
-autoload -U zrecompile
-zrecompile -pq ~/.zshrc
-zrecompile -pq ~/.zshenv
-
-fpath=(/opt/devtools-1.0/completions/zsh ~/git/zsh-completions/src ~/git/dotfiles/completion $fpath)
+autoload -Uz compinit
 compinit
-setopt autocd autopushd correct
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
-zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
-zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.zhistory
+HISTSIZE=10000
+SAVEHIST=10000
+setopt autocd extendedglob
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# Lines configured by m
+alias b='bundle exec'
+alias c=cabal
+alias d=docker
+alias e=vim
+alias g=git
+alias l='less -R'
+alias ls='ls --color -1'
+alias s=svn
+alias y=youtube-dl
 
-setopt prompt_subst
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '×'
-zstyle ':vcs_info:*' unstagedstr '×'
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+bindkey '\e' pound-insert
+bindkey "^z" _fg
+
+setopt autopushd histignorealldups histignorespace interactivecomments prompt_subst
+
+autoload -Uz promptinit vcs_info
+promptinit
+
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr 'M'
+zstyle ':vcs_info:*' unstagedstr 'M'
+zstyle ':vcs_info:git:*' formats "%F{1}%u%f%F{2}%c%f %F{218}%b%f"
 zstyle ':vcs_info:svn:*' formats "%F{3}%b%f"
-zstyle ':vcs_info:git:*' formats "%F{1}%u%f%F{2}%c%f %F{3}%b%f"
 zstyle ':vcs_info:*' enable git svn
+
+PROMPT="%M:%F{218}%~$prompt_newline%(?,%F{green},%F{red})%#%f "
+PROMPT2="%F{blue}%_%f> "
+RPROMPT="%{"$'\e[1A'"%}"$'$(vcs_info_wrapper)'' ''$(nix_env_wrapper)'"%{"$'\e[B'"%"
+WORDCHARS=${WORDCHARS//\//}
 
 function vcs_info_wrapper {
   vcs_info
@@ -35,157 +65,51 @@ function vcs_info_wrapper {
 function nix_env_wrapper {
   if [ -n "${IN_NIX_SHELL:-}" ]; then
     if [ "$name" = 'shell' ]; then
-      echo -n "❤"
+      echo -n "[no-project]"
     else
       echo -n "[${name}]"
     fi
   fi
 }
 
-function go_env_wrapper {
-  if [ -n "${GOPATH:-}" ]; then
-    echo -n "[$GOPATH]"
-  fi
+function _fg {
+  fg
 }
-
-promptinit
-colors
-PROMPT="%M:%F{yellow}%~$prompt_newline%(?,%F{green},%F{red})%#%f "
-PROMPT2="%F{blue}%_%f> "
-RPROMPT="%{"$'\e[1A'"%}"$'$(vcs_info_wrapper)'' ''$(nix_env_wrapper)$(go_env_wrapper)'"%{"$'\e[1B'"%"
-
-chpwd
-
-HISTSIZE=10000
-HISTFILE=~/.zhistory
-SAVEHIST=10000
-
-setopt histignorealldups
-setopt histignorespace
-
-setopt autocd
-
-setopt interactivecomments
-setopt nonomatch
-
-bindkey '^P' history-beginning-search-backward
-bindkey '^N' history-beginning-search-forward
-bindkey '^[[A' history-beginning-search-backward
-bindkey '^[[B' history-beginning-search-forward
-bindkey -a 'k' history-beginning-search-backward
-bindkey -a 'j' history-beginning-search-forward
-bindkey '^?' backward-delete-char
-bindkey '^[[3~' delete-char
-bindkey "^[[7~" beginning-of-line
-bindkey "^[[8~" end-of-line
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[4~" end-of-line
-bindkey "^_" undo
-bindkey -a "q" push-line
-bindkey "^[[Z" reverse-menu-complete
-bindkey '\e#' pound-insert
-
-alias ls='ls --color -1'
-alias less='less -R'
-alias ka='killall'
-alias c='cabal'
-alias g='git'
-alias s='svn'
-alias e='editor'
-alias v='vagrant'
-alias t='tmux'
-alias k='knife'
-alias d='docker'
-alias x='container'
-alias l='less'
-alias hr='echo -e "\e[1;38;05;224m${(l:COLUMNS::❤:)}\e[0m"'
-alias diff='git diff --no-index'
-alias update-package.nix="nix-shell -p 'cabal2nix' --run 'cabal2nix . > package.nix'"
-alias p='gulp'
-alias sc='supervisorctl'
-alias wc='lwc'
-alias b='bundle exec'
-alias y='youtube-dl'
-
-function nix-zsh() {
-	nix-shell --command "$SHELL" "$@"
-}
-
-function man {
-	/usr/bin/man $@ | ifne vim -X -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
-}
-
-function haddock-dist {
-	for index in dist/doc/html/*/index.html; do
-		x-www-browser file://$(pwd)/${index}
-	done
-}
-
-function j\* {
-	declare xs
-	xs=("${jobtexts[@]}")
-
-	case ${#xs} in
-		0) kill -SIGINT $$ ;; # totally not a hack
-		1) fg "${xs[@]}" ;;
-		*) fg "$(for x in "${xs[@]}"; do echo "$x"; done | wybor --prompt 'job> ')" ;;
-	esac
-}
-
-zle -N back-to-vim 'j\*'
-bindkey -a "^z" back-to-vim
-
-ssh-add 2>/dev/null # add my identity to ssh-agent and don't tell me about this, thanks
-
-source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export NO_SCRIPTS_NOTIFICATIONS=yes
-
-export PYTHONSTARTUP=${HOME}/.pythonrc
-
-export GOROOT=${HOME}/go
-
-export TERM=screen-256color
+zle -N _fg
 
 function mkcdir {
-	mkdir --parents "$1" && cd "$_";
+  mkdir --parents "$1" || cd "$_"
 }
 
-function fuck-them {
-	for pat in "$@"; do
-		pgrep "${pat}" | xargs kill -9
-	done
+function m {
+  man "$@" | ifne vim -X -c 'set ft=man nomod' -c 'nmap q :qa!<CR>' -
 }
 
-function sd {
-	svn diff "$@" | colordiff | diff-highlight | diff-so-fancy | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
+function nix-zsh {
+  nix-shell --command "$SHELL" "$@"
 }
 
 function svn {
-	case $1 in
-		st|status|up|update|sw|switch)
-			command svn --ignore-externals "$@" && \
-				if type externals >/dev/null; then
-					externals up
-				fi
-			;;
-
-		*)
-			command svn "$@"
-			;;
-		esac
+  case $1 in
+    st|status|up|update|sw|switch)
+      command svn --ignore-externals "$@" && \
+        if type externals >/dev/null; then
+          externals up
+        fi
+      ;;
+    d|diff)
+      command svn diff "$@" | colordiff | diff-highlight | diff-so-fancy | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
+      ;;
+    *)
+      command svn "$@"
+      ;;
+  esac
 }
 
-# Stream the contents of the file escaping the newlines.
 function databagify {
-	perl -p -e 's/\R/\\n/g' "$@"
+  perl -p -e 's/\R/\\n/g' "$@"
 }
 
-if [ -n "$NIX_GHC" ]; then
-	NIX_GHCI=${NIX_GHC}i
-fi
-
-WORDCHARS="${WORDCHARS//\//}"
-
-export DEPLOY_DEFAULT_CMD=run
-export NIX_PATH="nix-rehash=https://github.com/supki/nix-rehash/archive/master.tar.gz:$NIX_PATH"
+source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/git/zsh-autosuggestions/zsh-autosuggestions.zsh
+# End of lines configured by m
