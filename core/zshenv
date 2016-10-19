@@ -1,3 +1,5 @@
+path=(~/bin $path)
+
 export GOROOT=${HOME}/go
 export PYTHONSTARTUP=${HOME}/.pythonrc
 export NIX_PATH="nix-rehash=https://github.com/supki/nix-rehash/archive/master.tar.gz:${NIX_PATH}"
