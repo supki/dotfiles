@@ -78,7 +78,7 @@ function _fg {
 zle -N _fg
 
 function mkcdir {
-  mkdir --parents "$1" || cd "$_"
+  mkdir --parents "$1" && cd "$_"
 }
 
 function m {
