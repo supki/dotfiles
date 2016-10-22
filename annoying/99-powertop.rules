@@ -1,2 +1,5 @@
 # http://askubuntu.com/a/519699
 KERNEL=="host[0-1]", SUBSYSTEM=="scsi_host", ATTR{link_power_management_policy}="min_power"
+
+ACTION=="add", SUBSYSTEM=="pci", DEVPATH=="*/0000:0?:??.?", TEST=="power/control", ATTR{power/control}="auto"
+ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="auto"
