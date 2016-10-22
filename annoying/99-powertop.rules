@@ -1,0 +1,2 @@
+# http://askubuntu.com/a/519699
+KERNEL=="host[0-1]", SUBSYSTEM=="scsi_host", ATTR{link_power_management_policy}="min_power"
