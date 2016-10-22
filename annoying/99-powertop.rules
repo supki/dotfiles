@@ -1,5 +1,6 @@
 # http://askubuntu.com/a/519699
 KERNEL=="host[0-1]", SUBSYSTEM=="scsi_host", ATTR{link_power_management_policy}="min_power"
 
+# https://github.com/jimdigriz/debian-mssp4/blob/6e2c35ede6e3737f1a47760d462a605f5e34170c/root/etc/udev/rules.d/90-setupcon.rules
 ACTION=="add", SUBSYSTEM=="pci", DEVPATH=="*/0000:0?:??.?", TEST=="power/control", ATTR{power/control}="auto"
 ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="auto"
