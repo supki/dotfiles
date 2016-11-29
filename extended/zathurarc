@@ -1,0 +1,3 @@
+set smooth-scroll true
+
+map ; focus_inputbar ":"
