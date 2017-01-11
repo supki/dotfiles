@@ -81,3 +81,6 @@ import qualified Data.ByteString.Lazy.Char8 as BLC
 :set -XViewPatterns
 
 :set +t
+
+let test _ = return "hspec spec"
+:def test test
