@@ -221,6 +221,7 @@ vim = do
       pathogen_ (github "ap" "vim-css-color")
       pathogen_ (github "aperezdc" "vim-template")
       pathogen_ (github "exu" "pgsql.vim")
+      pathogen_ (github "tpope" "vim-eunuch")
     namespace "idris" $
       pathogen_ (github "idris-hackers" "idris-vim")
     namespace "rust" $
