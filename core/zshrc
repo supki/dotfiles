@@ -101,6 +101,10 @@ function svn {
       shift
       command svn diff "$@" | colordiff | diff-highlight | diff-so-fancy | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
       ;;
+    br|branch)
+      command svn list '^/branches' --xml |
+        xmlstarlet select --template --value-of '/lists/list/entry[@kind="dir"]/name' --nl
+      ;;
     *)
       command svn "$@"
       ;;
