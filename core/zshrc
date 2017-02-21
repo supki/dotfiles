@@ -98,6 +98,7 @@ function svn {
         fi
       ;;
     d|diff)
+      shift
       command svn diff "$@" | colordiff | diff-highlight | diff-so-fancy | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS
       ;;
     *)
