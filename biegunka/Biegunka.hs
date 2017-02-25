@@ -42,14 +42,12 @@ laptop = sudo "maksenov" $ sequence_
   , emacs
   , misc
   , mine
-  , vimpager
   ]
 work = sequence_
   [ dotfiles
   , vim
   , misc
   , mine
-  , vimpager
   ]
 
 dotfiles :: Script 'Sources ()
@@ -235,8 +233,6 @@ vim = do
     namespace "mine" $ do
       github "supki" "vim-flipping" (path (into "git")) $
         register ".vim/bundle/vim-flipping"
-      github "supki" "syntastic-cabal" (path (into "git")) $
-        register ".vim/bundle/syntastic-cabal"
       github "supki" "vim-languages" (path (into "git")) $
         register ".vim/bundle/vim-languages"
       github "supki" "seoul256.vim" (path (into ".vim/bundle") . branch "f/m") pass
@@ -269,7 +265,6 @@ misc =
       , github "zsh-users" "zsh-autosuggestions"
       , github "muennich" "urxvt-perls"
       ]
-    github "purescript-contrib" "grunt-init-purescript" (path (into ".grunt-init")) pass
     github "so-fancy" "diff-so-fancy" (path (into "git")) $
       link "diff-so-fancy" "bin/diff-so-fancy"
 
@@ -277,20 +272,12 @@ mine :: Script 'Sources ()
 mine = namespace "mine" $ do
   traverse_ (\p -> github "supki" p (path (into "git")) pass)
     [ "xmonad-screenshot"
-    , "xmonad-use-empty-workspace"
     , "xmonad-2014"
     , "pakej"
     , "da"
     ]
   github "supki" "slock" (path (into "git") . branch "feature/usable") $
     pure ()
-
-vimpager :: Script 'Sources ()
-vimpager = namespace "vimpager" $
-  github "rkitover" "vimpager" (path "git/vimpager") $ do
-    [sh|make PREFIX=$SOURCE_ROOT install|]
-    link "bin/vimpager" "bin/vless"
-    link "bin/vimcat" "bin/vcat"
 
 dot :: FilePath -> (FilePath, FilePath)
 dot fp = fp ~> ('.' : fp)
