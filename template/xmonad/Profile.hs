@@ -37,12 +37,10 @@ myFocusedBorderColor = blue
 
 -- Terminal emulator
 myTerminal :: String
-myTerminal = "$template.xmonad.terminal$"
+myTerminal = "urxvt"
 --
 
 -- Fonts
-ubuntuFont :: String
-ubuntuFont = "$template.xmonad.ubuntu$"
 terminusFont :: String
 terminusFont = "$template.xmonad.terminus$"
 --

@@ -17,7 +17,7 @@ myTheme = defaultTheme
   , inactiveBorderColor = orange
   , activeTextColor     = yellow
   , inactiveTextColor   = orange
-  , fontName            = ubuntuFont
+  , font                = terminusFont
   , decoWidth           = 1378
   , decoHeight          = 20
   }

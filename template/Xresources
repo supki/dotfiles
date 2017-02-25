@@ -38,7 +38,7 @@
 *.color15: #ffffff
 *.underlineColor: #eeccaa
 
-*.url-select.launcher: $template.urxvt.browser$
+*.url-select.launcher: x-www-browser
 *.url-select.autocopy: true
 *.perl-ext-common: default,tabbedex,keyboard-select,url-select
 

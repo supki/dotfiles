@@ -11,9 +11,7 @@ import Defaults
 template :: Template
 template = Defaults.template
   (\xmonad -> xmonad
-    { terminal  = "urxvtcd"
-    , ubuntu    = "xft:ubuntu:size=8"
-    , terminus  = "xft:terminus:size=8"
+    { terminus  = "xft:terminus:size=12:antialias=true"
     , white     = "#ffffff"
     , darkGray  = "#474747"
     , lightGray = "#cccccc"
@@ -45,5 +43,4 @@ template = Defaults.template
   (\urxvt -> urxvt
     { perllib     = "/home/maksenov/git/urxvt-tabbedex:/home/maksenov/git/urxvt-perls"
     , background_ = "#222222"
-    , browser     = "x-www-browser"
     })

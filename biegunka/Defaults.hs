@@ -29,9 +29,7 @@ template g h j k = Template
   }
 
 data Xmonad = Xmonad
-  { terminal
-  , ubuntu
-  , terminus
+  { terminus
   , white
   , darkGray
   , lightGray
@@ -47,7 +45,6 @@ data Xmonad = Xmonad
 defaultXmonad :: Xmonad
 defaultXmonad = Xmonad
   { terminal  = ""
-  , ubuntu    = ""
   , terminus  = ""
   , white     = ""
   , darkGray  = ""
@@ -80,12 +77,11 @@ defaultXsession = Xsession
   }
 
 data Urxvt = Urxvt
-  { perllib, background_, browser :: String
+  { perllib, background_ :: String
   } deriving (Data, Typeable)
 
 defaultUrxvt :: Urxvt
 defaultUrxvt = Urxvt
   { perllib     = ""
   , background_ = ""
-  , browser     = ""
   }
