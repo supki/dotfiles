@@ -1,0 +1,25 @@
+#!/usr/bin/env perl
+
+use v5.22;
+use strict;
+
+die "usage $0 LAYOUTS" unless scalar @ARGV;
+
+sub poll_screensaver_state($) {
+  my ($active) = @_;
+  $_ = qx(gnome-screensaver-command --query);
+
+  if (/\bactive\b/) {
+    qx(setxkbmap -layout us) if defined($active) && !$active;
+    $active = 1;
+  } elsif (/\binactive\b/) {
+    qx(setxkbmap -layout @ARGV) if defined($active) && $active;
+    $active = 0;
+  }
+
+  sleep 1;
+
+  @_ = ($active); goto &poll_screensaver_state; # This is how you do TCE in 1973.
+}
+
+poll_screensaver_state(undef);
