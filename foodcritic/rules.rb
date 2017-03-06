@@ -40,3 +40,21 @@ rule 'EBLO002', 'Stop doing this' do
     end
   end
 end
+
+rule "EBLO003", "Missing template (for real)" do
+  tags %w{correctness eblo}
+  recipe do |ast, filename|
+    find_resources(ast, type: :template).reject do |resource|
+      resource_attributes(resource)["local"] || resource_attributes(resource)["cookbook"]
+    end.select do |resource|
+      source = template_file(resource_attributes(resource, return_expressions: true))
+
+      break if source.respond_to?(:xpath)
+
+      templates = "#{::Pathname.new(filename).dirname.dirname}/templates"
+      template_paths(filename).none? do |path|
+        ["#{templates}/#{source}", "#{templates}/default/#{source}"].include?(path)
+      end
+    end
+  end
+end
