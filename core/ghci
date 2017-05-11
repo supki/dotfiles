@@ -82,5 +82,5 @@ import qualified Data.ByteString.Lazy.Char8 as BLC
 
 :set +t
 
-let test _ = return "hspec spec"
-:def test test
+let run _ = return "hspec spec"
+:def run run
