@@ -52,6 +52,7 @@
 	sub = reset HEAD --
 	sup = "!yo() { git branch "$2" --set-upstream "$1/$2"; }; yo"
 	unci = reset --soft HEAD~1
+	wip = "!f() { git commit -m 'wip'; git push; }; f"
 	wipe = reset --hard HEAD --
 [push]
 	default = current
