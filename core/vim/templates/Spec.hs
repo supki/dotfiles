@@ -4,5 +4,5 @@ import Test.Hspec
 
 
 spec :: Spec
-spec = do
+spec = parallel $ do
   %HERE%undefined
