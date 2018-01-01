@@ -31,6 +31,7 @@ alias g=git
 alias l='less -R'
 alias ls='ls --color -1'
 alias s=svn
+alias t='tree -C'
 alias y=youtube-dl
 
 bindkey '^P' history-beginning-search-backward
