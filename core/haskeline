@@ -1,6 +1,6 @@
 completionPromptLimit: Just 20
 historyDuplicates: IgnoreConsecutive
-bind: f1 : r e l o a d return : r u n return
+bind: f1 S y s t e m . M e m . p e r f o r m G C return : r e l o a d return : r u n return
 bind: f2 : r u n return
 keyseq: "\ESCOP" f1
 keyseq: "\ESCOQ" f2
