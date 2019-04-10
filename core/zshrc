@@ -26,7 +26,7 @@ bindkey -e
 alias b='bundle exec'
 alias c=cabal
 alias d=docker
-alias e=vim
+alias e=nvim
 alias g=git
 alias l='less -R'
 alias ls='ls --color -1'
