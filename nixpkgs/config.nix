@@ -53,6 +53,8 @@
         git
         pass
         m-neovim
+        tmux
+        zsh
       ];
     };
   };
