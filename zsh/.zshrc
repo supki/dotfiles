@@ -28,6 +28,8 @@ alias ls='ls --color -1'
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
+bindkey "^[[5~" history-beginning-search-backward
+bindkey "^[[6~" history-beginning-search-forward
 bindkey '\e' pound-insert
 bindkey "^z" _fg
 
