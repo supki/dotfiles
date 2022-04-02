@@ -1,5 +1,39 @@
 {
   packageOverrides = pkgs: with pkgs; rec {
+    m-zsh-autosuggestions = stdenv.mkDerivation rec {
+      name = "zsh-autosuggestions";
+      src = pkgs.fetchFromGitHub {
+        owner = "zsh-users";
+        repo = "zsh-autosuggestions";
+        rev = "master";
+        sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+      };
+
+      installPhase = ''
+        runHook preInstall
+        target=$out/share/zsh/${name}
+        mkdir -p $target
+        cp -r . $target
+        runHook postInstall
+      '';
+    };
+    m-zsh-syntax-highlighting = stdenv.mkDerivation rec {
+      name = "zsh-syntax-highlighting";
+      src = pkgs.fetchFromGitHub {
+        owner = "zsh-users";
+        repo = "zsh-syntax-highlighting";
+        rev = "master";
+        sha256 = "sha256-UqeK+xFcKMwdM62syL2xkV8jwkf/NWfubxOTtczWEwA=";
+      };
+
+      installPhase = ''
+        runHook preInstall
+        target=$out/share/zsh/${name}
+        mkdir -p $target
+        cp -r . $target
+        runHook postInstall
+      '';
+    };
     m-neovim =
       let
         customVimPlugins = {
@@ -50,9 +84,14 @@
     m-packages = pkgs.buildEnv {
       name = "m-packages";
       paths = [
+        diff-so-fancy
         git
+        htop
+        jq
         pass
         m-neovim
+        m-zsh-autosuggestions
+        m-zsh-syntax-highlighting
         tmux
         zsh
       ];
