@@ -87,3 +87,5 @@ for ext in ~/.nix-profile/share/zsh/zsh-*/*.zsh~*plugin.zsh; do
 done
 
 unset _cfg_cache_dir
+
+export LOCALE_ARCHIVE=/lib/locale/locale-archive # fix nix locale complaints

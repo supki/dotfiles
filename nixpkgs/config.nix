@@ -86,6 +86,7 @@
       paths = [
         diff-so-fancy
         git
+        glibcLocales
         htop
         jq
         pass
