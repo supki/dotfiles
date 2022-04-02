@@ -8,6 +8,7 @@ set cursorline
 set cursorcolumn
 
 let g:airline_theme = 'zenburn'
+let g:airline#extensions#tabline#enabled = 0
 
 set tabstop=2
 set softtabstop=0

@@ -88,10 +88,11 @@
         stack
         htop
         jq
-        pass
+        nodejs
         m-neovim
         m-zsh-autosuggestions
         m-zsh-syntax-highlighting
+        pass
         tmux
         yarn
         zsh
