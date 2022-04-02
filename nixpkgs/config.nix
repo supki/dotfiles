@@ -78,6 +78,27 @@
             };
           };
         };
+    x-selection-sync = pkgs.stdenv.mkDerivation {
+      name = "x-selection-sync";
+      src = pkgs.fetchFromGitHub {
+        owner = "supki";
+        repo = "x-selection-sync";
+        rev = "master";
+        sha256 = "sha256-w/nt6LKB8QbM8GxkiI7DcS4xNqhVfR/LKznWjQ2qle8=";
+      };
+      buildInputs = [
+        pkgs.pkg-config
+        pkgs.xorg.libX11
+        pkgs.xorg.libXfixes
+      ];
+      installPhase = ''
+        runHook preInstall
+        target=$out/bin
+        mkdir -p $target
+        cp ./build/x-selection-sync $target
+        runHook postInstall
+      '';
+    };
     m-packages = pkgs.buildEnv {
       name = "m-packages";
       paths = with pkgs; [
@@ -95,6 +116,7 @@
         pass
         tmux
         yarn
+        x-selection-sync
         zsh
 
         # packages Nix wants
