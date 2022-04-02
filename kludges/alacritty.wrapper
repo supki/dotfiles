@@ -1,0 +1,15 @@
+#! /usr/bin/perl -w
+
+while ($opt = shift(@ARGV))
+{
+  if ($opt eq '-display')
+  {
+    $ENV{'DISPLAY'} = shift(@ARGV);
+  }
+  elsif ($opt eq '-T' || $opt eq '-title')
+  {
+    push(@args, '-t', shift(@ARGV));
+  }
+}
+
+exec('nixGLIntel', 'alacritty', @args);

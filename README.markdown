@@ -5,22 +5,42 @@ I hope I will never have to do that, but deep down I know it's going to happen.
 
 ## Some small kludges I had to insert to make this actually work
 
-  1. Unfortunately, due to The Boostrap Problem™ I had to add the following:
+### Beating up Zsh to conform to XDG crap.
 
-     ```
-     export ZDOTDIR=$HOME/.config/zsh
-     ```
+Unfortunately, due to The Boostrap Problem™ I had to add the following:
 
-     to `/etc/zshenv`. Otherwise, `zsh` will try to read its configuration from `$HOME` directly
-     and I will have to mess around with symlinking to `$HOME/.config/zsh` myself.
+```
+export ZDOTDIR=$HOME/.config/zsh
+```
 
+to `/etc/zshenv`. Otherwise, `zsh` will try to read its configuration from `$HOME` directly
+and I will have to mess around with symlinking to `$HOME/.config/zsh` myself.
 
-  2. Some nix-free interaction with Ubuntu was obviously required to change the default shell:
+### Setting up default shell
 
-     ```
-     sudo chsh -s /home/m/.nix-profile/bin/zsh m
-     ```
+Some nix-free interaction with Ubuntu was obviously required to change the default shell:
 
-     Unsurprisingly, Ubuntu is still shit in 2022, so that broke the login screen and my user is nowhere to
-     be found there now. How they are able to produce such a awful user experience after 10+ years of trying
-     to make something usable is still a question I have no answer for.
+```
+$ sudo chsh -s /home/m/.nix-profile/bin/zsh m
+```
+
+Unsurprisingly, Ubuntu is still shit in 2022, so that broke the login screen and my user is nowhere to
+be found there now. How they are able to produce such a awful user experience after 10+ years of trying
+to make something usable is still a question I have no answer for.
+
+### Launching `alacritty`
+
+Since it's imperative that terminal emulators should use GPU in 2022, I had to:
+
+First, add nixGL channel to my environment:
+
+```
+% nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl
+% nix-channel --update
+```
+
+Second, create a `x-terminal-emulator` wrapper for Ubuntu to pick up the `alacritty` executable.
+This wrapper can be found in this repository as `kludges/alacritty.wrapper`. (Hopefully, no one will
+name their tool `kludges` in the future.)  
+It's in Perl because the original `gnome-terminal.wrapper` that I butchered was written in Perl.
+I don't particularly like the language.

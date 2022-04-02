@@ -1,5 +1,6 @@
 {
   packageOverrides = pkgs: rec {
+    nixgl = import <nixgl> {};
     buildZshPlugin = { name, src }:
       pkgs.stdenv.mkDerivation {
         inherit name src;
@@ -80,6 +81,7 @@
     m-packages = pkgs.buildEnv {
       name = "m-packages";
       paths = with pkgs; [
+        alacritty
         diff-so-fancy
         git
         glibcLocales
@@ -91,6 +93,7 @@
         m-zsh-syntax-highlighting
         tmux
         zsh
+        nixgl.nixGLIntel
       ];
     };
   };
