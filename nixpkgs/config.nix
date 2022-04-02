@@ -1,6 +1,18 @@
 {
-  packageOverrides = pkgs: with pkgs; rec {
-    m-zsh-autosuggestions = stdenv.mkDerivation rec {
+  packageOverrides = pkgs: rec {
+    buildZshPlugin = { name, src }:
+      pkgs.stdenv.mkDerivation {
+        inherit name src;
+
+        installPhase = ''
+          runHook preInstall
+          target=$out/share/zsh/${name}
+          mkdir -p $target
+          cp -r . $target
+          runHook postInstall
+        '';
+      };
+    m-zsh-autosuggestions = buildZshPlugin {
       name = "zsh-autosuggestions";
       src = pkgs.fetchFromGitHub {
         owner = "zsh-users";
@@ -8,16 +20,8 @@
         rev = "master";
         sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
       };
-
-      installPhase = ''
-        runHook preInstall
-        target=$out/share/zsh/${name}
-        mkdir -p $target
-        cp -r . $target
-        runHook postInstall
-      '';
     };
-    m-zsh-syntax-highlighting = stdenv.mkDerivation rec {
+    m-zsh-syntax-highlighting = buildZshPlugin {
       name = "zsh-syntax-highlighting";
       src = pkgs.fetchFromGitHub {
         owner = "zsh-users";
@@ -25,14 +29,6 @@
         rev = "master";
         sha256 = "sha256-UqeK+xFcKMwdM62syL2xkV8jwkf/NWfubxOTtczWEwA=";
       };
-
-      installPhase = ''
-        runHook preInstall
-        target=$out/share/zsh/${name}
-        mkdir -p $target
-        cp -r . $target
-        runHook postInstall
-      '';
     };
     m-neovim =
       let
@@ -57,7 +53,7 @@
           };
         };
       in
-        neovim.override {
+        pkgs.neovim.override {
           vimAlias = true;
           configure = {
             customRC = builtins.readFile ./init.vim;
@@ -83,7 +79,7 @@
         };
     m-packages = pkgs.buildEnv {
       name = "m-packages";
-      paths = [
+      paths = with pkgs; [
         diff-so-fancy
         git
         glibcLocales
