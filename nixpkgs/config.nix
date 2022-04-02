@@ -81,10 +81,11 @@
     m-packages = pkgs.buildEnv {
       name = "m-packages";
       paths = with pkgs; [
+        # packages I want
         alacritty
         diff-so-fancy
         git
-        glibcLocales
+        stack
         htop
         jq
         pass
@@ -92,7 +93,11 @@
         m-zsh-autosuggestions
         m-zsh-syntax-highlighting
         tmux
+        yarn
         zsh
+
+        # packages Nix wants
+        glibcLocales
         nixgl.nixGLIntel
       ];
     };
