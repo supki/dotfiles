@@ -107,6 +107,7 @@ rec {
       # packages I want
       alacritty
       diff-so-fancy
+      feh
       fira-code
       git
       stack
@@ -116,6 +117,7 @@ rec {
       neovim
       nodejs
       pass
+      scrot
       tmux
       tree
       x-selection-sync
