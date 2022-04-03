@@ -28,6 +28,10 @@ Unsurprisingly, Ubuntu is still shit in 2022, so that broke the login screen and
 be found there now. How they are able to produce such a awful user experience after 10+ years of trying
 to make something usable is still a question I have no answer for.
 
+After some additional research, the culprit was identified. I also had to add `/home/m/.nix-profile/bin/zsh`
+to the valid login shells listed in `/etc/shells`. This file is consulted when Ubuntu tries to determine
+whether a user is a "normal" one.
+
 ### Launching `alacritty`
 
 Since it's imperative that terminal emulators should use GPU in 2022, I had to:
