@@ -3,9 +3,11 @@ window:
   startup_mode: 'Maximized'
 font:
   normal:
-    family: 'FiraMono'
-    style: 'Regular'
+    family: 'Fira Code'
+    style: 'Light'
 
   bold:
-    family: 'FiraMono'
-    style: 'Bold'
+    family: 'Fira Code'
+    style: 'Medium'
+
+  size: 10

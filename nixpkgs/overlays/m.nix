@@ -107,7 +107,7 @@ rec {
       # packages I want
       alacritty
       diff-so-fancy
-      fira-mono
+      fira-code
       git
       stack
       htop
