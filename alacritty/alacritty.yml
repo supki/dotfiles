@@ -1,3 +1,11 @@
 window:
   decorations: 'None'
   startup_mode: 'Maximized'
+font:
+  normal:
+    family: 'FiraMono'
+    style: 'Regular'
+
+  bold:
+    family: 'FiraMono'
+    style: 'Bold'

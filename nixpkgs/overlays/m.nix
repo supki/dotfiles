@@ -59,7 +59,7 @@ rec {
       super.neovim.override {
         vimAlias = true;
         configure = {
-          customRC = builtins.readFile ../init.vim;
+          customRC = builtins.readFile ../../nvim/init.vim;
           packages.myVimPackage = with super.vimPlugins // customVimPlugins; {
             start = [
               fzf-vim
@@ -107,6 +107,7 @@ rec {
       # packages I want
       alacritty
       diff-so-fancy
+      fira-mono
       git
       stack
       htop
@@ -116,8 +117,9 @@ rec {
       nodejs
       pass
       tmux
-      yarn
+      tree
       x-selection-sync
+      yarn
       zsh
       zsh-autosuggestions
       zsh-syntax-highlighting

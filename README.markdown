@@ -48,3 +48,10 @@ This wrapper can be found in this repository as `kludges/alacritty.wrapper`. (Ho
 name their tool `kludges` in the future.)  
 It's in Perl because the original `gnome-terminal.wrapper` that I butchered was written in Perl.
 I don't particularly like the language.
+
+### Custom fonts
+
+This one is pretty easy: just need to add `<dir>/home/m/.nix-profile/share/fonts</dir>` after
+`<!-- Font directory list -->` in `/etc/fonts/fonts.conf`. Probably makes more sense to muck around
+with `~/.local/fonts` or whatever than polluting system-wide configuration, but I just didn't
+feel like it.
