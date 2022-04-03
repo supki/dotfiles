@@ -45,10 +45,19 @@ zstyle ':vcs_info:git:*' formats "%F{1}%u%f%F{2}%c%f %F{218}%b%f"
 zstyle ':vcs_info:svn:*' formats "%F{3}%b%f"
 zstyle ':vcs_info:*' enable git svn
 
-PROMPT="%M:%F{218}%~$prompt_newline%(?,%F{green},%F{red})%#%f "
+PROMPT="%M:%F{218}%~%f"$'$(signal_wrapper)'"$prompt_newline%(?,%F{green},%F{red})%#%f "
 PROMPT2="%F{blue}%_%f> "
 RPROMPT="%{"$'\e[1A'"%}"$'$(vcs_info_wrapper)'' ''$(nix_env_wrapper)'"%{"$'\e[B'"%"
 WORDCHARS=${WORDCHARS//\//}
+
+function signal_wrapper {
+  declare val=$?
+  if ((val > 128)); then
+    echo " (\$? is %F{red}$(kill -l "$val")%f)"
+  elif ((val > 0 )); then
+    echo " (\$? is %F{red}${val}%f)"
+  fi
+}
 
 function vcs_info_wrapper {
   vcs_info
