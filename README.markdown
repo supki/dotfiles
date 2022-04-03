@@ -52,6 +52,6 @@ I don't particularly like the language.
 ### Custom fonts
 
 This one is pretty easy: just need to add `<dir>/home/m/.nix-profile/share/fonts</dir>` after
-`<!-- Font directory list -->` in `/etc/fonts/fonts.conf`. Probably makes more sense to muck around
-with `~/.local/fonts` or whatever than polluting system-wide configuration, but I just didn't
-feel like it.
+`<!-- Font directory list -->` in `/etc/fonts/fonts.conf` and then run `% fc-cache -fv`. Probably makes more
+sense to muck around with `~/.local/fonts` or whatever than polluting system-wide configuration, but
+I just didn't feel like it.
