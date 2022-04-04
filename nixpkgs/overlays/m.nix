@@ -109,7 +109,6 @@ rec {
       feh
       fira-code
       git
-      stack
       htop
       jq
       mpv
@@ -117,9 +116,11 @@ rec {
       nodejs
       pass
       scrot
+      stack
       tmux
       tree
       x-selection-sync
+      xsel
       yarn
       zsh
       zsh-autosuggestions
