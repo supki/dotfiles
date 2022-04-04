@@ -12,7 +12,6 @@ let
         runHook postInstall
       '';
     };
-  nixgl = import <nixgl> {};
 in
 rec {
   zsh-autosuggestions = buildZshPlugin {
@@ -128,7 +127,7 @@ rec {
 
       # packages Nix wants
       glibcLocales
-      nixgl.nixGLIntel
+      self.nixgl.nixGLIntel
     ];
   };
 }

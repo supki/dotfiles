@@ -34,16 +34,8 @@ whether a user is a "normal" one.
 
 ### Launching `alacritty`
 
-Since it's imperative that terminal emulators should use GPU in 2022, I had to:
-
-First, add nixGL channel to my environment:
-
-```
-% nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl
-% nix-channel --update
-```
-
-Second, create a `x-terminal-emulator` wrapper for Ubuntu to pick up the `alacritty` executable.
+Since it's imperative that terminal emulators should use GPU in 2022, I had to
+create a `x-terminal-emulator` wrapper for Ubuntu to pick up the `alacritty` executable.
 This wrapper can be found in this repository as `kludges/alacritty.wrapper`. (Hopefully, no one will
 name their tool `kludges` in the future.)  
 It's in Perl because the original `gnome-terminal.wrapper` that I butchered was written in Perl.
