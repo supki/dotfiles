@@ -47,3 +47,8 @@ This one is pretty easy: just need to add `<dir>/home/m/.nix-profile/share/fonts
 `<!-- Font directory list -->` in `/etc/fonts/fonts.conf` and then run `% fc-cache -fv`. Probably makes more
 sense to muck around with `~/.local/fonts` or whatever than polluting system-wide configuration, but
 I just didn't feel like it.
+
+### .ghci
+
+It's still unaware of the XDG crap (at least at the GHC version I'm using), so I had to symlink
+`~/.config/ghc/ghci.conf` to `~/.ghci`.
