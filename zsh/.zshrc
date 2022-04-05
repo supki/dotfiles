@@ -21,7 +21,6 @@ SAVEHIST=10000
 setopt autocd extendedglob
 bindkey -e
 
-alias b='bundle exec'
 alias e=nvim
 alias g=git
 alias ls='ls --color -1'
@@ -85,12 +84,12 @@ function mkcdir {
   mkdir --parents "$1" && cd "$_"
 }
 
-function nix-zsh {
-  nix-shell --command "$SHELL" "$@"
-}
-
 function databagify {
   perl -p -e 's/\R/\\n/g' "$@"
+}
+
+function ns {
+  nix-shell --command "$*"
 }
 
 for ext in ~/.nix-profile/share/zsh/zsh-*/*.zsh~*plugin.zsh; do
