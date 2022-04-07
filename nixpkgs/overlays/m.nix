@@ -50,7 +50,7 @@ rec {
             owner = "supki";
             repo = "vim-languages";
             rev = "master";
-            sha256 = "sha256-ThAkYrykRAwk/jWj3ymjxwSZKfnyJcOdB3lmPUJxLcc=";
+            sha256 = "sha256-Dd7GwlGZoVG2VLu+2uLRR11BROZSgiJRuO0quEYofW0=";
           };
         };
       };
