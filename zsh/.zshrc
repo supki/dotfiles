@@ -88,7 +88,7 @@ function databagify {
   perl -p -e 's/\R/\\n/g' "$@"
 }
 
-function ns {
+function n {
   nix-shell --command "$*"
 }
 
