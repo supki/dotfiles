@@ -21,7 +21,6 @@ SAVEHIST=10000
 setopt autocd extendedglob
 bindkey -e
 
-alias e=nvim
 alias g=git
 alias ls='ls --color -1'
 
@@ -90,6 +89,14 @@ function databagify {
 
 function n {
   nix-shell --command "$*"
+}
+
+function e {
+  if [ -f shell.nix ]; then
+    n nvim
+  else
+    nvim
+  fi
 }
 
 for ext in ~/.nix-profile/share/zsh/zsh-*/*.zsh~*plugin.zsh; do
