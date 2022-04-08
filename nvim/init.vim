@@ -44,6 +44,6 @@ nnoremap <leader>b :Buffers<CR>
 set hidden
 
 set wildmenu
-set wildmode=list,full
+set wildmode=list:full
 
 let $FZF_DEFAULT_OPTS = '--reverse'
