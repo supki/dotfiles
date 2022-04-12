@@ -79,6 +79,24 @@ rec {
           };
         };
       };
+  stack = (
+    self.writeScriptBin "stack" ''
+      #!${self.runtimeShell}
+
+      xdg_config_home_config_yaml=''${XDG_CONFIG_HOME:-$HOME/.config}/stack/config.yaml
+      stack_root=$HOME/.stack
+      stack_root_config_yaml=$stack_root/config.yaml
+      if [ -f "$xdg_config_home_config_yaml" ]; then
+        mkdir -p "$stack_root"
+        cp "$xdg_config_home_config_yaml" "$stack_root_config_yaml"
+      fi
+
+      exec "${super.stack}/bin/stack" "$@"
+    ''
+  ) // {
+    name = "stack";
+    version = super.stack.version;
+  };
   x-selection-sync = self.stdenv.mkDerivation {
     name = "x-selection-sync";
     src = self.fetchFromGitHub {
