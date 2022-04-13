@@ -93,9 +93,9 @@ function n {
 
 function e {
   if [ -f shell.nix ]; then
-    n nvim
+    n nvim "$@"
   else
-    nvim
+    nvim "$@"
   fi
 }
 
