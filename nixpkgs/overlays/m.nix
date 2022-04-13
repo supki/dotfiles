@@ -140,6 +140,7 @@ rec {
       x-selection-sync
       xsel
       yarn
+      zellij
       zsh
       zsh-autosuggestions
       zsh-syntax-highlighting

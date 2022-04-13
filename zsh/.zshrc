@@ -23,6 +23,7 @@ bindkey -e
 
 alias g=git
 alias ls='ls --color -1'
+alias z=zellij
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward

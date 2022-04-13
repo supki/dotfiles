@@ -1,0 +1,23 @@
+---
+tabs:
+  - direction: Horizontal
+    parts:
+      - direction: Vertical
+        body: true
+        parts:
+          - direction: Horizontal
+            split_size:
+              percent: 70
+          - direction: Horizontal
+            parts:
+              - direction: Vertical
+                split_size:
+                  percent: 60
+              - direction: Vertical
+      - direction: Horizontal
+        borderless: true
+        split_size:
+          Fixed: 2
+        run:
+          plugin:
+            location: "zellij:status-bar"
