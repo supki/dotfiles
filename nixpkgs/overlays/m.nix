@@ -118,8 +118,8 @@ rec {
       runHook postInstall
     '';
   };
-  m-packages = super.buildEnv {
-    name = "m-packages";
+  m-env = super.buildEnv {
+    name = "m-env";
     paths = with super; [
       # packages I want
       alacritty
