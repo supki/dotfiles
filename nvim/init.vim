@@ -40,6 +40,7 @@ let mapleader = " "
 
 nnoremap <leader>e :Files<CR>
 nnoremap <leader>b :Buffers<CR>
+nnoremap <silent> <leader>h :nohlsearch<CR>
 
 set hidden
 
