@@ -38,7 +38,7 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 
 let mapleader = " "
 
-nnoremap <leader>e :Files<CR>
+nnoremap <leader>e :GitFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <silent> <leader>h :nohlsearch<CR>
 
