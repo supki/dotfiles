@@ -9,6 +9,7 @@ set cursorcolumn
 
 let g:airline_theme = 'zenburn'
 let g:airline#extensions#tabline#enabled = 0
+let g:rainbow_active = 1
 
 set tabstop=2
 set softtabstop=0

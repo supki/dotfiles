@@ -64,7 +64,7 @@ rec {
               fzf-vim
               golden-ratio
               haskell-vim
-              rainbow_parentheses-vim
+              rainbow
               seoul256-vim
               vim-airline
               vim-airline-themes
