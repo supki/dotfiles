@@ -51,6 +51,8 @@ keybinds:
           key: [Ctrl: 'g',]
         - action: [Quit]
           key: [Ctrl: 'q']
+        - action: [ToggleFocusFullscreen,]
+          key: [Ctrl: 'h',]
         - action: [MoveFocus: Left,]
           key: [ Alt: 'h',]
         - action: [MoveFocus: Right,]
