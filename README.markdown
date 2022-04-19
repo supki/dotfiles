@@ -41,6 +41,12 @@ name their tool `kludges` in the future.)
 It's in Perl because the original `gnome-terminal.wrapper` that I butchered was written in Perl.
 I don't particularly like the language.
 
+For Ubuntu to actually pick up the new wrapper, I had to run
+
+```
+% sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty.wrapper
+```
+
 ### Custom fonts
 
 This one is pretty easy: just need to add `<dir>/home/m/.nix-profile/share/fonts</dir>` after
@@ -52,3 +58,22 @@ I just didn't feel like it.
 
 It's still unaware of the XDG crap (at least at the GHC version I'm using), so I had to symlink
 `~/.config/ghc/ghci.conf` to `~/.ghci`.
+
+### pwfeedback
+
+To see the feedback when typing sudo passwords, just add
+
+```
+Defaults pwfeedback
+```
+
+to `/etc/sudoers`. Hopefully, there's no more exploits.
+
+### Solid background
+
+To save my eyes from the default Ubuntu background:
+
+```
+% gsettings set org.gnome.desktop.background picture-options 'none'
+% gsettings set org.gnome.desktop.background primary-color '#222222'
+```
