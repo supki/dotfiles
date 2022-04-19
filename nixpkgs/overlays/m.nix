@@ -134,6 +134,7 @@ rec {
       nodejs
       pass
       scrot
+      openssh
       stack
       tmux
       tree
