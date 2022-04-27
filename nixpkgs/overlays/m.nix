@@ -123,12 +123,16 @@ rec {
     paths = with super; [
       # packages I want
       alacritty
+      binutils
       diff-so-fancy
       feh
       fira-code
+      gcc
       git
+      gnumake
       htop
       jq
+      lzip
       mpv
       neovim
       nodejs
