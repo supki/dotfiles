@@ -77,3 +77,11 @@ To save my eyes from the default Ubuntu background:
 % gsettings set org.gnome.desktop.background picture-options 'none'
 % gsettings set org.gnome.desktop.background primary-color '#222222'
 ```
+
+### Separate keyboard layouts for each window
+
+For some reason this is not the default:
+
+```
+% gsettings set org.gnome.desktop.input-sources per-window true
+```
