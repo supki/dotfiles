@@ -52,7 +52,7 @@ keybinds:
         - action: [Quit]
           key: [Ctrl: 'q']
         - action: [ToggleFocusFullscreen,]
-          key: [Ctrl: 'h',]
+          key: [Ctrl: 'x',]
         - action: [MoveFocus: Left,]
           key: [ Alt: 'h',]
         - action: [MoveFocus: Right,]
