@@ -128,6 +128,7 @@ rec {
       fira-code
       git
       htop
+      iotop
       jq
       mpv
       neovim
