@@ -107,6 +107,7 @@ done
 unset _cfg_cache_dir
 
 export LOCALE_ARCHIVE=/lib/locale/locale-archive # fix nix locale complaints
+export CURL_HOME=${XDG_CONFIG_HOME:-$HOME/.config}/curl
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
