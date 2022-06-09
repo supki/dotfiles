@@ -130,6 +130,7 @@ rec {
       htop
       iotop
       jq
+      moreutils
       mpv
       neovim
       nodejs
