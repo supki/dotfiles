@@ -1,5 +1,6 @@
 declare _cfg_cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 mkdir -p "$_cfg_cache_dir"
+fpath=(~/.nix-profile/share/zsh/site-functions $fpath)
 
 zstyle ':completion:*' auto-description '%B%d:%b'
 zstyle ':completion:*' completer _expand _complete _ignored _approximate _prefix
