@@ -28,6 +28,7 @@ set ttimeout
 
 nnoremap Q <nop>
 nnoremap q <nop>
+nnoremap <tab> %
 
 nnoremap : ;
 nnoremap ; :
