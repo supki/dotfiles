@@ -29,7 +29,7 @@ rec {
       owner = "zsh-users";
       repo = "zsh-syntax-highlighting";
       rev = "master";
-      sha256 = "sha256-UqeK+xFcKMwdM62syL2xkV8jwkf/NWfubxOTtczWEwA=";
+      sha256 = "sha256-YV9lpJ0X2vN9uIdroDWEize+cp9HoKegS3sZiSpNk50=";
     };
   };
   neovim =
@@ -41,7 +41,7 @@ rec {
             owner = "ivyl";
             repo = "vim-bling";
             rev = "master";
-            sha256 = "sha256-c0opD24dFBQxiYITOUKTyX0msqT5B3hMb2rKnPuLqEo=";
+            sha256 = "sha256-iJ/uaoq71IM1hQSrnZ86MBlpUWRp9vs1Grd1+9C1QFM=";
           };
         };
         vim-languages = super.vimUtils.buildVimPlugin {
