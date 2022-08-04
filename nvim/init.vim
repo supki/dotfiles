@@ -1,5 +1,9 @@
 let g:seoul256_background = 234
 colorscheme seoul256
+highlight Pmenu ctermfg=252 ctermbg=235
+highlight PmenuSel cterm=bold ctermfg=252 ctermbg=237
+highlight StatusLine cterm=none ctermfg=252 ctermbg=235
+highlight WildMenu cterm=bold ctermfg=252 ctermbg=237
 
 set number
 set relativenumber
