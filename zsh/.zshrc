@@ -101,6 +101,11 @@ function e {
   fi
 }
 
+function stack-template {
+  declare -r name=$1
+  echo "${XDG_CONFIG_HOME:-$HOME/.config}/stack/${name}.hsfiles"
+}
+
 for ext in ~/.nix-profile/share/zsh/zsh-*/*.zsh~*plugin.zsh; do
   source "$ext"
 done

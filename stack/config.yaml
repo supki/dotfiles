@@ -2,3 +2,8 @@ system-ghc: true
 install-ghc: false
 nix:
   enable: false
+templates:
+  params:
+    author-name: Matvey Aksenov
+    author-email: matvey.aksenov@gmail.com
+    year: '2022'
