@@ -32,7 +32,8 @@ dependencies:
 default-extensions: []
 
 library:
-  dependencies: []
+  dependencies:
+    - envparse
   source-dirs:
     src
   other-modules:
@@ -180,20 +181,53 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE..
 module Main (main) where
 
 import qualified App
+import qualified Cfg
 
 
 main :: IO ()
-main =
-  App.run
+main = do
+  cfg <- Cfg.get
+  App.run cfg
 
 {-# START_FILE src/App.hs #-}
 module App
   ( run
   ) where
 
-run :: IO ()
-run = do
+import Cfg (Cfg)
+
+
+run :: Cfg -> IO ()
+run _ =
   pure ()
+
+{-# START_FILE src/Cfg.hs #-}
+module Cfg
+  ( Cfg(..)
+  , get
+  , version
+  ) where
+
+import           Env
+import qualified Meta_{{name}} as Meta
+
+
+data Cfg = Cfg
+    deriving (Show, Eq)
+
+get :: IO Cfg
+get =
+  Env.parse (header usageHeader) . prefixed "{{name}}" $ do
+    pure Cfg
+
+usageHeader :: String
+usageHeader =
+  unwords [Meta.name, version]
+
+version :: String
+version =
+  Meta.version <> "-" <> Meta.hash
+
 {-# START_FILE test/Spec.hs #-}
 {-# OPTIONS_GHC -F -pgmF hspec-discover #-}
 
