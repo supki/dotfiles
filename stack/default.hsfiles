@@ -8,8 +8,8 @@ allow-newer: true
 {-# START_FILE package.yaml #-}
 name:                {{name}}
 version:             1.0.0
-synopsis:            This is synopsis
-description:         This is description
+synopsis:            This is {{name}}
+description:         See README.markdown
 license:             BSD2
 author:              {{author-name}}
 maintainer:          {{author-email}}
@@ -217,7 +217,7 @@ data Cfg = Cfg
 
 get :: IO Cfg
 get =
-  Env.parse (header usageHeader) . prefixed "{{name}}" $ do
+  Env.parse (header usageHeader) . prefixed "{{name}}_" $ do
     pure Cfg
 
 usageHeader :: String
