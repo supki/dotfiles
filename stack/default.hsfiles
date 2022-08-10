@@ -245,6 +245,7 @@ pkgs.mkShell rec {
     glibcLocales
     gmp
     stack
+    zlib
   ];
 
   shellHook = ''
