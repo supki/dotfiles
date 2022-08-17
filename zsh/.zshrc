@@ -12,7 +12,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list '' 'r:|[._-]=* r:|=*'
 zstyle ':completion:*' max-errors 2
 zstyle ':completion:*' substitute 1
-zstyle :compinstall filename '/home/m/.zshrc'
+zstyle :compinstall filename '/home/m/.config/zsh/.zshrc'
 
 autoload -Uz compinit
 compinit -d "${_cfg_cache_dir}/zcompdump-${ZSH_VERSION}"
