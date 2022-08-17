@@ -4,6 +4,7 @@ highlight Pmenu ctermfg=252 ctermbg=235
 highlight PmenuSel cterm=bold ctermfg=252 ctermbg=237
 highlight StatusLine cterm=none ctermfg=252 ctermbg=235
 highlight WildMenu cterm=bold ctermfg=252 ctermbg=237
+highlight Comment ctermfg=246
 
 set number
 set relativenumber
