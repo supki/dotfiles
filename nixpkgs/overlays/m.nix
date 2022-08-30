@@ -139,6 +139,7 @@ rec {
       scrot
       stack
       tmux
+      transmission-gtk
       tree
       x-selection-sync
       xsel
