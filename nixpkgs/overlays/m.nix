@@ -124,6 +124,7 @@ rec {
       # packages I want
       alacritty
       diff-so-fancy
+      dig
       feh
       fira-code
       git
