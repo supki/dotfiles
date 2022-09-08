@@ -50,6 +50,9 @@ PROMPT2="%F{blue}%_%f> "
 RPROMPT="%{"$'\e[1A'"%}"$'$(vcs_info_wrapper)'' ''$(nix_env_wrapper)'"%{"$'\e[B'"%"
 WORDCHARS=${WORDCHARS//\//}
 
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]='fg=246'
+
 function signal_wrapper {
   declare val=$?
   if ((val > 128)); then
