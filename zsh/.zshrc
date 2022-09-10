@@ -85,7 +85,7 @@ function databagify {
 function n {
   local why_do_i_have_to_do_this
   echo "${(q)@}" | read -r why_do_i_have_to_do_this
-  nix-shell --command "${why_do_i_have_to_do_this}"
+  nix-shell --run "${why_do_i_have_to_do_this}"
 }
 
 function e {
