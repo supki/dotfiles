@@ -47,7 +47,7 @@ zstyle ':vcs_info:*' enable git svn
 
 PROMPT="%M:%F{218}%~%f"$'$(signal_wrapper)'"$prompt_newline%(?,%F{green},%F{red})%#%f "
 PROMPT2="%F{blue}%_%f> "
-RPROMPT="%{"$'\e[1A'"%}"$'$(vcs_info_wrapper)'' ''$(nix_env_wrapper)'"%{"$'\e[B'"%"
+RPROMPT="%{"$'\e[1A'"%}"$'$(vcs_info_wrapper)'"%{"$'\e[B'"%"
 WORDCHARS=${WORDCHARS//\//}
 
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -57,7 +57,7 @@ function signal_wrapper {
   declare val=$?
   if ((val > 128)); then
     echo " (\$? is %F{red}$(kill -l "$val")%f)"
-  elif ((val > 0 )); then
+  elif ((val > 0)); then
     echo " (\$? is %F{red}${val}%f)"
   fi
 }
@@ -66,16 +66,6 @@ function vcs_info_wrapper {
   vcs_info
   if [ -n "$vcs_info_msg_0_" ]; then
     echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
-  fi
-}
-
-function nix_env_wrapper {
-  if [ -n "${IN_NIX_SHELL:-}" ]; then
-    if [ "$name" = 'shell' ]; then
-      echo -n "[no-project]"
-    else
-      echo -n "[${name}]"
-    fi
   fi
 }
 
