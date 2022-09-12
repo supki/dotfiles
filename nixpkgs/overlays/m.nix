@@ -137,6 +137,7 @@ rec {
       nodejs
       pass
       scrot
+      shellcheck
       stack
       tmux
       transmission-gtk
