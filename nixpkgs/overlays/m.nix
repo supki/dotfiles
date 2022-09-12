@@ -118,6 +118,16 @@ rec {
       runHook postInstall
     '';
   };
+  haskellPackages = super.haskellPackages.override (_: {
+    overrides = self.haskell.lib.packageSourceOverrides {
+      dazu = self.fetchFromGitHub {
+        owner = "supki";
+        repo = "da";
+        rev = "main";
+        sha256 = "sha256-w4ecjQyzkcGAQr9wwEnVWVklDej7G/CBxKrPVNuaPWU=";
+      };
+    };
+  });
   m-env = super.buildEnv {
     name = "m-env";
     paths = with super; [
@@ -128,6 +138,7 @@ rec {
       feh
       fira-code
       git
+      haskellPackages.dazu
       htop
       iotop
       jq
