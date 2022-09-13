@@ -124,7 +124,7 @@ rec {
         owner = "supki";
         repo = "da";
         rev = "main";
-        sha256 = "sha256-w4ecjQyzkcGAQr9wwEnVWVklDej7G/CBxKrPVNuaPWU=";
+        sha256 = "sha256-wmvwcwhAxlkoD2m+b8YDaqWETeoAjyWqZw7OKrSI9Bk=";
       };
     };
   });

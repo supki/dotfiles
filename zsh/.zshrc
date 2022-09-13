@@ -101,6 +101,10 @@ function stack-template {
   echo "${XDG_CONFIG_HOME:-$HOME/.config}/stack/${name}.hsfiles"
 }
 
+function dazu {
+  RANDOMORG_APIKEY=$(pass random.org/apikey) command dazu
+}
+
 for ext in ~/.nix-profile/share/zsh/zsh-*/*.zsh~*plugin.zsh; do
   source "$ext"
 done
