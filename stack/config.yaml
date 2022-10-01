@@ -1,9 +1,17 @@
-system-ghc: true
-install-ghc: false
+# nix-shell-friendly stack behavior
+system-ghc: true   # use the ghc provided by Nix
+install-ghc: false # never try to install ghc from external sources, rather error out
 nix:
-  enable: false
+  enable: false    # no idea what this even is, but it's unlikely that
+                   # it's something useful
+
+# values to insert into project templates used by `stack new`
 templates:
   params:
     author-name: Matvey Aksenov
     author-email: matvey.aksenov@gmail.com
     year: '2022'
+
+# avoid annoying upgrade nagging; it's inactionable
+# since I'm just using what's in nixpkgs
+recommend-stack-upgrade: false
