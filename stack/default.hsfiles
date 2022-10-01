@@ -252,3 +252,5 @@ pkgs.mkShell rec {
   '';
 }
 
+{-# START_FILE .gitignore #-}
+.stack-work/
