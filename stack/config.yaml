@@ -15,3 +15,6 @@ templates:
 # avoid annoying upgrade nagging; it's inactionable
 # since I'm just using what's in nixpkgs
 recommend-stack-upgrade: false
+
+# avoid annoying save-your-hackage-password-as-plaintext nagging
+save-hackage-creds: false
