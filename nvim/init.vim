@@ -57,3 +57,13 @@ set wildmode=list:full
 let $FZF_DEFAULT_OPTS = '--reverse'
 
 match DiffDelete /\s\+$/
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  auto_install = false,
+  highlight = {
+    enable = { "nix", "haskell" },
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF

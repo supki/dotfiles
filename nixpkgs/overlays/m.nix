@@ -60,10 +60,17 @@ rec {
         configure = {
           customRC = builtins.readFile ../../nvim/init.vim;
           packages.myVimPackage = with super.vimPlugins // customVimPlugins; {
-            start = [
+            start = let
+              nvim-treesitter-with-plugins = nvim-treesitter.withPlugins (
+                plugins: [
+                  plugins.tree-sitter-haskell
+                  plugins.tree-sitter-nix
+                ]
+              );
+            in [
               fzf-vim
               golden-ratio
-              haskell-vim
+              nvim-treesitter-with-plugins
               rainbow
               seoul256-vim
               vim-airline
@@ -71,8 +78,11 @@ rec {
               vim-bling
               vim-commentary
               vim-languages
-              vim-nix
               vim-sandwich
+
+              # fallback for treesitter failures
+              haskell-vim
+              vim-nix
             ];
             opt = [
             ];
