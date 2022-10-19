@@ -64,8 +64,6 @@ vim.opt.hidden = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = 'list:full'
 
-vim.cmd("let $FZF_DEFAULT_OPTS = '--reverse'")
-
 vim.cmd('match DiffDelete /\\s\\+$/')
 
 require('nvim-treesitter.configs').setup {
