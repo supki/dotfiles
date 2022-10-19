@@ -55,3 +55,5 @@ set wildmenu
 set wildmode=list:full
 
 let $FZF_DEFAULT_OPTS = '--reverse'
+
+match DiffDelete /\s\+$/
