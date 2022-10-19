@@ -53,12 +53,18 @@ rec {
             sha256 = "sha256-Dd7GwlGZoVG2VLu+2uLRR11BROZSgiJRuO0quEYofW0=";
           };
         };
+        vim-init = super.vimUtils.buildVimPlugin {
+         name = "vim-init";
+         src = ../../nvim;
+        };
       };
     in
       super.neovim.override {
         vimAlias = true;
         configure = {
-          customRC = builtins.readFile ../../nvim/init.vim;
+          customRC = ''
+            lua require("init")
+          '';
           packages.myVimPackage = with super.vimPlugins // customVimPlugins; {
             start = let
               nvim-treesitter-with-plugins = nvim-treesitter.withPlugins (
@@ -68,6 +74,9 @@ rec {
                 ]
               );
             in [
+              # init.lua
+              vim-init
+
               fzf-vim
               golden-ratio
               nvim-treesitter-with-plugins
