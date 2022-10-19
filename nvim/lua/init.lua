@@ -6,6 +6,9 @@ highlight PmenuSel cterm=bold ctermfg=252 ctermbg=237
 highlight StatusLine cterm=none ctermfg=252 ctermbg=235
 highlight WildMenu cterm=bold ctermfg=252 ctermbg=237
 highlight Comment ctermfg=246
+highlight GitSignsAddNr ctermfg=40 cterm=bold
+highlight GitSignsChangeNr ctermfg=45 cterm=bold
+highlight GitSignsDeleteNr ctermfg=211 cterm=bold
 ]])
 
 vim.opt.number = true
@@ -68,7 +71,21 @@ vim.cmd('match DiffDelete /\\s\\+$/')
 require('nvim-treesitter.configs').setup {
   auto_install = false,
   highlight = {
-    enable = { "nix", "haskell" },
+    enable = {
+      "haskell",
+      "lua",
+      "nix",
+    },
     additional_vim_regex_highlighting = false,
   },
+}
+
+require('gitsigns').setup {
+  signcolumn = false,
+  numhl = true,
+  on_attach = function(bufnr)
+    local gitsigns = package.loaded.gitsigns
+    vim.keymap.set('n', '<leader>gr', gitsigns.reset_hunk, {buffer = bufnr})
+    vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, {buffer = bufnr})
+  end,
 }

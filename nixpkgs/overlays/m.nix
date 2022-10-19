@@ -70,6 +70,7 @@ rec {
               nvim-treesitter-with-plugins = nvim-treesitter.withPlugins (
                 plugins: [
                   plugins.tree-sitter-haskell
+                  plugins.tree-sitter-lua
                   plugins.tree-sitter-nix
                 ]
               );
@@ -78,6 +79,7 @@ rec {
               vim-init
 
               fzf-vim
+              gitsigns-nvim
               golden-ratio
               nvim-treesitter-with-plugins
               rainbow
