@@ -19,9 +19,7 @@ vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 
 vim.g.airline_theme = 'zenburn'
-vim.cmd([[
-let g:airline#extensions#tabline#enabled = 0
-]])
+vim.g['airline#extensions#tabline#enabled'] = 0
 vim.g.rainbow_active = 1
 
 vim.opt.tabstop = 2
