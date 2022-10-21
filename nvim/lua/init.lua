@@ -41,23 +41,32 @@ vim.opt.ttimeout = true
 
 vim.g.mapleader = " "
 
-vim.cmd([[
-nnoremap Q <nop>
-nnoremap q <nop>
-nnoremap <tab> %
+vim.keymap.set('n', 'Q', "<nop>", {remap = false})
+vim.keymap.set('n', 'q', "<nop>", {remap = false})
 
-nnoremap : ;
-nnoremap ; :
-vnoremap ; :
-vnoremap : ;
+vim.keymap.set('n', '<tab>', "%", {remap = false})
 
-nnoremap <expr> j v:count ? 'j' : 'gj'
-nnoremap <expr> k v:count ? 'k' : 'gk'
+vim.keymap.set('n', ';', ":", {remap = false})
+vim.keymap.set('v', ':', ";", {remap = false})
+vim.keymap.set('v', ';', ":", {remap = false})
+vim.keymap.set('v', ':', ";", {remap = false})
 
-nnoremap <leader>e :GitFiles<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <silent> <leader>h :nohlsearch<CR>
-]])
+vim.keymap.set(
+  'n',
+  'j',
+  function() return (vim.v.count > 0) and 'j' or 'gj' end,
+  {expr = true, remap = false}
+)
+vim.keymap.set(
+  'n',
+  'k',
+  function() return (vim.v.count > 0) and 'k' or 'gk' end,
+  {expr = true, remap = false}
+)
+
+vim.keymap.set('n', '<leader>e', ":GitFiles<CR>", {remap = false})
+vim.keymap.set('n', '<leader>b', ":Buffers<CR>", {remap = false})
+vim.keymap.set('n', '<leader>h', ":nohlsearch<CR>", {remap = false, silent = true})
 
 vim.opt.hidden = true
 
