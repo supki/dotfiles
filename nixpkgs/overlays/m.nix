@@ -81,9 +81,9 @@ rec {
               fzf-vim
               gitsigns-nvim
               golden-ratio
-              nvim-treesitter-with-plugins
-              rainbow
               nightfox-nvim
+              nvim-treesitter-with-plugins
+              nvim-ts-rainbow
               vim-airline
               vim-airline-themes
               vim-bling
