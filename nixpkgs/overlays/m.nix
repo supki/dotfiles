@@ -83,7 +83,7 @@ rec {
               golden-ratio
               nvim-treesitter-with-plugins
               rainbow
-              seoul256-vim
+              nightfox-nvim
               vim-airline
               vim-airline-themes
               vim-bling

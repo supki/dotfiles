@@ -1,14 +1,12 @@
 vim.g.seoul256_background = 234
 vim.cmd([[
-colorscheme seoul256
-highlight Pmenu ctermfg=252 ctermbg=235
-highlight PmenuSel cterm=bold ctermfg=252 ctermbg=237
-highlight StatusLine cterm=none ctermfg=252 ctermbg=235
-highlight WildMenu cterm=bold ctermfg=252 ctermbg=237
-highlight Comment ctermfg=246
-highlight GitSignsAddNr ctermfg=40 cterm=bold
-highlight GitSignsChangeNr ctermfg=45 cterm=bold
-highlight GitSignsDeleteNr ctermfg=211 cterm=bold
+colorscheme terafox
+highlight Normal guibg=#1c1c1c
+highlight NormalNC guibg=#1c1c1c
+highlight CursorLine guibg=#2c2c27
+highlight GitSignsAddNr guifg=#00d700 gui=bold
+highlight GitSignsChangeNr guifg=#00d7ff gui=bold
+highlight GitSignsDeleteNr guifg=#ff87af gui=bold
 ]])
 
 vim.opt.number = true
