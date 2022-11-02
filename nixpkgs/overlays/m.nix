@@ -73,6 +73,7 @@ rec {
                   plugins.tree-sitter-json
                   plugins.tree-sitter-lua
                   plugins.tree-sitter-nix
+                  plugins.tree-sitter-ruby
                   plugins.tree-sitter-yaml
                 ]
               );

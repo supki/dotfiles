@@ -78,6 +78,7 @@ require('nvim-treesitter.configs').setup {
       "json",
       "lua",
       "nix",
+      "ruby",
       "yaml",
     },
     additional_vim_regex_highlighting = false,
