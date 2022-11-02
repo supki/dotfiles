@@ -1,4 +1,3 @@
-vim.g.seoul256_background = 234
 vim.cmd([[
 colorscheme terafox
 highlight Normal guibg=#1c1c1c
@@ -76,8 +75,10 @@ require('nvim-treesitter.configs').setup {
   highlight = {
     enable = {
       "haskell",
+      "json",
       "lua",
       "nix",
+      "yaml",
     },
     additional_vim_regex_highlighting = false,
   },

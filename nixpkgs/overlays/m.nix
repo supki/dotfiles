@@ -70,8 +70,10 @@ rec {
               nvim-treesitter-with-plugins = nvim-treesitter.withPlugins (
                 plugins: [
                   plugins.tree-sitter-haskell
+                  plugins.tree-sitter-json
                   plugins.tree-sitter-lua
                   plugins.tree-sitter-nix
+                  plugins.tree-sitter-yaml
                 ]
               );
             in [
