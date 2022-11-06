@@ -1,8 +1,9 @@
 vim.cmd([[
-colorscheme terafox
+colorscheme nordfox
 highlight Normal guibg=#1c1c1c
 highlight NormalNC guibg=#1c1c1c
 highlight CursorLine guibg=#2c2c27
+highlight String guifg=#bea38c
 highlight GitSignsAddNr guifg=#00d700 gui=bold
 highlight GitSignsChangeNr guifg=#00d7ff gui=bold
 highlight GitSignsDeleteNr guifg=#ff87af gui=bold
