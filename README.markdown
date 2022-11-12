@@ -85,3 +85,9 @@ For some reason this is not the default:
 ```
 % gsettings set org.gnome.desktop.input-sources per-window true
 ```
+
+### Remove ads from my terminal
+
+```
+% sudo pro config set apt_news=false
+```
