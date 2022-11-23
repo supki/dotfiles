@@ -157,6 +157,7 @@ rec {
     paths = with super; [
       # packages I want
       alacritty
+      bookworm
       diff-so-fancy
       dig
       feh

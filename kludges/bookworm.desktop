@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=bookworm
+Comment=A simple, focused eBook reader
+Exec=nixGLIntel com.github.babluboy.bookworm
+Icon=bookworm.svg
+Terminal=false

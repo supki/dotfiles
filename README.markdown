@@ -91,3 +91,7 @@ For some reason this is not the default:
 ```
 % sudo pro config set apt_news=false
 ```
+
+### Set up `bookworm`
+
+This is pretty basic. First, it's necessary to create a `.desktop` entry in `~/.local/share/applications` by copying `./kludges/bookworm.desktop` there. Then, just drop an icon from `~/.nix-profile/share/icons/hicolor/128x128/apps/com.github.babluboy.bookworm.svg` to `~/.local/share/icons/bookworm.svg`
