@@ -1,5 +1,10 @@
 #! /usr/bin/perl -w
 
+sub homely {
+  my ($bin) = @_;
+  return "${ENV{HOME}}/.nix-profile/bin/${bin}"
+}
+
 while ($opt = shift(@ARGV))
 {
   if ($opt eq '-display')
@@ -12,4 +17,4 @@ while ($opt = shift(@ARGV))
   }
 }
 
-exec('nixGLIntel', 'alacritty', @args);
+exec(homely('nixGLIntel'), homely('alacritty'), @args);
