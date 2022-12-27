@@ -29,7 +29,7 @@ rec {
       owner = "zsh-users";
       repo = "zsh-syntax-highlighting";
       rev = "master";
-      sha256 = "sha256-YV9lpJ0X2vN9uIdroDWEize+cp9HoKegS3sZiSpNk50=";
+      sha256 = "sha256-lxwkVq9Ysvl2ZosD+riQ8dsCQIB5X4kqP+ix7XTDkKw=";
     };
   };
   neovim =
