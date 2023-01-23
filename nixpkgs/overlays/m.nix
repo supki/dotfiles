@@ -174,6 +174,7 @@ rec {
       pass
       scrot
       shellcheck
+      spotify
       stack
       tmux
       transmission-gtk
