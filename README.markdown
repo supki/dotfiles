@@ -92,6 +92,15 @@ For some reason this is not the default:
 % sudo pro config set apt_news=false
 ```
 
-### Set up `bookworm`
+### Integrate applications installed via Nix into the Ubuntu environment
 
-This is pretty basic. First, it's necessary to create a `.desktop` entry in `~/.local/share/applications` by copying `./kludges/bookworm.desktop` there. Then, just drop an icon from `~/.nix-profile/share/icons/hicolor/128x128/apps/com.github.babluboy.bookworm.svg` to `~/.local/share/icons/bookworm.svg`
+To add the applications to the dock:
+
+```
+# there's probably some shit already put in by Ubuntu
+% rm ~/.local/share/{applications,icons}
+# this let's Ubuntu see Nix's *.desktop files
+% ln -s ~/.nix-profile/share/applications ~/.local/share/applications
+# pick up the icons as well
+% ln -s ~/.nix-profile/share/icons ~/.local/share/icons
+```
