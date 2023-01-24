@@ -1,55 +1,55 @@
 [core]
-	excludesfile = ~/.gitignore
-	editor = vim
-	whitespace = blank-at-eof,blank-at-eol,space-before-tab,tab-in-indent
+  excludesfile = ~/.gitignore
+  editor = vim
+  whitespace = blank-at-eof,blank-at-eol,space-before-tab,tab-in-indent
 [user]
   useConfigOnly = true
 [color]
-	ui = true
+  ui = true
 [merge]
-	tool = gvimdiff
-	conflictstyle = diff3
+  tool = gvimdiff
+  conflictstyle = diff3
 [diff]
-	renames = true
-	algorithm = patience
+  renames = true
+  algorithm = patience
 [alias]
-	br = branch -v
-	ci = commit
-	cl = clone
-	co = checkout
-	cp = cherry-pick
-	d = diff
-	di = diff --ignore-space-change
-	dl = show HEAD
-	dli = show HEAD --ignore-space-change
-	ds = diff --staged
-	dsi = diff --staged --ignore-space-change
-	dw = diff --color-words
-	g = grep
-	l = log --oneline --decorate
-	l4 = log -4
-	ms = merge --squash
-	mf = merge --ff-only
-	p = pull
-	prbs = pull --rebase
-	pu = push
-	rbs = rebase
-	ru = remote update
-	s = status --short --branch
-	unci = reset --soft HEAD~1
-	wipe = reset --hard HEAD --
+  br = branch -v
+  ci = commit
+  cl = clone
+  co = checkout
+  cp = cherry-pick
+  d = diff
+  di = diff --ignore-space-change
+  dl = show HEAD
+  dli = show HEAD --ignore-space-change
+  ds = diff --staged
+  dsi = diff --staged --ignore-space-change
+  dw = diff --color-words
+  g = grep
+  l = log --oneline --decorate
+  l4 = log -4
+  ms = merge --squash
+  mf = merge --ff-only
+  p = pull
+  prbs = pull --rebase
+  pu = push
+  rbs = rebase
+  ru = remote update
+  s = status --short --branch
+  unci = reset --soft HEAD~1
+  wipe = reset --hard HEAD --
 [push]
-	default = current
+  default = current
 [rerere]
-	enabled = true
+  enabled = true
 [rebase]
-	autosquash = on
+  autosquash = on
 [pager]
-	log = diff-so-fancy | less
-	show = diff-so-fancy | less
-	diff = diff-so-fancy | less
+  log = diff-so-fancy | less
+  show = diff-so-fancy | less
+  diff = diff-so-fancy | less
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [includeIf "gitdir:~/w/"]
   path = ~/w/gitconfig
 [includeIf "gitdir:~/p/"]
