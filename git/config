@@ -51,3 +51,5 @@
 	diff = diff-so-fancy | less
 [init]
 	defaultBranch = main
+[includeIf "gitdir:~/w/"]
+  path = ~/w/gitconfig
