@@ -3,8 +3,7 @@
 	editor = vim
 	whitespace = blank-at-eof,blank-at-eol,space-before-tab,tab-in-indent
 [user]
-	name = Matvey Aksenov
-	email = matvey.aksenov@gmail.com
+  useConfigOnly = true
 [color]
 	ui = true
 [merge]
@@ -53,3 +52,7 @@
 	defaultBranch = main
 [includeIf "gitdir:~/w/"]
   path = ~/w/gitconfig
+[includeIf "gitdir:~/p/"]
+  path = ~/.config/git/p
+[includeIf "gitdir:~/.config/"]
+  path = ~/.config/git/p
