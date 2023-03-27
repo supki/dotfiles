@@ -171,7 +171,6 @@ rec {
       moreutils
       mpv
       neovim
-      nodejs
       pass
       scrot
       shellcheck
@@ -182,7 +181,6 @@ rec {
       tree
       x-selection-sync
       xsel
-      yarn
       zellij
       zsh
       zsh-autosuggestions
