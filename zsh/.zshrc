@@ -106,7 +106,7 @@ function dazu {
   RANDOMORG_APIKEY=$(pass random.org/apikey) command dazu
 }
 
-for ext in ~/.nix-profile/share/zsh/zsh-*/*.zsh~*plugin.zsh; do
+for ext in ~/.nix-profile/share/{zsh/zsh-*/*.zsh~*plugin.zsh,fzf/key-bindings.zsh}; do
   source "$ext"
 done
 

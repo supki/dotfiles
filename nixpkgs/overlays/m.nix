@@ -162,6 +162,7 @@ rec {
       dig
       feh
       fira-code
+      fzf
       git
       haskellPackages.dazu
       htop
