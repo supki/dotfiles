@@ -25,6 +25,7 @@ bindkey -e
 alias g=git
 alias gs='echo "fuck ghostscript"'
 alias ls='ls --color -1'
+alias ip='ip --color=auto'
 alias z=zellij
 
 bindkey '^P' history-beginning-search-backward
