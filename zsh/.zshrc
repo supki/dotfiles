@@ -24,7 +24,7 @@ bindkey -e
 
 alias g=git
 alias gs='echo "fuck ghostscript"'
-alias ls='ls --color -1'
+alias ls='ls --color -1 --literal'
 alias ip='ip --color=auto'
 alias z=zellij
 
