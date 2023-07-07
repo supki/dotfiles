@@ -1,0 +1,27 @@
+# these suggestions are stupid and/or harmful:
+- ignore: {name: "Avoid lambda"}
+- ignore: {name: "Avoid lambda using `infix`"}
+- ignore: {name: "Eta reduce"}
+- ignore: {name: "Redundant $"}
+- ignore: {name: "Redundant id"}
+- ignore: {name: "Redundant lambda"}
+- ignore: {name: "Use &&"}
+- ignore: {name: "Use ||"}
+- ignore: {name: "Use =<<"}
+- ignore: {name: "Use const"}
+- ignore: {name: "Use forM_"} # this is actually a *very bad* suggestion
+                              # due to `*> pure ()`-thunk accumulation in
+                              # the "perhaps" version in the common case
+                              # of optional iteration.
+- ignore: {name: "Use id"}
+- ignore: {name: "Use if"}
+- ignore: {name: "Use join"}
+- ignore: {name: "Use second"}
+- ignore: {name: "Use section"}
+- ignore: {name: "Use tuple-section"}
+- ignore: {name: "Use uncurry"}
+- ignore: {name: "Use void"}
+
+# these suggestins are for some reason missing from the default list
+- warn: {name: "Use module export list"}
+- warn: {name: "Use explicit module export list"}

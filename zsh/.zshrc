@@ -91,7 +91,7 @@ function n {
 }
 
 function e {
-  if [ -f shell.nix ]; then
+  if [ -f ./shell.nix ]; then
     n nvim "$@"
   else
     nvim "$@"
@@ -105,6 +105,14 @@ function stack-template {
 
 function dazu {
   RANDOMORG_APIKEY=$(pass random.org/apikey) command dazu
+}
+
+function hlint {
+  if [ -f ./shell.nix ]; then
+    n hlint --hint=$HOME/.config/hlint/hlint.yaml "$@"
+  else
+    hlint --hint=$HOME/.config/hlint/hlint.yaml "$@"
+  fi
 }
 
 for ext in ~/.nix-profile/share/{zsh/zsh-*/*.zsh~*plugin.zsh,fzf/key-bindings.zsh}; do
