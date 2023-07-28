@@ -1,3 +1,12 @@
+# Without this, trying to input any non-latin letter resuts in the
+# terminal outputting <ffffffff> back. I'm not sure why exactly
+# `exec'ing into the new environment is necessary, but it's Ubuntu/Nix,
+# so whatever.
+if [ -z "${LOCALE_ARCHIVE:-}" ]; then
+  export LOCALE_ARCHIVE=/lib/locale/locale-archive
+  exec zsh
+fi
+
 declare _cfg_cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 mkdir -p "$_cfg_cache_dir"
 fpath=(~/.nix-profile/share/zsh/site-functions $fpath)
@@ -121,7 +130,6 @@ done
 
 unset _cfg_cache_dir
 
-export LOCALE_ARCHIVE=/lib/locale/locale-archive # fix nix locale complaints
 export CURL_HOME=${XDG_CONFIG_HOME:-$HOME/.config}/curl
 
 export FZF_DEFAULT_OPTS='--reverse'
