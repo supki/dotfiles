@@ -71,6 +71,24 @@ vim.opt.wildmode = 'list:full'
 
 vim.cmd('match DiffDelete /\\s\\+$/')
 
+function autosave()
+  local current_buffer = vim.api.nvim_get_current_buf()
+  local buffer_name = vim.api.nvim_buf_get_name(current_buffer)
+  local buftype = vim.api.nvim_buf_get_option(current_buffer, 'buftype')
+
+  -- We only try to save those buffers that:
+  --   - are file buffers (i.e. have an associated file)
+  --   - do not have &buftype set
+  -- Otherwise, vim becomes annoying and complains a lot.
+  if buffer_name ~= '' and buftype == '' then
+    vim.cmd('w')
+  end
+end
+
+vim.cmd([[
+  autocmd FocusLost,BufLeave,BufWinLeave * :lua autosave()
+]])
+
 require('nvim-treesitter.configs').setup {
   auto_install = false,
   highlight = {
