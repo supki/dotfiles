@@ -1,5 +1,5 @@
 {-# START_FILE stack.yaml #-}
-resolver: lts-18.28
+resolver: lts-19.33
 packages:
   - '.'
 extra-deps:
@@ -233,7 +233,7 @@ version =
 
 {-# START_FILE shell.nix #-}
 { pkgs ? import <nixpkgs> { }
-, ghc ? pkgs.haskell.compiler.ghc8107
+, ghc ? pkgs.haskell.compiler.ghc902
 , stack ? pkgs.stack
 }:
 
