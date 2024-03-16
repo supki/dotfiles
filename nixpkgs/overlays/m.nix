@@ -29,7 +29,7 @@ rec {
       owner = "zsh-users";
       repo = "zsh-syntax-highlighting";
       rev = "master";
-      sha256 = "sha256-lxwkVq9Ysvl2ZosD+riQ8dsCQIB5X4kqP+ix7XTDkKw=";
+      sha256 = "sha256-4rW2N+ankAH4sA6Sa5mr9IKsdAg7WTgrmyqJ2V1vygQ=";
     };
   };
   neovim =
@@ -158,12 +158,14 @@ rec {
       # packages I want
       alacritty
       bookworm
+      chromium
       diff-so-fancy
       dig
       feh
       fira-code
       fzf
       git
+      gnome3.gnome-tweaks
       haskellPackages.dazu
       htop
       iotop
@@ -188,7 +190,6 @@ rec {
 
       # packages Nix wants
       glibcLocales
-      self.nixgl.nixGLIntel
     ];
   };
 }

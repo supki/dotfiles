@@ -5,7 +5,6 @@ window:
 font:
   normal:
     family: 'Fira Code'
-    style: 'Light'
 
   bold:
     family: 'Fira Code'
