@@ -152,6 +152,10 @@ rec {
       };
     };
   });
+  nix-rebuild-env = super.writeScriptBin "nix-rebuild-env" ''
+    #!${super.stdenv.shell}
+    exec nix-env -r -iA nixos.m-env
+  '';
   m-env = super.buildEnv {
     name = "m-env";
     paths = with super; [
@@ -174,6 +178,7 @@ rec {
       moreutils
       mpv
       neovim
+      nix-rebuild-env
       openssl
       pass
       scrot
