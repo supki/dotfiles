@@ -168,11 +168,13 @@ rec {
       gnome3.gnome-tweaks
       haskellPackages.dazu
       htop
+      inetutils
       iotop
       jq
       moreutils
       mpv
       neovim
+      openssl
       pass
       scrot
       shellcheck
