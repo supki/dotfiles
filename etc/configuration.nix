@@ -83,7 +83,12 @@
     enableSSHSupport = true;
     pinentryFlavor = "curses";
   };
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    shellInit = ''
+      export ZDOTDIR=$HOME/.config/zsh
+    '';
+  };
 
   # List services that you want to enable:
 
