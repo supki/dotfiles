@@ -13,7 +13,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "m-laptop-nixos"; # Define your hostname.
+  networking.hostName = "depression"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -72,6 +72,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     gnomeExtensions.dash-to-dock
+    gnomeExtensions.primary-input-on-lockscreen
     pinentry-curses
   ];
 
@@ -133,7 +134,7 @@
     '';
     wantedBy = [ "graphical-session.target" ];
     # for some reason, the first time this is run it fails, so
-    # we schedule a restart; probably quite useful anyway as
+    # we schedule a restart; probably quite useful anyway as I'm
     # no C programmer
     serviceConfig = {
       Restart = lib.mkForce "always";
