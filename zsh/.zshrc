@@ -35,7 +35,6 @@ alias g=git
 alias gs='echo "fuck ghostscript"'
 alias ls='ls --color -1 --literal --time-style=long-iso --group-directories-first'
 alias ip='ip --color=auto'
-alias z=zellij
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
@@ -104,6 +103,18 @@ function e {
     n nvim "$@"
   else
     nvim "$@"
+  fi
+}
+
+function z {
+  # this runs `sha256sum` on the basename of $PWD and takes
+  # the first word of the result (the hash)
+  local layout_name=${${(z)$(sha256sum <<< $(basename "$PWD"))}[1]}
+  local layout_path=${XDG_CONFIG_HOME:-$HOME/.config}/zellij/layouts/${layout_name}
+  if test -e "$layout_path"; then
+    zellij --layout "$layout_path"
+  else
+    zellij
   fi
 }
 
