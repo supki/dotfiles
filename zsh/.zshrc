@@ -59,6 +59,7 @@ PROMPT="%M:%F{218}%~%f"$'$(signal_wrapper)'"$prompt_newline%(?,%F{green},%F{red}
 PROMPT2="%F{blue}%_%f> "
 RPROMPT="%{"$'\e[1A'"%}"$'$(vcs_info_wrapper)'"%{"$'\e[B'"%"
 WORDCHARS=${WORDCHARS//\//}
+READNULLCMD='less'
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=246'
