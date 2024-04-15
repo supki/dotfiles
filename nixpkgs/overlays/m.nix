@@ -86,7 +86,7 @@ rec {
               golden-ratio
               nightfox-nvim
               nvim-treesitter-with-plugins
-              nvim-ts-rainbow
+              nvim-ts-rainbow2
               vim-airline
               vim-airline-themes
               vim-bling
