@@ -63,6 +63,8 @@ vim.keymap.set(
 vim.keymap.set('n', '<leader>e', ":GitFiles<CR>", {remap = false})
 vim.keymap.set('n', '<leader>b', ":Buffers<CR>", {remap = false})
 vim.keymap.set('n', '<leader>h', ":nohlsearch<CR>", {remap = false, silent = true})
+vim.keymap.set('n', '<leader>dn', ":lua vim.diagnostic.goto_next()<CR>", {remap = false, silent = true})
+vim.keymap.set('n', '<leader>dp', ":lua vim.diagnostic.goto_prev()<CR>", {remap = false, silent = true})
 
 vim.opt.hidden = true
 
@@ -88,6 +90,10 @@ end
 vim.cmd([[
   autocmd FocusLost,BufLeave,BufWinLeave * :lua autosave()
 ]])
+
+vim.diagnostic.config {
+  signs = false
+}
 
 require('nvim-treesitter.configs').setup {
   auto_install = false,
