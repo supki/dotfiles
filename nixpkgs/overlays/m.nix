@@ -84,6 +84,7 @@ rec {
               fzf-vim
               gitsigns-nvim
               golden-ratio
+              haskell-tools-nvim
               nightfox-nvim
               nvim-treesitter-with-plugins
               nvim-ts-rainbow2
@@ -170,6 +171,7 @@ rec {
       fzf
       git
       gnome3.gnome-tweaks
+      haskell-language-server
       haskellPackages.dazu
       htop
       inetutils
