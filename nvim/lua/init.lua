@@ -121,8 +121,31 @@ require('gitsigns').setup {
   end,
 }
 
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+
+require('lualine').setup {
+  options = {
+    section_separators = '',
+    component_separators = '|',
+  },
+  sections = {
+    lualine_c = {
+      "require('lsp-status').status()"
+    },
+    lualine_x = {
+      'encoding',
+      'filetype',
+    },
+    lualine_y = {
+      'filename'
+    }
+  }
+}
+
 vim.g.haskell_tools = {
   hls = {
+    on_attach = lsp_status.on_attach,
     settings = {
       haskell = {
         plugin = {

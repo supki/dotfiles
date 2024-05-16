@@ -86,10 +86,10 @@ rec {
               golden-ratio
               haskell-tools-nvim
               nightfox-nvim
+              lualine-nvim
+              lsp-status-nvim
               nvim-treesitter-with-plugins
               nvim-ts-rainbow2
-              vim-airline
-              vim-airline-themes
               vim-bling
               vim-commentary
               vim-languages
