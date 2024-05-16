@@ -162,6 +162,7 @@ rec {
     paths = with super; [
       # packages I want
       alacritty
+      bat
       bookworm
       chromium
       diff-so-fancy
