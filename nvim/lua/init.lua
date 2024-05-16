@@ -120,3 +120,20 @@ require('gitsigns').setup {
     vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, {buffer = bufnr})
   end,
 }
+
+vim.g.haskell_tools = {
+  hls = {
+    settings = {
+      haskell = {
+        plugin = {
+          eval = {
+            globalOn = false,
+          },
+          hlint = {
+            globalOn = false,
+          },
+        },
+      },
+    },
+  },
+}
