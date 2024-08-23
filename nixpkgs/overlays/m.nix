@@ -188,6 +188,7 @@ rec {
       shellcheck
       spotify
       stack
+      foliate
       tmux
       transmission-gtk
       tree
