@@ -14,6 +14,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "depression"; # Define your hostname.
+  networking.extraHosts =
+    ''
+      188.166.203.243 bananarustle.com
+    '';
+
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -56,7 +61,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  hardware.opengl.driSupport32Bit = true;
+
   services.pcscd.enable = true;
+  services.fstrim.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.m = {
