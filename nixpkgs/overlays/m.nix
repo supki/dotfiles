@@ -73,6 +73,7 @@ rec {
                   plugins.tree-sitter-json
                   plugins.tree-sitter-lua
                   plugins.tree-sitter-nix
+                  plugins.tree-sitter-purescript
                   plugins.tree-sitter-ruby
                   plugins.tree-sitter-yaml
                 ]
@@ -97,6 +98,7 @@ rec {
 
               # fallback for treesitter failures
               haskell-vim
+              purescript-vim
               vim-nix
             ];
             opt = [
