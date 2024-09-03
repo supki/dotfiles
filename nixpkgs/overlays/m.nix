@@ -90,7 +90,7 @@ rec {
               lualine-nvim
               lsp-status-nvim
               nvim-treesitter-with-plugins
-              nvim-ts-rainbow2
+              rainbow-delimiters-nvim
               vim-bling
               vim-commentary
               vim-languages
