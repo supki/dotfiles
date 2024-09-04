@@ -159,6 +159,9 @@ rec {
     #!${super.stdenv.shell}
     exec nix-env -r -iA nixos.m-env
   '';
+  haskell-language-servers = ghcs: super.haskell-language-server.override {
+    supportedGhcVersions = ghcs;
+  };
   m-env = super.buildEnv {
     name = "m-env";
     paths = with super; [
@@ -174,7 +177,7 @@ rec {
       fzf
       git
       gnome3.gnome-tweaks
-      haskell-language-server
+      (haskell-language-servers ["948" "965"])
       haskellPackages.dazu
       htop
       inetutils
