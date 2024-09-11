@@ -55,7 +55,7 @@ zstyle ':vcs_info:git:*' formats "%F{1}%u%f%F{2}%c%f %F{218}%b%f"
 zstyle ':vcs_info:svn:*' formats "%F{3}%b%f"
 zstyle ':vcs_info:*' enable git svn
 
-PROMPT="%M:%F{218}%~%f"$'$(signal_wrapper)'"$prompt_newline%(?,%F{green},%F{red})%#%f "
+PROMPT=$'$(ins_wrapper)'"%M:%F{218}%~%f"$'$(signal_wrapper)'"$prompt_newline%(?,%F{green},%F{red})%#%f "
 PROMPT2="%F{blue}%_%f> "
 RPROMPT="%{"$'\e[1A'"%}"$'$(vcs_info_wrapper)'"%{"$'\e[B'"%"
 WORDCHARS=${WORDCHARS//\//}
@@ -78,6 +78,10 @@ function vcs_info_wrapper {
   if [ -n "$vcs_info_msg_0_" ]; then
     echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
   fi
+}
+
+function ins_wrapper {
+  echo ${IN_NIX_SHELL:+·}
 }
 
 function _fg {
