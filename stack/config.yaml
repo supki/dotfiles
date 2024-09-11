@@ -4,6 +4,7 @@ install-ghc: false # never try to install ghc from external sources, rather erro
 nix:
   enable: false    # no idea what this even is, but it's unlikely that
                    # it's something useful
+notify-if-nix-on-path: false # thanks for another useless warning
 
 # values to insert into project templates used by `stack new`
 templates:
