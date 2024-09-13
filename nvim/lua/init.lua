@@ -89,10 +89,6 @@ function autosave()
   end
 end
 
-vim.cmd([[
-  autocmd FocusLost,BufLeave,BufWinLeave * :lua autosave()
-]])
-
 vim.diagnostic.config {
   signs = false
 }
