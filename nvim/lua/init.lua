@@ -66,6 +66,7 @@ vim.keymap.set('n', '<leader>h', ":nohlsearch<CR>", {remap = false, silent = tru
 vim.keymap.set('n', '<leader>dn', ":lua vim.diagnostic.goto_next()<CR>", {remap = false, silent = true})
 vim.keymap.set('n', '<leader>dp', ":lua vim.diagnostic.goto_prev()<CR>", {remap = false, silent = true})
 vim.keymap.set('n', '<leader>df', ":lua vim.diagnostic.open_float()<CR>", {remap = false, silent = true})
+vim.keymap.set('n', '<leader>hr', ":HlsRestart<CR>", {remap = false})
 
 vim.opt.hidden = true
 
