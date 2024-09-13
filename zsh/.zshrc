@@ -1,12 +1,3 @@
-# Without this, trying to input any non-latin letter resuts in the
-# terminal outputting <ffffffff> back. I'm not sure why exactly
-# `exec'ing into the new environment is necessary, but it's Ubuntu/Nix,
-# so whatever.
-if [ -z "${LOCALE_ARCHIVE:-}" ]; then
-  export LOCALE_ARCHIVE=/lib/locale/locale-archive
-  exec zsh
-fi
-
 declare _cfg_cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 mkdir -p "$_cfg_cache_dir"
 fpath=(~/.nix-profile/share/zsh/site-functions $fpath)
