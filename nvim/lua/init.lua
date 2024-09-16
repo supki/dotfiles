@@ -142,7 +142,9 @@ require('lualine').setup {
       'filetype',
     },
     lualine_y = {
-      'filename'
+      -- vim plugin developers' API design skills are truly something else
+      { 'filename', path = 1 -- relative path, see `:h lualine-filename-component-options` for details
+      }
     }
   }
 }
