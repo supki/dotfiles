@@ -1,19 +1,48 @@
-{-# START_FILE stack.yaml #-}
-resolver: lts-19.33
+This init file sets up a basic Haskell project.
+First, we define variables that have reasonable defaults but can be overriden if needed.
+{# SETUP #}
+{% set
+    resolver = coalesce(resolver, "lts-22.27")
+    ghc = coalesce(ghc, "965")
+    with-executable? = coalesce(with-executable?, false)
+
+    author-name = coalesce(author-name, "Matvey Aksenov")
+    author-email-domain = coalesce(author-email-domain, "@gmail.com")
+%}
+{# NOOP #}
+Then, we define variables that must be defined by `init` invocation.
+{# SETUP #}
+{% set
+    _ = package-name
+%}
+{# NOOP #}
+Lastly, we define the derived variables.
+{# SETUP #}
+{% set
+    author-email =
+      concat([join(".", split(" ", lower-case(author-name))), "@", author-email-domain])
+    year = 2024
+    meta-module-name =
+      join("_", split("-", package-name))
+    env-var-name =
+      upper-case(join("_", split("-", package-name)))
+%}
+{# FILE stack.yaml #}
+resolver: {{ resolver }}
 packages:
   - '.'
 extra-deps:
 allow-newer: true
 
-{-# START_FILE package.yaml #-}
-name:                {{name}}
+{# FILE package.yaml #}
+name:                {{ package-name }}
 version:             1.0.0
-synopsis:            This is {{name}}
+synopsis:            This is {{ package-name }}
 description:         See README.markdown
 license:             BSD2
-author:              {{author-name}}
-maintainer:          {{author-email}}
-copyright:           {{year}} {{author-name}}
+author:              {{ author-name }}
+maintainer:          {{ author-email }}
+copyright:           {{ year }} {{ author-name }}
 extra-source-files:
   - README.markdown
   - CHANGELOG.markdown
@@ -37,31 +66,35 @@ library:
   source-dirs:
     src
   other-modules:
-    - Meta_{{name}}
-    - Paths_{{name}}
+    - Meta_{{ meta-module-name }}
+    - Paths_{{ meta-module-name }}
   ghc-options:
     - -funbox-strict-fields
     - -Wall
+    - -Wno-incomplete-uni-patterns
     - -Werror
 
+{% if with-executable? %}
 executables:
-  {{name}}:
+  {{ package-name }}:
     dependencies:
-      - {{name}}
+      - {{ package-name }}
     source-dirs:
       driver
     main:
       Main.hs
     ghc-options:
       - -Wall
+      - -Wno-incomplete-uni-patterns
       - -Werror
       - -threaded
       - -with-rtsopts=-N
+{% endif %}
 
 tests:
   spec:
     dependencies:
-      - {{name}}
+      - {{ package-name }}
       - hspec
     source-dirs:
       test
@@ -70,28 +103,29 @@ tests:
     ghc-options:
       - -freduction-depth=0
       - -Wall
+      - -Wno-incomplete-uni-patterns
       - -Werror
       - -threaded
       - -with-rtsopts=-N
 
-{-# START_FILE Setup.hs #-}
+{# FILE Setup.hs #}
 {-# LANGUAGE NamedFieldPuns #-}
 module Main (main) where
 
-import qualified Data.Char as Char
-import qualified Data.List as List
-import           Distribution.Package (PackageIdentifier(..), unPackageName)
-import           Distribution.PackageDescription (PackageDescription(package))
-import           Distribution.Pretty (prettyShow)
-import           Distribution.Simple (defaultMainWithHooks, simpleUserHooks, buildHook)
-import           Distribution.Simple.BuildPaths (autogenPackageModulesDir)
-import           Distribution.Simple.LocalBuildInfo (LocalBuildInfo, localPkgDescr)
-import           Distribution.Simple.Setup (BuildFlags(buildVerbosity), fromFlag)
-import           Distribution.Simple.Utils (notice, rewriteFileEx)
-import           System.Directory (createDirectoryIfMissing)
-import           System.FilePath ((</>), (<.>))
-import           System.IO.Error (catchIOError)
-import           System.Process (readProcess)
+import Data.Char qualified as Char
+import Data.List qualified as List
+import Distribution.Package (PackageIdentifier(..), unPackageName)
+import Distribution.PackageDescription (PackageDescription(package))
+import Distribution.Pretty (prettyShow)
+import Distribution.Simple (defaultMainWithHooks, simpleUserHooks, buildHook)
+import Distribution.Simple.BuildPaths (autogenPackageModulesDir)
+import Distribution.Simple.LocalBuildInfo (LocalBuildInfo, localPkgDescr)
+import Distribution.Simple.Setup (BuildFlags(buildVerbosity), fromFlag)
+import Distribution.Simple.Utils (notice, rewriteFileEx)
+import System.Directory (createDirectoryIfMissing)
+import System.FilePath ((</>), (<.>))
+import System.IO.Error (catchIOError)
+import System.Process (readProcess)
 
 
 main :: IO ()
@@ -139,18 +173,18 @@ gitHash =
  where
   sanitize = List.dropWhileEnd Char.isSpace
 
-{-# START_FILE README.markdown #-}
-{{name}}
+{# FILE README.markdown #}
+{{ package-name }}
 ===
 
-{-# START_FILE CHANGELOG.markdown #-}
+{# FILE CHANGELOG.markdown #}
 1.0.0
 =====
 
   * Initial release.
 
-{-# START_FILE LICENSE #-}
-Copyright {{author-name}} (c) {{year}}
+{# FILE LICENSE #}
+Copyright {{ author-name }} (c) {{ year }}
 
 All rights reserved.
 
@@ -177,7 +211,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE..
 
-{-# START_FILE driver/Main.hs #-}
+{# FILE driver/Main.hs #}
 module Main (main) where
 
 import qualified App
@@ -189,7 +223,7 @@ main = do
   cfg <- Cfg.get
   App.run cfg
 
-{-# START_FILE src/App.hs #-}
+{# FILE src/App.hs #}
 module App
   ( run
   ) where
@@ -201,7 +235,7 @@ run :: Cfg -> IO ()
 run _ =
   pure ()
 
-{-# START_FILE src/Cfg.hs #-}
+{# FILE src/Cfg.hs #}
 module Cfg
   ( Cfg(..)
   , get
@@ -209,7 +243,7 @@ module Cfg
   ) where
 
 import           Env
-import qualified Meta_{{name}} as Meta
+import qualified Meta_{{ meta-module-name }} as Meta
 
 
 data Cfg = Cfg
@@ -217,7 +251,7 @@ data Cfg = Cfg
 
 get :: IO Cfg
 get =
-  Env.parse (header usageHeader) . prefixed "{{name}}_" $ do
+  Env.parse (header usageHeader) . prefixed "{{ env-var-name }}_" $ do
     pure Cfg
 
 usageHeader :: String
@@ -228,18 +262,15 @@ version :: String
 version =
   Meta.version <> "-" <> Meta.hash
 
-{-# START_FILE test/Spec.hs #-}
+{# FILE test/Spec.hs #}
 {-# OPTIONS_GHC -F -pgmF hspec-discover #-}
 
-{-# START_FILE shell.nix #-}
+{# FILE shell.nix #}
 { pkgs ? import <nixpkgs> { }
-, ghc ? pkgs.haskell.compiler.ghc902
-, stack ? pkgs.stack
+, ghc ? pkgs.haskell.compiler.ghc{{ ghc }}
 }:
 
 pkgs.mkShell rec {
-  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
-
   buildInputs = with pkgs; [
     ghc
     glibcLocales
@@ -249,8 +280,9 @@ pkgs.mkShell rec {
   ];
 
   shellHook = ''
+    export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath buildInputs}"
   '';
 }
 
-{-# START_FILE .gitignore #-}
+{# FILE .gitignore #}
 .stack-work/
