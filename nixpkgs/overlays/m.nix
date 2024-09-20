@@ -199,6 +199,7 @@ rec {
       tree
       x-selection-sync
       xsel
+      zathura
       zellij
       zsh
       zsh-autosuggestions
