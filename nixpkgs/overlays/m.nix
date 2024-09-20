@@ -50,7 +50,7 @@ rec {
             owner = "supki";
             repo = "vim-languages";
             rev = "master";
-            sha256 = "sha256-Dd7GwlGZoVG2VLu+2uLRR11BROZSgiJRuO0quEYofW0=";
+            sha256 = "sha256-2neE7qKT2/zpn78JNEpkaKAnj7rD1HzygAurqbyUc8M=";
           };
         };
         vim-init = super.vimUtils.buildVimPlugin {
