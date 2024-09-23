@@ -67,6 +67,8 @@ vim.keymap.set('n', '<leader>dn', ":lua vim.diagnostic.goto_next()<CR>", {remap 
 vim.keymap.set('n', '<leader>dp', ":lua vim.diagnostic.goto_prev()<CR>", {remap = false, silent = true})
 vim.keymap.set('n', '<leader>df', ":lua vim.diagnostic.open_float()<CR>", {remap = false, silent = true})
 vim.keymap.set('n', '<leader>hr', ":HlsRestart<CR>", {remap = false})
+-- get a list of code actions to apply, sans folds/unfolds
+vim.keymap.set('n', '<leader>ha', ":lua vim.lsp.buf.code_action({filter = function(a) return not ({[\"refactor.inline\"] = true, [\"refactor.extract\"] = true})[a.kind] end})<CR>", {remap = false}) -- who the fuck likes Lua btw?
 
 vim.opt.hidden = true
 
