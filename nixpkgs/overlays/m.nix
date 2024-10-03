@@ -53,6 +53,15 @@ rec {
             sha256 = "sha256-2neE7qKT2/zpn78JNEpkaKAnj7rD1HzygAurqbyUc8M=";
           };
         };
+        kdl-vim = super.vimUtils.buildVimPlugin {
+          name = "kdl-vim";
+          src = super.fetchFromGitHub {
+            owner = "imsnif";
+            repo = "kdl.vim";
+            rev = "master";
+            sha256 = "sha256-IajKK1EjrKs6b2rotOj+RlBBge9Ii2m/iuIuefnjAE4=";
+          };
+        };
         vim-init = super.vimUtils.buildVimPlugin {
          name = "vim-init";
          src = ../../nvim;
@@ -100,6 +109,7 @@ rec {
               haskell-vim
               purescript-vim
               vim-nix
+              kdl-vim
             ];
             opt = [
             ];
