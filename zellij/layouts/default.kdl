@@ -1,8 +1,13 @@
 layout {
-    default_tab_template {
-        children
-    }
-    tab split_direction="Horizontal" {
+    // hide_floating_panes=true doesn't work
+    // when default_tab_template is defined.
+    // I have no idea why it is here in the first
+    // place, so I just disabled it.
+    //
+    // default_tab_template {
+    //     children
+    // }
+    tab split_direction="Horizontal" hide_floating_panes=true {
         pane split_direction="Vertical" {
             pane size="70%"
             pane split_direction="Horizontal" {
@@ -12,6 +17,14 @@ layout {
         }
         pane size=2 borderless=true {
             plugin location="zellij:status-bar"
+        }
+        floating_panes {
+            pane name="" {
+                x "20%"
+                y "10%"
+                width "60%"
+                height "80%"
+            }
         }
     }
 }
