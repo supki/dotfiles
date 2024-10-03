@@ -58,7 +58,10 @@ custom-setup:
 dependencies:
   - base >= 4.7 && < 5
 
-default-extensions: []
+default-extensions:
+  - ImportQualifiedPost
+  - NoFieldSelectors
+  - OverloadedStrings
 
 library:
   dependencies:
@@ -147,7 +150,6 @@ generateMeta lbi bf = let
       [ "module " ++ metaName
       , "  ( name"
       , "  , version"
-      , "  , hash"
       , "  ) where"
       , ""
       , "import Data.String (IsString(fromString))"
@@ -156,10 +158,7 @@ generateMeta lbi bf = let
       , "name = fromString " ++ show (unPackageName pkgName)
       , ""
       , "version :: IsString str => str"
-      , "version = fromString " ++ show (prettyShow pkgVersion)
-      , ""
-      , "hash :: IsString str => str"
-      , "hash = fromString " ++ show hash
+      , "version = fromString " ++ show (prettyShow pkgVersion ++ "-" ++ hash)
       ])
  where
   autogen = autogenPackageModulesDir lbi
@@ -239,7 +238,7 @@ run _ =
 module Cfg
   ( Cfg(..)
   , get
-  , version
+  , Meta.version
   ) where
 
 import           Env
@@ -256,11 +255,7 @@ get =
 
 usageHeader :: String
 usageHeader =
-  unwords [Meta.name, version]
-
-version :: String
-version =
-  Meta.version <> "-" <> Meta.hash
+  unwords [Meta.name, Meta.version]
 
 {# FILE test/Spec.hs #}
 {-# OPTIONS_GHC -F -pgmF hspec-discover #-}
@@ -283,6 +278,17 @@ pkgs.mkShell rec {
     export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath buildInputs}"
   '';
 }
+
+{# FILE .ghci #}
+:set -Wall
+:set -Wno-incomplete-uni-patterns
+:set -isrc
+:set -itest
+:set -idriver
+:set -i.stack-work/dist/x86_64-linux/ghc-{{ join(".", chunks-of(1, ghc)) }}/build/global-autogen
+:set -XImportQualifiedPost
+:set -XNoFieldSelectors
+:set -XOverloadedStrings
 
 {# FILE .gitignore #}
 .stack-work/
