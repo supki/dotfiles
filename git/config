@@ -13,7 +13,8 @@
   renames = true
   algorithm = patience
 [alias]
-  br = branch -v
+  brv = branch -v
+  br = branch
   ci = commit
   cl = clone
   co = checkout
@@ -48,6 +49,10 @@
   log = diff-so-fancy | less
   show = diff-so-fancy | less
   diff = diff-so-fancy | less
+[advice]
+  forceDeleteBranch = false
+  addIgnoredFile = false
+  addEmptyPathspec = false
 [init]
   defaultBranch = main
 [includeIf "gitdir:~/w/"]
