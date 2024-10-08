@@ -2,30 +2,37 @@ This init file sets up a basic Haskell project.
 First, we define variables that have reasonable defaults but can be overriden if needed.
 {# SETUP #}
 {% set
-    resolver = coalesce(resolver, "lts-22.27")
-    ghc = coalesce(ghc, "965")
-    with-executable? = coalesce(with-executable?, false)
+    resolver =
+      coalesce(resolver, "lts-22.27")
+    ghc =
+      coalesce(ghc, "965")
+    with-executable? =
+      coalesce(with-executable?, false)
 
-    author-name = coalesce(author-name, "Matvey Aksenov")
-    author-email-domain = coalesce(author-email-domain, "@gmail.com")
+    author =
+      { name: coalesce(author-name, "Matvey Aksenov")
+      , email-domain: coalesce(author-email-domain, "@gmail.com")
+      }
 %}
 {# NOOP #}
 Then, we define variables that must be defined by `init` invocation.
 {# SETUP #}
 {% set
-    _ = package-name
+    package =
+      { name: package-name
+      }
 %}
 {# NOOP #}
 Lastly, we define the derived variables.
 {# SETUP #}
 {% set
-    author-email =
-      concat([join(".", split(" ", lower-case(author-name))), "@", author-email-domain])
+    author.email =
+      concat([join(".", split(" ", lower-case(author.name))), "@", author.email-domain])
     year = 2024
     meta-module-name =
-      join("_", split("-", package-name))
+      join("_", split("-", package.name))
     env-var-name =
-      upper-case(join("_", split("-", package-name)))
+      upper-case(join("_", split("-", package.name)))
 %}
 {# FILE stack.yaml #}
 resolver: {{ resolver }}
@@ -35,14 +42,14 @@ extra-deps:
 allow-newer: true
 
 {# FILE package.yaml #}
-name:                {{ package-name }}
+name:                {{ package.name }}
 version:             1.0.0
-synopsis:            This is {{ package-name }}
+synopsis:            This is {{ package.name }}
 description:         See README.markdown
 license:             BSD2
-author:              {{ author-name }}
-maintainer:          {{ author-email }}
-copyright:           {{ year }} {{ author-name }}
+author:              {{ author.name }}
+maintainer:          {{ author.email }}
+copyright:           {{ year }} {{ author.name }}
 extra-source-files:
   - README.markdown
   - CHANGELOG.markdown
@@ -81,7 +88,7 @@ library:
 executables:
   {{ package-name }}:
     dependencies:
-      - {{ package-name }}
+      - {{ package.name }}
     source-dirs:
       driver
     main:
@@ -97,7 +104,7 @@ executables:
 tests:
   spec:
     dependencies:
-      - {{ package-name }}
+      - {{ package.name }}
       - hspec
     source-dirs:
       test
@@ -173,7 +180,7 @@ gitHash =
   sanitize = List.dropWhileEnd Char.isSpace
 
 {# FILE README.markdown #}
-{{ package-name }}
+{{ package.name }}
 ===
 
 {# FILE CHANGELOG.markdown #}
@@ -183,7 +190,7 @@ gitHash =
   * Initial release.
 
 {# FILE LICENSE #}
-Copyright {{ author-name }} (c) {{ year }}
+Copyright {{ author.name }} (c) {{ year }}
 
 All rights reserved.
 
