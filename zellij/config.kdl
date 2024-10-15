@@ -282,6 +282,8 @@ mouse_mode false
 //
 // theme_dir "/path/to/my/theme_dir"
 
+session_serialization false
+
 plugins {
     status-bar { path "status-bar"; }
 }
