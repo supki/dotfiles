@@ -55,6 +55,8 @@
   addEmptyPathspec = false
 [init]
   defaultBranch = main
+[grep]
+  linenumber = true
 [includeIf "gitdir:~/w/"]
   path = ~/w/gitconfig
 [includeIf "gitdir:~/p/"]
