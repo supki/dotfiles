@@ -27,7 +27,7 @@ keybinds clear-defaults=true {
         bind "Alt l" { MoveFocus "Right"; }
         bind "Alt j" { MoveFocus "Down"; }
         bind "Alt k" { MoveFocus "Up"; }
-        bind "Ctrl h" { ToggleFloatingPanes; }
+        bind "Alt g" { ToggleFloatingPanes; }
     }
     pane {
         bind "Ctrl g" { SwitchToMode "locked"; }
