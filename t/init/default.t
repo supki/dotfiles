@@ -299,3 +299,4 @@ pkgs.mkShell rec {
 
 {# FILE .gitignore #}
 .stack-work/
+.ghci_history
