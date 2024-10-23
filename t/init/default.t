@@ -11,7 +11,7 @@ First, we define variables that have reasonable defaults but can be overriden if
 
     author =
       { name: coalesce(author-name, "Matvey Aksenov")
-      , email-domain: coalesce(author-email-domain, "@gmail.com")
+      , email-domain: coalesce(author-email-domain, "gmail.com")
       }
 %}
 {# NOOP #}
