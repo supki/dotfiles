@@ -163,15 +163,23 @@ rec {
         rev = "main";
         sha256 = "sha256-VOEPXnAg5cPaKyxtf/plNbBJuVfoqptuPGRvZjmxsuk=";
       };
+      relocant = self.fetchFromGitHub {
+        owner = "supki";
+        repo = "relocant";
+        rev = "main";
+        sha256 = "sha256-2cnjoVCu8l2bbnmv/9PgLBRv21MKay6emtyv6nrqE1k=";
+      };
     };
   });
+  haskell-language-servers = ghcs: super.haskell-language-server.override {
+    supportedGhcVersions = ghcs;
+  };
+  dazu = haskellPackages.dazu;
+  relocant = super.haskell.lib.dontCheck haskellPackages.relocant;
   nix-rebuild-env = super.writeScriptBin "nix-rebuild-env" ''
     #!${super.stdenv.shell}
     exec nix-env -r -iA nixos.m-env
   '';
-  haskell-language-servers = ghcs: super.haskell-language-server.override {
-    supportedGhcVersions = ghcs;
-  };
   m-env = super.buildEnv {
     name = "m-env";
     paths = with super; [
@@ -180,6 +188,7 @@ rec {
       bat
       bookworm
       chromium
+      dazu
       diff-so-fancy
       dig
       feh
@@ -188,7 +197,6 @@ rec {
       git
       gnome3.gnome-tweaks
       (haskell-language-servers ["948" "965"])
-      haskellPackages.dazu
       htop
       inetutils
       iotop
@@ -199,6 +207,7 @@ rec {
       nix-rebuild-env
       openssl
       pass
+      relocant
       scrot
       shellcheck
       spotify
