@@ -220,8 +220,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE..
 {# FILE driver/Main.hs #}
 module Main (main) where
 
-import qualified App
-import qualified Cfg
+import App qualified
+import Cfg qualified
 
 
 main :: IO ()
@@ -248,8 +248,8 @@ module Cfg
   , Meta.version
   ) where
 
-import           Env
-import qualified Meta_{{ meta-module-name }} as Meta
+import Env
+import Meta_{{ meta-module-name }} qualified as Meta
 
 
 data Cfg = Cfg
