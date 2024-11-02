@@ -50,7 +50,7 @@ license:             BSD2
 author:              {{ author.name }}
 maintainer:          {{ author.email }}
 copyright:           {{ year }} {{ author.name }}
-extra-source-files:
+extra-doc-files:
   - README.markdown
   - CHANGELOG.markdown
 
@@ -76,13 +76,14 @@ library:
   source-dirs:
     src
   other-modules:
-    - Meta_{{ meta-module-name }}
     - Paths_{{ meta-module-name }}
+  generated-exposed-modules:
+    - Meta_{{ meta-module-name }}
   ghc-options:
     - -funbox-strict-fields
     - -Wall
     - -Wno-incomplete-uni-patterns
-    - -Werror
+    # - -Werror
 
 {% if with-executable? %}
 executables:
@@ -96,7 +97,7 @@ executables:
     ghc-options:
       - -Wall
       - -Wno-incomplete-uni-patterns
-      - -Werror
+      # - -Werror
       - -threaded
       - -with-rtsopts=-N
 {% endif %}
@@ -114,7 +115,7 @@ tests:
       - -freduction-depth=0
       - -Wall
       - -Wno-incomplete-uni-patterns
-      - -Werror
+      # - -Werror
       - -threaded
       - -with-rtsopts=-N
 
