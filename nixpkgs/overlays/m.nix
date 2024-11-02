@@ -167,7 +167,7 @@ rec {
         owner = "supki";
         repo = "relocant";
         rev = "main";
-        sha256 = "sha256-2cnjoVCu8l2bbnmv/9PgLBRv21MKay6emtyv6nrqE1k=";
+        sha256 = "sha256-+RuOP9A3f7NO1d7f941LbVTKHO9QgZVIhKS+XkF3zJY=";
       };
     };
   });
@@ -175,6 +175,8 @@ rec {
     supportedGhcVersions = ghcs;
   };
   dazu = haskellPackages.dazu;
+  # relocant's tests require a running PostgreSQL server; no way
+  # I'm figuring out how to set that up properly here.
   relocant = super.haskell.lib.dontCheck haskellPackages.relocant;
   nix-rebuild-env = super.writeScriptBin "nix-rebuild-env" ''
     #!${super.stdenv.shell}
