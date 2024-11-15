@@ -102,6 +102,10 @@
       export ZDOTDIR=$HOME/.config/zsh
     '';
   };
+  programs.less = {
+    lessopen = lib.mkDefault null;
+  };
+
 
   fonts.packages = with pkgs; [
     noto-fonts
