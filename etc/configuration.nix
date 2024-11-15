@@ -14,10 +14,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "depression"; # Define your hostname.
-  networking.extraHosts =
-    ''
-      188.166.203.243 bananarustle.com
-    '';
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
