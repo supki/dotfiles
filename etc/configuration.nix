@@ -105,6 +105,11 @@
   programs.less = {
     lessopen = lib.mkDefault null;
   };
+  programs.bash = {
+    shellInit = ''
+      PROMPT_COMMAND="if [ -n \"\$IN_NIX_SHELL\" ]; then echo \"🚀🚀🚀 Ascending to ZSH-heaven 🚀🚀🚀\">/dev/stderr; exec \$SHELL; fi"
+    '';
+  };
 
 
   fonts.packages = with pkgs; [
