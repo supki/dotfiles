@@ -193,6 +193,7 @@ rec {
       dazu
       diff-so-fancy
       dig
+      eza
       feh
       fira-code
       fzf
@@ -217,7 +218,6 @@ rec {
       foliate
       tmux
       transmission-gtk
-      tree
       x-selection-sync
       xsel
       zathura
