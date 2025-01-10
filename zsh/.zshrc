@@ -26,7 +26,7 @@ alias g=git
 alias gs='echo "fuck ghostscript"'
 alias ls='ls --color -1 --literal --time-style=long-iso --group-directories-first'
 alias ip='ip --color=auto'
-alias tree='exa -T'
+alias tree='eza -T'
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
