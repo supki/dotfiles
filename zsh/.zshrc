@@ -24,9 +24,9 @@ bindkey -e
 
 alias g=git
 alias gs='echo "fuck ghostscript"'
-alias ls='ls --color -1 --literal --time-style=long-iso --group-directories-first'
 alias ip='ip --color=auto'
 alias tree='eza -T'
+alias ls='eza -1  --time-style=long-iso --group-directories-first --all --no-permissions --octal-permissions'
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
