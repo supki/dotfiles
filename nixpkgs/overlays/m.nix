@@ -192,6 +192,7 @@ rec {
       chromium
       dazu
       diff-so-fancy
+      difftastic
       dig
       eza
       feh
