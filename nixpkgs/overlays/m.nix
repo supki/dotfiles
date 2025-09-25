@@ -62,10 +62,6 @@ rec {
             sha256 = "sha256-IajKK1EjrKs6b2rotOj+RlBBge9Ii2m/iuIuefnjAE4=";
           };
         };
-        vim-init = super.vimUtils.buildVimPlugin {
-         name = "vim-init";
-         src = ../../nvim;
-        };
       };
     in
       super.neovim.override {
@@ -88,9 +84,6 @@ rec {
                 ]
               );
             in [
-              # init.lua
-              vim-init
-
               fzf-vim
               gitsigns-nvim
               golden-ratio
