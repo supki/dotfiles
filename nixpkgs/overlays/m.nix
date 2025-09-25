@@ -200,7 +200,7 @@ rec {
       fzf
       git
       gnome-tweaks
-      (haskell-language-servers ["948" "965"])
+      (haskell-language-servers ["984"])
       htop
       inetutils
       iotop
