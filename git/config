@@ -8,10 +8,13 @@
   ui = true
 [merge]
   tool = gvimdiff
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 [diff]
   renames = true
-  algorithm = patience
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
 [alias]
   brv = branch -v
   br = branch
@@ -43,8 +46,19 @@
   default = current
 [rerere]
   enabled = true
+  autoupdate = true
 [rebase]
-  autosquash = on
+  autosquash = true
+  autostash = true
+  updaterefs = true
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
 [pager]
   log = diff-so-fancy | less
   show = diff-so-fancy | less
