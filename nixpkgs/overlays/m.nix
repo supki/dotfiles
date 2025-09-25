@@ -219,7 +219,7 @@ rec {
       foliate
       t
       tmux
-      transmission-gtk
+      transmission_3-gtk
       x-selection-sync
       xsel
       zathura
