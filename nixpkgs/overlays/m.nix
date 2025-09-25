@@ -166,7 +166,7 @@ rec {
         owner = "supki";
         repo = "relocant";
         rev = "main";
-        sha256 = "sha256-+RuOP9A3f7NO1d7f941LbVTKHO9QgZVIhKS+XkF3zJY=";
+        sha256 = "sha256-CrYxUotiVZwRncbquxTE2Cm1uIsvxow+tJVWkUYKyTQ=";
       };
     };
   });
