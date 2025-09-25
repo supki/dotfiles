@@ -199,7 +199,7 @@ rec {
       fira-code
       fzf
       git
-      gnome3.gnome-tweaks
+      gnome-tweaks
       (haskell-language-servers ["948" "965"])
       htop
       inetutils
