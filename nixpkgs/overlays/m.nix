@@ -150,6 +150,12 @@ rec {
   };
   haskellPackages = super.haskellPackages.override (_: {
     overrides = self.haskell.lib.packageSourceOverrides {
+      t = self.fetchFromGitHub {
+        owner = "supki";
+        repo = "t";
+        rev = "main";
+        sha256 = "sha256-vA3/JVAXU2XkeRjfHRGTmUhXIOmWtkd5weIWAr+SO74=";
+      };
       dazu = self.fetchFromGitHub {
         owner = "supki";
         repo = "da";
@@ -168,6 +174,7 @@ rec {
     supportedGhcVersions = ghcs;
   };
   dazu = haskellPackages.dazu;
+  t = haskellPackages.t;
   # relocant's tests require a running PostgreSQL server; no way
   # I'm figuring out how to set that up properly here.
   relocant = super.haskell.lib.dontCheck haskellPackages.relocant;
@@ -210,6 +217,7 @@ rec {
       spotify
       stack
       foliate
+      t
       tmux
       transmission-gtk
       x-selection-sync
