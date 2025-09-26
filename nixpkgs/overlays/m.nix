@@ -216,6 +216,7 @@ rec {
       shellcheck
       spotify
       stack
+      steam
       foliate
       t
       tmux
