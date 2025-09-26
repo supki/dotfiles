@@ -231,6 +231,8 @@ rec {
 
       # packages Nix wants
       glibcLocales
+
+      self.p-env
     ];
   };
 }
