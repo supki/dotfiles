@@ -1,7 +1,7 @@
-self: super:
+final: prev:
 let
   buildZshPlugin = { name, src }:
-    super.stdenv.mkDerivation {
+    final.stdenv.mkDerivation {
       inherit name src;
 
       installPhase = ''
@@ -16,7 +16,7 @@ in
 rec {
   zsh-autosuggestions = buildZshPlugin {
     name = "zsh-autosuggestions";
-    src = super.fetchFromGitHub {
+    src = final.fetchFromGitHub {
       owner = "zsh-users";
       repo = "zsh-autosuggestions";
       rev = "master";
@@ -25,7 +25,7 @@ rec {
   };
   zsh-syntax-highlighting = buildZshPlugin {
     name = "zsh-syntax-highlighting";
-    src = super.fetchFromGitHub {
+    src = final.fetchFromGitHub {
       owner = "zsh-users";
       repo = "zsh-syntax-highlighting";
       rev = "master";
@@ -35,27 +35,27 @@ rec {
   neovim =
     let
       customVimPlugins = {
-        vim-bling = super.vimUtils.buildVimPlugin {
+        vim-bling = final.vimUtils.buildVimPlugin {
           name = "vim-bling";
-          src = super.fetchFromGitHub {
+          src = final.fetchFromGitHub {
             owner = "ivyl";
             repo = "vim-bling";
             rev = "master";
             sha256 = "sha256-iJ/uaoq71IM1hQSrnZ86MBlpUWRp9vs1Grd1+9C1QFM=";
           };
         };
-        vim-languages = super.vimUtils.buildVimPlugin {
+        vim-languages = final.vimUtils.buildVimPlugin {
           name = "vim-languages";
-          src = super.fetchFromGitHub {
+          src = final.fetchFromGitHub {
             owner = "supki";
             repo = "vim-languages";
             rev = "master";
             sha256 = "sha256-2neE7qKT2/zpn78JNEpkaKAnj7rD1HzygAurqbyUc8M=";
           };
         };
-        kdl-vim = super.vimUtils.buildVimPlugin {
+        kdl-vim = final.vimUtils.buildVimPlugin {
           name = "kdl-vim";
-          src = super.fetchFromGitHub {
+          src = final.fetchFromGitHub {
             owner = "imsnif";
             repo = "kdl.vim";
             rev = "master";
@@ -64,13 +64,13 @@ rec {
         };
       };
     in
-      super.neovim.override {
+      prev.neovim.override {
         vimAlias = true;
         configure = {
           customRC = ''
             lua require("init")
           '';
-          packages.myVimPackage = with super.vimPlugins // customVimPlugins; {
+          packages.myVimPackage = with final.vimPlugins // customVimPlugins; {
             start = let
               nvim-treesitter-with-plugins = nvim-treesitter.withPlugins (
                 plugins: [
@@ -110,8 +110,8 @@ rec {
         };
       };
   stack = (
-    self.writeScriptBin "stack" ''
-      #!${self.runtimeShell}
+    final.writeScriptBin "stack" ''
+      #!${final.runtimeShell}
 
       xdg_config_home_config_yaml=''${XDG_CONFIG_HOME:-$HOME/.config}/stack/config.yaml
       stack_root=$HOME/.stack
@@ -121,24 +121,24 @@ rec {
         cp "$xdg_config_home_config_yaml" "$stack_root_config_yaml"
       fi
 
-      exec "${super.stack}/bin/stack" "$@"
+      exec "${prev.stack}/bin/stack" "$@"
     ''
   ) // {
     name = "stack";
-    version = super.stack.version;
+    version = prev.stack.version;
   };
-  x-selection-sync = self.stdenv.mkDerivation {
+  x-selection-sync = final.stdenv.mkDerivation {
     name = "x-selection-sync";
-    src = self.fetchFromGitHub {
+    src = final.fetchFromGitHub {
       owner = "supki";
       repo = "x-selection-sync";
       rev = "master";
       sha256 = "sha256-w/nt6LKB8QbM8GxkiI7DcS4xNqhVfR/LKznWjQ2qle8=";
     };
     buildInputs = [
-      self.pkg-config
-      self.xorg.libX11
-      self.xorg.libXfixes
+      final.pkg-config
+      final.xorg.libX11
+      final.xorg.libXfixes
     ];
     installPhase = ''
       runHook preInstall
@@ -148,21 +148,21 @@ rec {
       runHook postInstall
     '';
   };
-  haskellPackages = super.haskellPackages.override (_: {
-    overrides = self.haskell.lib.packageSourceOverrides {
-      t = self.fetchFromGitHub {
+  haskellPackages = prev.haskellPackages.override (_: {
+    overrides = final.haskell.lib.packageSourceOverrides {
+      t = final.fetchFromGitHub {
         owner = "supki";
         repo = "t";
         rev = "main";
         sha256 = "sha256-vA3/JVAXU2XkeRjfHRGTmUhXIOmWtkd5weIWAr+SO74=";
       };
-      dazu = self.fetchFromGitHub {
+      dazu = final.fetchFromGitHub {
         owner = "supki";
         repo = "da";
         rev = "main";
         sha256 = "sha256-VOEPXnAg5cPaKyxtf/plNbBJuVfoqptuPGRvZjmxsuk=";
       };
-      relocant = self.fetchFromGitHub {
+      relocant = final.fetchFromGitHub {
         owner = "supki";
         repo = "relocant";
         rev = "main";
@@ -170,21 +170,21 @@ rec {
       };
     };
   });
-  haskell-language-servers = ghcs: super.haskell-language-server.override {
+  haskell-language-servers = ghcs: final.haskell-language-server.override {
     supportedGhcVersions = ghcs;
   };
   dazu = haskellPackages.dazu;
   t = haskellPackages.t;
   # relocant's tests require a running PostgreSQL server; no way
   # I'm figuring out how to set that up properly here.
-  relocant = super.haskell.lib.dontCheck haskellPackages.relocant;
-  nix-rebuild-env = super.writeScriptBin "nix-rebuild-env" ''
-    #!${super.stdenv.shell}
+  relocant = final.haskell.lib.dontCheck haskellPackages.relocant;
+  nix-rebuild-env = final.writeScriptBin "nix-rebuild-env" ''
+    #!${final.stdenv.shell}
     exec nix-env -r -iA nixos.m-env
   '';
-  m-env = super.buildEnv {
+  m-env = final.buildEnv {
     name = "m-env";
-    paths = with super; [
+    paths = with final; [
       # packages I want
       alacritty
       bat
@@ -232,7 +232,7 @@ rec {
       # packages Nix wants
       glibcLocales
 
-      self.p-env
+      final.p-env
     ];
   };
 }
