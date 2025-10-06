@@ -57,7 +57,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
 
   services.pcscd.enable = true;
   services.fstrim.enable = true;
@@ -107,7 +107,7 @@
   };
   programs.bash = {
     shellInit = ''
-      PROMPT_COMMAND="if [ -n \"\$IN_NIX_SHELL\" ]; then echo \"🚀🚀🚀 Ascending to ZSH-heaven 🚀🚀🚀\">/dev/stderr; exec \$SHELL; fi"
+      PROMPT_COMMAND="if [ -n \"\$IN_NIX_SHELL\" ]; then echo \"🚀 Forcing ZSH in interactive Nix shells/flakes\">/dev/stderr; exec /run/current-system/sw/bin/zsh; fi"
     '';
   };
 
