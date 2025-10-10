@@ -27,7 +27,10 @@ vim.opt.shiftwidth = 2
 vim.opt.smarttab = true
 vim.opt.linebreak = true
 vim.opt.smartindent = true
+
 vim.opt.virtualedit = 'all'
+
+vim.opt.undofile = true
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
