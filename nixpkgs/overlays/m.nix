@@ -97,6 +97,7 @@ rec {
               vim-commentary
               vim-languages
               vim-sandwich
+              which-key-nvim
 
               # fallback for treesitter failures
               haskell-vim
