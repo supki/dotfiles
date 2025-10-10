@@ -197,6 +197,7 @@ rec {
       eza
       feh
       fira-code
+      firefox
       fzf
       git
       gnome-tweaks
