@@ -74,6 +74,7 @@ rec {
             start = let
               nvim-treesitter-with-plugins = nvim-treesitter.withPlugins (
                 plugins: [
+                  plugins.tree-sitter-clojure
                   plugins.tree-sitter-haskell
                   plugins.tree-sitter-json
                   plugins.tree-sitter-lua
