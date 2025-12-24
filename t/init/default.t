@@ -3,9 +3,9 @@ First, we define variables that have reasonable defaults but can be overriden if
 {# SETUP #}
 {% set
     resolver =
-      coalesce(resolver, "lts-22.43")
+      coalesce(resolver, "lts-23.28")
     ghc =
-      coalesce(ghc, "966")
+      coalesce(ghc, "984")
     with-executable? =
       coalesce(with-executable?, false)
 
