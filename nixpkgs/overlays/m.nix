@@ -221,6 +221,7 @@ rec {
       transmission_4-gtk
       x-selection-sync
       xsel
+      xxd
       zathura
       zellij
       zsh
