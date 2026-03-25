@@ -212,6 +212,7 @@ rec {
       mpv
       neovim
       nix-rebuild-env
+      nmap
       openssl
       pass
       relocant
