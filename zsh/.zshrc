@@ -132,7 +132,7 @@ function hlint {
   fi
 }
 
-for ext in ~/.nix-profile/share/{zsh/zsh-*/*.zsh~*plugin.zsh,fzf/key-bindings.zsh}; do
+for ext in /etc/profiles/per-user/${USERNAME}/share/{zsh/zsh-*/*.zsh~*plugin.zsh,fzf/key-bindings.zsh}; do
   source "$ext"
 done
 

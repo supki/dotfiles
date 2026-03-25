@@ -9,6 +9,8 @@
     nixosConfigurations.depression = nixpkgs.lib.nixosSystem {
       modules = [
         ./configuration.nix
+        ./packages.nix
+        ./packages-private.nix
       ];
     };
   };
