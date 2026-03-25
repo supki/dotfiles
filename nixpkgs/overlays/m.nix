@@ -29,7 +29,7 @@ rec {
       owner = "zsh-users";
       repo = "zsh-syntax-highlighting";
       rev = "master";
-      sha256 = "sha256-KRsQEDRsJdF7LGOMTZuqfbW6xdV5S38wlgdcCM98Y/Q=";
+      sha256 = "sha256-VMne38IQwqB4jwGUI2f3eEiSkT2ww7+G5ch7w+65GT0=";
     };
   };
   neovim =
@@ -156,7 +156,7 @@ rec {
         owner = "supki";
         repo = "t";
         rev = "main";
-        sha256 = "sha256-vA3/JVAXU2XkeRjfHRGTmUhXIOmWtkd5weIWAr+SO74=";
+        sha256 = "sha256-fAY6dtLcV2WNX0+W89t+f//AqLeCspJaPELgRjcHk4E=";
       };
       dazu = final.fetchFromGitHub {
         owner = "supki";
@@ -218,7 +218,7 @@ rec {
       stack
       foliate
       t
-      transmission_3-gtk
+      transmission_4-gtk
       x-selection-sync
       xsel
       zathura
