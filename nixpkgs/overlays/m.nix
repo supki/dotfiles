@@ -189,9 +189,6 @@ rec {
     paths = with final; [
       # packages I want
       alacritty
-      bat
-      bookworm
-      chromium
       dazu
       diff-so-fancy
       difftastic
@@ -203,7 +200,6 @@ rec {
       fzf
       git
       gnome-tweaks
-      (haskell-language-servers ["984"])
       htop
       inetutils
       iotop
@@ -220,7 +216,6 @@ rec {
       shellcheck
       spotify
       stack
-      steam
       foliate
       t
       tmux
