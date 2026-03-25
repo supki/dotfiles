@@ -218,7 +218,6 @@ rec {
       stack
       foliate
       t
-      tmux
       transmission_3-gtk
       x-selection-sync
       xsel
