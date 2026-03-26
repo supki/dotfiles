@@ -59,7 +59,7 @@ let
     spotify
     foliate
     transmission_4-gtk
-    xsel
+    wl-clipboard
     xxd
     zathura
     zellij
