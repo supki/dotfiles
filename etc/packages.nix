@@ -105,7 +105,7 @@ let
               owner = "supki";
               repo = "vim-languages";
               rev = "master";
-              sha256 = "sha256-2neE7qKT2/zpn78JNEpkaKAnj7rD1HzygAurqbyUc8M=";
+              sha256 = "sha256-9RuVISRz7Xkdbp2X4er36X+BcqgK/TeY2qahWYOYI/0=";
             };
           };
           kdl-vim = pkgs.vimUtils.buildVimPlugin {
