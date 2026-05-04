@@ -54,6 +54,7 @@ let
     nmap
     openssl
     pass
+    qrencode
     scrot
     shellcheck
     spotify
