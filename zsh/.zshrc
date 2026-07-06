@@ -23,7 +23,6 @@ setopt autocd extendedglob
 bindkey -e
 
 alias g=git
-alias gs='echo "fuck ghostscript"'
 alias ip='ip --color=auto'
 alias tree='eza -T'
 alias ls='eza -1  --time-style=long-iso --group-directories-first --all --no-permissions --octal-permissions'
