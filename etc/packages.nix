@@ -63,7 +63,6 @@ let
     wl-clipboard
     xxd
     zathura
-    zellij
     zsh
 
     # packages Nix wants
