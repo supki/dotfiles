@@ -114,11 +114,6 @@ function z {
   fi
 }
 
-function stack-template {
-  declare -r name=$1
-  echo "${XDG_CONFIG_HOME:-$HOME/.config}/stack/${name}.hsfiles"
-}
-
 function dazu {
   RANDOMORG_APIKEY=$(pass random.org/apikey) command dazu
 }
