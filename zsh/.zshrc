@@ -43,8 +43,7 @@ zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr 'M'
 zstyle ':vcs_info:*' unstagedstr 'M'
 zstyle ':vcs_info:git:*' formats "%F{1}%u%f%F{2}%c%f %F{218}%b%f"
-zstyle ':vcs_info:svn:*' formats "%F{3}%b%f"
-zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' enable git
 
 PROMPT=$'$(ins_wrapper)'"%M:%F{218}%~%f"$'$(signal_wrapper)'"$prompt_newline%(?,%F{green},%F{red})%#%f "
 PROMPT2="%F{blue}%_%f> "
