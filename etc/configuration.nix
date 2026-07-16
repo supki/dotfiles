@@ -113,6 +113,9 @@
       PROMPT_COMMAND="if [ -n \"\$IN_NIX_SHELL\" ]; then echo \"🚀 Forcing ZSH in interactive Nix shells/flakes\">/dev/stderr; exec /run/current-system/sw/bin/zsh; fi"
     '';
   };
+  programs.niri = {
+    enable = true;
+  };
 
 
   fonts.packages = with pkgs; [
