@@ -98,25 +98,21 @@ vim.diagnostic.config {
   signs = false
 }
 
-require('nvim-treesitter.configs').setup {
-  auto_install = false,
-  highlight = {
-    enable = {
-      "clojure",
-      "haskell",
-      "json",
-      "lua",
-      "nix",
-      "ruby",
-      "yaml",
-    },
-    additional_vim_regex_highlighting = false,
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    "clojure",
+    "haskell",
+    "json",
+    "lua",
+    "nix",
+    "ruby",
+    "yaml",
   },
-  rainbow = {
-    enable = true,
-    extended_mode = false,
-  },
-}
+  callback = function(ev)
+    local bufnr = ev.buf
+    vim.treesitter.start(bufnr)
+  end,
+})
 
 require('gitsigns').setup {
   signcolumn = false,
