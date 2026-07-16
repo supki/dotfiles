@@ -120,6 +120,7 @@
 
   fonts.packages = with pkgs; [
     noto-fonts
+    nerd-fonts.symbols-only
   ];
 
   # List services that you want to enable:
