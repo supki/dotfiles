@@ -123,6 +123,11 @@
     nerd-fonts.symbols-only
   ];
 
+   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+     "spotify"
+     "vim-sandwich"
+   ];
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
