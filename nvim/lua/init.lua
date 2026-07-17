@@ -76,7 +76,7 @@ vim.keymap.set('n', '<leader>ha', ":lua vim.lsp.buf.code_action({filter = functi
 vim.opt.hidden = true
 
 vim.opt.wildmenu = true
-vim.opt.wildmode = 'list:full'
+vim.opt.wildmode = 'full'
 
 vim.cmd('match DiffDelete /\\s\\+$/')
 
